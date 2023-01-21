@@ -1,10 +1,10 @@
-package frc.robot.commands.Drive;
+package team.gif.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import team.gif.robot.Robot;
 
-public class DriveArcade extends CommandBase {
-    public DriveArcade() {
+public class DriveTank extends CommandBase {
+    public DriveTank() {
         super();
         addRequirements(Robot.drivetrain);
     }
@@ -16,9 +16,9 @@ public class DriveArcade extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double rot = Robot.oi.driver.getRightX() * .95;
-        double currSpd = Robot.oi.driver.getLeftY();
-        Robot.drivetrain.driveTank(rot,currSpd);
+        double currL = Robot.oi.driver.getLeftY();
+        double currR = Robot.oi.driver.getRightY();
+        Robot.drivetrain.driveTank(currL,currR);
     }
 
     // Called once the command ends or is interrupted.
