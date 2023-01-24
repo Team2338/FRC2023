@@ -18,7 +18,7 @@ public class DriveArcade extends CommandBase {
     public void execute() {
         double rot = Robot.oi.driver.getRightX() * .95;
         double currSpd = Robot.oi.driver.getLeftY();
-        Robot.drivetrain.driveTank(rot,currSpd);
+        Robot.drivetrain.driveArcade(rot,currSpd);
     }
 
     // Called once the command ends or is interrupted.

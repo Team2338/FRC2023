@@ -22,8 +22,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   public static Drivetrain drivetrain;
-  public static OI oi;
   public static DriveTank tankDrive;
+  public static OI oi;
 
   /**
    * This function is run when the robot is first started up and should be used for any
