@@ -1,8 +1,7 @@
 package team.gif.lib;
 
 import edu.wpi.first.wpilibj.GenericHID;
-
-import java.awt.*;
+import edu.wpi.first.wpilibj2.command.button.Button;
 
 public class AxisButton extends Button {
     private final GenericHID joystick;
