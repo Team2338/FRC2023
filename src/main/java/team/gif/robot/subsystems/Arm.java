@@ -1,5 +1,6 @@
 package team.gif.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
@@ -73,6 +74,17 @@ public class Arm extends SubsystemBase {
             armMotor.set(0);
 
     }
+
+    public void PIDMove(double speed) {
+        if ((speed > 0 && getTicks() < Constants.Arm.TICKS_ABS_MAX) ||
+                (speed < 0 && getTicks() > Constants.Arm.TICKS_ABS_MIN)
+        ) {
+            armMotor.set(ControlMode.Position, speed);
+        } else{
+            armMotor.set(ControlMode.Position, 0);
+        }
+    }
+
     // getting the ticks from the encoders.
     public double getTicks2() {
         return armEncoderTalon.getSelectedSensorPosition();

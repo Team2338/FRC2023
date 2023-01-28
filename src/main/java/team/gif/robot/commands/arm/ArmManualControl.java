@@ -1,6 +1,7 @@
 package team.gif.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class ArmManualControl extends CommandBase {
@@ -13,6 +14,7 @@ public class ArmManualControl extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +34,7 @@ public class ArmManualControl extends CommandBase {
 //        }
 
         // run the elevator either up or down
-        Robot.arm.move(speed);
+        Robot.arm.PIDMove(speed);
     }
 
     // Called once the command ends or is interrupted.
