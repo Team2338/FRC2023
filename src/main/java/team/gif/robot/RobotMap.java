@@ -13,7 +13,8 @@ public abstract class RobotMap {
     public static final int LEFT_DRIVETRAIN_TWO = 22;
 
     //Arm
-    public static final int ARM_MOTOR = 0;
+    public static final int ARM_MOTOR = 5;
+    public static final int ARM_ENCODER = 6;
 
     //Pigeon
     public static final int PIGEON = 0;

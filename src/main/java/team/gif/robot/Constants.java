@@ -13,13 +13,16 @@ package team.gif.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
+    public static class OperatorConstants {
+        public static final int kDriverControllerPort = 0;
+    }
 
-  public static class Arm {
-    public static final double FF = 0.00;
-    public static final double P = 0.00;
-    public static final double Ticks_Move = 3;
-  }
+    public static class Arm {
+        public static final double FF = 0.00;
+        public static final double P = 0.00;
+        public static final double Ticks_Move = 3;
+        public static final double TICKS_ABS_MAX = 3000;
+        public static final double TICKS_ABS_MIN = 500;
+
+    }
 }
