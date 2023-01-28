@@ -38,7 +38,7 @@ public class Arm extends SubsystemBase {
         //armEncoderTalon settings
         armEncoderTalon.setNeutralMode(NeutralMode.Brake); //setting to brake mode
         armEncoderTalon.configFactoryDefault();
-        armEncoderTalon.setInverted(false); //maybe we might change to true (IDK)
+        armEncoderTalon.setInverted(true); //maybe we might change to true (IDK)
         armEncoderTalon.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
         armEncoderTalon.enableCurrentLimit(false); //limiter
         armEncoderTalon.setSensorPhase(true);
@@ -59,7 +59,7 @@ public class Arm extends SubsystemBase {
 
     // getting the ticks from the encoders.
     public double getTicks() {
-        return armMotor.getSelectedSensorPosition();
+        return armMotor.getSelectedSensorPosition() + 4096;
 //        return armMotor.getSupplyCurrent();
     }
 

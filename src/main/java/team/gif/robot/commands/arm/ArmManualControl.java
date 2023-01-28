@@ -34,7 +34,7 @@ public class ArmManualControl extends CommandBase {
 //        }
 
         // run the elevator either up or down
-        Robot.arm.PIDMove(speed);
+        Robot.arm.move(speed);
     }
 
     // Called once the command ends or is interrupted.
