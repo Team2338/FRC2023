@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
+import team.gif.robot.commands.arm.MoveDown;
+import team.gif.robot.commands.arm.MoveUp;
 
 public class OI {
     /*
@@ -86,5 +88,9 @@ public class OI {
          *  whileHeld   Init->Execute repeats until IsFinished = true or button released->End, will start again at Init if still held down
          *
          */
+
+        // to move the arm to find the ticks.
+        dDPadUp.whileHeld(new MoveUp());
+        dDPadDown.whileFalse(new MoveDown());
     }
 }

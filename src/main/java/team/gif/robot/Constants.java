@@ -16,4 +16,10 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static class Arm {
+    public static final double FF = 0.00;
+    public static final double P = 0.00;
+    public static final double Ticks_Move = 3;
+  }
 }
