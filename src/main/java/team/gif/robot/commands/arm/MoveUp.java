@@ -5,6 +5,9 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class MoveUp extends CommandBase {
+
+    private int counter=0;
+
     public MoveUp() {
         super();
         addRequirements(Robot.arm);
@@ -12,21 +15,28 @@ public class MoveUp extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        counter=0;
+    }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        Robot.arm.setAngle(Constants.Arm.Ticks_Move);
+        Robot.arm.PIDMove(1750);
+        System.out.println(Robot.arm.getTicks() + "  " + Robot.arm.PIDError());
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+    }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        if(++counter < 10)
+            return false;
+
+        return Math.abs(Robot.arm.PIDError()) < 10;
     }
 }

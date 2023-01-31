@@ -30,7 +30,7 @@ public class Arm extends SubsystemBase {
         //armMotor settings
         armMotor.setNeutralMode(NeutralMode.Brake); //setting to brake mode
         armMotor.configFactoryDefault();
-        armMotor.setInverted(false); //maybe we might change to true (IDK)
+        armMotor.setInverted(true); //maybe we might change to true (IDK)
         armMotor.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
         armMotor.enableCurrentLimit(false); //limiter
         armMotor.setSensorPhase(true);
@@ -48,6 +48,8 @@ public class Arm extends SubsystemBase {
         // PID
         armMotor.config_kF(0, Constants.Arm.FF); //feed forward
         armMotor.config_kP(0, Constants.Arm.P); //proportional
+        armMotor.config_kI(0,Constants.Arm.I);
+        armMotor.config_IntegralZone(0,200);
     }
 
     // This method will set ticks that the arm have to move.
@@ -59,7 +61,7 @@ public class Arm extends SubsystemBase {
 
     // getting the ticks from the encoders.
     public double getTicks() {
-        return armMotor.getSelectedSensorPosition() + 4096;
+        return armMotor.getSelectedSensorPosition(); // 4096
 //        return armMotor.getSupplyCurrent();
     }
 
@@ -75,14 +77,12 @@ public class Arm extends SubsystemBase {
 
     }
 
-    public void PIDMove(double speed) {
-        if ((speed > 0 && getTicks() < Constants.Arm.TICKS_ABS_MAX) ||
-                (speed < 0 && getTicks() > Constants.Arm.TICKS_ABS_MIN)
-        ) {
-            armMotor.set(ControlMode.Position, speed);
-        } else{
-            armMotor.set(ControlMode.Position, 0);
-        }
+    public void PIDMove(double position) {
+        armMotor.set(ControlMode.Position, position);
+    }
+
+    public double PIDError(){
+        return armMotor.getClosedLoopError();
     }
 
     // getting the ticks from the encoders.
@@ -94,4 +94,6 @@ public class Arm extends SubsystemBase {
     public void currentLimitingEnable(boolean enableLimit) {
         armMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(enableLimit, MAX_SUPPLY_CURRENT_AMPS,MAX_STATOR_CURRENT_AMPS, 0));
     }
+
+
 }

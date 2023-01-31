@@ -92,5 +92,7 @@ public class OI {
         // to move the arm to find the ticks.
 //        dDPadUp.whileHeld(new MoveUp());
 //        dDPadDown.whileFalse(new MoveDown());
+
+        aB.onTrue(new MoveUp());
     }
 }
