@@ -16,7 +16,7 @@ public class MoveUp extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        counter=0;
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -34,9 +34,6 @@ public class MoveUp extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if(++counter < 10)
-            return false;
-
         return Math.abs(Robot.arm.PIDError()) < 10;
     }
 }

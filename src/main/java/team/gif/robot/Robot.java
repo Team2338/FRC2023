@@ -10,8 +10,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.robot.commands.Drive.DriveArcade;
 import team.gif.robot.commands.Drive.DriveTank;
 import team.gif.robot.commands.arm.ArmManualControl;
+import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Drivetrain;
+import team.gif.robot.subsystems.Elevator;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,6 +30,7 @@ public class Robot extends TimedRobot {
     public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
     public static Arm arm;
+    public static Elevator elevator;
     public static OI oi;
 
     public static UI ui;
@@ -46,11 +49,13 @@ public class Robot extends TimedRobot {
         tankDrive = new DriveTank();
         arcadeDrive = new DriveArcade();
         arm = new Arm();
+        elevator = new Elevator();
         ui = new UI();
         oi = new OI();
 
         drivetrain.setDefaultCommand(arcadeDrive);
         arm.setDefaultCommand(new ArmManualControl());
+        elevator.setDefaultCommand(new ElevatorManualControl());
     }
 
     /**
