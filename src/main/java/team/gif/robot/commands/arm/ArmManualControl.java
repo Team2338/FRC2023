@@ -20,7 +20,7 @@ public class ArmManualControl extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double speed = -Robot.oi.aux.getLeftY();
+        double speed = Robot.oi.aux.getLeftY();
 
         if (speed > -0.05 && speed < 0.05) {
             speed = 0;

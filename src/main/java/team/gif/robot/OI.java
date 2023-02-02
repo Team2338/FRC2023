@@ -1,6 +1,7 @@
 package team.gif.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
@@ -18,11 +19,11 @@ public class OI {
      * private final JoystickButton leftTrigger = new JoystickButton(leftStick, 0);
      */
 
-    public final XboxController driver = new XboxController(RobotMap.DRIVER_CONTROLLER_ID);
+//    public final XboxController driver = new XboxController(RobotMap.DRIVER_CONTROLLER_ID);
     public final XboxController aux = new XboxController(RobotMap.AUX_CONTROLLER_ID);
     public final XboxController test = new XboxController(RobotMap.TEST_CONTROLLER_ID);
 
-    public final JoystickButton dA = new JoystickButton(driver, 1);
+/*    public final JoystickButton dA = new JoystickButton(driver, 1);
     public final JoystickButton dB = new JoystickButton(driver, 2);
     public final JoystickButton dX = new JoystickButton(driver, 3);
     public final JoystickButton dY = new JoystickButton(driver, 4);
@@ -39,7 +40,7 @@ public class OI {
     public final POVButton dDPadRight = new POVButton(driver, 90);
     public final POVButton dDPadDown = new POVButton(driver, 180);
     public final POVButton dDPadLeft = new POVButton(driver, 270);
-
+*/
     public final JoystickButton aA = new JoystickButton(aux, 1);
     public final JoystickButton aB = new JoystickButton(aux, 2);
     public final JoystickButton aX = new JoystickButton(aux, 3);
@@ -95,5 +96,6 @@ public class OI {
 
         aB.onTrue(new MoveUp());
         aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
     }
 }
