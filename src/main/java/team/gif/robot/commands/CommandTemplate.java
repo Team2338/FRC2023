@@ -1,12 +1,13 @@
-package team.gif.robot.commands.Drive;
+package team.gif.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class DriveTank extends CommandBase {
-    public DriveTank() {
+public class CommandTemplate extends CommandBase {
+
+    public CommandTemplate() {
         super();
-        addRequirements(Robot.drivetrain);
+        //addRequirements(Robot.climber); // uncomment
     }
 
     // Called when the command is initially scheduled.
@@ -15,11 +16,7 @@ public class DriveTank extends CommandBase {
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {
-        double currL = 0; //-Robot.oi.driver.getLeftY();
-        double currR = 0; // -Robot.oi.driver.getRightY();
-        Robot.drivetrain.driveTank(currL,-currR);
-    }
+    public void execute() {}
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
@@ -30,5 +27,4 @@ public class DriveTank extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
-
 }

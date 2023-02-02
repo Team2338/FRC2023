@@ -12,16 +12,13 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
 
 //-        System.out.println("elevator: " + Robot.elevator.getPosition());
-
 
         double speed = -Robot.oi.aux.getRightY();
 
@@ -37,20 +34,19 @@ public class ElevatorManualControl extends CommandBase {
         }
 
         // run the elevator either up or down
-
         Robot.elevator.move(speed);
     }
 
-    // Called once the command ends or is interrupted.
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         Robot.elevator.move(0);
         Robot.elevator.enableLowerSoftLimit(true);
-    }
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return false;
     }
 }
