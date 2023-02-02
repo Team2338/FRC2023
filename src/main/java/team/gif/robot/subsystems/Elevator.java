@@ -29,14 +29,7 @@ public class Elevator extends SubsystemBase {
 
         zeroEncoder();
     }
-
-    public static Elevator getInstance() {
-        if (instance == null) {
-            instance = new Elevator();
-        }
-        return instance;
-    }
-
+    
     public void setPercentOutput(double percent) {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
 //        lift.set(ControlMode.PercentOutput, percent);
