@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
 import team.gif.robot.commands.arm.MoveUp;
+import team.gif.robot.commands.collector.CollectorEject;
+import team.gif.robot.commands.collector.CollectorIn;
+import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
 
 public class OI {
@@ -95,5 +98,8 @@ public class OI {
 
         aB.onTrue(new MoveUp());
         aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+        aX.onTrue(new CollectorRun());
+        aA.onTrue(new CollectorEject());
+//        aB.onTrue(new Co)
     }
 }

@@ -51,4 +51,8 @@ public final class Constants {
         public static final int MIN_POS = 100;
         public static final int MAX_POS = 1000;
     }
+
+    public static class Collector {
+        public static final int CollectorRun = 0; //collector percent
+    }
 }

@@ -12,6 +12,8 @@ import team.gif.robot.commands.Drive.DriveTank;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
+import team.gif.robot.subsystems.Collector;
+import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 
@@ -29,8 +31,11 @@ public class Robot extends TimedRobot {
     public static Drivetrain drivetrain;
     public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
+
     public static Arm arm;
     public static Elevator elevator;
+    public static Collector collector;
+    public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
 
     public static UI ui;
@@ -50,6 +55,8 @@ public class Robot extends TimedRobot {
         arcadeDrive = new DriveArcade();
         arm = new Arm();
         elevator = new Elevator();
+        collector = new Collector();
+        collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         oi = new OI();
 

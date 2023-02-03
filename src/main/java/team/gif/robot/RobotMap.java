@@ -21,4 +21,10 @@ public abstract class RobotMap {
 
     // Elevator
     public static final int ELEVATOR_MOTOR_ID = 41;
+
+    //Collector
+    public static final int SOLENOID_COLLECTOR_FORWARD = 0;
+    public static final int SOLENOID_COLLECTOR_REVERSE = 0;
+    public static final int COLLECTOR_LEFT_MOTOR = 0;
+    public static final int COLLECTOR_RIGHT_MOTOR = 0;
 }
