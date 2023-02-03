@@ -13,21 +13,22 @@ public class DriveArcade extends CommandBase {
     @Override
     public void initialize() {}
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled.
     @Override
     public void execute() {
-        double rot = Robot.oi.driver.getRightX() * .95;
-        double currSpd = Robot.oi.driver.getLeftY();
+        double rot = 0; //Robot.oi.driver.getRightX() * .95;
+        double currSpd = 0; //Robot.oi.driver.getLeftY();
         Robot.drivetrain.driveArcade(rot,currSpd);
     }
 
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {}
-
-    // Returns true when the command should end.
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
         return false;
     }
+
+    // Called when the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {}
+
 }

@@ -65,6 +65,9 @@ public class Arm extends SubsystemBase {
 //        return armMotor.getSupplyCurrent();
     }
 
+    public double getTicksRel(){
+        return armEncoderTalon.getSelectedSensorPosition();
+    }
     // getting the ticks from the encoders.
     public void move(double percent) {
         if( (percent > 0 && getTicks() < Constants.Arm.TICKS_ABS_MAX) ||

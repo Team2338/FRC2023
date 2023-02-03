@@ -17,18 +17,19 @@ public class Elevator extends SubsystemBase {
         elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
         configLift(elevatorMotor);
 
-        int absPos = elevatorMotor.getSensorCollection().getPulseWidthPosition();
-        absPos &= 0xFFF;
-        elevatorMotor.setSelectedSensorPosition(absPos);
-    }
+//        int absPos = elevatorMotor.getSensorCollection().getPulseWidthPosition();
+//        absPos &= 0xFFF;
+//        elevatorMotor.setSelectedSensorPosition(absPos);
+//        elevatorMotor.setSelectedSensorPosition(0);
+        // Soft Limits
+        elevatorMotor.configReverseSoftLimitEnable(true);
+        elevatorMotor.configReverseSoftLimitThreshold(Constants.Elevator.MIN_POS);
+        elevatorMotor.configForwardSoftLimitEnable(true);
+        elevatorMotor.configForwardSoftLimitThreshold(Constants.Elevator.MAX_POS);
 
-    public static Elevator getInstance() {
-        if (instance == null) {
-            instance = new Elevator();
-        }
-        return instance;
+        zeroEncoder();
     }
-
+    
     public void setPercentOutput(double percent) {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
 //        lift.set(ControlMode.PercentOutput, percent);
@@ -86,18 +87,25 @@ public class Elevator extends SubsystemBase {
         return elevatorMotor.getOutputCurrent();
     }
 
+    public void enableLowerSoftLimit(boolean engage) {
+        elevatorMotor.configReverseSoftLimitEnable(engage);
+    }
 //    public int getClosedLoopError() {
 //        //return lift.getClosedLoopError();
 //    }
     public void move(double percent) {
-        if( (percent > 0 && getPosition() < Constants.Arm.TICKS_ABS_MAX) ||
-                (percent < 0 && getPosition() > Constants.Arm.TICKS_ABS_MIN)
-        ) {
+//        if( (percent > 0 && getPosition() < Constants.Elevator.MAX_POS) ||
+//                (percent < 0 && getPosition() > Constants.Elevator.MIN_POS)
+//        ) {
             elevatorMotor.set(percent);
-        }
-        else
-            elevatorMotor.set(0);
+//        }
+//        else
+//            elevatorMotor.set(0);
 
+    }
+
+    public void zeroEncoder() {
+        elevatorMotor.setSelectedSensorPosition(0);
     }
 
     private void configLift(TalonSRX talon) {

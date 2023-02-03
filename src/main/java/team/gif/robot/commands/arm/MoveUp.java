@@ -15,25 +15,22 @@ public class MoveUp extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
+    public void initialize() {}
 
-    }
-
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
         Robot.arm.PIDMove(1750);
         System.out.println(Robot.arm.getTicks() + "  " + Robot.arm.PIDError());
     }
 
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {
-    }
-
-    // Returns true when the command should end.
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
         return Math.abs(Robot.arm.PIDError()) < 10;
     }
+
+    // Called when the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {}
 }

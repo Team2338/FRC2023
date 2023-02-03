@@ -12,45 +12,41 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
 
-        System.out.println("elevator: " + Robot.elevator.getPosition());
+//-        System.out.println("elevator: " + Robot.elevator.getPosition());
 
-
-        double speed = Robot.oi.aux.getRightY();
+        double speed = -Robot.oi.aux.getRightY();
 
         if (speed > -0.05 && speed < 0.05) {
             speed = 0;
         }
 
         // Allows user to run past 0 setpoint if pressing the right stick
-//        if (Robot.oi.aux.getRightStickButton()) {
-//            Robot.climber.enableLowerSoftLimit(false);
-//        } else {
-//            Robot.climber.enableLowerSoftLimit(true);
-//        }
+        if (Robot.oi.aux.getRightStickButton()) {
+            Robot.elevator.enableLowerSoftLimit(false);
+        } else {
+            Robot.elevator.enableLowerSoftLimit(true);
+        }
 
         // run the elevator either up or down
-
-        //-Robot.elevator.move(speed);
+        Robot.elevator.move(speed);
     }
 
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {
-        Robot.elevator.move(0);
-//        Robot.climber.enableLowerSoftLimit(true);
-    }
-
-    // Returns true when the command should end.
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    // Called when the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        Robot.elevator.move(0);
+        Robot.elevator.enableLowerSoftLimit(true);
     }
 }

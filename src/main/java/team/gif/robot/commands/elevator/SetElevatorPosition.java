@@ -18,6 +18,7 @@ public class SetElevatorPosition extends CommandBase {
         addRequirements(Robot.elevator);
     }
 
+    // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         if (position > Robot.elevator.getPosition()) {
@@ -32,6 +33,7 @@ public class SetElevatorPosition extends CommandBase {
 
     }
 
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
 //        if (!elevator.getFwdLimit() && elevator.getClosedLoopError() < 0) {
@@ -41,13 +43,13 @@ public class SetElevatorPosition extends CommandBase {
 //        }
     }
 
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
         return Robot.elevator.isFinished();
     }
 
+    // Called when the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-
-    }
+    public void end(boolean interrupted) {}
 }
