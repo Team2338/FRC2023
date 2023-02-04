@@ -97,12 +97,9 @@ public class OI {
 
         aB.onTrue(new MoveUp());
         aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
-<<<<<<< HEAD
         aX.onTrue(new CollectorRun());
         aA.onTrue(new CollectorEject());
 //        aB.onTrue(new Co)
-=======
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
->>>>>>> 085ac9bf8324791b24d91b0922c642011c60eea7
     }
 }
