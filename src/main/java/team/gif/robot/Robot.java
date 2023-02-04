@@ -62,7 +62,6 @@ public class Robot extends TimedRobot {
         swervetrain = new SwerveDrivetrain();
         driveSwerve = new DriveSwerve();
         swervetrain.resetHeading();
-        swervetrain.setDefaultCommand(driveSwerve);
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
@@ -70,7 +69,11 @@ public class Robot extends TimedRobot {
         ui = new UI();
         oi = new OI();
 
-        drivetrain.setDefaultCommand(arcadeDrive);
+        if(isSwervePBot) {
+            swervetrain.setDefaultCommand(driveSwerve);
+        } else if (isTankPBot) {
+            drivetrain.setDefaultCommand(arcadeDrive);
+        }
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
     }
