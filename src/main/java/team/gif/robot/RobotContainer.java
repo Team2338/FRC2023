@@ -4,7 +4,6 @@
 
 package team.gif.robot;
 
-import team.gif.robot.Constants.OperatorConstants;
 import team.gif.robot.commands.Autos;
 import team.gif.robot.commands.ExampleCommand;
 import team.gif.robot.subsystems.ExampleSubsystem;
