@@ -1,10 +1,10 @@
-package team.gif.robot.commands.Drive;
+package team.gif.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class DriveArcade extends CommandBase {
-    public DriveArcade() {
+public class DriveTank extends CommandBase {
+    public DriveTank() {
         super();
         addRequirements(Robot.drivetrain);
     }
@@ -13,12 +13,12 @@ public class DriveArcade extends CommandBase {
     @Override
     public void initialize() {}
 
-    // Called every time the scheduler runs (~20ms) while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double rot = 0; //Robot.oi.driver.getRightX() * .95;
-        double currSpd = 0; //Robot.oi.driver.getLeftY();
-        Robot.drivetrain.driveArcade(rot,currSpd);
+        double currL = 0; //-Robot.oi.driver.getLeftY();
+        double currR = 0; // -Robot.oi.driver.getRightY();
+        Robot.drivetrain.driveTank(currL,-currR);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
