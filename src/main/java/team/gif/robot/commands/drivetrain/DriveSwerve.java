@@ -24,22 +24,24 @@ public class DriveSwerve extends CommandBase {
 
     @Override
     public void execute() {
-        double x = Robot.oi.driver.getLeftX();
-        x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0;
-        double y = -Robot.oi.driver.getLeftY();
-        y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0;
-        double rot = Robot.oi.driver.getRightX();
-        rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0;
+        if( Robot.isSwervePBot) {
+            double x = Robot.oi.driver.getLeftX();
+            x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0;
+            double y = -Robot.oi.driver.getLeftY();
+            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0;
+            double rot = Robot.oi.driver.getRightX();
+            rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0;
 
-        //Forward speed, Sideways speed, Rotation Speed
-        x = xLimiter.calculate(x) * Constants.ModuleConstants.kTeleDriveMaxSpeedMetersPerSecond;
-        y = yLimiter.calculate(y) * Constants.ModuleConstants.kTeleDriveMaxSpeedMetersPerSecond;
-        rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
+            //Forward speed, Sideways speed, Rotation Speed
+            x = xLimiter.calculate(x) * Constants.ModuleConstants.kTeleDriveMaxSpeedMetersPerSecond;
+            y = yLimiter.calculate(y) * Constants.ModuleConstants.kTeleDriveMaxSpeedMetersPerSecond;
+            rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
 
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(y, x, rot);
+            ChassisSpeeds chassisSpeeds = new ChassisSpeeds(y, x, rot);
 
-        SwerveModuleState[] moduleStates = Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
-        Robot.swervetrain.setModuleStates(moduleStates);
+            SwerveModuleState[] moduleStates = Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+            Robot.swervetrain.setModuleStates(moduleStates);
+        }
     }
 
     @Override

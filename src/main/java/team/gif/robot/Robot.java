@@ -104,7 +104,13 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
-        m_autonomousCommand = m_robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
+        if (isSwervePBot) {
+            m_autonomousCommand = m_robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
+        } else {
+            m_autonomousCommand = m_robotContainer.getAutonomousCommand(null);
+        }
+//        m_autonomousCommand = m_robotContainer.getAutonomousCommand(chosenAuto);
+
 
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) {
@@ -148,4 +154,9 @@ public class Robot extends TimedRobot {
     /** This function is called periodically whilst in simulation. */
     @Override
     public void simulationPeriodic() {}
+
+    //TODO: Change and check before each usage
+    public static boolean isCompBot = false;
+    public static boolean isSwervePBot = false;
+    public static boolean isTankPBot = true;
 }
