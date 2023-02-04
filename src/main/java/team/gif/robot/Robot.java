@@ -7,7 +7,9 @@ package team.gif.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import team.gif.lib.autoMode;
 import team.gif.robot.commands.drivetrain.DriveArcade;
+import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.drivetrain.DriveTank;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
@@ -16,6 +18,7 @@ import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
+import team.gif.robot.subsystems.SwerveDrivetrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -31,6 +34,9 @@ public class Robot extends TimedRobot {
     public static Drivetrain drivetrain;
     public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
+    public static SwerveDrivetrain swervetrain = null;
+    public static DriveSwerve driveSwerve;
+
 
     public static Arm arm;
     public static Elevator elevator;
@@ -53,6 +59,10 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain(false, false);
         tankDrive = new DriveTank();
         arcadeDrive = new DriveArcade();
+        swervetrain = new SwerveDrivetrain();
+        driveSwerve = new DriveSwerve();
+        swervetrain.resetHeading();
+        swervetrain.setDefaultCommand(driveSwerve);
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
@@ -94,7 +104,7 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
-        m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+        m_autonomousCommand = m_robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
 
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) {
