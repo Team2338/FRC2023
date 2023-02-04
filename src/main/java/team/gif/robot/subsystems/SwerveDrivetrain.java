@@ -33,8 +33,8 @@ public class SwerveDrivetrain extends SubsystemBase {
         super();
 
         fL = new SwerveModule(
-                RobotMap.kFrontLeftDriveMotorPort,
-                RobotMap.kFrontLeftTurningMotorPort,
+                RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
+                RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
                 false,
                 true,
                 true,
@@ -44,8 +44,8 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
 
         fR = new SwerveModule(
-                RobotMap.kFrontRightDriveMotorPort,
-                RobotMap.kFrontRightTurningMotorPort,
+                RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
+                RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
                 false,
                 false,
                 true,
@@ -55,20 +55,20 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
 
         rR = new SwerveModuleCANCoder(
-                RobotMap.kRearRightDriveMotorPort,
-                RobotMap.kRearRightTurningMotorPort,
+                RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
+                RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
                 false,
                 false,
                 true,
                 Constants.Drivetrain.kRearRightOffset,
-                RobotMap.kRearRightCANCoder,
+                RobotMap.REAR_RIGHT_CANCODER,
                 0.02,
                 0.5
         );
 
         rL = new SwerveModule(
-                RobotMap.kRearLeftDriveMotorPort,
-                RobotMap.kRearLeftTurningMotorPort,
+                RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
+                RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
                 false,
                 false,
                 true,
@@ -78,7 +78,7 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
 
 //        resetEncoders();
-        pigMotor = new TalonSRX(RobotMap.kPIGEONMot);
+        pigMotor = new TalonSRX(RobotMap.PIGEON);
         pig = new Pigeon(pigMotor);
         odometry = new SwerveDriveOdometry(Constants.Drivetrain.kDriveKinematics, pig.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
