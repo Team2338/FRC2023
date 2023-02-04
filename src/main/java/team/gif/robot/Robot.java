@@ -32,7 +32,6 @@ public class Robot extends TimedRobot {
     private RobotContainer m_robotContainer;
 
     public static Drivetrain drivetrain;
-    public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
@@ -55,13 +54,6 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
-
-        drivetrain = new Drivetrain(false, false);
-        tankDrive = new DriveTank();
-        arcadeDrive = new DriveArcade();
-        swervetrain = new SwerveDrivetrain();
-        driveSwerve = new DriveSwerve();
-        swervetrain.resetHeading();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
@@ -69,11 +61,17 @@ public class Robot extends TimedRobot {
         ui = new UI();
         oi = new OI();
 
-        if(isSwervePBot) {
+        if(isSwervePBot || isCompBot) {
+            swervetrain = new SwerveDrivetrain();
+            driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
-        } else if (isTankPBot) {
+            swervetrain.resetHeading();
+        } else {
+            drivetrain = new Drivetrain(false, false);
+            arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
+
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
     }
@@ -160,6 +158,6 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = false;
-    public static boolean isTankPBot = true;
+    public static boolean isSwervePBot = true;
+    public static boolean isTankPBot = false;
 }
