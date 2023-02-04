@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import team.gif.robot.Robot;
-import team.gif.robot.subsystems.lib.RobotTrajectory;
+import team.gif.lib.RobotTrajectory;
 import java.util.List;
 
 public class SwervePOC extends SequentialCommandGroup {
