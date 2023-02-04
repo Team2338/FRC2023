@@ -140,16 +140,16 @@ public final class Constants {
 
 
         public static final int ALLOWABLE_ERROR = 100; // Error to allow move command to end
-        public static final int MAX_VELOCITY = 1700; // Elevator velocity (ticks/100ms)
-        public static final int REV_MAX_VELOCITY = 2800;
-        public static final int MAX_ACCELERATION = 8000; // Elevator acceleration (ticks/100ms/s)
+        public static final int MAX_VELOCITY = 3000; // Elevator velocity (ticks/100ms)
+        public static final int REV_MAX_VELOCITY = 4000;
+        public static final int MAX_ACCELERATION = 10000; // Elevator acceleration (ticks/100ms/s)
 
-        public static final int COLLECT_FROM_GROUND_POS = 200;
-        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 300;
-        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 400;
-        public static final int PLACE_HIGH_POS = 500;
-        public static final int PLACE_MID_POS = 300;
-        public static final int PLACE_LOW_POS = 200;
+        public static final int PLACE_HIGH_POS = 20000;
+        public static final int PLACE_MID_POS = 10000;
+        public static final int PLACE_LOW_POS = 8000;
+        public static final int COLLECT_FROM_GROUND_POS = 6000;
+        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 8000;
+        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 20000;
 
         public static final int MIN_POS =  5000;
         public static final int MAX_POS = 45000;

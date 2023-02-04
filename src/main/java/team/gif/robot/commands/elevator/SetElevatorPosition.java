@@ -9,11 +9,13 @@ public class SetElevatorPosition extends CommandBase {
 
     private final double position;
 
-    public SetElevatorPosition(int position) {
+    public SetElevatorPosition(int targetPosition) {
         super();
-        if (position > Constants.Elevator.MAX_POS) { position = Constants.Elevator.MAX_POS; }
-        if (position < Constants.Elevator.MIN_POS) { position = Constants.Elevator.MIN_POS; }
-        this.position = position;
+        // do not allow code to set a point higher or lower than max/min
+        if (targetPosition > Constants.Elevator.MAX_POS) { targetPosition = Constants.Elevator.MAX_POS; }
+        if (targetPosition < Constants.Elevator.MIN_POS) { targetPosition = Constants.Elevator.MIN_POS; }
+
+        position = targetPosition;
 
         addRequirements(Robot.elevator);
     }
@@ -21,6 +23,7 @@ public class SetElevatorPosition extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("SetElPos init");
         if (position > Robot.elevator.getPosition()) {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.F);
@@ -30,7 +33,6 @@ public class SetElevatorPosition extends CommandBase {
             Robot.elevator.configF(Constants.Elevator.REV_F);
             Robot.elevator.setMotionMagic(position, Constants.Elevator.REV_GRAV_FEED_FORWARD);
         }
-
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -46,10 +48,13 @@ public class SetElevatorPosition extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return Robot.elevator.isFinished();
+//        return Robot.elevator.isFinished();
+        return false;
     }
 
     // Called when the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        System.out.println("FINISHED TARGET");
+    }
 }
