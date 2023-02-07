@@ -46,7 +46,7 @@ public class Pigeon {
     public double getHeading() {
         double[] ypr = new double[3];
 
-        _pigeon.getYawPitchRoll(ypr);
+//-        _pigeon.getYawPitchRoll(ypr);
 
         return ypr[0];
     }

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 import static team.gif.robot.Robot.arm;
+import static team.gif.robot.Robot.elevator;
 
 public class UI {
 

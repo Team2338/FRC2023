@@ -96,12 +96,21 @@ public class OI {
      *
      */
 
+        // arm
         aB.onTrue(new MoveUp());
-        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+
+        // elevator
+        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        aDPadUp.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_DOUBLE_SUBSTATION));
+        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
+        aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+
+        // collector
         aX.onTrue(new CollectorRun());
         aA.onTrue(new CollectorEject());
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
         dB.onTrue(new ResetWheels());
+
     }
 }
