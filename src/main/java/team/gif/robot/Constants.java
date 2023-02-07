@@ -100,13 +100,13 @@ public final class Constants {
 
         public static final class DrivetrainPID {
             public static final double frontLeftP = 0.5;
-            public static final double frontLeftFF = 0.03;
-            public static final double frontRightP = 0.5;
-            public static final double frontRightFF = 0.03;
+            public static final double frontLeftFF = 0.035;
+            public static final double frontRightP = 0.48;
+            public static final double frontRightFF = 0.05; //issa good
             public static final double rearLeftP = 0.5;
-            public static final double rearLeftFF = 0.02;
+            public static final double rearLeftFF = 0.035;
             public static final double rearRightP = 0.5;
-            public static final double rearRightFF = 0.02;
+            public static final double rearRightFF = 0.035;
         }
     }
 

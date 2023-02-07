@@ -246,7 +246,7 @@ public class SwerveModuleCANCoder {
         SmartDashboard.putNumber("PF Error", turnOutput);
 
         // Calculate the turning motor output from the turning PID controller.
-        driveMotor.set(driveOutput);
+        driveMotor.set(0);
         turnMotor.set(turnOutput);
     }
 
