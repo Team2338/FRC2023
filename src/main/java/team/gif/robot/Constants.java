@@ -36,10 +36,10 @@ public final class Constants {
         public static final boolean kFrontRightTurningMotorReversed = false;
         public static final boolean kRearRightTurningMotorReversed = false;
 
-        public static final double kFrontLeftOffset = -1581.0; // TODO: Calculate 454.0
-        public static final double kRearLeftOffset = 1231.0; //-2853.0
-        public static final double kFrontRightOffset = -55.0; //-35.0
-        public static final double kRearRightOffset = 87.0;
+        public static final double kFrontLeftOffset = 455.0; // TODO: Calculate 454.0
+        public static final double kRearLeftOffset = 1230.0; //-2853.0
+        public static final double kFrontRightOffset = -66.0; //-35.0
+        public static final double kRearRightOffset = 180.352;
 
         public static final double kTrackWidth = 0.4699;
         // Distance between centers of right and left wheels on robot

@@ -62,7 +62,7 @@ public class SwerveModuleCANCoder {
         this.driveMotor.restoreFactoryDefaults();
         this.turnMotor.configFactoryDefault();
 
-        this.driveMotor.setIdleMode(CANSparkMax.IdleMode.kCoast); //TODO: Need confirmation on mode
+        this.driveMotor.setIdleMode(CANSparkMax.IdleMode.kBrake); //TODO: Need confirmation on mode
         this.turnMotor.setNeutralMode(NeutralMode.Brake);
 
         this.driveMotor.setInverted(isDriveInverted);
@@ -118,6 +118,10 @@ public class SwerveModuleCANCoder {
         return canCoder.getVelocity();
     }
 
+    public double getRawHeading() {
+        return canCoder.getPosition();
+    }
+
     /**
      *
      * @return The encoder position of the turn motor, in ticks, after the offset is applied
@@ -133,7 +137,7 @@ public class SwerveModuleCANCoder {
      * @return
      */
     public double getOffsetHeading() {
-        return Units.degreesToRadians(canCoder.getPosition() + turningOffset);
+        return Units.degreesToRadians(canCoder.getPosition());
     }
 
     /**

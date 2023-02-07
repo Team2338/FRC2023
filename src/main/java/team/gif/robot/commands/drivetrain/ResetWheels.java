@@ -9,7 +9,7 @@ public class ResetWheels extends CommandBase {
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         Robot.swervetrain.fL.resetWheel();
         Robot.swervetrain.fR.resetWheel();
         Robot.swervetrain.rL.resetWheel();

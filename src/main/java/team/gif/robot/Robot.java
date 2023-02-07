@@ -4,7 +4,10 @@
 
 package team.gif.robot;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
@@ -59,7 +62,6 @@ public class Robot extends TimedRobot {
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
-        oi = new OI();
 
         if(isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain();
@@ -72,8 +74,13 @@ public class Robot extends TimedRobot {
             drivetrain.setDefaultCommand(arcadeDrive);
         }
 
+        oi = new OI();
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
+        Shuffleboard.getTab("Swerve").addDouble("rR", swervetrain.rR::getRawHeading);
+        Shuffleboard.getTab("Swerve").addDouble("rL", swervetrain.rL::getRawHeading);
+        Shuffleboard.getTab("Swerve").addDouble("fR", swervetrain.fR::getRawHeading);
+        Shuffleboard.getTab("Swerve").addDouble("fL", swervetrain.fL::getRawHeading);
     }
 
     /**

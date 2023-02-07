@@ -159,11 +159,8 @@ public class SwerveModule {
      *
      */
     public void resetWheel() {
-        final double error = getTurningHeading();
-        final double kff = kFF * Math.abs(error) / error;
-        final double turnOutput = kff + (kP * error);
-
-        turnMotor.set(turnOutput);
+        SwerveModuleState optimizedState = optimizeState(new SwerveModuleState());
+        setDesiredState(optimizedState);
     }
 
     /**

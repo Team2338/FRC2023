@@ -10,6 +10,7 @@ import team.gif.robot.commands.arm.MoveUp;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorIn;
 import team.gif.robot.commands.collector.CollectorRun;
+import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
 
 public class OI {
@@ -101,5 +102,6 @@ public class OI {
         aA.onTrue(new CollectorEject());
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        dB.onTrue(new ResetWheels());
     }
 }
