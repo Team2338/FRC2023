@@ -101,5 +101,11 @@ public class OI {
         aA.onTrue(new CollectorEject());
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+
+        dStart.whenPressed(new ConeLED());
+
+        dBack.whenPressed(new CubeLED());
+
+        dY.whenPressed(new DefaultLED());
     }
 }
