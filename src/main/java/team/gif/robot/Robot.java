@@ -77,10 +77,9 @@ public class Robot extends TimedRobot {
         oi = new OI();
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
-        Shuffleboard.getTab("Swerve").addDouble("rR", swervetrain.rR::getRawHeading);
-        Shuffleboard.getTab("Swerve").addDouble("rL", swervetrain.rL::getRawHeading);
-        Shuffleboard.getTab("Swerve").addDouble("fR", swervetrain.fR::getRawHeading);
-        Shuffleboard.getTab("Swerve").addDouble("fL", swervetrain.fL::getRawHeading);
+        Shuffleboard.getTab("Swerve").addDouble("robot x", swervetrain.getRobotPose()::getX);
+        Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
+        Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
     }
 
     /**

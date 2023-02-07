@@ -97,6 +97,17 @@ public final class Constants {
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
 
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
+
+        public static final class DrivetrainPID {
+            public static final double frontLeftP = 0.5;
+            public static final double frontLeftFF = 0.03;
+            public static final double frontRightP = 0.5;
+            public static final double frontRightFF = 0.03;
+            public static final double rearLeftP = 0.5;
+            public static final double rearLeftFF = 0.02;
+            public static final double rearRightP = 0.5;
+            public static final double rearRightFF = 0.02;
+        }
     }
 
     public static final class AutoConstants {

@@ -39,8 +39,8 @@ public class SwerveDrivetrain extends SubsystemBase {
                 true,
                 true,
                 Constants.Drivetrain.kFrontLeftOffset,
-                0.03,
-                0.5
+                Constants.ModuleConstants.DrivetrainPID.frontLeftFF,
+                Constants.ModuleConstants.DrivetrainPID.frontLeftP
         );
 
         fR = new SwerveModule(
@@ -50,20 +50,20 @@ public class SwerveDrivetrain extends SubsystemBase {
                 false,
                 true,
                 Constants.Drivetrain.kFrontRightOffset,
-                0.03,
-                0.5
+                Constants.ModuleConstants.DrivetrainPID.frontRightFF,
+                Constants.ModuleConstants.DrivetrainPID.frontRightP
         );
 
         rR = new SwerveModuleCANCoder(
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
                 false,
-                true,
+                false,
                 true,
                 Constants.Drivetrain.kRearRightOffset,
                 RobotMap.REAR_RIGHT_CANCODER,
-                0.02,
-                0.5
+                Constants.ModuleConstants.DrivetrainPID.rearRightFF,
+                Constants.ModuleConstants.DrivetrainPID.rearRightP
         );
 
         rL = new SwerveModule(
@@ -73,8 +73,8 @@ public class SwerveDrivetrain extends SubsystemBase {
                 true,
                 true,
                 Constants.Drivetrain.kRearLeftOffset,
-                0.02,
-                0.5
+                Constants.ModuleConstants.DrivetrainPID.rearLeftFF,
+                Constants.ModuleConstants.DrivetrainPID.rearLeftP
         );
 
 //        resetEncoders();
@@ -197,5 +197,9 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     public double getRobotHeading() {
         return pig.getCompassHeading();
+    }
+
+    public Pose2d getRobotPose() {
+        return odometry.getPoseMeters();
     }
 }
