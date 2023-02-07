@@ -92,9 +92,6 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
-
-        System.out.println("elevator: " + elevator.getPosition());
-        System.out.println("arm: " + arm.getTicks() + "  " + arm.getTicksRel());
     }
 
     /** This function is called once each time the robot enters Disabled mode. */

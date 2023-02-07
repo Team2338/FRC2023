@@ -30,7 +30,7 @@ public class SmartElevatorPosition extends CommandBase {
         switch (position) {
             case COLLECT_FROM_GROUND:
                 new SetElevatorPosition(
-                        Constants.Elevator.COLLECT_FROM_GROUND_POS).schedule();
+                        Constants.Elevator.LOAD_FROM_GROUND_POS).schedule();
                 break;
             case LOAD_FROM_SINGLE_SUBSTATION:
                 new SetElevatorPosition(
