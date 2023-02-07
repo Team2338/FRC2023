@@ -31,21 +31,16 @@ import team.gif.robot.subsystems.SwerveDrivetrain;
  */
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
-
     private RobotContainer m_robotContainer;
-
     public static Drivetrain drivetrain;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
-
-
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
-
     public static UI ui;
 
     /**

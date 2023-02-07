@@ -1,6 +1,5 @@
 package team.gif.robot.subsystems.drivers;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -71,8 +70,8 @@ public class SwerveModuleCANCoder {
 
         this.turningOffset = turningOffset;
 
-        this.driveMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2Meter);
-        this.driveMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.kDriveEncoderRPM2MeterPerSec);
+        this.driveMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.DRIVE_ENCODER_ROT_2_METER);
+        this.driveMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.DRIVE_ENCODER_RPM_2_METER_PER_SEC);
 
         this.canCoder = new CANCoder(canCoder);
         this.canCoder.configFactoryDefault();
@@ -85,7 +84,7 @@ public class SwerveModuleCANCoder {
         this.turningPID =  new
             ProfiledPIDController(kP, 0, 0,
             new TrapezoidProfile.Constraints(
-                Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond, Constants.ModuleConstants.kMaxModuleAngularAccelerationRadiansPerSecondSquared
+                Constants.ModuleConstants.MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND, Constants.ModuleConstants.MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
             ));
         turningPID.enableContinuousInput(-Math.PI, Math.PI);
 
@@ -118,14 +117,18 @@ public class SwerveModuleCANCoder {
         return canCoder.getVelocity();
     }
 
+    /**
+     * Get the heading of the canCoder - will also include the offset
+     * @return Returns the raw heading of the canCoder (deg)
+     */
     public double getRawHeading() {
         return canCoder.getPosition();
     }
 
     /**
-     *
+     * offsetHeading with ticks
      * @return The encoder position of the turn motor, in ticks, after the offset is applied
-     * @deprecated use getOffsetHeading instead
+     * @deprecated Use {@link SwerveModuleCANCoder#getRawHeading()} instead
      */
     @Deprecated(forRemoval = true)
     public double getOffsetHeadingTicks() {
@@ -133,9 +136,11 @@ public class SwerveModuleCANCoder {
     }
 
     /**
-     *
-     * @return
+     * Get the heading with offset accounted for
+     * @return the encoder with the offset applied
+     * @deprecated Use {@link SwerveModuleCANCoder#getRawHeading()} instead
      */
+    @Deprecated(forRemoval = true)
     public double getOffsetHeading() {
         return Units.degreesToRadians(canCoder.getPosition());
     }
@@ -145,13 +150,13 @@ public class SwerveModuleCANCoder {
      * @return Returns the heading of the module in radians as a double
      */
     public double getTurningHeading() {
-        double heading = getOffsetHeading() * (isAbsInverted ? -1.0: 1.0);
+        double heading = Units.degreesToRadians(getRawHeading()) * (isAbsInverted ? -1.0: 1.0);
         heading %= 2 * Math.PI;
         return heading;
     }
 
     /**
-     *
+     * Reset the wheels to their 0 positions
      */
     public void resetWheel() {
         final double error = getTurningHeading();
@@ -162,28 +167,28 @@ public class SwerveModuleCANCoder {
     }
 
     /**
-     *
-     * @param radians
-     * @return
+     * Find the reverse of a given angle (i.e. pi/4->7pi/4)
+     * @param radians the angle in radians to reverse
+     * @return the reversed angle
      */
     private double findRevAngle(double radians) {
         return (Math.PI * 2 + radians) % (2 * Math.PI) - Math.PI;
     }
 
     /**
-     *
-     * @param setpoint
-     * @param position
-     * @return
+     * Finds the distance in ticks between two setpoints
+     * @param setpoint initial/current point
+     * @param position desired position
+     * @return the distance between the two point
      */
     private double getDistance(double setpoint, double position) {
         return Math.abs(setpoint - position);
     }
 
     /**
-     *
-     * @param original
-     * @return
+     * Optimize the swerve module state by setting it to the closest equivalent vector
+     * @param original the original swerve module state
+     * @return the optimized swerve module state
      */
     private SwerveModuleState optimizeState(SwerveModuleState original) {
         // Compute all options for a setpoint
@@ -223,33 +228,18 @@ public class SwerveModuleCANCoder {
      * @param state The desired state of the swerve module
      */
     public void setDesiredState(SwerveModuleState state) {
-
-//        if(Math.abs(state.speedMetersPerSecond) < 0.001) {
-//            stop();
-//            return;
-//        }
-
-        // Modules will pick the closest equivalent angle, reversing drive motors if necessary
-//        var stateOptimized = SwerveModuleState.optimize(state,
-//                new Rotation2d(getTurningHeading()));
-
         SwerveModuleState stateOptimized = optimizeState(state);
-
-        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.kMaxSpeedMetersPerSecond;
-
-        // Calculate the turning motor output from the turning PID controller.
-//        final double turnOutput =
-//                turningPID.calculate(getTurningHeading(), stateOptimized.angle.getRadians());
+        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND;
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
         final double kff = kFF * Math.abs(error) / error;
         final double turnOutput = kff + (kP * error);
-        SmartDashboard.putNumber("PF Error", turnOutput);
-
-        // Calculate the turning motor output from the turning PID controller.
         driveMotor.set(0);
         turnMotor.set(turnOutput);
     }
 
+    /**
+     * Stop the swerve modules
+     */
     public void stop() {
         driveMotor.set(0);
         turnMotor.set(0);
@@ -263,22 +253,17 @@ public class SwerveModuleCANCoder {
         canCoder.setPosition(0);
     }
 
-    public double getPowPos() {
-        return driveMotor.getEncoder().getPosition();
-    }
-
-    public TalonSRX getTurn() {
-        return turnMotor;
-    }
-
+    /**
+     * Get the position of the swerve module - TODO: HAS BUG
+     * @return the position of the swerve module
+     */
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(driveMotor.getEncoder().getPosition(), new Rotation2d(getTurningHeading()));
     }
 
-    public CANSparkMax getDriveMotor() {
-        return driveMotor;
-    }
-
+    /**
+     * Resets the drive encoder
+     */
     public void resetDriveEncoders() {
         driveMotor.getEncoder().setPosition(0.0);
     }
