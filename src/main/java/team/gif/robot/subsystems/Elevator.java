@@ -9,18 +9,12 @@ import team.gif.robot.RobotMap;
 
 public class Elevator extends SubsystemBase {
 
-    private static Elevator instance;
-
     private final TalonSRX elevatorMotor;
 
     public Elevator() {
         elevatorMotor = new TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
         configElevatorTalon();
 
-//        int absPos = elevatorMotor.getSensorCollection().getPulseWidthPosition();
-//        absPos &= 0xFFF;
-//        elevatorMotor.setSelectedSensorPosition(absPos);
-//        elevatorMotor.setSelectedSensorPosition(0);
         // Soft Limits
         elevatorMotor.configReverseSoftLimitEnable(true);
         elevatorMotor.configReverseSoftLimitThreshold(Constants.Elevator.MIN_POS);
@@ -32,7 +26,6 @@ public class Elevator extends SubsystemBase {
     
     public void setPercentOutput(double percent) {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
-//        lift.set(ControlMode.PercentOutput, percent);
     }
 
     public void setMotionMagic(double position) {
@@ -67,10 +60,6 @@ public class Elevator extends SubsystemBase {
         return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.ALLOWABLE_ERROR;
     }
 
-    public double getElevatorClosedLoopError() {
-        return elevatorMotor.getClosedLoopError();
-    }
-
     public double getOutputVoltage() {
         return elevatorMotor.getMotorOutputVoltage();
     }
@@ -83,10 +72,6 @@ public class Elevator extends SubsystemBase {
         return elevatorMotor.getSelectedSensorVelocity() * 10.0;
     }
 
-    //public double getVelRPS() {
-       // return getVelTPS() * Constants.Drivetrain.TPS_TO_RPS;
-    //}
-
     public double getCurrent() {
         return elevatorMotor.getOutputCurrent();
     }
@@ -94,19 +79,9 @@ public class Elevator extends SubsystemBase {
     public void enableLowerSoftLimit(boolean engage) {
         elevatorMotor.configReverseSoftLimitEnable(engage);
     }
-//    public int getClosedLoopError() {
-//        //return lift.getClosedLoopError();
-//    }
-    public void move(double percent) {
-//        if( (percent > 0 && getPosition() < Constants.Elevator.MAX_POS) ||
-//                (percent < 0 && getPosition() > Constants.Elevator.MIN_POS)
-//        ) {
-//-            elevatorMotor.set(percent);
-            elevatorMotor.set(ControlMode.PercentOutput, percent);
-//        }
-//        else
-//            elevatorMotor.set(0);
 
+    public void move(double percent) {
+        elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
 
     public void zeroEncoder() {
@@ -115,8 +90,6 @@ public class Elevator extends SubsystemBase {
 
     private void configElevatorTalon() {
         elevatorMotor.configFactoryDefault();
-//        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10);
-//        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10);
         elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         elevatorMotor.enableVoltageCompensation(true);
         elevatorMotor.setSensorPhase(true);
@@ -141,6 +114,5 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.overrideLimitSwitchesEnable(false);
         elevatorMotor.configForwardSoftLimitEnable(true);
         elevatorMotor.configReverseSoftLimitEnable(true);
-//        talon.configClearPositionOnLimitR(true, 0);
     }
 }

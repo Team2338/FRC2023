@@ -12,7 +12,5 @@ public class UI {
         ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("FRC2023");
 
         shuffleboardTab.add("Arm Ticks", arm.getTicks()); // displaying the ticks for the arm.
-
-        shuffleboardTab.add("Elevator Error", elevator.getElevatorClosedLoopError() );
     }
 }
