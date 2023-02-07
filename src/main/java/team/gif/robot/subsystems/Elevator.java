@@ -11,11 +11,11 @@ public class Elevator extends SubsystemBase {
 
     private static Elevator instance;
 
-    private final WPI_TalonSRX elevatorMotor;
+    private final TalonSRX elevatorMotor;
 
     public Elevator() {
-        elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
-        configLift(elevatorMotor);
+        elevatorMotor = new TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
+        configElevatorTalon();
 
 //        int absPos = elevatorMotor.getSensorCollection().getPulseWidthPosition();
 //        absPos &= 0xFFF;
@@ -67,6 +67,10 @@ public class Elevator extends SubsystemBase {
         return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.ALLOWABLE_ERROR;
     }
 
+    public double getElevatorClosedLoopError() {
+        return elevatorMotor.getClosedLoopError();
+    }
+
     public double getOutputVoltage() {
         return elevatorMotor.getMotorOutputVoltage();
     }
@@ -97,7 +101,8 @@ public class Elevator extends SubsystemBase {
 //        if( (percent > 0 && getPosition() < Constants.Elevator.MAX_POS) ||
 //                (percent < 0 && getPosition() > Constants.Elevator.MIN_POS)
 //        ) {
-            elevatorMotor.set(percent);
+//-            elevatorMotor.set(percent);
+            elevatorMotor.set(ControlMode.PercentOutput, percent);
 //        }
 //        else
 //            elevatorMotor.set(0);
@@ -108,34 +113,34 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.setSelectedSensorPosition(0);
     }
 
-    private void configLift(TalonSRX talon) {
-        talon.configFactoryDefault();
+    private void configElevatorTalon() {
+        elevatorMotor.configFactoryDefault();
 //        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10);
 //        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10);
-        talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-        talon.enableVoltageCompensation(true);
-        talon.setSensorPhase(true);
-        talon.setInverted(false);
-        talon.setNeutralMode(NeutralMode.Brake);
+        elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        elevatorMotor.enableVoltageCompensation(true);
+        elevatorMotor.setSensorPhase(true);
+        elevatorMotor.setInverted(false);
+        elevatorMotor.setNeutralMode(NeutralMode.Brake);
 
-        talon.config_kP(0, Constants.Elevator.P);
-        talon.config_kI(0, Constants.Elevator.I);
-        talon.config_kD(0, Constants.Elevator.D);
-        talon.config_kF(0, Constants.Elevator.F);
-        talon.configMotionCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
-        talon.configMotionAcceleration(Constants.Elevator.MAX_ACCELERATION);
-        talon.configNominalOutputForward(0);
-        talon.configNominalOutputReverse(0);
-        talon.configPeakOutputForward(1);
-        talon.configPeakOutputReverse(-1);
+        elevatorMotor.config_kP(0, Constants.Elevator.P);
+        elevatorMotor.config_kI(0, Constants.Elevator.I);
+        elevatorMotor.config_kD(0, Constants.Elevator.D);
+        elevatorMotor.config_kF(0, Constants.Elevator.F);
+        elevatorMotor.configMotionCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
+        elevatorMotor.configMotionAcceleration(Constants.Elevator.MAX_ACCELERATION);
+        elevatorMotor.configNominalOutputForward(0);
+        elevatorMotor.configNominalOutputReverse(0);
+        elevatorMotor.configPeakOutputForward(1);
+        elevatorMotor.configPeakOutputReverse(-1);
 
-        talon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
-        talon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        talon.configForwardSoftLimitThreshold(Constants.Elevator.MAX_POS);
-        talon.configReverseSoftLimitThreshold(Constants.Elevator.MIN_POS);
-        talon.overrideLimitSwitchesEnable(false);
-        talon.configForwardSoftLimitEnable(true);
-        talon.configReverseSoftLimitEnable(true);
+        elevatorMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
+        elevatorMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        elevatorMotor.configForwardSoftLimitThreshold(Constants.Elevator.MAX_POS);
+        elevatorMotor.configReverseSoftLimitThreshold(Constants.Elevator.MIN_POS);
+        elevatorMotor.overrideLimitSwitchesEnable(false);
+        elevatorMotor.configForwardSoftLimitEnable(true);
+        elevatorMotor.configReverseSoftLimitEnable(true);
 //        talon.configClearPositionOnLimitR(true, 0);
     }
 }

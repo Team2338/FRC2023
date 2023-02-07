@@ -93,6 +93,8 @@ public class Robot extends TimedRobot {
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
 
+        System.out.println("el error: " + elevator.getElevatorClosedLoopError());
+        System.out.println("Ticks: " + elevator.getPosition());
 //        System.out.println("elevator: " + elevator.getPosition());
 //        System.out.println("arm: " + arm.getTicks() + "  " + arm.getTicksRel());
     }

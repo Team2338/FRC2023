@@ -144,20 +144,18 @@ public final class Constants {
         public static final int REV_MAX_VELOCITY = 4000;
         public static final int MAX_ACCELERATION = 10000; // Elevator acceleration (ticks/100ms/s)
 
-        public static final int PLACE_HIGH_POS = 20000;
-        public static final int PLACE_MID_POS = 10000;
+        public static final int PLACE_HIGH_POS = 50000;
+        public static final int PLACE_MID_POS = 40000;
         public static final int PLACE_LOW_POS = 8000;
-        public static final int COLLECT_FROM_GROUND_POS = 6000;
-        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 8000;
-        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 20000;
+        public static final int LOAD_FROM_GROUND_POS = 5000;
+        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 55000;
+        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 30000;
 
+        public static final int MAX_POS = 60000;
         public static final int MIN_POS =  5000;
-        public static final int MAX_POS = 45000;
     }
 
     public static class Collector {
         public static final int CollectorRun = 0; //collector percent
     }
-
-    
 }
