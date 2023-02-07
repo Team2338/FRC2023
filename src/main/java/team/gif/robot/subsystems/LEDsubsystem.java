@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class LedSubsystem extends SubsystemBase {
+public class LEDsubsystem extends SubsystemBase {
     //change port
     private static AddressableLED m_led;
     private static AddressableLEDBuffer m_ledBuffer;
 
 
-    public LedSubsystem() {
+    public LEDsubsystem() {
         super();
         m_led = new AddressableLED(9);
 

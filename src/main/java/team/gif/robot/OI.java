@@ -11,6 +11,8 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorIn;
 import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
+import team.gif.robot.commands.leds.ConeLEDs;
+import team.gif.robot.commands.leds.CubeLEDs;
 
 public class OI {
     /*
@@ -102,10 +104,8 @@ public class OI {
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
 
-        dStart.whenPressed(new ConeLED());
-
-        dBack.whenPressed(new CubeLED());
-
-        dY.whenPressed(new DefaultLED());
+        dStart.onTrue(new ConeLEDs());
+        dBack.onTrue(new CubeLEDs());
+        dY.onTrue(new frc.robot.commands.LEDcommands.DefaultLED());
     }
 }

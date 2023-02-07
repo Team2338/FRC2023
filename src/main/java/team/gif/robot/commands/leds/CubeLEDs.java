@@ -1,6 +1,7 @@
 package team.gif.robot.commands.leds;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.Robot;
 
 public class CubeLEDs extends CommandBase {
 
