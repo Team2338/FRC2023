@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.drivetrain.DriveTank;
@@ -74,7 +75,9 @@ public class Robot extends TimedRobot {
         } else if (isTankPBot) {
             drivetrain.setDefaultCommand(arcadeDrive);
         }
-        arm.setDefaultCommand(new ArmManualControl());
+//        arm.setDefaultCommand(new ArmManualControl());
+        arm.setArmTargetPos(arm.getTicks());
+        arm.setDefaultCommand(new ArmPIDControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
     }
 
@@ -92,6 +95,8 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+
+        System.out.println("Arm ticks: " + arm.getTicks());
     }
 
     /** This function is called once each time the robot enters Disabled mode. */

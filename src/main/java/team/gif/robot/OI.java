@@ -2,13 +2,13 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
-import team.gif.robot.commands.arm.MoveUp;
+import team.gif.robot.commands.arm.SetArmHigh;
+import team.gif.robot.commands.arm.SetArmLow;
+import team.gif.robot.commands.arm.SetArmMid;
 import team.gif.robot.commands.collector.CollectorEject;
-import team.gif.robot.commands.collector.CollectorIn;
 import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
 
@@ -96,10 +96,13 @@ public class OI {
      */
 
         // arm
-        aB.onTrue(new MoveUp());
+        aY.onTrue(new SetArmHigh());
+        aB.onTrue(new SetArmMid());
+        aA.onTrue(new SetArmLow());
+//        aX.onTrue(new InstantCommand(Robot.arm::setArmHigh));
 
         // elevator
-        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        aX.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
         aDPadUp.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_DOUBLE_SUBSTATION));
         aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
         aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));

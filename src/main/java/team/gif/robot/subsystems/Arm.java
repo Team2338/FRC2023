@@ -5,13 +5,14 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
+import team.gif.robot.commands.arm.ArmPIDControl;
+
+import static team.gif.robot.Robot.arm;
 
 public class Arm extends SubsystemBase {
     public static WPI_TalonSRX armMotor = new WPI_TalonSRX(RobotMap.ARM_MOTOR);
@@ -20,6 +21,8 @@ public class Arm extends SubsystemBase {
 
     private static final int MAX_SUPPLY_CURRENT_AMPS = 20;
     private static final int MAX_STATOR_CURRENT_AMPS = 90;
+
+    private static double armTargetPos;
 
     public Arm() {
         //motor controller groups
@@ -50,6 +53,7 @@ public class Arm extends SubsystemBase {
         armMotor.config_kP(0, Constants.Arm.P); //proportional
         armMotor.config_kI(0,Constants.Arm.I);
         armMotor.config_IntegralZone(0,200);
+
     }
 
     // This method will set ticks that the arm have to move.
@@ -81,8 +85,12 @@ public class Arm extends SubsystemBase {
 
     }
 
-    public void PIDMove(double position) {
-        armMotor.set(ControlMode.Position, position);
+//    public void setArmTargetPos(int position) {
+//        armTargetPos = position;
+//    }
+
+    public void PIDMove() {
+        armMotor.set(ControlMode.Position, armTargetPos);
     }
 
     public double PIDError(){
@@ -99,5 +107,11 @@ public class Arm extends SubsystemBase {
         armMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(enableLimit, MAX_SUPPLY_CURRENT_AMPS,MAX_STATOR_CURRENT_AMPS, 0));
     }
 
+    public void setArmTargetPos(double pos) {
+        armTargetPos = pos;
+    }
 
+    public void setArmHigh() {
+//        armTargetPos = 1750;
+    }
 }

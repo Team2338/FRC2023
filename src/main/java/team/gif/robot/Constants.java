@@ -125,8 +125,8 @@ public final class Constants {
         public static final double P = 1.2;
         public static final double I = 0.0005;
         public static final double Ticks_Move = 3;
-        public static final double TICKS_ABS_MIN = 1600;
-        public static final double TICKS_ABS_MAX = 2800;
+        public static final double TICKS_ABS_MIN = 1300;
+        public static final double TICKS_ABS_MAX = 3000;
 
     }
     public static class Elevator {
