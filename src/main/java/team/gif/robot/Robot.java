@@ -37,6 +37,9 @@ public class Robot extends TimedRobot {
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
 
+    public static LEDsubsystem led;
+    led = new LEDsubsystem();
+
 
     public static Arm arm;
     public static Elevator elevator;
