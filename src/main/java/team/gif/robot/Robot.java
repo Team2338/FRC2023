@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     public static DriveSwerve driveSwerve;
     private delay chosenDelay;
     private autoMode chosenAuto;
-    private static final Timer elapsed = new Timer();
+    private static final Timer elapsedTime = new Timer();
     private static boolean runAutoScheduler = false;
     private UiSmartDashboard uiSmartDashboard;
 
