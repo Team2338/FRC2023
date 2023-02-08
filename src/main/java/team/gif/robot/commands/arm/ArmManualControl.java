@@ -17,7 +17,6 @@ public class ArmManualControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        System.out.println("ArmMAnual");
         double percent = Robot.oi.aux.getLeftY();
 
         if (percent > -0.05 && percent < 0.05) {
@@ -38,7 +37,7 @@ public class ArmManualControl extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false; //Robot.arm.armManualFlag;
+        return !Robot.arm.armManualFlag;
     }
 
     // Called when the command ends or is interrupted.
@@ -46,6 +45,5 @@ public class ArmManualControl extends CommandBase {
     public void end(boolean interrupted) {
         Robot.arm.move(0);
         Robot.arm.setArmTargetPos(Robot.arm.getPosition());
-//        Robot.climber.enableLowerSoftLimit(true);
     }
 }

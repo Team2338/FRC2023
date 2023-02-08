@@ -76,6 +76,10 @@ public class Arm extends SubsystemBase {
             armMotor.set(0);
     }
 
+    public double getOutput(){
+        return armMotor.getMotorOutputPercent();
+    }
+
     public void PIDMove() {
         armMotor.set(ControlMode.Position, armTargetPos);
     }
@@ -96,4 +100,6 @@ public class Arm extends SubsystemBase {
     public boolean isFinished() {
         return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
     }
+
+    public boolean getArmManualFlag() { return armManualFlag;}
 }

@@ -121,12 +121,13 @@ public final class Constants {
     }
 
     public static class Arm {
-        public static final double FF = 0;
-        public static final double P = 1.2;
-        public static final double I = 0.0005;
+        public static final double FF = 0.0;
+        public static final double P = 4.0; // 2.0; // 1.2;
+        // todo create gain for rev direction around 0.5
+        public static final double I = 0.0;
         public static final double Ticks_Move = 3;
         public static final double TICKS_ABS_MIN = 1300;
-        public static final double TICKS_ABS_MAX = 3000;
+        public static final double TICKS_ABS_MAX = 2800;
         public static final int PID_TOLERANCE = 30; // allows PID to get closer
 
     }
@@ -146,7 +147,7 @@ public final class Constants {
         public static final int MAX_ACCELERATION = 10000; // Elevator acceleration (ticks/100ms/s)
 
         public static final int PLACE_HIGH_POS = 50000;
-        public static final int PLACE_MID_POS = 40000;
+        public static final int PLACE_MID_POS = 30000;
         public static final int PLACE_LOW_POS = 8000;
         public static final int LOAD_FROM_GROUND_POS = 5000;
         public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 55000;

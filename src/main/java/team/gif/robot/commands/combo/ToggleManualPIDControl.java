@@ -19,7 +19,6 @@ public class ToggleManualPIDControl extends CommandBase {
         new ElevatorManualControl().schedule();
         Robot.arm.armManualFlag = true;
         Robot.elevator.elevatorManualFlag = true;
-        System.out.println("toggling on");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -38,6 +37,5 @@ public class ToggleManualPIDControl extends CommandBase {
         // By setting these to false, they will interrupt the manual control commands
         Robot.arm.armManualFlag = false;
         Robot.elevator.elevatorManualFlag = false;
-        System.out.println("toggling off");
     }
 }

@@ -13,13 +13,20 @@ public class UI {
 
 //        shuffleboardTab.add("Arm Ticks", arm.getPosition()); // displaying the ticks for the arm.
 //        shuffleboardTab.add("Elevator Ticks", elevator.getPosition()); // displaying the ticks for the arm.
-        shuffleboardTab.addBoolean("Enable Indexer", () -> Robot.arm.armManualFlag)
+//        shuffleboardTab.addBoolean("Enable Indexer", () -> Robot.arm.armManualFlag)
+        shuffleboardTab.addBoolean("Manual Cntl", arm::getArmManualFlag)
                 .withPosition(3, 1)
                 .withSize(1, 1);
         ;
         shuffleboardTab.addNumber("Arm Ticks", arm::getPosition)
                 .withPosition(1, 1);
         shuffleboardTab.addNumber("Elevator Ticks", elevator::getPosition)
+                .withPosition(2, 1);
+
+        shuffleboardTab.addNumber("Arm Output", arm::getOutput)
+                .withPosition(2, 1);
+
+        shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
                 .withPosition(2, 1);
 
     }

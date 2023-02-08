@@ -40,7 +40,7 @@ public class ElevatorManualControl extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return Robot.elevator.elevatorManualFlag;
+        return !Robot.elevator.elevatorManualFlag;
     }
 
     // Called when the command ends or is interrupted.
