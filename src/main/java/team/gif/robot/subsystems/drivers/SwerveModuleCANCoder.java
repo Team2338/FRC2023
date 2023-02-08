@@ -94,9 +94,7 @@ public class SwerveModuleCANCoder {
     /**
      * Get the active state of the swerve module
      * @return Returns a SwerveModuleState of the drive velocity and turn velocity
-     * @deprecated no more need for getState other than debugging
      */
-    @Deprecated(forRemoval = true)
     public SwerveModuleState getState() {
         return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurnVelocity()));
     }
@@ -123,26 +121,6 @@ public class SwerveModuleCANCoder {
      */
     public double getRawHeading() {
         return canCoder.getPosition();
-    }
-
-    /**
-     * offsetHeading with ticks
-     * @return The encoder position of the turn motor, in ticks, after the offset is applied
-     * @deprecated Use {@link SwerveModuleCANCoder#getRawHeading()} instead
-     */
-    @Deprecated(forRemoval = true)
-    public double getOffsetHeadingTicks() {
-        return 0; //turnMotor.getSelectedSensorPosition() - this.turningOffset;
-    }
-
-    /**
-     * Get the heading with offset accounted for
-     * @return the encoder with the offset applied
-     * @deprecated Use {@link SwerveModuleCANCoder#getRawHeading()} instead
-     */
-    @Deprecated(forRemoval = true)
-    public double getOffsetHeading() {
-        return Units.degreesToRadians(canCoder.getPosition());
     }
 
     /**

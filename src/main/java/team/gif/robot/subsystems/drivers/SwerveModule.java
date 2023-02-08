@@ -14,10 +14,6 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team.gif.robot.Constants;
 
-/**
- * @deprecated Use {@link SwerveModuleCANCoder} instead
- */
-@Deprecated(forRemoval = true)
 public class SwerveModule {
 
     private final WPI_TalonSRX turnMotor;
