@@ -10,7 +10,8 @@ import team.gif.robot.commands.arm.SetArmLow;
 import team.gif.robot.commands.arm.SetArmMid;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorRun;
-import team.gif.robot.commands.elevator.SmartElevatorPosition;
+import team.gif.robot.commands.combo.GoFloor;
+import team.gif.robot.commands.combo.ToggleManualPIDControl;
 
 public class OI {
     /*
@@ -102,13 +103,29 @@ public class OI {
 //        aX.onTrue(new InstantCommand(Robot.arm::setArmHigh));
 
         // elevator
-        aX.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
-        aDPadUp.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_DOUBLE_SUBSTATION));
-        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
-        aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+//        aDPadUp.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_DOUBLE_SUBSTATION));
+//        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
+//        aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+
+        // combo loading actions
+        aDPadDown.onTrue(new GoFloor());
+        aBack.toggleOnTrue(new ToggleManualPIDControl());
+//        aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
+//        aDPadLeft.onTrue(new GoHome());
+//        aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
+
+        // combo placing cone actions
+//        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
+//        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH);
+
+        // combo placing cube actions
+//        aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));
+//        aB.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
+//        aA.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_LOW));
 
         // collector
-        aX.onTrue(new CollectorRun());
-        aA.onTrue(new CollectorEject());
+        aRTrigger.onTrue(new CollectorRun());
+        aLTrigger.onTrue(new CollectorEject());
     }
 }

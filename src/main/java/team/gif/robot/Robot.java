@@ -12,8 +12,7 @@ import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.drivetrain.DriveTank;
-import team.gif.robot.commands.arm.ArmManualControl;
-import team.gif.robot.commands.elevator.ElevatorManualControl;
+import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorPneumatics;
@@ -44,6 +43,8 @@ public class Robot extends TimedRobot {
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
+    public static UiSmartDashboard uiSmartDashboard;
+
 
     public static UI ui;
 
@@ -69,6 +70,8 @@ public class Robot extends TimedRobot {
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         oi = new OI();
+        uiSmartDashboard = new UiSmartDashboard();
+
 
         if(isSwervePBot) {
             swervetrain.setDefaultCommand(driveSwerve);
@@ -76,9 +79,12 @@ public class Robot extends TimedRobot {
             drivetrain.setDefaultCommand(arcadeDrive);
         }
 //        arm.setDefaultCommand(new ArmManualControl());
-        arm.setArmTargetPos(arm.getTicks());
+        arm.setArmTargetPos(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
-        elevator.setDefaultCommand(new ElevatorManualControl());
+
+        elevator.setElevatorTargetPos(elevator.getPosition());
+        elevator.setDefaultCommand(new ElevatorPIDControl());
+//        elevator.setDefaultCommand(new ElevatorManualControl());
     }
 
     /**
@@ -96,7 +102,8 @@ public class Robot extends TimedRobot {
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
 
-        System.out.println("Arm ticks: " + arm.getTicks());
+        uiSmartDashboard.updateUI();
+
     }
 
     /** This function is called once each time the robot enters Disabled mode. */

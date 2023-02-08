@@ -1,7 +1,6 @@
 package team.gif.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class ArmManualControl extends CommandBase {
@@ -18,10 +17,11 @@ public class ArmManualControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double speed = Robot.oi.aux.getLeftY();
+        System.out.println("ArmMAnual");
+        double percent = Robot.oi.aux.getLeftY();
 
-        if (speed > -0.05 && speed < 0.05) {
-            speed = 0;
+        if (percent > -0.05 && percent < 0.05) {
+            percent = 0;
         }
 
         // Allows user to run past 0 setpoint if pressing the right stick
@@ -32,19 +32,20 @@ public class ArmManualControl extends CommandBase {
 //        }
 
         // run the elevator either up or down
-        Robot.arm.move(speed);
+        Robot.arm.move(percent);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false;
+        return false; //Robot.arm.armManualFlag;
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         Robot.arm.move(0);
+        Robot.arm.setArmTargetPos(Robot.arm.getPosition());
 //        Robot.climber.enableLowerSoftLimit(true);
     }
 }

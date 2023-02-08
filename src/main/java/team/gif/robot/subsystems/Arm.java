@@ -10,9 +10,6 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
-import team.gif.robot.commands.arm.ArmPIDControl;
-
-import static team.gif.robot.Robot.arm;
 
 public class Arm extends SubsystemBase {
     public static WPI_TalonSRX armMotor = new WPI_TalonSRX(RobotMap.ARM_MOTOR);
@@ -23,6 +20,8 @@ public class Arm extends SubsystemBase {
     private static final int MAX_STATOR_CURRENT_AMPS = 90;
 
     private static double armTargetPos;
+
+    public boolean armManualFlag = false;
 
     public Arm() {
         //motor controller groups
@@ -54,40 +53,28 @@ public class Arm extends SubsystemBase {
         armMotor.config_kI(0,Constants.Arm.I);
         armMotor.config_IntegralZone(0,200);
 
-    }
-
-    // This method will set ticks that the arm have to move.
-    public void setAngle(double ticks) {
-        while (getTicks() < ticks) {
-//            armEncoderTalon.set(ticks);
-        }
+        // soft limits
+        armMotor.configReverseSoftLimitEnable(true);
+        armMotor.configReverseSoftLimitThreshold(Constants.Arm.TICKS_ABS_MIN);
+        armMotor.configForwardSoftLimitEnable(true);
+        armMotor.configForwardSoftLimitThreshold(Constants.Arm.TICKS_ABS_MAX);
     }
 
     // getting the ticks from the encoders.
-    public double getTicks() {
+    public double getPosition() {
         return armMotor.getSelectedSensorPosition(); // 4096
-//        return armMotor.getSupplyCurrent();
-    }
-
-    public double getTicksRel(){
-        return armEncoderTalon.getSelectedSensorPosition();
     }
 
     // getting the ticks from the encoders.
     public void move(double percent) {
-        if( (percent > 0 && getTicks() < Constants.Arm.TICKS_ABS_MAX) ||
-            (percent < 0 && getTicks() > Constants.Arm.TICKS_ABS_MIN)
+        if( (percent > 0 && getPosition() < Constants.Arm.TICKS_ABS_MAX) ||
+            (percent < 0 && getPosition() > Constants.Arm.TICKS_ABS_MIN)
         ) {
             armMotor.set(percent);
         }
         else
             armMotor.set(0);
-
     }
-
-//    public void setArmTargetPos(int position) {
-//        armTargetPos = position;
-//    }
 
     public void PIDMove() {
         armMotor.set(ControlMode.Position, armTargetPos);
@@ -95,11 +82,6 @@ public class Arm extends SubsystemBase {
 
     public double PIDError(){
         return armMotor.getClosedLoopError();
-    }
-
-    // getting the ticks from the encoders.
-    public double getTicks2() {
-        return armEncoderTalon.getSelectedSensorPosition();
     }
 
     // limits
@@ -111,7 +93,7 @@ public class Arm extends SubsystemBase {
         armTargetPos = pos;
     }
 
-    public void setArmHigh() {
-//        armTargetPos = 1750;
+    public boolean isFinished() {
+        return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
     }
 }

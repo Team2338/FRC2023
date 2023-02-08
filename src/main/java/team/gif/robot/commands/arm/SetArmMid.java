@@ -5,24 +5,31 @@ import team.gif.robot.Robot;
 
 public class SetArmMid extends CommandBase {
 
+    private int counter;
+
     public SetArmMid() {
         super();
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        Robot.arm.setArmTargetPos(2000);
+        Robot.arm.PIDMove();
+        counter = 0;
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {
-        Robot.arm.setArmTargetPos(2000);
-    }
+    public void execute() {}
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return true;
+        if ( ++counter > 15)  // waiting for 20 cycles (400ms) to let error catch up
+            return Robot.arm.isFinished();
+        else
+            return false;
     }
 
     // Called when the command ends or is interrupted.

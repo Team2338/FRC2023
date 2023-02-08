@@ -2,7 +2,6 @@ package team.gif.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
@@ -11,6 +10,15 @@ public class Elevator extends SubsystemBase {
 
     private final TalonSRX elevatorMotor;
 
+    private double elevatorPos;
+
+    public boolean elevatorManualFlag = false;
+
+    /*
+    * This class controls the elevator.
+    *
+    * 0 position is straight up.
+    * */
     public Elevator() {
         elevatorMotor = new TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
         configElevatorTalon();
@@ -40,6 +48,14 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.configMotionCruiseVelocity(ticksPer100ms);
     }
 
+    public void PIDMove() {
+        elevatorMotor.set(ControlMode.Position, elevatorPos);
+    }
+
+    public void setElevatorTargetPos(double pos) {
+        elevatorPos = pos;
+    }
+
     public void configF(double f) {
         elevatorMotor.config_kF(0, f);
     }
@@ -57,7 +73,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isFinished() {
-        return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.ALLOWABLE_ERROR;
+        return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.PID_TOLERANCE;
     }
 
     public double getOutputVoltage() {

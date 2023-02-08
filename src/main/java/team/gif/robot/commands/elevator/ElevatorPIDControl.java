@@ -1,34 +1,31 @@
-package team.gif.robot.commands.arm;
+package team.gif.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class SetArmLow extends CommandBase {
+public class ElevatorPIDControl extends CommandBase {
 
-    private int counter;
-    public SetArmLow() {
+    private int counter=0;
+
+    public ElevatorPIDControl() {
         super();
+        addRequirements(Robot.elevator);
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        Robot.arm.setArmTargetPos(2800);
-        Robot.arm.PIDMove();
-        counter = 0;
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        Robot.elevator.PIDMove();
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if ( ++counter > 15) // waiting for 20 cycles (400ms) to let error catch up
-            return Robot.arm.isFinished();
-        else
-            return false;
+        return false;
     }
 
     // Called when the command ends or is interrupted.
