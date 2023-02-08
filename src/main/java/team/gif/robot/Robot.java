@@ -113,8 +113,8 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
-        elapsed.reset();
-        elapsed.start();
+        elapsedTime.reset();
+        elapsedTime.start();
         runAutoScheduler = true;
 
         autonomousCommand = robotContainer.getAutonomousCommand(chosenAuto);
@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
-        if (runAutoScheduler && (elapsed.get() > (chosenDelay.getValue()))) {
+        if (runAutoScheduler && (elapsedTime.get() > (chosenDelay.getValue()))) {
             if (isSwervePBot) {
                 autonomousCommand = robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
             } else {
@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
                 autonomousCommand.schedule();
             }
             runAutoScheduler = false;
-            elapsed.stop();
+            elapsedTime.stop();
         }
     }
 
