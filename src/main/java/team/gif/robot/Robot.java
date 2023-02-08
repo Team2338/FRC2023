@@ -4,7 +4,10 @@
 
 package team.gif.robot;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
@@ -28,22 +31,16 @@ import team.gif.robot.subsystems.SwerveDrivetrain;
  */
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
-
     private RobotContainer m_robotContainer;
-
     public static Drivetrain drivetrain;
-    public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
-
-
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
-
     public static UI ui;
 
     /**
@@ -55,27 +52,29 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
-
-        drivetrain = new Drivetrain(false, false);
-        tankDrive = new DriveTank();
-        arcadeDrive = new DriveArcade();
-        swervetrain = new SwerveDrivetrain();
-        driveSwerve = new DriveSwerve();
-        swervetrain.resetHeading();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
-        oi = new OI();
 
-        if(isSwervePBot) {
+        if(isSwervePBot || isCompBot) {
+            swervetrain = new SwerveDrivetrain();
+            driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
-        } else if (isTankPBot) {
+            swervetrain.resetHeading();
+        } else {
+            drivetrain = new Drivetrain(false, false);
+            arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
+
+        oi = new OI();
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
+        Shuffleboard.getTab("Swerve").addDouble("robot x", swervetrain.getRobotPose()::getX);
+        Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
+        Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
     }
 
     /**
