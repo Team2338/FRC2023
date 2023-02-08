@@ -71,7 +71,6 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
-//        ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
         oi = new OI();
 
