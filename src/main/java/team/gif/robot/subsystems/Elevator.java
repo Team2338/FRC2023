@@ -8,7 +8,7 @@ import team.gif.robot.RobotMap;
 
 public class Elevator extends SubsystemBase {
 
-    private final TalonSRX elevatorMotor;
+    public final TalonSRX elevatorMotor;
 
     private double elevatorPos;
 

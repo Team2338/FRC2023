@@ -1,9 +1,13 @@
 package team.gif.robot.commands.elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
 public class ElevatorManualControl extends CommandBase {
+
+    private boolean holdNeedFirstPID;
+    private double holdPIDPos;
 
     public ElevatorManualControl() {
         super();
@@ -12,18 +16,25 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        holdNeedFirstPID = false;
+        holdPIDPos = Robot.elevator.getPosition();
+    }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        double percent = -Robot.oi.aux.getRightY();
 
-//-        System.out.println("elevator: " + Robot.elevator.getPosition());
-
-        double speed = -Robot.oi.aux.getRightY();
-
-        if (speed > -0.05 && speed < 0.05) {
-            speed = 0;
+        if (percent > -0.03 && percent < 0.03) {
+            if( holdNeedFirstPID ) {
+                holdPIDPos = Robot.elevator.getPosition();
+                holdNeedFirstPID = false;
+            }
+            Robot.elevator.elevatorMotor.set(ControlMode.Position, holdPIDPos);
+        } else {
+            holdNeedFirstPID = true;
+            Robot.elevator.move(percent);
         }
 
         // Allows user to run past 0 setpoint if pressing the right stick
@@ -32,9 +43,6 @@ public class ElevatorManualControl extends CommandBase {
         } else {
             Robot.elevator.enableLowerSoftLimit(true);
         }
-
-        // run the elevator either up or down
-        Robot.elevator.move(speed);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
