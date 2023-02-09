@@ -5,6 +5,7 @@
 package team.gif.robot;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -134,7 +135,11 @@ public class Robot extends TimedRobot {
 
     /** This function is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        double timeLeft = DriverStation.getMatchTime();
+        oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
+                (timeLeft <= 5.0 && timeLeft >= 3.0));
+    }
 
     @Override
     public void testInit() {
