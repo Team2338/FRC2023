@@ -5,12 +5,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
-import team.gif.robot.commands.arm.SetArmHigh;
-import team.gif.robot.commands.arm.SetArmLow;
-import team.gif.robot.commands.arm.SetArmMid;
+import team.gif.robot.commands.arm.SetArmTest;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.combo.GoFloor;
+import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 
 public class OI {
@@ -97,10 +96,7 @@ public class OI {
      */
 
         // arm
-        aY.onTrue(new SetArmHigh());
-        aB.onTrue(new SetArmMid());
-        aA.onTrue(new SetArmLow());
-//        aX.onTrue(new InstantCommand(Robot.arm::setArmHigh));
+        aLBump.onTrue(new SetArmTest());
 
         // elevator
         aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
@@ -108,12 +104,18 @@ public class OI {
 //        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
 //        aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
 
-        // combo loading actions
-        aDPadDown.onTrue(new GoFloor());
         aBack.toggleOnTrue(new ToggleManualPIDControl());
-//        aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
+
+        // combo loading actions
+
+        aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
+        aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
+        aDPadDown.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
+        aDPadLeft.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
+
+//        aDPadDown.onTrue(new GoFloor());
 //        aDPadLeft.onTrue(new GoHome());
-//        aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
+//        aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
 
         // combo placing cone actions
 //        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));

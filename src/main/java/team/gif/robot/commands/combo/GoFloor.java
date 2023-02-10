@@ -14,7 +14,7 @@ public class GoFloor extends CommandBase {
     @Override
     public void initialize() {
         new SetArmMid().schedule();
-        new SetElevatorPosition(Constants.Elevator.PLACE_MID_POS).schedule();
+        new SetElevatorPosition(Constants.Elevator.PLACE_CONE_MID_POS).schedule();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

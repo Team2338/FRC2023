@@ -2,13 +2,14 @@ package team.gif.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 
 public class Elevator extends SubsystemBase {
 
-    public final TalonSRX elevatorMotor;
+    public final WPI_TalonSRX elevatorMotor;
 
     private double elevatorPos;
 
@@ -20,7 +21,7 @@ public class Elevator extends SubsystemBase {
     * 0 position is straight up.
     * */
     public Elevator() {
-        elevatorMotor = new TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
+        elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
         configElevatorTalon();
 
         // Soft Limits
@@ -49,11 +50,15 @@ public class Elevator extends SubsystemBase {
     }
 
     public void PIDMove() {
-        elevatorMotor.set(ControlMode.Position, elevatorPos);
+        elevatorMotor.set(ControlMode.Position, elevatorPos); // closed loop position control
     }
 
     public void setElevatorTargetPos(double pos) {
         elevatorPos = pos;
+    }
+
+    public double PIDError() {
+        return elevatorMotor.getClosedLoopError();
     }
 
     public void configF(double f) {
@@ -73,6 +78,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isFinished() {
+        System.out.println( "            Error: " + elevatorMotor.getClosedLoopError());
         return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.PID_TOLERANCE;
     }
 

@@ -29,5 +29,8 @@ public class UI {
         shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
                 .withPosition(2, 1);
 
+        shuffleboardTab.addNumber("Elevator PID Error", elevator::PIDError)
+                .withPosition(2, 1);
+
     }
 }

@@ -6,9 +6,6 @@ import team.gif.robot.Robot;
 
 public class ElevatorManualControl extends CommandBase {
 
-    private boolean holdNeedFirstPID;
-    private double holdPIDPos;
-
     public ElevatorManualControl() {
         super();
         addRequirements(Robot.elevator);
@@ -17,8 +14,6 @@ public class ElevatorManualControl extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        holdNeedFirstPID = false;
-        holdPIDPos = Robot.elevator.getPosition();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -26,16 +21,11 @@ public class ElevatorManualControl extends CommandBase {
     public void execute() {
         double percent = -Robot.oi.aux.getRightY();
 
-        if (percent > -0.03 && percent < 0.03) {
-            if( holdNeedFirstPID ) {
-                holdPIDPos = Robot.elevator.getPosition();
-                holdNeedFirstPID = false;
-            }
-            Robot.elevator.elevatorMotor.set(ControlMode.Position, holdPIDPos);
-        } else {
-            holdNeedFirstPID = true;
-            Robot.elevator.move(percent);
+        if (percent > -0.05 && percent < 0.05) {
+            percent = 0.05; // apply a FeedForward to keep the elevator from falling
         }
+
+        Robot.elevator.move(percent);
 
         // Allows user to run past 0 setpoint if pressing the right stick
         if (Robot.oi.aux.getRightStickButton()) {
@@ -54,7 +44,7 @@ public class ElevatorManualControl extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.elevator.move(0);
+        Robot.elevator.move(0.05);
         Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
         Robot.elevator.enableLowerSoftLimit(true);
     }
