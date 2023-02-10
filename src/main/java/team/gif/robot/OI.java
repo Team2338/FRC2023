@@ -110,7 +110,7 @@ public class OI {
         aA.onTrue(new CollectorEject());
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
-        dB.onTrue(new ResetWheels());
-
+        if( Robot.isSwervePBot || Robot.isCompBot )
+            dB.onTrue(new ResetWheels());
     }
 }
