@@ -73,9 +73,12 @@ public class Robot extends TimedRobot {
         oi = new OI();
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
-        Shuffleboard.getTab("Swerve").addDouble("robot x", swervetrain.getRobotPose()::getX);
-        Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
-        Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+
+        if(isSwervePBot || isCompBot) {
+            Shuffleboard.getTab("Swerve").addDouble("robot x", swervetrain.getRobotPose()::getX);
+            Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
+            Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+        }
     }
 
     /**
