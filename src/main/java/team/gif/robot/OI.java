@@ -112,8 +112,8 @@ public class OI {
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
         dB.onTrue(new ResetWheels());
-
     }
+
     public void setRumble(boolean rumble) {
         driver.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
         driver.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
