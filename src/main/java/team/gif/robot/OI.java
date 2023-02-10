@@ -1,5 +1,6 @@
 package team.gif.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
@@ -112,5 +113,12 @@ public class OI {
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
         if( Robot.isSwervePBot || Robot.isCompBot )
             dB.onTrue(new ResetWheels());
+    }
+
+    public void setRumble(boolean rumble) {
+        driver.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+        driver.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
+        aux.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+        aux.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
     }
 }
