@@ -119,7 +119,7 @@ public class SwerveModuleCANCoder {
      * @return Returns the raw heading of the canCoder (deg)
      */
     public double getRawHeading() {
-        return canCoder.getPosition();
+        return canCoder.getAbsolutePosition();
     }
 
     /**

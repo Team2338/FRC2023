@@ -73,7 +73,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
                 false,
-                false,
+                true,
                 true,
                 Constants.Drivetrain.REAR_LEFT_OFFSET,
                 RobotMap.REAR_LEFT_CANCODER,

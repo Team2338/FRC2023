@@ -28,7 +28,7 @@ public class DriveSwerve extends CommandBase {
             double x = Robot.oi.driver.getLeftX();
             x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0.0;
             double y = -Robot.oi.driver.getLeftY();
-            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0.00001;
+            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0f; //0.00001;
             double rot = Robot.oi.driver.getRightX();
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0;
 
