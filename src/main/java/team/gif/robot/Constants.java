@@ -125,10 +125,19 @@ public final class Constants {
         public static final double P = 4.0; // 2.0; // 1.2;
         // todo create gain for rev direction around 0.5
         public static final double I = 0.0;
+        public static final double D = 0.0;
         public static final double Ticks_Move = 3;
-        public static final double TICKS_ABS_MIN = 1300;
-        public static final double TICKS_ABS_MAX = 2800;
-        public static final int PID_TOLERANCE = 30; // allows PID to get closer
+        public static final double MIN_POS = 1300;
+        public static final double MAX_POS = 2800;
+        public static final int PID_TOLERANCE = 40; // allows PID to get closer
+
+        public static final int MAX_VELOCITY = 16000; // 5000; // ticks/100ms
+        public static final int REV_MAX_VELOCITY = 16000;
+        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
+        public static final double GRAV_FEED_FORWARD = 700 / 1023.0; // Percent constant to counteract gravity
+        public static final double REV_GRAV_FEED_FORWARD = 700 / 1023.0;
+        public static final double F = 16.0; // 0.8; // 0.4; // 0.3; // 0.425;
+        public static final double REV_F = 16.0; // 0.3; // 0.38;
 
         private static final double TICKS_PER_DEGREE = 26.8;
         private static final int ZERO_OFFSET_TICKS = 428; // ticks between motor 0 and straight up (compass 0)
@@ -150,7 +159,7 @@ public final class Constants {
         public static final double P = 4.0;
         public static final double I = 0.0;
         public static final double D = 0.0;
-        public static final int PID_TOLERANCE = 75; // allows PID to get closer
+        public static final int PID_TOLERANCE = 40; // allows PID to get closer
 
         // Motion Magic constants
         public static final int MAX_VELOCITY = 5000; // Elevator velocity (ticks/100ms)

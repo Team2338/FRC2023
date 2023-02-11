@@ -19,8 +19,8 @@ public class GoLocation extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        double armTargetPos = -1;
-        int elevatorTargetPos = -1;
+        double armTargetPos;
+        int elevatorTargetPos;
 
 //        if ( Robot.arm.getPosition() < 30) { // TODO: change to ticks
 //            new GoLocationFromHome().schedule();
@@ -58,6 +58,10 @@ public class GoLocation extends CommandBase {
                case Constants.Location.PLACE_LOW:
                     elevatorTargetPos = Constants.Elevator.PLACE_LOW_POS;
                     armTargetPos = Constants.Arm.PLACE_LOW_POS;
+                    break;
+                default:
+                    elevatorTargetPos = -1;
+                    armTargetPos = -1;
                     break;
 //            }
 //        }

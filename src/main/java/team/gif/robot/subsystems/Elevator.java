@@ -1,7 +1,6 @@
 package team.gif.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
@@ -11,7 +10,7 @@ public class Elevator extends SubsystemBase {
 
     public final WPI_TalonSRX elevatorMotor;
 
-    private double elevatorPos;
+    private double elevatorTargetPos;
 
     public boolean elevatorManualFlag = false;
 
@@ -50,15 +49,20 @@ public class Elevator extends SubsystemBase {
     }
 
     public void PIDMove() {
-        elevatorMotor.set(ControlMode.Position, elevatorPos); // closed loop position control
+        elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
     }
 
     public void setElevatorTargetPos(double pos) {
-        elevatorPos = pos;
+        elevatorTargetPos = pos;
+    }
+
+    public double getTargetPosition() {
+        return elevatorTargetPos;
     }
 
     public double PIDError() {
-        return elevatorMotor.getClosedLoopError();
+        return Math.abs(getPosition() - elevatorTargetPos);
+        //elevatorMotor.getClosedLoopError();
     }
 
     public void configF(double f) {
@@ -78,8 +82,9 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isFinished() {
-        System.out.println( "            Error: " + elevatorMotor.getClosedLoopError());
-        return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.PID_TOLERANCE;
+//        System.out.println( "            Error: " + PIDError());
+        //return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.PID_TOLERANCE;
+        return  PIDError() < Constants.Elevator.PID_TOLERANCE;
     }
 
     public double getOutputVoltage() {

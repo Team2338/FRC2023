@@ -20,6 +20,7 @@ public class ElevatorPIDControl extends CommandBase {
     @Override
     public void execute() {
 //        Robot.elevator.PIDMove();
+//        System.out.println("PID CONTROL");
         Robot.elevator.move(0.05); // for now, just apply simple FF gain to keep the elevator from falling
     }
 

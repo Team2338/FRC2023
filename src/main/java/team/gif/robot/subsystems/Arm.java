@@ -1,7 +1,10 @@
 package team.gif.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -27,6 +30,7 @@ public class Arm extends SubsystemBase {
         //motor controller groups
 //        armControl = new MotorControllerGroup(armMotor);
 
+        configArmTalon();
         currentLimitingEnable(true); //limits
 
         //armMotor settings
@@ -55,9 +59,9 @@ public class Arm extends SubsystemBase {
 
         // soft limits
         armMotor.configReverseSoftLimitEnable(true);
-        armMotor.configReverseSoftLimitThreshold(Constants.Arm.TICKS_ABS_MIN);
+        armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         armMotor.configForwardSoftLimitEnable(true);
-        armMotor.configForwardSoftLimitThreshold(Constants.Arm.TICKS_ABS_MAX);
+        armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);
     }
 
     // getting the ticks from the encoders.
@@ -66,9 +70,14 @@ public class Arm extends SubsystemBase {
     }
 
     // getting the ticks from the encoders.
+    public double getTargetPosition() {
+        return armTargetPos; // 4096
+    }
+
+    // getting the ticks from the encoders.
     public void move(double percent) {
-        if( (percent > 0 && getPosition() < Constants.Arm.TICKS_ABS_MAX) ||
-            (percent < 0 && getPosition() > Constants.Arm.TICKS_ABS_MIN)
+        if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
+            (percent < 0 && getPosition() > Constants.Arm.MIN_POS)
         ) {
             armMotor.set(percent);
         }
@@ -85,7 +94,8 @@ public class Arm extends SubsystemBase {
     }
 
     public double PIDError(){
-        return armMotor.getClosedLoopError();
+        return Math.abs(getPosition() - armTargetPos);
+        //return armMotor.getClosedLoopError();
     }
 
     // limits
@@ -98,8 +108,48 @@ public class Arm extends SubsystemBase {
     }
 
     public boolean isFinished() {
-        return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
+       // return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
+        return  PIDError() < Constants.Arm.PID_TOLERANCE;
     }
 
     public boolean getArmManualFlag() { return armManualFlag;}
+
+    public void setMotionMagic(double position, double arbitraryFeedForward) {
+        armMotor.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, arbitraryFeedForward);
+    }
+
+    public void setCruiseVelocity(int ticksPer100ms) {
+        armMotor.configMotionCruiseVelocity(ticksPer100ms);
+    }
+    public void configF(double f) {
+        armMotor.config_kF(0, f);
+    }
+
+    private void configArmTalon() {
+        armMotor.configFactoryDefault();
+        armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        armMotor.enableVoltageCompensation(true);
+        armMotor.setSensorPhase(true);
+        armMotor.setInverted(true);
+        armMotor.setNeutralMode(NeutralMode.Brake);
+
+        armMotor.config_kP(0, Constants.Arm.P);
+        armMotor.config_kI(0, Constants.Arm.I);
+        armMotor.config_kD(0, Constants.Arm.D);
+        armMotor.config_kF(0, Constants.Arm.F);
+        armMotor.configMotionCruiseVelocity(Constants.Arm.MAX_VELOCITY);
+        armMotor.configMotionAcceleration(Constants.Arm.MAX_ACCELERATION);
+        armMotor.configNominalOutputForward(0);
+        armMotor.configNominalOutputReverse(0);
+        armMotor.configPeakOutputForward(1);
+        armMotor.configPeakOutputReverse(-1);
+
+        armMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed);
+        armMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);
+        armMotor.configReverseSoftLimitEnable(true);
+        armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
+        armMotor.overrideLimitSwitchesEnable(false);
+        armMotor.configForwardSoftLimitEnable(true);
+    }
 }

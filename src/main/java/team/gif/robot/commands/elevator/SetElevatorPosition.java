@@ -6,7 +6,7 @@ import team.gif.robot.Robot;
 
 public class SetElevatorPosition extends CommandBase {
 
-    private final double position;
+    private final double desiredPosition;
 
     public SetElevatorPosition(int targetPosition) {
         super();
@@ -16,21 +16,22 @@ public class SetElevatorPosition extends CommandBase {
         if (targetPosition > Constants.Elevator.MAX_POS) { targetPosition = Constants.Elevator.MAX_POS; }
         if (targetPosition < Constants.Elevator.MIN_POS) { targetPosition = Constants.Elevator.MIN_POS; }
 
-        position = targetPosition;
+        Robot.elevator.setElevatorTargetPos(targetPosition);
+        desiredPosition = targetPosition;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
 
-        if (position > Robot.elevator.getPosition()) {
+        if (desiredPosition > Robot.elevator.getPosition()) {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.F);
-            Robot.elevator.setMotionMagic(position, Constants.Elevator.GRAV_FEED_FORWARD);
+            Robot.elevator.setMotionMagic(desiredPosition, Constants.Elevator.GRAV_FEED_FORWARD);
         } else {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.REV_MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.REV_F);
-            Robot.elevator.setMotionMagic(position, Constants.Elevator.REV_GRAV_FEED_FORWARD);
+            Robot.elevator.setMotionMagic(desiredPosition, Constants.Elevator.REV_GRAV_FEED_FORWARD);
         }
     }
 
@@ -43,12 +44,14 @@ public class SetElevatorPosition extends CommandBase {
     public boolean isFinished() {
         // this is currently always returning false, but keep the logc here in case
         // it does return true and we need to shift to PID control
-        return Robot.elevator.elevatorMotor.isMotionProfileFinished();
+//        return Robot.elevator.elevatorMotor.isMotionProfileFinished();
+//        System.out.println("MOTION MAGIC");
+        return Robot.elevator.isFinished();
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
+//        Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
     }
 }
