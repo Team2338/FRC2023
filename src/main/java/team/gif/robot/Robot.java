@@ -4,17 +4,15 @@
 
 package team.gif.robot;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
-import team.gif.robot.commands.drivetrain.DriveTank;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
@@ -59,7 +57,7 @@ public class Robot extends TimedRobot {
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
 
-        if(isSwervePBot || isCompBot) {
+        if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain();
             driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
@@ -74,10 +72,11 @@ public class Robot extends TimedRobot {
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
 
-        if(isSwervePBot || isCompBot) {
-            Shuffleboard.getTab("Swerve").addDouble("robot x", swervetrain.getRobotPose()::getX);
-            Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
-            Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+        if (isSwervePBot || isCompBot) {
+            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+            swerveTab.addDouble("robot x", swervetrain.getRobotPose()::getX);
+            swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
+            swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
         }
     }
 
@@ -164,6 +163,6 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = false;
-    public static boolean isTankPBot = true;
+    public static boolean isSwervePBot = true;
+    public static boolean isTankPBot = false;
 }
