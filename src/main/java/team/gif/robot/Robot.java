@@ -4,14 +4,20 @@
 
 package team.gif.robot;
 
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.drivetrain.DriveTank;
+import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
@@ -28,16 +34,11 @@ import team.gif.robot.subsystems.SwerveDrivetrain;
  */
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
-
     private RobotContainer m_robotContainer;
-
     public static Drivetrain drivetrain;
-    public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
-
-
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
@@ -57,25 +58,21 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
-
-        drivetrain = new Drivetrain(false, false);
-        tankDrive = new DriveTank();
-        arcadeDrive = new DriveArcade();
-        swervetrain = new SwerveDrivetrain();
-        driveSwerve = new DriveSwerve();
-        swervetrain.resetHeading();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
-        oi = new OI();
         uiSmartDashboard = new UiSmartDashboard();
 
-
-        if(isSwervePBot) {
+        if(isSwervePBot || isCompBot) {
+            swervetrain = new SwerveDrivetrain();
+            driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
-        } else if (isTankPBot) {
+            swervetrain.resetHeading();
+        } else {
+            drivetrain = new Drivetrain(false, false);
+            arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
 //        arm.setDefaultCommand(new ArmManualControl());
@@ -85,6 +82,14 @@ public class Robot extends TimedRobot {
         elevator.setElevatorTargetPos(elevator.getPosition());
         elevator.setDefaultCommand(new ElevatorPIDControl());
 //        elevator.setDefaultCommand(new ElevatorManualControl());
+
+        oi = new OI();
+
+        if(isSwervePBot || isCompBot) {
+            Shuffleboard.getTab("Swerve").addDouble("robot x", swervetrain.getRobotPose()::getX);
+            Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
+            Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+        }
     }
 
     /**
@@ -147,7 +152,11 @@ public class Robot extends TimedRobot {
 
     /** This function is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        double timeLeft = DriverStation.getMatchTime();
+        oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
+                (timeLeft <= 5.0 && timeLeft >= 3.0));
+    }
 
     @Override
     public void testInit() {

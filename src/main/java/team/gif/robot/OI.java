@@ -1,5 +1,6 @@
 package team.gif.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -8,6 +9,10 @@ import team.gif.lib.AxisButton;
 import team.gif.robot.commands.arm.SetArmTest;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorRun;
+import team.gif.robot.commands.collector.WheelsIn;
+import team.gif.robot.commands.collector.WheelsOut;
+import team.gif.robot.commands.drivetrain.ResetWheels;
+import team.gif.robot.commands.elevator.SmartElevatorPosition;
 import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
@@ -37,8 +42,8 @@ public class OI {
     public final JoystickButton dStart = new JoystickButton(driver, 8);
     public final JoystickButton dLStickBtn = new JoystickButton(driver, 9);
     public final JoystickButton dRStickBtn = new JoystickButton(driver, 10);
-    public final AxisButton dRTrigger = new AxisButton(driver, 3, .05);
-    public final AxisButton dLTrigger = new AxisButton(driver, 2, .05);
+//    public final AxisButton dRTrigger = new AxisButton(driver, 3, .05);
+//    public final AxisButton dLTrigger = new AxisButton(driver, 2, .05);
 
     public final POVButton dDPadUp = new POVButton(driver, 0);
     public final POVButton dDPadRight = new POVButton(driver, 90);
@@ -55,8 +60,10 @@ public class OI {
     public final JoystickButton aStart = new JoystickButton(aux, 8);
     public final JoystickButton aLStickBtn = new JoystickButton(aux, 9);
     public final JoystickButton aRStickBtn = new JoystickButton(aux, 10);
-    public final AxisButton aRTrigger = new AxisButton(aux, 3, .05);
-    public final AxisButton aLTrigger = new AxisButton(aux, 2, .05);
+//    public final AxisButton aRTrigger = new AxisButton(aux, 3, .05);
+//    public final AxisButton aLTrigger = new AxisButton(aux, 2, .05);
+//    public final JoystickButton aRTrigger = new JoystickButton(aux, 11);
+//    public final JoystickButton aLTrigger = new JoystickButton(aux, 12);
     public final POVButton aDPadUp = new POVButton(aux, 0);
     public final POVButton aDPadRight = new POVButton(aux, 90);
     public final POVButton aDPadDown = new POVButton(aux, 180);
@@ -96,7 +103,7 @@ public class OI {
      */
 
         // arm
-        aLBump.onTrue(new SetArmTest());
+//        aLBump.onTrue(new SetArmTest());
 
         // elevator
         aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
@@ -127,7 +134,24 @@ public class OI {
 //        aA.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_LOW));
 
         // collector
-        aRTrigger.onTrue(new CollectorRun());
-        aLTrigger.onTrue(new CollectorEject());
+//        aX.onTrue(new CollectorRun());
+//        aA.onTrue(new CollectorEject());
+//        aB.onTrue(new Co)
+        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        if( Robot.isSwervePBot || Robot.isCompBot )
+            dB.onTrue(new ResetWheels());
+        aB.whileTrue(new CollectorRun());
+        aY.whileTrue(new CollectorEject());
+//        aRTrigger.whileTrue(new CollectorRun());
+//        aLTrigger.whileTrue(new CollectorEject());
+        aLBump.whileTrue(new WheelsIn());
+        aRBump.whileTrue(new WheelsOut());
+    }
+
+    public void setRumble(boolean rumble) {
+        driver.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+        driver.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
+        aux.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+        aux.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
     }
 }

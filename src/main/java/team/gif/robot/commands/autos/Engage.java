@@ -29,7 +29,7 @@ public class Engage extends CommandBase {
   @Override
   public void execute() {
       ChassisSpeeds chassisSpeeds = new ChassisSpeeds(1.4, 0.0, 0.0);
-      SwerveModuleState[] moduleStates = Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+      SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
       Robot.swervetrain.setModuleStates(moduleStates);
   }
 
@@ -37,7 +37,7 @@ public class Engage extends CommandBase {
   @Override
   public void end(boolean interrupted) {
       ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
-      SwerveModuleState[] moduleStates = Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+      SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
       Robot.swervetrain.setModuleStates(moduleStates);
       System.out.println("ENDING" + ++counter);
   }

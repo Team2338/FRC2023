@@ -3,7 +3,6 @@ package team.gif.robot.commands.collector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
-import team.gif.robot.subsystems.Collector;
 
 public class CollectorRun extends CommandBase {
 
@@ -14,14 +13,12 @@ public class CollectorRun extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        Robot.collector.setSpeedPercentCollector(Constants.Collector.CollectorRun);
+        Robot.collector.setSpeedPercentCollector(Constants.Collector.COLLECTOR_RUN);
     }
 
     // Called once the command ends or is interrupted.

@@ -3,8 +3,8 @@ package team.gif.robot.commands.collector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class CollectorOut extends CommandBase {
-    public CollectorOut() {
+public class WheelsIn extends CommandBase {
+    public WheelsIn() {
         super();
         addRequirements(Robot.collectorPneumatics);
     }
@@ -12,7 +12,7 @@ public class CollectorOut extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorPneumatics.collectorOut();
+        Robot.collectorPneumatics.pneumaticsIn();
     }
 
     // Called every time the scheduler runs while the command is scheduled.

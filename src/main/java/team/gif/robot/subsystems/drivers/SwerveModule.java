@@ -66,8 +66,8 @@ public class SwerveModule {
 
         this.turningOffset = turningOffset;
 
-        this.driveMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2Meter);
-        this.driveMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.kDriveEncoderRPM2MeterPerSec);
+        this.driveMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.DRIVE_ENCODER_ROT_2_METER);
+        this.driveMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.DRIVE_ENCODER_RPM_2_METER_PER_SEC);
 
         this.turnMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         this.turnMotor.configSelectedFeedbackCoefficient(1);
@@ -79,7 +79,7 @@ public class SwerveModule {
         this.turningPID =  new
                 ProfiledPIDController(kP, 0, 0,
                 new TrapezoidProfile.Constraints(
-                        Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond, Constants.ModuleConstants.kMaxModuleAngularAccelerationRadiansPerSecondSquared
+                        Constants.ModuleConstants.MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND, Constants.ModuleConstants.MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
                 ));
         turningPID.enableContinuousInput(-Math.PI, Math.PI);
 
@@ -131,7 +131,7 @@ public class SwerveModule {
      */
     public double getTurningHeading() {
         double heading = this.getOffsetHeadingTicks() * (isAbsInverted ? -1.0: 1.0);
-        heading *= (2.0 * Math.PI) / Constants.ModuleConstants.kEncoderCPR;
+        heading *= (2.0 * Math.PI) / Constants.ModuleConstants.ENCODER_CPR;
         heading %= 2 * Math.PI;
         return heading;
     }
@@ -159,11 +159,8 @@ public class SwerveModule {
      *
      */
     public void resetWheel() {
-        final double error = getTurningHeading();
-        final double kff = kFF * Math.abs(error) / error;
-        final double turnOutput = kff + (kP * error);
-
-        turnMotor.set(turnOutput);
+        SwerveModuleState optimizedState = optimizeState(new SwerveModuleState());
+        setDesiredState(optimizedState);
     }
 
     /**
@@ -221,7 +218,7 @@ public class SwerveModule {
 
         SwerveModuleState stateOptimized = optimizeState(state);
 
-        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.kMaxSpeedMetersPerSecond;
+        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND;
 
         // Calculate the turning motor output from the turning PID controller.
 //        final double turnOutput =
@@ -232,7 +229,7 @@ public class SwerveModule {
         SmartDashboard.putNumber("PF Error", turnOutput);
 
         // Calculate the turning motor output from the turning PID controller.
-        driveMotor.set(driveOutput);
+        driveMotor.set(0);
         turnMotor.set(turnOutput);
     }
 

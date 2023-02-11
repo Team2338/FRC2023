@@ -38,9 +38,9 @@ public class SwerveDrivetrain extends SubsystemBase {
                 false,
                 true,
                 true,
-                Constants.Drivetrain.kFrontLeftOffset,
-                0.03,
-                0.5
+                Constants.Drivetrain.FRONT_LEFT_OFFSET,
+                Constants.ModuleConstants.DrivetrainPID.frontLeftFF,
+                Constants.ModuleConstants.DrivetrainPID.frontLeftP
         );
 
         fR = new SwerveModule(
@@ -49,9 +49,9 @@ public class SwerveDrivetrain extends SubsystemBase {
                 false,
                 false,
                 true,
-                Constants.Drivetrain.kFrontRightOffset,
-                0.03,
-                0.5
+                Constants.Drivetrain.FRONT_RIGHT_OFFSET,
+                Constants.ModuleConstants.DrivetrainPID.frontRightFF,
+                Constants.ModuleConstants.DrivetrainPID.frontRightP
         );
 
         rR = new SwerveModuleCANCoder(
@@ -60,27 +60,27 @@ public class SwerveDrivetrain extends SubsystemBase {
                 false,
                 false,
                 true,
-                Constants.Drivetrain.kRearRightOffset,
+                Constants.Drivetrain.REAR_RIGHT_OFFSET,
                 RobotMap.REAR_RIGHT_CANCODER,
-                0.02,
-                0.5
+                Constants.ModuleConstants.DrivetrainPID.rearRightFF,
+                Constants.ModuleConstants.DrivetrainPID.rearRightP
         );
 
         rL = new SwerveModule(
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
                 false,
-                false,
                 true,
-                Constants.Drivetrain.kRearLeftOffset,
-                0.02,
-                0.5
+                true,
+                Constants.Drivetrain.REAR_LEFT_OFFSET,
+                Constants.ModuleConstants.DrivetrainPID.rearLeftFF,
+                Constants.ModuleConstants.DrivetrainPID.rearLeftP
         );
 
 //        resetEncoders();
         pigMotor = new TalonSRX(RobotMap.PIGEON);
         pig = new Pigeon(pigMotor);
-        odometry = new SwerveDriveOdometry(Constants.Drivetrain.kDriveKinematics, pig.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
+        odometry = new SwerveDriveOdometry(Constants.Drivetrain.DRIVE_KINEMATICS, pig.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
         resetHeading();
         resetDriveEncoders();
@@ -101,12 +101,12 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     public void drive(double x, double y, double rot, boolean fieldRelative) {
         SwerveModuleState[] swerveModuleStates =
-                Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(
+                Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(
                         fieldRelative ?
                                 ChassisSpeeds.fromFieldRelativeSpeeds(x, y, rot, pig.getRotation2d())
                                 : new ChassisSpeeds(x, y, rot));
         SwerveDriveKinematics.desaturateWheelSpeeds(
-                swerveModuleStates, Constants.Drivetrain.kMaxSpeedMetersPerSecond
+                swerveModuleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
         );
 
         fL.setDesiredState(swerveModuleStates[0]);
@@ -122,7 +122,7 @@ public class SwerveDrivetrain extends SubsystemBase {
      */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(
-                desiredStates, Constants.Drivetrain.kMaxSpeedMetersPerSecond
+                desiredStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
         );
 
         fL.setDesiredState(desiredStates[0]);
@@ -136,9 +136,9 @@ public class SwerveDrivetrain extends SubsystemBase {
      * @param chassisSpeeds Field Relative ChassisSpeeds to apply to wheel speeds
      */
     public void setModuleStates(ChassisSpeeds chassisSpeeds) {
-        SwerveModuleState[] swerveModuleStates = Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+        SwerveModuleState[] swerveModuleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(
-                swerveModuleStates, Constants.Drivetrain.kMaxSpeedMetersPerSecond
+                swerveModuleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
         );
 
         fL.setDesiredState(swerveModuleStates[0]);
@@ -197,5 +197,9 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     public double getRobotHeading() {
         return pig.getCompassHeading();
+    }
+
+    public Pose2d getRobotPose() {
+        return odometry.getPoseMeters();
     }
 }

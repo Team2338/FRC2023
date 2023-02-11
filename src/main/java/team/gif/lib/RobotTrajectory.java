@@ -24,22 +24,22 @@ public class RobotTrajectory {
     }
 
     public TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-        Constants.AutoConstants.kMaxSpeedMetersPerSecond,
-        Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared
+        Constants.AutoConstants.MAX_SPEED_METERS_PER_SECOND,
+        Constants.AutoConstants.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED
     )
-        .setKinematics(Constants.Drivetrain.kDriveKinematics);
+        .setKinematics(Constants.Drivetrain.DRIVE_KINEMATICS);
 
     public SwerveControllerCommand swerveControllerCommand(Trajectory trajectory) {
         ProfiledPIDController kThetaController = new ProfiledPIDController(Constants.AutoConstants.kPThetaController, 0, 0,
             new TrapezoidProfile.Constraints(
-                Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond, Constants.ModuleConstants.kMaxModuleAngularAccelerationRadiansPerSecondSquared
+                Constants.ModuleConstants.MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND, Constants.ModuleConstants.MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
             ));
 
         kThetaController.enableContinuousInput(-Math.PI, Math.PI);
         SwerveControllerCommand sCC = new SwerveControllerCommand(
             trajectory,
             Robot.swervetrain::getPose,
-            Constants.Drivetrain.kDriveKinematics,
+            Constants.Drivetrain.DRIVE_KINEMATICS,
             new PIDController(Constants.AutoConstants.kPXController, 0, 0),
             new PIDController(Constants.AutoConstants.kPYController, 0, 0),
             kThetaController,

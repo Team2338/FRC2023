@@ -11,9 +11,9 @@ public class DriveSwerve extends CommandBase {
     private final SlewRateLimiter xLimiter, yLimiter, turnLimiter;
 
     public DriveSwerve() {
-        this.xLimiter = new SlewRateLimiter(Constants.ModuleConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
-        this.yLimiter = new SlewRateLimiter(Constants.ModuleConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
-        this.turnLimiter = new SlewRateLimiter(Constants.ModuleConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
+        this.xLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
+        this.yLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
+        this.turnLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ANGULAR_ACCELERATION_UNITS_PER_SECOND);
         addRequirements(Robot.swervetrain);
     }
 
@@ -26,20 +26,20 @@ public class DriveSwerve extends CommandBase {
     public void execute() {
         if( Robot.isSwervePBot) {
             double x = Robot.oi.driver.getLeftX();
-            x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0;
+            x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0.0;
             double y = -Robot.oi.driver.getLeftY();
-            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0;
+            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0.00001;
             double rot = Robot.oi.driver.getRightX();
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0;
 
             //Forward speed, Sideways speed, Rotation Speed
-            x = xLimiter.calculate(x) * Constants.ModuleConstants.kTeleDriveMaxSpeedMetersPerSecond;
-            y = yLimiter.calculate(y) * Constants.ModuleConstants.kTeleDriveMaxSpeedMetersPerSecond;
-            rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
+            x = xLimiter.calculate(x) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
+            y = yLimiter.calculate(y) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
+            rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.TELE_DRIVE_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND;
 
             ChassisSpeeds chassisSpeeds = new ChassisSpeeds(y, x, rot);
 
-            SwerveModuleState[] moduleStates = Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+            SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
             Robot.swervetrain.setModuleStates(moduleStates);
         }
     }
