@@ -11,6 +11,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
@@ -94,6 +95,25 @@ public class SwerveDrivetrain extends SubsystemBase {
         swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
         swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
         swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+    }
+
+    public SwerveDrivetrain(TelemetryFileLogger logger) {
+        this();
+
+        logger.addMetric("FL_Rotation", fL::getTurningHeading);
+        logger.addMetric("FR_Rotation", fR::getTurningHeading);
+        logger.addMetric("RL_Rotation", rL::getTurningHeading);
+        logger.addMetric("RR_Rotation", rR::getTurningHeading);
+
+        logger.addMetric("FL_Drive_Command", fL.getDriveMotor()::getAppliedOutput);
+        logger.addMetric("FR_Drive_Command", fR.getDriveMotor()::getAppliedOutput);
+        logger.addMetric("RL_Drive_Command", rL.getDriveMotor()::getAppliedOutput);
+        logger.addMetric("RR_Drive_Command", rR.getDriveMotor()::getAppliedOutput);
+
+        logger.addMetric("FL_Turn_Command", fL.getTurnMotor()::getMotorOutputPercent);
+        logger.addMetric("FR_Turn_Command", fR.getTurnMotor()::getMotorOutputPercent);
+        logger.addMetric("RL_Turn_Command", rL.getTurnMotor()::getMotorOutputPercent);
+        logger.addMetric("RR_Turn_Command", rR.getTurnMotor()::getMotorOutputPercent);
     }
 
     @Override

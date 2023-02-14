@@ -8,7 +8,9 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class DriveSwerve extends CommandBase {
-    private final SlewRateLimiter xLimiter, yLimiter, turnLimiter;
+    private final SlewRateLimiter xLimiter;
+    private final SlewRateLimiter yLimiter;
+    private final SlewRateLimiter turnLimiter;
 
     public DriveSwerve() {
         this.xLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
@@ -24,7 +26,7 @@ public class DriveSwerve extends CommandBase {
 
     @Override
     public void execute() {
-        if( Robot.isSwervePBot) {
+        if (Robot.isSwervePBot) {
             double x = Robot.oi.driver.getLeftX();
             x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0.0;
             double y = -Robot.oi.driver.getLeftY();
