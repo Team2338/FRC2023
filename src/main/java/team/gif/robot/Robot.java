@@ -90,6 +90,8 @@ public class Robot extends TimedRobot {
             Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
             Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
         }
+
+        SmartDashboard.putNumber("Collector Speed",0);
     }
 
     /**
