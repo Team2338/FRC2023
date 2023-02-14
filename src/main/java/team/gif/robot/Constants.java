@@ -150,8 +150,8 @@ public final class Constants {
         public static final double F = 16.0; // 0.8; // 0.4; // 0.3; // 0.425;
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
-        private static final double TICKS_PER_DEGREE = 26.8;
-        private static final int ZERO_OFFSET_TICKS = 428; // ticks between motor 0 and straight up (compass 0)
+        public static final double TICKS_PER_DEGREE = 26.8;
+        public static final int ZERO_OFFSET_TICKS = 428; // ticks between motor 0 and straight up (compass 0)
 
         // n is in degrees
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up

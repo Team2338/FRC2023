@@ -49,6 +49,10 @@ public class Arm extends SubsystemBase {
         return armMotor.getSelectedSensorPosition(); // 4096
     }
 
+    public double getPositionDegrees() {
+        return (armMotor.getSelectedSensorPosition() - Constants.Arm.ZERO_OFFSET_TICKS ) / Constants.Arm.TICKS_PER_DEGREE; // 4096
+    }
+    
     public void setTargetPosition(double pos) {
         armTargetPos = pos;
     }
