@@ -78,7 +78,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 //        resetEncoders();
         odometry = new SwerveDriveOdometry(Constants.Drivetrain.kDriveKinematics, Robot.pigeon.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
-        resetHeading();
+        Robot.pigeon.resetPigeonPosition();
         resetDriveEncoders();
 
     }
@@ -153,21 +153,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR.resetEncoders();
     }
 
-    /**
-     * Reset the pigeon heading
-     */
-    public void resetHeading() {
-        Robot.pigeon.resetPigeonPosition();
-    }
-
-
-    /**
-     * Get the pigeon heading
-     * @return The pigeon heading in degrees
-     */
-    public Rotation2d getHeading() {
-        return Robot.pigeon.getRotation2d();
-    }
 
     public Pose2d getPose() {
         return odometry.getPoseMeters();

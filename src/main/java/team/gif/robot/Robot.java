@@ -128,11 +128,6 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         if (runAutoScheduler && (elapsedTime.get() > (chosenDelay.getValue()))) {
-            if (isSwervePBot) {
-                autonomousCommand = robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
-            } else {
-                autonomousCommand = robotContainer.getAutonomousCommand(null);
-            }
             if (autonomousCommand != null) {
                 autonomousCommand.schedule();
             }
