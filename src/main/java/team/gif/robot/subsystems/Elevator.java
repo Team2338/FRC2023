@@ -6,32 +6,41 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 
-public class Elevator extends SubsystemBase {
 
+
+public class Elevator extends SubsystemBase {
     public final WPI_TalonSRX elevatorMotor;
 
+    public boolean elevatorManualFlag = false;
     private double elevatorTargetPos;
 
-    public boolean elevatorManualFlag = false;
-
-    /*
-    * This class controls the elevator.
-    *
-    * 0 position is straight up.
-    * */
     public Elevator() {
         elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
         configElevatorTalon();
-
-        // Soft Limits
-        elevatorMotor.configReverseSoftLimitEnable(true);
-        elevatorMotor.configReverseSoftLimitThreshold(Constants.Elevator.MIN_POS);
-        elevatorMotor.configForwardSoftLimitEnable(true);
-        elevatorMotor.configForwardSoftLimitThreshold(Constants.Elevator.MAX_POS);
-
         zeroEncoder();
     }
-    
+
+    public void move(double percent) {
+        elevatorMotor.set(ControlMode.PercentOutput, percent);
+    }
+
+    public void PIDMove() {
+        elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
+    }
+
+    public double getPosition() {
+        return elevatorMotor.getSelectedSensorPosition();
+    }
+
+    public double getTargetPosition() {
+        return elevatorTargetPos;
+    }
+
+    public double PIDError() {
+        return Math.abs(getPosition() - elevatorTargetPos);
+        //elevatorMotor.getClosedLoopError();
+    }
+
     public void setPercentOutput(double percent) {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
@@ -48,29 +57,12 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.configMotionCruiseVelocity(ticksPer100ms);
     }
 
-    public void PIDMove() {
-        elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
-    }
-
     public void setElevatorTargetPos(double pos) {
         elevatorTargetPos = pos;
     }
 
-    public double getTargetPosition() {
-        return elevatorTargetPos;
-    }
-
-    public double PIDError() {
-        return Math.abs(getPosition() - elevatorTargetPos);
-        //elevatorMotor.getClosedLoopError();
-    }
-
     public void configF(double f) {
         elevatorMotor.config_kF(0, f);
-    }
-
-    public double getPosition() {
-        return elevatorMotor.getSelectedSensorPosition();
     }
 
     public boolean getFwdLimit() {
@@ -82,16 +74,14 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isFinished() {
-//        System.out.println( "            Error: " + PIDError());
-        //return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.PID_TOLERANCE;
-        return  PIDError() < Constants.Elevator.PID_TOLERANCE;
+        return  Math.abs(PIDError()) < Constants.Elevator.PID_TOLERANCE;
     }
 
     public double getOutputVoltage() {
         return elevatorMotor.getMotorOutputVoltage();
     }
 
-    public double getOutputCommand() {
+    public double getOutputPercent() {
         return elevatorMotor.getMotorOutputPercent();
     }
 
@@ -105,10 +95,6 @@ public class Elevator extends SubsystemBase {
 
     public void enableLowerSoftLimit(boolean engage) {
         elevatorMotor.configReverseSoftLimitEnable(engage);
-    }
-
-    public void move(double percent) {
-        elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
 
     public void zeroEncoder() {

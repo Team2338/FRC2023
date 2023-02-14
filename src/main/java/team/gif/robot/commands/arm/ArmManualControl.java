@@ -59,6 +59,6 @@ public class ArmManualControl extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Robot.arm.move(0);
-        Robot.arm.setArmTargetPos(Robot.arm.getPosition());
+        Robot.arm.setTargetPosition(Robot.arm.getPosition());
     }
 }
