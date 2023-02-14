@@ -16,7 +16,7 @@ import team.gif.robot.RobotMap;
 
 public class Arm extends SubsystemBase {
     public static WPI_TalonSRX armMotor = new WPI_TalonSRX(RobotMap.ARM_MOTOR);
-    private static WPI_TalonSRX armEncoderTalon = new WPI_TalonSRX(RobotMap.ARM_ENCODER);
+//    private static WPI_TalonSRX armEncoderTalon = new WPI_TalonSRX(RobotMap.ARM_ENCODER);
     private static MotorController armControl;
 
     private static final int MAX_SUPPLY_CURRENT_AMPS = 20;
@@ -30,8 +30,8 @@ public class Arm extends SubsystemBase {
         //motor controller groups
 //        armControl = new MotorControllerGroup(armMotor);
 
-        configArmTalon();
-        currentLimitingEnable(true); //limits
+//        configArmTalon();
+        currentLimitingEnable(false); //limits
 
         //armMotor settings
         armMotor.setNeutralMode(NeutralMode.Brake); //setting to brake mode
@@ -42,12 +42,12 @@ public class Arm extends SubsystemBase {
         armMotor.setSensorPhase(true);
 
         //armEncoderTalon settings
-        armEncoderTalon.setNeutralMode(NeutralMode.Brake); //setting to brake mode
-        armEncoderTalon.configFactoryDefault();
-        armEncoderTalon.setInverted(true); //maybe we might change to true (IDK)
-        armEncoderTalon.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
-        armEncoderTalon.enableCurrentLimit(false); //limiter
-        armEncoderTalon.setSensorPhase(true);
+//        armEncoderTalon.setNeutralMode(NeutralMode.Brake); //setting to brake mode
+//        armEncoderTalon.configFactoryDefault();
+//        armEncoderTalon.setInverted(true); //maybe we might change to true (IDK)
+//        armEncoderTalon.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
+//        armEncoderTalon.enableCurrentLimit(false); //limiter
+//        armEncoderTalon.setSensorPhase(true);
 
         armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
@@ -124,6 +124,7 @@ public class Arm extends SubsystemBase {
     public void configF(double f) {
         armMotor.config_kF(0, f);
     }
+
 
     private void configArmTalon() {
         armMotor.configFactoryDefault();

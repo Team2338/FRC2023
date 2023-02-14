@@ -6,32 +6,32 @@ import team.gif.robot.Robot;
 
 public class SetElevatorPosition extends CommandBase {
 
-    private final double desiredPosition;
+    private final double targetPosition;
 
-    public SetElevatorPosition(int targetPosition) {
+    public SetElevatorPosition(int targetPos) {
         super();
         addRequirements(Robot.elevator);
 
         // do not allow code to set a point higher or lower than max/min
-        if (targetPosition > Constants.Elevator.MAX_POS) { targetPosition = Constants.Elevator.MAX_POS; }
-        if (targetPosition < Constants.Elevator.MIN_POS) { targetPosition = Constants.Elevator.MIN_POS; }
+        if (targetPos > Constants.Elevator.MAX_POS) { targetPos = Constants.Elevator.MAX_POS; }
+        if (targetPos < Constants.Elevator.MIN_POS) { targetPos = Constants.Elevator.MIN_POS; }
 
-        Robot.elevator.setElevatorTargetPos(targetPosition);
-        desiredPosition = targetPosition;
+        Robot.elevator.setElevatorTargetPos(targetPos);
+        targetPosition = targetPos;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
 
-        if (desiredPosition > Robot.elevator.getPosition()) {
+        if (targetPosition > Robot.elevator.getPosition()) {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.F);
-            Robot.elevator.setMotionMagic(desiredPosition, Constants.Elevator.GRAV_FEED_FORWARD);
+            Robot.elevator.setMotionMagic(targetPosition, Constants.Elevator.GRAV_FEED_FORWARD);
         } else {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.REV_MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.REV_F);
-            Robot.elevator.setMotionMagic(desiredPosition, Constants.Elevator.REV_GRAV_FEED_FORWARD);
+            Robot.elevator.setMotionMagic(targetPosition, Constants.Elevator.REV_GRAV_FEED_FORWARD);
         }
     }
 

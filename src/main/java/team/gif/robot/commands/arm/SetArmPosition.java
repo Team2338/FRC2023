@@ -7,7 +7,7 @@ import team.gif.robot.Robot;
 public class SetArmPosition extends CommandBase {
 
     private final double targetPosition;
-    private int loopCounter;
+
     public SetArmPosition(double targetPos) {
         super();
         addRequirements(Robot.arm);
@@ -23,21 +23,18 @@ public class SetArmPosition extends CommandBase {
     @Override
     public void initialize( ) {
 
-//        if (targetPosition > Robot.arm.getPosition()) {
-//            Robot.arm.setCruiseVelocity(Constants.Arm.MAX_VELOCITY);
-//            Robot.arm.configF(Constants.Arm.F);
-//            Robot.arm.setMotionMagic(targetPosition, Constants.Arm.GRAV_FEED_FORWARD);
-//        } else {
-//            System.out.println("raise arm");
-//            Robot.arm.setCruiseVelocity(Constants.Arm.REV_MAX_VELOCITY);
-//            Robot.arm.configF(Constants.Arm.REV_F);
-//            Robot.arm.setMotionMagic(targetPosition, Constants.Arm.REV_GRAV_FEED_FORWARD);
-//        }
+        if (targetPosition > Robot.arm.getPosition()) {
+            Robot.arm.setCruiseVelocity(Constants.Arm.MAX_VELOCITY);
+            Robot.arm.configF(Constants.Arm.F);
+            Robot.arm.setMotionMagic(targetPosition, Constants.Arm.GRAV_FEED_FORWARD);
+        } else {
+            System.out.println("raise arm");
+            Robot.arm.setCruiseVelocity(Constants.Arm.REV_MAX_VELOCITY);
+            Robot.arm.configF(Constants.Arm.REV_F);
+            Robot.arm.setMotionMagic(targetPosition, Constants.Arm.REV_GRAV_FEED_FORWARD);
+        }
 
-        Robot.arm.setArmTargetPos(targetPosition);
-        Robot.arm.PIDMove();
-        loopCounter = 0;
-        System.out.println("START MOTION MAGIC");
+        System.out.println("START ARM MOTION MAGIC");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -47,18 +44,13 @@ public class SetArmPosition extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if ( ++loopCounter > 15) // waiting for 20 cycles (400ms) to let error catch up
-            return Robot.arm.isFinished();
-        else
-            return false;
-//        System.out.println("MOTION MAGIC");
-//        return Robot.arm.isFinished();
+        System.out.println("ARM MOTION MAGIC");
+        return Robot.arm.isFinished();
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         System.out.println("END MOTION MAGIC");
-        //Robot.arm.setArmTargetPos(Robot.arm.getPosition());
     }
 }
