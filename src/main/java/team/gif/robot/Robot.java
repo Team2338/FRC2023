@@ -21,6 +21,7 @@ import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
+import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
 
     public static Drivetrain drivetrain;
+    public static Pigeon pigeon;
     public static DriveTank tankDrive;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
@@ -64,6 +66,7 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain(false, false);
         tankDrive = new DriveTank();
         arcadeDrive = new DriveArcade();
+        pigeon = new Pigeon();
         swervetrain = new SwerveDrivetrain();
         driveSwerve = new DriveSwerve();
         swervetrain.resetHeading();

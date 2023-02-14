@@ -10,6 +10,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
+import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.SwerveModule;
@@ -20,9 +21,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     public static SwerveModule fR;
     public static SwerveModuleCANCoder rR;
     public static SwerveModule rL;
-
-    private static TalonSRX pigMotor;
-    private static Pigeon pig;
 
     private static SwerveDriveOdometry odometry;
 
@@ -78,9 +76,7 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
 
 //        resetEncoders();
-        pigMotor = new TalonSRX(RobotMap.PIGEON);
-        pig = new Pigeon(pigMotor);
-        odometry = new SwerveDriveOdometry(Constants.Drivetrain.kDriveKinematics, pig.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
+        odometry = new SwerveDriveOdometry(Constants.Drivetrain.kDriveKinematics, Robot.pigeon.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
         resetHeading();
         resetDriveEncoders();
@@ -90,20 +86,20 @@ public class SwerveDrivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         odometry.update(
-                new Rotation2d().fromDegrees(pig.get360Heading()), //TODO: Check getHeading Function
+                new Rotation2d().fromDegrees(Robot.pigeon.get360Heading()), //TODO: Check getHeading Function
                 getPosition()
         );
     }
 
     public void resetOdometry(Pose2d pose) {
-        odometry.resetPosition(pig.getRotation2d(), new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()}, pose);
+        odometry.resetPosition(Robot.pigeon.getRotation2d(), new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()}, pose);
     }
 
     public void drive(double x, double y, double rot, boolean fieldRelative) {
         SwerveModuleState[] swerveModuleStates =
                 Constants.Drivetrain.kDriveKinematics.toSwerveModuleStates(
                         fieldRelative ?
-                                ChassisSpeeds.fromFieldRelativeSpeeds(x, y, rot, pig.getRotation2d())
+                                ChassisSpeeds.fromFieldRelativeSpeeds(x, y, rot, Robot.pigeon.getRotation2d())
                                 : new ChassisSpeeds(x, y, rot));
         SwerveDriveKinematics.desaturateWheelSpeeds(
                 swerveModuleStates, Constants.Drivetrain.kMaxSpeedMetersPerSecond
@@ -161,7 +157,7 @@ public class SwerveDrivetrain extends SubsystemBase {
      * Reset the pigeon heading
      */
     public void resetHeading() {
-        pig.resetPigeonPosition();
+        Robot.pigeon.resetPigeonPosition();
     }
 
 
@@ -170,7 +166,7 @@ public class SwerveDrivetrain extends SubsystemBase {
      * @return The pigeon heading in degrees
      */
     public Rotation2d getHeading() {
-        return pig.getRotation2d();
+        return Robot.pigeon.getRotation2d();
     }
 
     public Pose2d getPose() {
@@ -193,9 +189,5 @@ public class SwerveDrivetrain extends SubsystemBase {
         fR.resetDriveEncoders();
         rL.resetDriveEncoders();
         rR.resetDriveEncoders();
-    }
-
-    public double getRobotHeading() {
-        return pig.getCompassHeading();
     }
 }
