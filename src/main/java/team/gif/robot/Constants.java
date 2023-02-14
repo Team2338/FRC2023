@@ -7,6 +7,7 @@ package team.gif.robot;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -65,14 +66,11 @@ public final class Constants {
     public static final class ModuleConstants {
         public static final double MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND = 6 * (2 * Math.PI); //6
         public static final double MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 6 * (2 * Math.PI); //7
-
-        public static final double DRIVE_MOTOR_GEAR_RATIO = 2; // TODO: Need to ask Aaron
-        public static final double WHEEL_DIAMETER_METERS = 0.10338;
-        public static final double DRIVE_ENCODER_ROT_2_METER = DRIVE_MOTOR_GEAR_RATIO * Math.PI * WHEEL_DIAMETER_METERS;
+        public static final double GEAR_RATIO = 27.0 / 4.0; // need to ask aaron
+        public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(3.5);
+        public static final double DRIVE_ENCODER_ROT_2_METER = Math.PI * WHEEL_DIAMETER_METERS / (GEAR_RATIO);
         public static final double DRIVE_ENCODER_RPM_2_METER_PER_SEC = DRIVE_ENCODER_ROT_2_METER / 60;
-
-        public static final double ENCODER_CPR = 4096.0; //1024
-        public static final double kFalconEncoderCPR = 2048;
+        public static final double ENCODER_CPR = 2048.0; //4096.0 for talons
         public static final double kDriveEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (WHEEL_DIAMETER_METERS * Math.PI) / (double) ENCODER_CPR;
@@ -80,12 +78,6 @@ public final class Constants {
         public static final double kTurningEncoderDistancePerPulse =
             // Assumes the encoders are on a 1:1 reduction with the module shaft.
             (2 * Math.PI) / (double) ENCODER_CPR;
-
-        public static final double kPModuleTurningController = 1.0; // 1
-
-        public static final double kPModuleDriveController = 0.3; // 1
-
-        public static final double GEAR_RATIO = 46080.0 / 6720.0; // need to ask aaron
 
         public static final double PHYSICAL_MAX_SPEED_METERS_PER_SECOND = 5;
 
@@ -140,6 +132,7 @@ public final class Constants {
         public static final double TICKS_ABS_MAX = 2800;
 
     }
+
     public static class Elevator {
         public static final double P = 4.0;
         public static final double I = 0.0;

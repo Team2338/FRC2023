@@ -14,13 +14,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
-import team.gif.robot.subsystems.drivers.SwerveModuleCANCoder;
+import team.gif.robot.subsystems.drivers.SwerveModuleMK4;
 
 public class SwerveDrivetrain extends SubsystemBase {
-    public static SwerveModuleCANCoder fL;
-    public static SwerveModuleCANCoder fR;
-    public static SwerveModuleCANCoder rR;
-    public static SwerveModuleCANCoder rL;
+    public static SwerveModuleMK4 fL;
+    public static SwerveModuleMK4 fR;
+    public static SwerveModuleMK4 rR;
+    public static SwerveModuleMK4 rL;
 
     private static TalonSRX pigMotor;
     private static Pigeon pig;
@@ -33,7 +33,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     public SwerveDrivetrain() {
         super();
 
-        fL = new SwerveModuleCANCoder(
+        fL = new SwerveModuleMK4 (
                 RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
                 false,
@@ -45,7 +45,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 Constants.ModuleConstants.DrivetrainPID.frontLeftP
         );
 
-        fR = new SwerveModuleCANCoder(
+        fR = new SwerveModuleMK4 (
                 RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
                 false,
@@ -57,7 +57,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 Constants.ModuleConstants.DrivetrainPID.frontRightP
         );
 
-        rR = new SwerveModuleCANCoder(
+        rR = new SwerveModuleMK4 (
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
                 false,
@@ -69,7 +69,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 Constants.ModuleConstants.DrivetrainPID.rearRightP
         );
 
-        rL = new SwerveModuleCANCoder(
+        rL = new SwerveModuleMK4 (
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
                 false,
@@ -160,10 +160,10 @@ public class SwerveDrivetrain extends SubsystemBase {
      * Reset the position of each of the wheels so that they all are pointing straight forward
      */
     public void resetEncoders() {
-        fL.resetEncoders();
-        fR.resetEncoders();
-        rL.resetEncoders();
-        rR.resetEncoders();
+        fL.resetDriveEncoders();
+        fR.resetDriveEncoders();
+        rL.resetDriveEncoders();
+        rR.resetDriveEncoders();
     }
 
     /**
