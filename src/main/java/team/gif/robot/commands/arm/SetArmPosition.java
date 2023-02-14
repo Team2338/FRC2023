@@ -35,31 +35,24 @@ public class SetArmPosition extends CommandBase {
         }
 
         Robot.arm.setTargetPosition(targetPosition);
-
-        if(Robot.arm.PIDError() > 0 )
-            Robot.arm.configP(Constants.Arm.P);
-        else
-            Robot.arm.configP(Constants.Arm.REV_P);
-
-        Robot.arm.PIDMove();
-        loopCounter = 0;
-        System.out.println("START MOTION MAGIC");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        System.out.println("START ARM MOTION MAGIC");
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        System.out.println("ARM MOTION MAGIC");
         return Robot.arm.isFinished();
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        System.out.println("END MOTION MAGIC");
+        Robot.arm.setTargetPosition(Robot.arm.getPosition()); // update target based on current position
+        System.out.println("END ARM MOTION MAGIC");
     }
 }

@@ -64,7 +64,6 @@ public class Arm extends SubsystemBase {
     public double PIDError(){
         return getPosition() - armTargetPos;
     }
-    // limits
 
     public void currentLimitingEnable(boolean enableLimit) {
         armMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(enableLimit, MAX_SUPPLY_CURRENT_AMPS,MAX_STATOR_CURRENT_AMPS, 0));
@@ -96,7 +95,7 @@ public class Arm extends SubsystemBase {
     private void configArmTalon() {
         armMotor.configFactoryDefault();
 
-        //general settings
+        // general settings
         armMotor.setNeutralMode(NeutralMode.Brake); // setting to brake mode
         armMotor.setInverted(true);
         armMotor.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
@@ -120,8 +119,8 @@ public class Arm extends SubsystemBase {
         armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);
         armMotor.configNominalOutputForward(0);     // nominal = minimum
         armMotor.configNominalOutputReverse(0);     // nominal = minimum
-        armMotor.configPeakOutputReverse(-0.5);     // use max 50% power
-        armMotor.configPeakOutputForward(0.5);      // use max 50% power
+        armMotor.configPeakOutputReverse(-0.5);     // use max 50% power to slow down arm
+        armMotor.configPeakOutputForward(0.5);      // use max 50% power to slow down arm
         armMotor.configClosedloopRamp(1); // time in seconds to get to peak output power
 
         // additional Motions Magic settings
