@@ -99,8 +99,7 @@ public class Arm extends SubsystemBase {
     }
 
     public double PIDError(){
-        return Math.abs(getPosition() - armTargetPos);
-        //return armMotor.getClosedLoopError();
+        return getPosition() - armTargetPos;
     }
 
     // limits
@@ -113,8 +112,8 @@ public class Arm extends SubsystemBase {
     }
 
     public boolean isFinished() {
-       // return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
-        return  PIDError() < Constants.Arm.PID_TOLERANCE;
+        return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
+//        return  PIDError() < Constants.Arm.PID_TOLERANCE;
     }
 
     public boolean getArmManualFlag() { return armManualFlag;}
