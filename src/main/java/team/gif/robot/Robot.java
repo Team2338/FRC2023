@@ -4,17 +4,17 @@
 
 package team.gif.robot;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.lib.logging.EventFileLogger;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
-import team.gif.robot.commands.drivetrain.DriveTank;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
@@ -43,6 +43,8 @@ public class Robot extends TimedRobot {
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
     public static UI ui;
+    private static TelemetryFileLogger telemetryFileLogger;
+    private static EventFileLogger eventFileLogger;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -79,6 +81,14 @@ public class Robot extends TimedRobot {
             Shuffleboard.getTab("Swerve").addDouble("robot y", swervetrain.getRobotPose()::getY);
             Shuffleboard.getTab("Swerve").addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
         }
+
+        eventFileLogger = new EventFileLogger();
+        eventFileLogger.init();
+
+        telemetryFileLogger = new TelemetryFileLogger();
+        addMetricsToLogger();
+        telemetryFileLogger.init();
+
     }
 
     /**
@@ -166,4 +176,19 @@ public class Robot extends TimedRobot {
     public static boolean isCompBot = false;
     public static boolean isSwervePBot = false;
     public static boolean isTankPBot = true;
+
+    public void addMetricsToLogger() {
+        //General Info Tracking
+        telemetryFileLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
+        telemetryFileLogger.addMetric("MatchNumber", DriverStation::getMatchNumber);
+        telemetryFileLogger.addMetric("MatchTime", DriverStation::getMatchTime);
+        telemetryFileLogger.addMetric("GameData", DriverStation::getGameSpecificMessage);
+
+        //Driver Input Tracking
+        telemetryFileLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY()); // TODO: Check negatives
+        telemetryFileLogger.addMetric("Driver_Left_X", () -> -Robot.oi.driver.getLeftX());
+        telemetryFileLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
+
+        //Voltage Strat Tracking
+    }
 }
