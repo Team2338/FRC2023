@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
         pigeon = new Pigeon();
         swervetrain = new SwerveDrivetrain();
         driveSwerve = new DriveSwerve();
-        swervetrain.resetHeading();
+        pigeon.resetPigeonPosition();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
