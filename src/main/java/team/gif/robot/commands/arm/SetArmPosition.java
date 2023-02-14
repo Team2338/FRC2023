@@ -35,6 +35,12 @@ public class SetArmPosition extends CommandBase {
 //        }
 
         Robot.arm.setArmTargetPos(targetPosition);
+
+        if(Robot.arm.PIDError() > 0 )
+            Robot.arm.configP(Constants.Arm.P);
+        else
+            Robot.arm.configP(Constants.Arm.REV_P);
+
         Robot.arm.PIDMove();
         loopCounter = 0;
         System.out.println("START MOTION MAGIC");

@@ -30,7 +30,8 @@ public class Arm extends SubsystemBase {
         //motor controller groups
 //        armControl = new MotorControllerGroup(armMotor);
 
-        configArmTalon();
+        armMotor.configFactoryDefault();
+//        configArmTalon();
         currentLimitingEnable(true); //limits
 
         //armMotor settings
@@ -62,6 +63,10 @@ public class Arm extends SubsystemBase {
         armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         armMotor.configForwardSoftLimitEnable(true);
         armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);
+
+        armMotor.configPeakOutputReverse(-0.5);
+        armMotor.configPeakOutputForward(0.5);
+        armMotor.configClosedloopRamp(1);
     }
 
     // getting the ticks from the encoders.
@@ -121,8 +126,13 @@ public class Arm extends SubsystemBase {
     public void setCruiseVelocity(int ticksPer100ms) {
         armMotor.configMotionCruiseVelocity(ticksPer100ms);
     }
+
     public void configF(double f) {
         armMotor.config_kF(0, f);
+    }
+
+    public void configP(double p) {
+        armMotor.config_kP(0, p);
     }
 
     private void configArmTalon() {
@@ -151,5 +161,8 @@ public class Arm extends SubsystemBase {
         armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         armMotor.overrideLimitSwitchesEnable(false);
         armMotor.configForwardSoftLimitEnable(true);
+        armMotor.configClosedloopRamp(5);
+        armMotor.configPeakOutputReverse(-0.5);
+        armMotor.configPeakOutputForward(0.5);
     }
 }

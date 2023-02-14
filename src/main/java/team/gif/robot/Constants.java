@@ -132,8 +132,9 @@ public final class Constants {
     }
 
     public static class Arm {
-        public static final double FF = 0.0;
-        public static final double P = 4.0; // 2.0; // 1.2;
+        public static final double FF = -0.02;
+        public static final double P = 2.0; // 2.0; // 1.2;
+        public static final double REV_P = 0.5;
         // todo create gain for rev direction around 0.5
         public static final double I = 0.0;
         public static final double D = 0.0;
