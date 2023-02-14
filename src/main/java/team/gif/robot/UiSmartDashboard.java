@@ -8,9 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
-import team.gif.robot.subsystems.drivers.Pigeon;
-
-import static team.gif.robot.Robot.*;
 import static team.gif.robot.Robot.drivetrain;
 
 public class UiSmartDashboard {
@@ -22,7 +19,7 @@ public class UiSmartDashboard {
         ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard"); // Gets a reference to the shuffleboard tab
         tab.add("BotHead", (x) -> {
                     x.setSmartDashboardType("Gyro");
-                    x.addDoubleProperty("Value", () -> Robot.swervetrain.getHeading().getDegrees(), null);
+                    x.addDoubleProperty("Value", () -> Robot.pigeon.getHeading(), null);
                 })
                 .withPosition(5, 0);
 
@@ -58,7 +55,7 @@ public class UiSmartDashboard {
     }
 
     public void updateUI() {
-        // Pressure Sensor
+        // Timers
         SmartDashboard.putString("Time", String.format("%.4f", Timer.getFPGATimestamp()));
         SmartDashboard.putString("Timer",String.format("%.2f",Timer.getMatchTime()));
     }
