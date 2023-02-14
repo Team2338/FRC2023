@@ -132,9 +132,9 @@ public final class Constants {
     }
 
     public static class Arm {
-        public static final double FF = 0.0;
-        public static final double P = 4.0; // 2.0; // 1.2;
-        // todo create gain for rev direction around 0.5
+        public static final double FF = -0.02;
+        public static final double P = 2.0; // 2.0; // 1.2;
+        public static final double REV_P = 0.5; // ToDo needs tuning (orig test only used P)
         public static final double I = 0.0;
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
@@ -156,7 +156,7 @@ public final class Constants {
         // n is in degrees
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 60.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 70.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_GROUND_POS = 2850;
         public static final double PLACE_CUBE_HIGH_POS = 2850;
         public static final double PLACE_CUBE_MID_POS = 80.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
@@ -182,8 +182,8 @@ public final class Constants {
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
         private static final int EL_TICKS_PER_INCH = 1111;
-        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 53 * EL_TICKS_PER_INCH; // n is in inches
-        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 24 * EL_TICKS_PER_INCH;
+        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 51 * EL_TICKS_PER_INCH; // n is in inches
+        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 35 * EL_TICKS_PER_INCH;
         public static final int LOAD_FROM_GROUND_POS = 5000;
         public static final int PLACE_CUBE_HIGH_POS = 50000;
         public static final int PLACE_CUBE_MID_POS = 18 * EL_TICKS_PER_INCH;
@@ -191,7 +191,7 @@ public final class Constants {
         public static final int PLACE_CONE_MID_POS = 30000;
         public static final int PLACE_LOW_POS = 1 * EL_TICKS_PER_INCH;;
 
-        public static final int MAX_POS = 56 * EL_TICKS_PER_INCH;
+        public static final int MAX_POS = 55 * EL_TICKS_PER_INCH;
         public static final int MIN_POS =  8 * EL_TICKS_PER_INCH;
     }
 

@@ -15,7 +15,7 @@ public class SetArmPosition extends CommandBase {
         if (targetPos > Constants.Arm.MAX_POS) { targetPos = Constants.Arm.MAX_POS; }
         if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
 
-        Robot.arm.setArmTargetPos(targetPos);
+        Robot.arm.setTargetPosition(targetPos);
         targetPosition = targetPos;
     }
 
@@ -34,7 +34,16 @@ public class SetArmPosition extends CommandBase {
             Robot.arm.setMotionMagic(targetPosition, Constants.Arm.REV_GRAV_FEED_FORWARD);
         }
 
-        System.out.println("START ARM MOTION MAGIC");
+        Robot.arm.setTargetPosition(targetPosition);
+
+        if(Robot.arm.PIDError() > 0 )
+            Robot.arm.configP(Constants.Arm.P);
+        else
+            Robot.arm.configP(Constants.Arm.REV_P);
+
+        Robot.arm.PIDMove();
+        loopCounter = 0;
+        System.out.println("START MOTION MAGIC");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

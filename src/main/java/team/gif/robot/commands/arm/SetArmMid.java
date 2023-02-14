@@ -14,7 +14,7 @@ public class SetArmMid extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.arm.setArmTargetPos(2850);
+        Robot.arm.setTargetPosition(2850);
         Robot.arm.PIDMove();
         counter = 0;
     }

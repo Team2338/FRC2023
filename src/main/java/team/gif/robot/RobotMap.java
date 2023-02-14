@@ -37,9 +37,9 @@ public abstract class RobotMap {
 
     //Collector
     public static final int SOLENOID_COLLECTOR_LEFT_FORWARD = 0;
-    public static final int SOLENOID_COLLECTOR_RIGHT_FORWARD = 1;
+    public static final int SOLENOID_COLLECTOR_RIGHT_FORWARD = 0;
     public static final int SOLENOID_COLLECTOR_LEFT_REVERSE = 2;
-    public static final int SOLENOID_COLLECTOR_RIGHT_REVERSE = 3;
+    public static final int SOLENOID_COLLECTOR_RIGHT_REVERSE = 1;
     public static final int SOLENOID_COLLECTOR_REVERSE = 0;
     public static final int COLLECTOR_LEFT_MOTOR = 0;
     public static final int COLLECTOR_RIGHT_MOTOR = 6;
