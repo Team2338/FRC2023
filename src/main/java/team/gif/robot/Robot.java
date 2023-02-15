@@ -77,6 +77,10 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("robot x", swervetrain.getRobotPose()::getX);
             swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
             swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+            swerveTab.addDouble("fR", swervetrain.fR::getTurningHeading);
+            swerveTab.addDouble("fL", swervetrain.fL::getTurningHeading);
+            swerveTab.addDouble("rR", swervetrain.rR::getTurningHeading);
+            swerveTab.addDouble("rL", swervetrain.rL::getTurningHeading);
         }
     }
 

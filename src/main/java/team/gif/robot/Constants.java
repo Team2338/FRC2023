@@ -37,10 +37,10 @@ public final class Constants {
         public static final boolean kFrontRightTurningMotorReversed = false;
         public static final boolean kRearRightTurningMotorReversed = false;
 
-        public static final double FRONT_LEFT_OFFSET = 131.748;
-        public static final double REAR_LEFT_OFFSET = 20.302;
-        public static final double FRONT_RIGHT_OFFSET = 88.682;
-        public static final double REAR_RIGHT_OFFSET = 76.904;
+        public static final double FRONT_LEFT_OFFSET = 82.8808;
+        public static final double REAR_LEFT_OFFSET = -137.9882;
+        public static final double FRONT_RIGHT_OFFSET = 159.1699;
+        public static final double REAR_RIGHT_OFFSET = -22.413;
 
         public static final double TRACK_WIDTH = 0.4699;
         // Distance between centers of right and left wheels on robot
@@ -67,7 +67,7 @@ public final class Constants {
         public static final double MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND = 6 * (2 * Math.PI); //6
         public static final double MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 6 * (2 * Math.PI); //7
         public static final double GEAR_RATIO = 27.0 / 4.0; // need to ask aaron
-        public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(3.5);
+        public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(3.78);
         public static final double DRIVE_ENCODER_ROT_2_METER = Math.PI * WHEEL_DIAMETER_METERS / (GEAR_RATIO);
         public static final double DRIVE_ENCODER_RPM_2_METER_PER_SEC = DRIVE_ENCODER_ROT_2_METER / 60;
         public static final double ENCODER_CPR = 2048.0; //4096.0 for talons
@@ -91,14 +91,14 @@ public final class Constants {
         public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION_UNITS_PER_SECOND = 3;
 
         public static final class DrivetrainPID {
-            public static final double frontLeftP = 0.5;
-            public static final double frontLeftFF = 0.035;
-            public static final double frontRightP = 0.48;
-            public static final double frontRightFF = 0.05; //issa good
-            public static final double rearLeftP = 0.5;
-            public static final double rearLeftFF = 0.035;
-            public static final double rearRightP = 0.5;
-            public static final double rearRightFF = 0.035;
+            public static final double frontLeftP = 0.25;
+            public static final double frontLeftFF = 0.01;
+            public static final double frontRightP = 0.25;
+            public static final double frontRightFF = 0.01; //issa good
+            public static final double rearLeftP = 0.25;
+            public static final double rearLeftFF = 0.01;
+            public static final double rearRightP = 0.25;
+            public static final double rearRightFF = 0.01;
         }
     }
 
