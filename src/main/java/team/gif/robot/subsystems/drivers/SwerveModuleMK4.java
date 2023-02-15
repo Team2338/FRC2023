@@ -74,7 +74,7 @@ public class SwerveModuleMK4 {
      * @return Returns the active state of the given swerveModule
      */
     public SwerveModuleState getState() {
-        return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurnVelocity()));
+        return new SwerveModuleState(getDriveVelocity(), new Rotation2d(Units.degreesToRadians(getTurnVelocity())));
     }
 
     /**
