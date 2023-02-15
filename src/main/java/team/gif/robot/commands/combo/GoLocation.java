@@ -2,6 +2,7 @@ package team.gif.robot.commands.combo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
+import team.gif.robot.Globals;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmMid;
 import team.gif.robot.commands.arm.SetArmPosition;
@@ -27,13 +28,19 @@ public class GoLocation extends CommandBase {
         this.location = location;
     }
 
+    public GoLocation() {
+        super();
+        this.location = Globals.goLocationTarget; // pull the location set on the previous call to GoLocation
+    }
+
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         double armTargetPos;
         int elevatorTargetPos;
 
-        if ( Robot.arm.getPositionDegrees() < 30) { // TODO: change to ticks
+        if ( Robot.arm.getPositionDegrees() < 25) { // need to be in a safe place before going anywhere else
+            Globals.goLocationTarget = location;
             new GoLocationFromHome().schedule();
         } else {
             switch (location) {

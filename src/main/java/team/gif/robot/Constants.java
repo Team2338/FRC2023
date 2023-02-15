@@ -139,7 +139,7 @@ public final class Constants {
         public static final double I = 0.0;
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
-        public static final int PID_TOLERANCE = 40; // allows PID to get closer
+        public static final int PID_TOLERANCE = 50; // allows PID to get closer
 
         public static final int MAX_VELOCITY = 16000; // 5000; // ticks/100ms
         public static final int REV_MAX_VELOCITY = 16000;
