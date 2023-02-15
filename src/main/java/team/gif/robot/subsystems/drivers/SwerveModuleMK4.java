@@ -73,6 +73,14 @@ public class SwerveModuleMK4 {
         this.turnMotor.setSmartCurrentLimit(20, 40);
     }
 
+    public CANSparkMax getDriveMotor() {
+        return this.driveMotor;
+    }
+
+    public TalonSRX getTurnMotor() {
+        return this.turnMotor;
+    }
+
     /**
      * Get the active state of the swerve module
      * @return Returns the active state of the given swerveModule
