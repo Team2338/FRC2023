@@ -76,7 +76,6 @@ public class SwerveModuleCANCoder {
         this.canCoder = new CANCoder(canCoder);
         this.canCoder.configFactoryDefault();
         this.canCoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
-        this.canCoder.configMagnetOffset(turningOffset);
 
         this.kFF = kFF;
         this.kP = kP;
@@ -89,6 +88,14 @@ public class SwerveModuleCANCoder {
         turningPID.enableContinuousInput(-Math.PI, Math.PI);
 
         this.driveMotor.setSmartCurrentLimit(20, 40);
+    }
+
+    public CANSparkMax getDriveMotor() {
+        return this.driveMotor;
+    }
+
+    public TalonSRX getTurnMotor() {
+        return this.turnMotor;
     }
 
     /**
@@ -120,7 +127,7 @@ public class SwerveModuleCANCoder {
      * @return Returns the raw heading of the canCoder (deg)
      */
     public double getRawHeading() {
-        return canCoder.getPosition();
+        return canCoder.getAbsolutePosition();
     }
 
     /**
@@ -128,7 +135,8 @@ public class SwerveModuleCANCoder {
      * @return Returns the heading of the module in radians as a double
      */
     public double getTurningHeading() {
-        double heading = Units.degreesToRadians(getRawHeading()) * (isAbsInverted ? -1.0: 1.0);
+        double heading = Units.degreesToRadians(getRawHeading() - this.turningOffset);
+        heading *= isAbsInverted ? -1.0 : 1.0;
         heading %= 2 * Math.PI;
         return heading;
     }
@@ -211,7 +219,7 @@ public class SwerveModuleCANCoder {
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
         final double kff = kFF * Math.abs(error) / error;
         final double turnOutput = kff + (kP * error);
-        driveMotor.set(0);
+        driveMotor.set(driveOutput);
         turnMotor.set(turnOutput);
     }
 
@@ -228,7 +236,7 @@ public class SwerveModuleCANCoder {
      */
     public void resetEncoders() {
         driveMotor.getEncoder().setPosition(0);
-        canCoder.setPosition(0);
+//        canCoder.setPosition(0);
     }
 
     /**

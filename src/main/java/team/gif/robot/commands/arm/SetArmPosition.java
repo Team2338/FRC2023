@@ -39,15 +39,11 @@ public class SetArmPosition extends CommandBase {
         if (Robot.arm.PIDError() > 0){
             Robot.arm.configF(Constants.Arm.FF);
             Robot.arm.configP(Constants.Arm.P);
-        System.out.println("                       FORWARD P");
-    }        else {
+        } else {
             Robot.arm.configF(Constants.Arm.REV_FF);
             Robot.arm.configP(Constants.Arm.REV_P);
-            System.out.println("                   REV_P");
         }
         Robot.arm.PIDMove();
-        loopCounter = 0;
-        System.out.println("START ARM PID");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -57,18 +53,10 @@ public class SetArmPosition extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if ( ++loopCounter > 15) // waiting for 20 cycles (400ms) to let error catch up
-            return Robot.arm.isFinished();
-        else
-            return false;
-//        System.out.println("MOTION MAGIC");
-//        return Robot.arm.isFinished();
+        return Robot.arm.isFinished();
     }
 
     // Called when the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-        System.out.println("END ARM PID");
-        //Robot.arm.setArmTargetPos(Robot.arm.getPosition());
-    }
+    public void end(boolean interrupted) {}
 }

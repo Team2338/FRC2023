@@ -36,10 +36,10 @@ public final class Constants {
         public static final boolean kFrontRightTurningMotorReversed = false;
         public static final boolean kRearRightTurningMotorReversed = false;
 
-        public static final double FRONT_LEFT_OFFSET = 455.0; // TODO: Calculate 454.0
-        public static final double REAR_LEFT_OFFSET = 1230.0; //-2853.0
-        public static final double FRONT_RIGHT_OFFSET = -66.0; //-35.0
-        public static final double REAR_RIGHT_OFFSET = 180.352;
+        public static final double FRONT_LEFT_OFFSET = 131.748;
+        public static final double REAR_LEFT_OFFSET = 20.302;
+        public static final double FRONT_RIGHT_OFFSET = 88.682;
+        public static final double REAR_RIGHT_OFFSET = 76.904;
 
         public static final double TRACK_WIDTH = 0.4699;
         // Distance between centers of right and left wheels on robot
@@ -54,7 +54,7 @@ public final class Constants {
 
         public static final boolean kGyroReversed = false;
 
-        public static final double MAX_DRIVE_RPM = 4800;
+        public static final double MAX_DRIVE_RPM = 3200;
 
         public static final double MAX_SPEED_METERS_PER_SECOND = MAX_DRIVE_RPM *
             (Math.PI * Constants.ModuleConstants.WHEEL_DIAMETER_METERS) /

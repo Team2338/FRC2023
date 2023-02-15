@@ -18,6 +18,9 @@ public abstract class RobotMap {
     public static final int REAR_LEFT_DRIVE_MOTOR_PORT = 13; // broken
     public static final int FRONT_RIGHT_DRIVE_MOTOR_PORT = 7;
     public static final int REAR_RIGHT_DRIVE_MOTOR_PORT = 23;
+    public static final int FRONT_LEFT_CANCODER = 6;
+    public static final int FRONT_RIGHT_CANCODER = 9;
+    public static final int REAR_LEFT_CANCODER = 11;
     public static final int REAR_RIGHT_CANCODER = 7;
 
     public static final int FRONT_LEFT_TURNING_MOTOR_PORT = 3; //not 12

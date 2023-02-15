@@ -45,12 +45,13 @@ public class Engage extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(Robot.swervetrain.fL.getDriveMotor().getEncoder().getPosition()) < 36.5) {
-        System.out.println("RUNNING " + ++counter);
-        return false;
-    } else {
-        System.out.println("EXITING");
-        return true;
-    }
+//    if(Math.abs(Robot.swervetrain.fL.getDriveMotor().getEncoder().getPosition()) < 36.5) {
+//        System.out.println("RUNNING " + ++counter);
+//        return false;
+//    } else {
+//        System.out.println("EXITING");
+//        return true;
+//    }
+      return true;
   }
 }

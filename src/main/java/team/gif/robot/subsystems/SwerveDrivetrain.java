@@ -8,18 +8,20 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
-import team.gif.robot.subsystems.drivers.SwerveModule;
 import team.gif.robot.subsystems.drivers.SwerveModuleCANCoder;
 
 public class SwerveDrivetrain extends SubsystemBase {
-    public static SwerveModule fL;
-    public static SwerveModule fR;
+    public static SwerveModuleCANCoder fL;
+    public static SwerveModuleCANCoder fR;
     public static SwerveModuleCANCoder rR;
-    public static SwerveModule rL;
+    public static SwerveModuleCANCoder rL;
 
     private static TalonSRX pigMotor;
     private static Pigeon pig;
@@ -32,24 +34,26 @@ public class SwerveDrivetrain extends SubsystemBase {
     public SwerveDrivetrain() {
         super();
 
-        fL = new SwerveModule(
+        fL = new SwerveModuleCANCoder(
                 RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
                 false,
-                true,
+                false,
                 true,
                 Constants.Drivetrain.FRONT_LEFT_OFFSET,
+                RobotMap.FRONT_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontLeftFF,
                 Constants.ModuleConstants.DrivetrainPID.frontLeftP
         );
 
-        fR = new SwerveModule(
+        fR = new SwerveModuleCANCoder(
                 RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
                 false,
-                false,
+                true,
                 true,
                 Constants.Drivetrain.FRONT_RIGHT_OFFSET,
+                RobotMap.FRONT_RIGHT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontRightFF,
                 Constants.ModuleConstants.DrivetrainPID.frontRightP
         );
@@ -58,7 +62,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
                 false,
-                false,
+                true,
                 true,
                 Constants.Drivetrain.REAR_RIGHT_OFFSET,
                 RobotMap.REAR_RIGHT_CANCODER,
@@ -66,13 +70,14 @@ public class SwerveDrivetrain extends SubsystemBase {
                 Constants.ModuleConstants.DrivetrainPID.rearRightP
         );
 
-        rL = new SwerveModule(
+        rL = new SwerveModuleCANCoder(
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
                 false,
                 true,
                 true,
                 Constants.Drivetrain.REAR_LEFT_OFFSET,
+                RobotMap.REAR_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.rearLeftFF,
                 Constants.ModuleConstants.DrivetrainPID.rearLeftP
         );
@@ -85,6 +90,30 @@ public class SwerveDrivetrain extends SubsystemBase {
         resetHeading();
         resetDriveEncoders();
 
+        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
+        swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
+        swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
+        swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+    }
+
+    public SwerveDrivetrain(TelemetryFileLogger logger) {
+        this();
+
+        logger.addMetric("FL_Rotation", fL::getTurningHeading);
+        logger.addMetric("FR_Rotation", fR::getTurningHeading);
+        logger.addMetric("RL_Rotation", rL::getTurningHeading);
+        logger.addMetric("RR_Rotation", rR::getTurningHeading);
+
+        logger.addMetric("FL_Drive_Command", fL.getDriveMotor()::getAppliedOutput);
+        logger.addMetric("FR_Drive_Command", fR.getDriveMotor()::getAppliedOutput);
+        logger.addMetric("RL_Drive_Command", rL.getDriveMotor()::getAppliedOutput);
+        logger.addMetric("RR_Drive_Command", rR.getDriveMotor()::getAppliedOutput);
+
+        logger.addMetric("FL_Turn_Command", fL.getTurnMotor()::getMotorOutputPercent);
+        logger.addMetric("FR_Turn_Command", fR.getTurnMotor()::getMotorOutputPercent);
+        logger.addMetric("RL_Turn_Command", rL.getTurnMotor()::getMotorOutputPercent);
+        logger.addMetric("RR_Turn_Command", rR.getTurnMotor()::getMotorOutputPercent);
     }
 
     @Override
