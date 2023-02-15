@@ -13,6 +13,7 @@ import team.gif.robot.commands.collector.CollectorIn;
 import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
+import team.gif.robot.commands.limeLight.LedToggle;
 
 public class OI {
     /*
@@ -113,6 +114,9 @@ public class OI {
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
         if( Robot.isSwervePBot || Robot.isCompBot )
             dB.onTrue(new ResetWheels());
+
+        // limelight toggle
+        dRTrigger.onTrue(new LedToggle());
     }
 
     public void setRumble(boolean rumble) {
