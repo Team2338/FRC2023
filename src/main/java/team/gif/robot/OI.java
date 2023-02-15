@@ -11,6 +11,7 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.collector.WheelsIn;
 import team.gif.robot.commands.collector.WheelsOut;
+import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
 import team.gif.robot.commands.combo.GoFloor;
@@ -111,11 +112,11 @@ public class OI {
         aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
         aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
         aDPadDown.onTrue(new GoFloor());
-//        aDPadLeft.onTrue(new GoHome());
+        aDPadLeft.onTrue(new GoHome());
 
         // combo placing cone actions
-        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
-        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH));
+        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH));
+        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
 
         // combo placing cube actions
         aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));

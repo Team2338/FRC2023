@@ -29,6 +29,9 @@ public class UI {
         shuffleboardTab.addNumber("Arm Output", arm::getOutput)
                 .withPosition(2, 1);
 
+        shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
+                .withPosition(3, 1);
+
         shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
                 .withPosition(0, 1);
 
@@ -37,6 +40,9 @@ public class UI {
 
         shuffleboardTab.addNumber("Elevator PID Error", elevator::PIDError)
                 .withPosition(1, 1);
+
+        shuffleboardTab.addNumber("Elevator Inches", elevator::getPositionInches)
+                .withPosition(2, 2);
 
         shuffleboardTab.addNumber("Arm Degrees", arm::getPositionDegrees)
                 .withPosition(3, 0);

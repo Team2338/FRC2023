@@ -42,10 +42,6 @@ public class SetElevatorPosition extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        // this is currently always returning false, but keep the logc here in case
-        // it does return true and we need to shift to PID control
-//        return Robot.elevator.elevatorMotor.isMotionProfileFinished();
-//        System.out.println("MOTION MAGIC");
         return Robot.elevator.isFinished();
     }
 

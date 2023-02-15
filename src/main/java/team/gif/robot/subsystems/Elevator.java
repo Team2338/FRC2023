@@ -32,6 +32,10 @@ public class Elevator extends SubsystemBase {
         return elevatorMotor.getSelectedSensorPosition();
     }
 
+    public double getPositionInches() {
+        return (elevatorMotor.getSelectedSensorPosition() + Constants.Elevator.ZERO_OFFSET_TICKS) / Constants.Elevator.EL_TICKS_PER_INCH;
+    }
+
     public double getTargetPosition() {
         return elevatorTargetPos;
     }

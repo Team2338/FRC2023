@@ -42,6 +42,7 @@ public class GoLocation extends CommandBase {
         if ( Robot.arm.getPositionDegrees() < 25) { // need to be in a safe place before going anywhere else
             Globals.goLocationTarget = location;
             new GoLocationFromHome().schedule();
+            System.out.println("going to safe location " + location);
         } else {
             switch (location) {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
@@ -82,6 +83,7 @@ public class GoLocation extends CommandBase {
                     break;
             }
             if( armTargetPos >= 0 ) {
+                System.out.println("Moving to location " + location);
                 new SetElevatorPosition(elevatorTargetPos).schedule();
                 new SetArmPosition(armTargetPos).schedule();
             }
