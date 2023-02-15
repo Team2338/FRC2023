@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
         eventLogger.init();
 
         telemetryLogger = new TelemetryFileLogger();
+        addMetricsToLogger();
 
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
@@ -87,10 +88,10 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
             swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
             swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
-            swerveTab.addDouble("fR", swervetrain.fR::getTurningHeading);
-            swerveTab.addDouble("fL", swervetrain.fL::getTurningHeading);
-            swerveTab.addDouble("rR", swervetrain.rR::getTurningHeading);
-            swerveTab.addDouble("rL", swervetrain.rL::getTurningHeading);
+            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
+            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
+            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
+            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
 
         telemetryLogger.init();
@@ -183,6 +184,8 @@ public class Robot extends TimedRobot {
         telemetryLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
 
         telemetryLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY());
+        telemetryLogger.addMetric("Driver_Left_X", () -> Robot.oi.driver.getLeftX());
+        telemetryLogger.addMetric("Driver_Angle", () -> Math.atan(-Robot.oi.driver.getLeftY() / Robot.oi.driver.getLeftX()));
         telemetryLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
     }
 

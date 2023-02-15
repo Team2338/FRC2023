@@ -99,6 +99,8 @@ public class SwerveDrivetrain extends SubsystemBase {
         swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
         swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
         swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+        swerveTab.addDouble("RR_Accum", rR::getAccum);
+        swerveTab.addDouble("RL_Accum", rL::getAccum);
     }
 
     public SwerveDrivetrain(TelemetryFileLogger logger) {
@@ -109,15 +111,20 @@ public class SwerveDrivetrain extends SubsystemBase {
         logger.addMetric("RL_Rotation", rL::getTurningHeading);
         logger.addMetric("RR_Rotation", rR::getTurningHeading);
 
-        logger.addMetric("FL_Drive_Command", fL.getDriveMotor()::getMotorOutputPercent);
-        logger.addMetric("FR_Drive_Command", fR.getDriveMotor()::getMotorOutputPercent);
-        logger.addMetric("RL_Drive_Command", rL.getDriveMotor()::getMotorOutputPercent);
-        logger.addMetric("RR_Drive_Command", rR.getDriveMotor()::getMotorOutputPercent);
+        logger.addMetric("FL_Drive_Command", () -> fL.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("FR_Drive_Command", () -> fR.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("RL_Drive_Command", () -> rL.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("RR_Drive_Command", () -> rR.getDriveMotor().getMotorOutputPercent());
 
-        logger.addMetric("FL_Turn_Command", fL.getTurnMotor()::getAppliedOutput);
-        logger.addMetric("FR_Turn_Command", fR.getTurnMotor()::getAppliedOutput);
-        logger.addMetric("RL_Turn_Command", rL.getTurnMotor()::getAppliedOutput);
-        logger.addMetric("RR_Turn_Command", rR.getTurnMotor()::getAppliedOutput);
+        logger.addMetric("FL_Turn_Command", () -> fL.getTurnMotor().getAppliedOutput());
+        logger.addMetric("FR_Turn_Command", () -> fR.getTurnMotor().getAppliedOutput());
+        logger.addMetric("RL_Turn_Command", () -> rL.getTurnMotor().getAppliedOutput());
+        logger.addMetric("RR_Turn_Command", () -> rR.getTurnMotor().getAppliedOutput());
+
+        logger.addMetric("FL_Turn_Velocity", () -> fL.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("FR_Turn_Velocity", () -> fR.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("RL_Turn_Velocity", () -> rL.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("RR_Turn_Velocity", () -> rR.getTurnMotor().getEncoder().getVelocity());
     }
 
     /**

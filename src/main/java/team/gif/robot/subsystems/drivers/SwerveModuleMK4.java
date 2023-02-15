@@ -1,7 +1,6 @@
 package team.gif.robot.subsystems.drivers;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
@@ -25,6 +24,7 @@ public class SwerveModuleMK4 {
 
     private final double kFF;
     private final double kP;
+    private double accum = 0;
 
     private final boolean isAbsInverted;
 
@@ -81,6 +81,10 @@ public class SwerveModuleMK4 {
 
     public CANSparkMax getTurnMotor() {
         return this.turnMotor;
+    }
+
+    public double getAccum() {
+        return accum;
     }
 
     /**
@@ -202,7 +206,8 @@ public class SwerveModuleMK4 {
         double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND;
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
         final double kff = kFF * Math.abs(error) / error;
-        final double turnOutput = kff + (kP * error);
+//        accum += error;
+        final double turnOutput = kff + (kP * error) + (0.001 * accum);
         driveMotor.set(driveOutput);
         turnMotor.set(turnOutput);
     }
