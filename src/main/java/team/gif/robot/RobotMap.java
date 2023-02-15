@@ -43,4 +43,11 @@ public abstract class RobotMap {
     public static final int SOLENOID_COLLECTOR_REVERSE = 0;
     public static final int COLLECTOR_LEFT_MOTOR = 0;
     public static final int COLLECTOR_RIGHT_MOTOR = 0;
+
+    // Sensor
+    public static final int SENSOR_AIR_PRESSURE = 3; // TODO
+
+    // Compressors
+    public static final int COMPRESSOR = 0; // TODO
+
 }

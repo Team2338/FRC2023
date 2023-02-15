@@ -5,6 +5,7 @@
 package team.gif.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -24,6 +25,7 @@ import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
+import team.gif.robot.subsystems.drivers.RobotCompressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
     public static Elevator elevator;
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
+    public static RobotCompressor compressor;
     public static OI oi;
     public static UI ui;
 
@@ -65,6 +68,7 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
+        compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.CTREPCM);
         ui = new UI();
 
         if (isSwervePBot || isCompBot) {
