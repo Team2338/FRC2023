@@ -55,7 +55,7 @@ public final class Constants {
 
         public static final boolean kGyroReversed = false;
 
-        public static final double MAX_DRIVE_RPM = 3200;
+        public static final double MAX_DRIVE_RPM = 4800;
 
         public static final double MAX_SPEED_METERS_PER_SECOND = MAX_DRIVE_RPM *
             (Math.PI * Constants.ModuleConstants.WHEEL_DIAMETER_METERS) /
@@ -92,13 +92,13 @@ public final class Constants {
         public static final double TELE_DRIVE_MAX_ANGULAR_ACCELERATION_UNITS_PER_SECOND = 3;
 
         public static final class DrivetrainPID {
-            public static final double frontLeftP = 0.25;
+            public static final double frontLeftP = 0.5;
             public static final double frontLeftFF = 0.01;
-            public static final double frontRightP = 0.25;
+            public static final double frontRightP = 0.5;
             public static final double frontRightFF = 0.01; //issa good
-            public static final double rearLeftP = 0.25;
+            public static final double rearLeftP = 0.6;
             public static final double rearLeftFF = 0.01;
-            public static final double rearRightP = 0.25;
+            public static final double rearRightP = 0.5;
             public static final double rearRightFF = 0.01;
         }
     }
