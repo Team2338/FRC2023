@@ -14,7 +14,7 @@ public class SetArmTest extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.arm.setArmTargetPos(1600);
+        Robot.arm.setTargetPosition(1600);
         Robot.arm.PIDMove();
         counter = 0;
     }

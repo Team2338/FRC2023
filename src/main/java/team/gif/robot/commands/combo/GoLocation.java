@@ -7,6 +7,17 @@ import team.gif.robot.commands.arm.SetArmMid;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 
+/*
+ *
+ * This CommandBase moves both the arm and elevator to the desired position (exclusive
+ *      of home and floor)
+ *
+ * There are separate classes for moving the mechanisms back home or to the floor.
+ * This is because when going home or to the floor, we need to move the
+ * mechanisms a different way to avoid crashing the mechanisms into other parts
+ * of the robot.
+ *
+ */
 public class GoLocation extends CommandBase {
 
     private int location;
@@ -22,9 +33,9 @@ public class GoLocation extends CommandBase {
         double armTargetPos;
         int elevatorTargetPos;
 
-//        if ( Robot.arm.getPosition() < 30) { // TODO: change to ticks
+        if ( Robot.arm.getPositionDegrees() < 30) { // TODO: change to ticks
 //            new GoLocationFromHome().schedule();
-//        } else {
+        } else {
             switch (location) {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
@@ -63,15 +74,12 @@ public class GoLocation extends CommandBase {
                     elevatorTargetPos = -1;
                     armTargetPos = -1;
                     break;
-//            }
-//        }
+            }
+            if( armTargetPos >= 0 ) {
+                new SetElevatorPosition(elevatorTargetPos).schedule();
+                new SetArmPosition(armTargetPos).schedule();
+            }
         }
-        if( armTargetPos >= 0 ) {
-            new SetElevatorPosition(elevatorTargetPos).schedule();
-            new SetArmPosition(armTargetPos).schedule();
-        }
-//        new SetArmMid().schedule();
-//        new SetElevatorPosition(Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS).schedule();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

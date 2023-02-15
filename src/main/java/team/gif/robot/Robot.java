@@ -4,7 +4,6 @@
 
 package team.gif.robot;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -12,12 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
-import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
-import team.gif.robot.commands.drivetrain.DriveTank;
-import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
@@ -76,7 +72,7 @@ public class Robot extends TimedRobot {
             drivetrain.setDefaultCommand(arcadeDrive);
         }
 //        arm.setDefaultCommand(new ArmManualControl());
-        arm.setArmTargetPos(arm.getPosition());
+        arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
 
         elevator.setElevatorTargetPos(elevator.getPosition());
