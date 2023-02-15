@@ -5,6 +5,10 @@ import team.gif.robot.Robot;
 
 public class CubeLEDs extends CommandBase {
 
+    public CubeLEDs() {
+        super();
+        addRequirements(Robot.led);
+    }
 
     public void initialize() {
 
@@ -23,4 +27,7 @@ public class CubeLEDs extends CommandBase {
 
     // Returns true when the command should end.
 
+    public boolean isFinished() {
+        return false;
+    }
 }
