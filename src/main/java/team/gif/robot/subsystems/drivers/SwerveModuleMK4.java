@@ -1,6 +1,8 @@
 package team.gif.robot.subsystems.drivers;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
@@ -73,11 +75,11 @@ public class SwerveModuleMK4 {
         this.turnMotor.setSmartCurrentLimit(20, 40);
     }
 
-    public CANSparkMax getDriveMotor() {
+    public TalonFX getDriveMotor() {
         return this.driveMotor;
     }
 
-    public TalonSRX getTurnMotor() {
+    public CANSparkMax getTurnMotor() {
         return this.turnMotor;
     }
 

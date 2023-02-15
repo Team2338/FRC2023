@@ -84,9 +84,9 @@ public class Robot extends TimedRobot {
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getRobotPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
+            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
+            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
             swerveTab.addDouble("fR", swervetrain.fR::getTurningHeading);
             swerveTab.addDouble("fL", swervetrain.fL::getTurningHeading);
             swerveTab.addDouble("rR", swervetrain.rR::getTurningHeading);
