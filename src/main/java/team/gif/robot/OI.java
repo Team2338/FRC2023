@@ -101,51 +101,35 @@ public class OI {
      *  whileTrue(new RepeatCommand()) (fka whileHeld)   Init->Execute repeats until IsFinished = true or button released->End, will start again at Init if still held down
      *
      */
-
-        // arm
-//        aLBump.onTrue(new SetArmTest());
-
         // elevator
         aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
-//        aDPadUp.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_DOUBLE_SUBSTATION));
-//        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
-//        aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
 
+        // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());
 
         // combo loading actions
-
         aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
         aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
-        aDPadDown.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
-        aDPadLeft.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
-
-//        aDPadDown.onTrue(new GoFloor());
+        aDPadDown.onTrue(new GoFloor());
 //        aDPadLeft.onTrue(new GoHome());
-//        aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
 
         // combo placing cone actions
-//        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
-//        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH);
+        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
+        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH));
 
         // combo placing cube actions
-//        aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));
-//        aB.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
-//        aA.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_LOW));
+        aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));
+        aB.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
+        aA.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
 
         // collector
-//        aX.onTrue(new CollectorRun());
-//        aA.onTrue(new CollectorEject());
-//        aB.onTrue(new Co)
-        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        dRBump.whileTrue(new CollectorRun());
+        dLBump.whileTrue(new CollectorEject());
+        dY.onTrue(new WheelsIn());
+        dB.onTrue(new WheelsOut());
+
         if( Robot.isSwervePBot || Robot.isCompBot )
-            dB.onTrue(new ResetWheels());
-        aB.whileTrue(new CollectorRun());
-        aY.whileTrue(new CollectorEject());
-//        aRTrigger.whileTrue(new CollectorRun());
-//        aLTrigger.whileTrue(new CollectorEject());
-        aLBump.whileTrue(new WheelsIn());
-        aRBump.whileTrue(new WheelsOut());
+            dA.onTrue(new ResetWheels());
     }
 
     public void setRumble(boolean rumble) {

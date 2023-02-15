@@ -34,35 +34,34 @@ public class GoLocation extends CommandBase {
         int elevatorTargetPos;
 
         if ( Robot.arm.getPositionDegrees() < 30) { // TODO: change to ticks
-//            new GoLocationFromHome().schedule();
+            new GoLocationFromHome().schedule();
         } else {
             switch (location) {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     break;
-
                 case Constants.Location.LOAD_FROM_SINGLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_SINGLE_SUBSTATION_POS;
                     break;
-/*                case Constants.Location.LOAD_FROM_FLOOR:
-                    new SetElevatorPosition(
-                            Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS).schedule();
+                case Constants.Location.LOAD_FROM_FLOOR:
+                    elevatorTargetPos = Constants.Elevator.LOAD_FROM_GROUND_POS;
+                    armTargetPos = Constants.Arm.LOAD_FROM_GROUND_POS;
                     break;
                 case Constants.Location.PLACE_CONE_HIGH:
-                    new SetElevatorPosition(
-                            Constants.Elevator.PLACE_CONE_HIGH_POS).schedule();
+                    elevatorTargetPos = Constants.Elevator.PLACE_CONE_HIGH_POS;
+                    armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
                     break;
                 case Constants.Location.PLACE_CONE_MID:
-                    new SetElevatorPosition(
-                            Constants.Elevator.PLACE_CONE_MID_POS).schedule();
+                    elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
+                    armTargetPos = Constants.Arm.PLACE_CONE_MID_POS;
                     break;
                 case Constants.Location.PLACE_CUBE_HIGH:
-                    new SetElevatorPosition(
-                            Constants.Elevator.PLACE_CUBE_HIGH_POS).schedule();
+                    elevatorTargetPos = Constants.Elevator.PLACE_CUBE_HIGH_POS;
+                    armTargetPos = Constants.Arm.PLACE_CUBE_HIGH_POS;
                     break;
-*/                case Constants.Location.PLACE_CUBE_MID:
+                case Constants.Location.PLACE_CUBE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CUBE_MID_POS;
                     armTargetPos = Constants.Arm.PLACE_CUBE_MID_POS;
                     break;

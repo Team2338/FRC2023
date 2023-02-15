@@ -38,5 +38,7 @@ public class UI {
         shuffleboardTab.addNumber("Elevator PID Error", elevator::PIDError)
                 .withPosition(1, 1);
 
+        shuffleboardTab.addNumber("Arm Degrees", arm::getPositionDegrees)
+                .withPosition(3, 0);
     }
 }

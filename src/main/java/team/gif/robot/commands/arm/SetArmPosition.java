@@ -36,14 +36,18 @@ public class SetArmPosition extends CommandBase {
 
         Robot.arm.setTargetPosition(targetPosition);
 
-        if(Robot.arm.PIDError() > 0 )
+        if (Robot.arm.PIDError() > 0){
+            Robot.arm.configF(Constants.Arm.FF);
             Robot.arm.configP(Constants.Arm.P);
-        else
+        System.out.println("                       FORWARD P");
+    }        else {
+            Robot.arm.configF(Constants.Arm.REV_FF);
             Robot.arm.configP(Constants.Arm.REV_P);
-
+            System.out.println("                   REV_P");
+        }
         Robot.arm.PIDMove();
         loopCounter = 0;
-        System.out.println("START MOTION MAGIC");
+        System.out.println("START ARM PID");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -64,7 +68,7 @@ public class SetArmPosition extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        System.out.println("END MOTION MAGIC");
+        System.out.println("END ARM PID");
         //Robot.arm.setArmTargetPos(Robot.arm.getPosition());
     }
 }

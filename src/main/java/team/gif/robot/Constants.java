@@ -133,13 +133,12 @@ public final class Constants {
 
     public static class Arm {
         public static final double FF = -0.02;
+        public static final double REV_FF = -0.03;
         public static final double P = 2.0; // 2.0; // 1.2;
-        public static final double REV_P = 0.5; // ToDo needs tuning (orig test only used P)
+        public static final double REV_P = 1.0; // 0.5; // ToDo needs tuning (orig test only used P)
         public static final double I = 0.0;
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
-        public static final double MIN_POS = 1300;
-        public static final double MAX_POS = 2800;
         public static final int PID_TOLERANCE = 40; // allows PID to get closer
 
         public static final int MAX_VELOCITY = 16000; // 5000; // ticks/100ms
@@ -151,19 +150,23 @@ public final class Constants {
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
         public static final double TICKS_PER_DEGREE = 26.8;
-        public static final int ZERO_OFFSET_TICKS = 428; // ticks between motor 0 and straight up (compass 0)
+        public static final int ZERO_OFFSET_TICKS = 375; // ticks between motor 0 and straight up (compass 0)
 
         // n is in degrees
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 70.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_GROUND_POS = 2850;
-        public static final double PLACE_CUBE_HIGH_POS = 2850;
-        public static final double PLACE_CUBE_MID_POS = 80.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double PLACE_CONE_HIGH_POS = 2850;
-        public static final double PLACE_CONE_MID_POS = 2850;
-        public static final double PLACE_LOW_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;;
+        public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 45.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_HIGH_POS = 95.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_MID_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_HIGH_POS = 70.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
+        public static final double PLACE_LOW_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double MOVE_FROM_HOME_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS;
 
+        public static final double MAX_POS = PLACE_LOW_POS;
+        public static final double MIN_POS = 800;
     }
     public static class Elevator {
         // PID constants
@@ -181,18 +184,20 @@ public final class Constants {
         public static final double GRAV_FEED_FORWARD = 300 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
-        private static final int EL_TICKS_PER_INCH = 1111;
-        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 51 * EL_TICKS_PER_INCH; // n is in inches
-        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 35 * EL_TICKS_PER_INCH;
-        public static final int LOAD_FROM_GROUND_POS = 5000;
-        public static final int PLACE_CUBE_HIGH_POS = 50000;
-        public static final int PLACE_CUBE_MID_POS = 18 * EL_TICKS_PER_INCH;
-        public static final int PLACE_CONE_HIGH_POS = 50000;
-        public static final int PLACE_CONE_MID_POS = 30000;
-        public static final int PLACE_LOW_POS = 1 * EL_TICKS_PER_INCH;;
+        private static final int EL_TICKS_PER_INCH = 1700;
+        private static final int ZERO_OFFSET_TICKS = 11 * EL_TICKS_PER_INCH;
+        public static final int LOAD_FROM_DOUBLE_SUBSTATION_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
+        public static final int LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int LOAD_FROM_GROUND_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int PLACE_CUBE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int PLACE_CUBE_MID_POS = 40 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int PLACE_CONE_HIGH_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int PLACE_CONE_MID_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
+        public static final int PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS;
 
-        public static final int MAX_POS = 55 * EL_TICKS_PER_INCH;
-        public static final int MIN_POS =  8 * EL_TICKS_PER_INCH;
+        public static final int MAX_POS = 49 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int MIN_POS =  12 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
     }
 
     public static class Collector {
