@@ -6,11 +6,14 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.lib.logging.EventFileLogger;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.arm.ArmManualControl;
@@ -31,6 +34,8 @@ import team.gif.robot.subsystems.SwerveDrivetrain;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
+    private static TelemetryFileLogger telemetryLogger;
+    public static EventFileLogger eventLogger;
     public static Drivetrain drivetrain;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
@@ -48,6 +53,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        eventLogger = new EventFileLogger();
+        eventLogger.init();
+
+        telemetryLogger = new TelemetryFileLogger();
+
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
@@ -78,6 +88,8 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
             swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
         }
+
+        telemetryLogger.init();
     }
 
     /**
@@ -141,6 +153,8 @@ public class Robot extends TimedRobot {
         double timeLeft = DriverStation.getMatchTime();
         oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
                 (timeLeft <= 5.0 && timeLeft >= 3.0));
+
+        telemetryLogger.run();
     }
 
     @Override
@@ -160,6 +174,13 @@ public class Robot extends TimedRobot {
     /** This function is called periodically whilst in simulation. */
     @Override
     public void simulationPeriodic() {}
+
+    private void addMetricsToLogger() {
+        telemetryLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
+
+        telemetryLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY());
+        telemetryLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
+    }
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
