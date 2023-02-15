@@ -16,6 +16,10 @@ import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.SwerveModuleMK4;
 
+/**
+ * @author Rohan Cherukuri
+ * @since 2/14/22
+ */
 public class SwerveDrivetrain extends SubsystemBase {
     public static SwerveModuleMK4 fL;
     public static SwerveModuleMK4 fR;
@@ -96,6 +100,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
     }
 
+    /**
+     * periodic function to constantly update the odometry
+     */
     @Override
     public void periodic() {
         odometry.update(
@@ -104,10 +111,21 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
     }
 
+    /**
+     * Reset the odometry to a given pose
+     * @param pose the pose to reset to
+     */
     public void resetOdometry(Pose2d pose) {
         odometry.resetPosition(pig.getRotation2d(), new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()}, pose);
     }
 
+    /**
+     * Drive the bot with given params
+     * @param x dForward
+     * @param y dLeft
+     * @param rot dRot
+     * @param fieldRelative Field relativity
+     */
     public void drive(double x, double y, double rot, boolean fieldRelative) {
         SwerveModuleState[] swerveModuleStates =
                 Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(
@@ -182,10 +200,17 @@ public class SwerveDrivetrain extends SubsystemBase {
         return pig.getRotation2d();
     }
 
+    /**
+     * Get the current pose of the robot
+     * @return The current pose of the robot (Pose2D)
+     */
     public Pose2d getPose() {
         return odometry.getPoseMeters();
     }
 
+    /**
+     * Stop all of the modules
+     */
     public void stopModules() {
         fL.stop();
         fR.stop();
@@ -193,10 +218,17 @@ public class SwerveDrivetrain extends SubsystemBase {
         rL.stop();
     }
 
+    /**
+     * Get the current position of each of the swerve modules
+     * @return An array in form fL -> fR -> rL -> rR of each of the module positions
+     */
     public SwerveModulePosition[] getPosition() {
         return new SwerveModulePosition[] {fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()};
     }
 
+    /**
+     * Reset the drive encoders
+     */
     public void resetDriveEncoders() {
         fL.resetDriveEncoders();
         fR.resetDriveEncoders();
@@ -204,11 +236,11 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR.resetDriveEncoders();
     }
 
+    /**
+     * Get the current heading of the robot
+     * @return the heading of the robot in degrees
+     */
     public double getRobotHeading() {
         return pig.getCompassHeading();
-    }
-
-    public Pose2d getRobotPose() {
-        return odometry.getPoseMeters();
     }
 }

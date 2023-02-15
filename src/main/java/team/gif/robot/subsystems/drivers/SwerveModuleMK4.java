@@ -12,6 +12,10 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import team.gif.robot.Constants;
 
+/**
+ * @author Rohan Cherukuri
+ * @since 2/14/22
+ */
 public class SwerveModuleMK4 {
     private final WPI_TalonFX driveMotor;
     private final CANCoder canCoder;
