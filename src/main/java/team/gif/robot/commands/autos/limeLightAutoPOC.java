@@ -2,7 +2,7 @@ package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import team.gif.robot.subsystems.drivers.Limelight;
+import team.gif.robot.Constants.Limelight;
 
 import team.gif.robot.Robot;
 
@@ -13,19 +13,22 @@ public class limeLightAutoPOC extends CommandBase {
         addRequirements((Subsystem) Robot.limelight);
     }
 
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     public void execute() {
         if (Robot.limelight.hasTarget()) {
-            double xDirection = -Robot.limelight.getXOffset();
-            Robot.swervetrain.drive(xDirection,0,0,true);
+            double xOffset = -Robot.limelight.getXOffset();
+
+            if (xOffset < Limelight.xOffsetOffRange && xOffset > Limelight.xOffsetOffRange) {
+                xOffset = 0;
+                return;
+            }
+
+            double output = Limelight.staticFrictionCoefficient + (Limelight.xOffsetMax/Math.abs(xOffset) * Limelight.kP);
+            Robot.swervetrain.drive(0,output,0,true);
         }
     }
-    public void end() {
-
-    }
+    public void end() {}
 
     public boolean isFinished() {
         return false;

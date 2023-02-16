@@ -169,4 +169,13 @@ public final class Constants {
     public static class Collector {
         public static final int CollectorRun = 0; //collector percent
     }
+
+    public static class Limelight {
+        public static final double staticFrictionCoefficient = 0.5;
+
+        public static final double xOffsetOffRange = 2.0;
+
+        public static final double xOffsetMax = 27.0;
+        public static final double kP = 0.5;
+    }
 }
