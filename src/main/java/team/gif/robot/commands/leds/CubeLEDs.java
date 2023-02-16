@@ -10,23 +10,18 @@ public class CubeLEDs extends CommandBase {
         addRequirements(Robot.led);
     }
 
-    public void initialize() {
+    // Called when the command is initially scheduled.
+    public void initialize() {}
 
-    }
-
-    // Called every time the scheduler runs while the command is scheduled.
-
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     public void execute() {
         Robot.led.setLEDPurple();
     }
 
-    // Called once the command ends or is interrupted.
-
-    public void end(boolean interrupted) {
-    }
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
+    public void end(boolean interrupted) {}
 
     // Returns true when the command should end.
-
     public boolean isFinished() {
         return false;
     }

@@ -6,54 +6,48 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LEDsubsystem extends SubsystemBase {
     //change port
-    private static AddressableLED m_led;
-    private static AddressableLEDBuffer m_ledBuffer;
-
+    private static AddressableLED led;
+    private static AddressableLEDBuffer ledBuffer;
 
     public LEDsubsystem() {
         super();
-        m_led = new AddressableLED(9);
+        //initializes by inputting PWM port number from Roborio
+        led = new AddressableLED(9);
 
-        // Reuse buffer
-        // Default to a length of 60, start empty output
-        // Length is expensive to set, so only set it once, then just update data
-        m_ledBuffer = new AddressableLEDBuffer(32);
-        m_led.setLength(m_ledBuffer.getLength());
+        //initialize by inputting length of LEDs
+        ledBuffer = new AddressableLEDBuffer(32);
+        led.setLength(ledBuffer.getLength());
 
         // Set the data
-        m_led.setData(m_ledBuffer);
-        m_led.start();
-
+        led.setData(ledBuffer);
+        led.start();
     }
 
     public void setLEDOrange() {
-        for (var i = 0; i < m_ledBuffer.getLength(); i++) {
-            // Sets the specified LED to the RGB values for red
-            m_ledBuffer.setRGB(i, 80, 10, 0);
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+            // Sets the specified LED to the RGB values for Orange
+            ledBuffer.setRGB(i, 80, 10, 0);
 
-            m_led.setData(m_ledBuffer);
+            led.setData(ledBuffer);
         }
     }
 
     public void setLEDPurple() {
-        for (var i = 0; i < m_ledBuffer.getLength(); i++) {
-            // Sets the specified LED to the RGB values for red
-            m_ledBuffer.setRGB(i, 64, 0, 128);
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+            // Sets the specified LED to the RGB values to Purple
+            ledBuffer.setRGB(i, 64, 0, 128);
 
-            m_led.setData(m_ledBuffer);
+            led.setData(ledBuffer);
         }
-
-
     }
 
-    public void setLEDNull() {
-        for (var i = 0; i < m_ledBuffer.getLength(); i++) {
-            // Sets the specified LED to the RGB values for red
-            m_ledBuffer.setRGB(i, 0, 0, 0);
+    public void setLEDDefaultl() {
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+            // Sets the specified LED to the RGB values for black (off)
+            ledBuffer.setRGB(i, 0, 0, 0);
 
-            m_led.setData(m_ledBuffer);
+            led.setData(ledBuffer);
         }
-
     }
 
 }

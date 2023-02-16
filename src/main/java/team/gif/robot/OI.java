@@ -106,6 +106,5 @@ public class OI {
 
         dStart.onTrue(new ConeLEDs());
         dBack.onTrue(new CubeLEDs());
-        dY.onTrue(new frc.robot.commands.LEDcommands.DefaultLED());
     }
 }

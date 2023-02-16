@@ -13,6 +13,7 @@ import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.drivetrain.DriveTank;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
+import team.gif.robot.commands.leds.DefaultLED;
 import team.gif.robot.subsystems.*;
 
 /**
@@ -75,6 +76,7 @@ public class Robot extends TimedRobot {
         }
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
+        led.setDefaultCommand(new DefaultLED());
     }
 
     /**
