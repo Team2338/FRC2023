@@ -24,6 +24,7 @@ import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
+import team.gif.robot.subsystems.TelescopingArm;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -44,6 +45,7 @@ public class Robot extends TimedRobot {
     public static Elevator elevator;
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
+    public static TelescopingArm telescopingArm;
     public static OI oi;
     public static UI ui;
 
@@ -65,6 +67,7 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
+        telescopingArm = new TelescopingArm();
         ui = new UI();
 
         if (isSwervePBot || isCompBot) {

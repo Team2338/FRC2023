@@ -166,6 +166,12 @@ public final class Constants {
         public static final int MIN_POS =  5000;
     }
 
+    public static class TelescopingArm {
+        public static final double TEST = 0.2;
+        public static final double MAX_VELOCITY = 0.4; // TODO: need more testing
+        public static final double MIN_VELOCITY =
+    }
+
     public static class Collector {
         public static final int CollectorRun = 0; //collector percent
     }
