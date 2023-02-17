@@ -70,7 +70,6 @@ public class SwerveModuleMK4 {
         this.kFF = kFF;
         this.kP = kP;
 
-        this.turnMotor.setSmartCurrentLimit(20, 40);
     }
 
     /**
