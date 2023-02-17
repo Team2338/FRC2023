@@ -83,4 +83,9 @@ public class Drivetrain extends SubsystemBase {
     public void driveTank(double leftSpeed, double rightSpeed) {
         drive.tankDrive(leftSpeed,rightSpeed);
     }
+
+    public double getTempLeftOne() { return leftSideOne.getTemperature(); }
+    public double getTempLeftTwo() { return leftSideTwo.getTemperature(); }
+    public double getTempRightOne() { return rightSideOne.getTemperature(); }
+    public double getTempRightTwo() { return rightSideTwo.getTemperature(); }
 }
