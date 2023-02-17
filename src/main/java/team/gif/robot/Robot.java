@@ -18,6 +18,7 @@ import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
+import team.gif.robot.commands.telescopingArm.MotorRun;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorPneumatics;
@@ -84,6 +85,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
         arm.setDefaultCommand(new ArmManualControl());
         elevator.setDefaultCommand(new ElevatorManualControl());
+        telescopingArm.setDefaultCommand(new MotorRun());
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
