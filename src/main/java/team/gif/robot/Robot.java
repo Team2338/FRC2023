@@ -4,6 +4,8 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -44,7 +46,7 @@ public class Robot extends TimedRobot {
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
-    public static Pigeon pigeon;
+    public static PigeonIMU pigeon;
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
     public static UI ui;
@@ -67,7 +69,7 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
-        pigeon = new Pigeon();
+        pigeon = new PigeonIMU(RobotMap.PIGEON);
         ui = new UI();
 
         if (isSwervePBot || isCompBot) {

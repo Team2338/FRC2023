@@ -2,8 +2,7 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-
-import static com.ctre.phoenix.GadgeteerUartClient.GadgeteerProxyType.Pigeon;
+import team.gif.robot.subsystems.drivers.Pigeon;
 import static team.gif.robot.Robot.arm;
 import static team.gif.robot.Robot.elevator;
 
@@ -17,7 +16,7 @@ public class UI {
         // Pigeon
         shuffleboardTab.add("Bot Heading", (x) -> {
             x.setSmartDashboardType("Gyro");
-            x.addDoubleProperty("Value", () -> Robot.pigeon.getCompassHeading(), null);
+            x.addDoubleProperty("Value", () -> Pigeon._pigeon.getCompassHeading(), null);
         });
     }
 }
