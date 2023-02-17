@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
-        compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.CTREPCM);
+        compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.CTREPCM, RobotMap.SENSOR_AIR_PRESSURE);
         ui = new UI();
 
         if (isSwervePBot || isCompBot) {
