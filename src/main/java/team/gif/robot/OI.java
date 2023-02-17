@@ -12,6 +12,7 @@ import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.collector.WheelsIn;
 import team.gif.robot.commands.collector.WheelsOut;
 import team.gif.robot.commands.combo.GoHome;
+import team.gif.robot.commands.combo.GoLocationFromHomeArm;
 import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
 import team.gif.robot.commands.combo.GoFloor;

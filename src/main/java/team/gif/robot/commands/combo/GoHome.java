@@ -15,8 +15,15 @@ public class GoHome extends CommandBase {
     @Override
     public void initialize() {
         if (Robot.elevator.getPosition() < Constants.Elevator.MAX_HOME_SAFE_POS) {
+            System.out.println("Elevator less than 5");
             new SetArmPosition(Constants.Arm.HOME_POS).schedule();
             new SetElevatorPosition(Constants.Elevator.HOME_POS).schedule();
+        } else if (Robot.elevator.getPosition() < Constants.Elevator.ELEVATOR_30 ) {
+            System.out.println("Elevator less than 30");
+            new GoHomePreStage().schedule();
+        } else {
+            System.out.println("Elevator greater than 30");
+            new GoHomeFinal().schedule();
         }
     }
 

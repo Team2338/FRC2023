@@ -23,6 +23,7 @@ public class SetElevatorPosition extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("elevator start " + desiredPosition);
 
         if (desiredPosition > Robot.elevator.getPosition()) {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
@@ -48,6 +49,7 @@ public class SetElevatorPosition extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        System.out.println("elevator finish " + Robot.elevator.getPosition());
 //        Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
     }
 }

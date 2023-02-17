@@ -166,6 +166,8 @@ public final class Constants {
         public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS;
         public static final double HOME_POS = 20.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
+        public static final double ARM_80 = 80 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+
         public static final double MAX_POS = PLACE_LOW_POS;
         public static final double MIN_POS = HOME_POS;
     }
@@ -198,9 +200,10 @@ public final class Constants {
         public static final int MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS;
         public static final int MAX_HOME_SAFE_POS = 14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final int HOME_POS = 12 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final int MAX_POS = 49 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final int MIN_POS =  5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final int MIN_POS =  12 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
     }
 
     public static class Collector {

@@ -11,7 +11,7 @@ import team.gif.robot.commands.elevator.SetElevatorPosition;
 public class GoLocationFromHome extends SequentialCommandGroup {
     public GoLocationFromHome() {
         addCommands(
-            new SetArmPosition(Constants.Arm.MOVE_FROM_HOME_POS),
+            new GoLocationFromHomeArm(),
 //            new ParallelCommandGroup(
 //                new SetArmPosition(Constants.Arm.MOVE_FROM_HOME_PRE_POS),
 //                new SetElevatorPosition(Constants.Elevator.MOVE_FROM_HOME_PRE_POS)
