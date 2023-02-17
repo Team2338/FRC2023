@@ -16,7 +16,7 @@ public class ConeLEDs extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.led.setLEDOrange();
+        Robot.led.setLEDYellow();
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.

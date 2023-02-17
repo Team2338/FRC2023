@@ -15,7 +15,7 @@ public class DefaultLED extends CommandBase {
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     public void execute() {
-        Robot.led.setLEDDefaultl();
+        Robot.led.setLEDDefault();
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
