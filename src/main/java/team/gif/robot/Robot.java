@@ -6,11 +6,14 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.lib.logging.EventFileLogger;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.arm.ArmManualControl;
@@ -31,6 +34,8 @@ import team.gif.robot.subsystems.SwerveDrivetrain;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
+    private static TelemetryFileLogger telemetryLogger;
+    public static EventFileLogger eventLogger;
     public static Drivetrain drivetrain;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
@@ -48,6 +53,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        eventLogger = new EventFileLogger();
+        eventLogger.init();
+
+        telemetryLogger = new TelemetryFileLogger();
+        addMetricsToLogger();
+
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         m_robotContainer = new RobotContainer();
@@ -58,7 +69,7 @@ public class Robot extends TimedRobot {
         ui = new UI();
 
         if (isSwervePBot || isCompBot) {
-            swervetrain = new SwerveDrivetrain();
+            swervetrain = new SwerveDrivetrain(telemetryLogger);
             driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
             swervetrain.resetHeading();
@@ -74,10 +85,16 @@ public class Robot extends TimedRobot {
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getRobotPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
+            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
+            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
+            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
+            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
+            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
+            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
+
+        telemetryLogger.init();
     }
 
     /**
@@ -141,6 +158,8 @@ public class Robot extends TimedRobot {
         double timeLeft = DriverStation.getMatchTime();
         oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
                 (timeLeft <= 5.0 && timeLeft >= 3.0));
+
+        telemetryLogger.run();
     }
 
     @Override
@@ -160,6 +179,15 @@ public class Robot extends TimedRobot {
     /** This function is called periodically whilst in simulation. */
     @Override
     public void simulationPeriodic() {}
+
+    private void addMetricsToLogger() {
+        telemetryLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
+
+        telemetryLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY());
+        telemetryLogger.addMetric("Driver_Left_X", () -> Robot.oi.driver.getLeftX());
+        telemetryLogger.addMetric("Driver_Angle", () -> Math.atan(-Robot.oi.driver.getLeftY() / Robot.oi.driver.getLeftX()));
+        telemetryLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
+    }
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;

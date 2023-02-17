@@ -11,6 +11,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
@@ -41,7 +42,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
                 false,
-                false,
+                true,
                 true,
                 Constants.Drivetrain.FRONT_LEFT_OFFSET,
                 RobotMap.FRONT_LEFT_CANCODER,
@@ -53,7 +54,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
                 false,
-                true,
+                false,
                 true,
                 Constants.Drivetrain.FRONT_RIGHT_OFFSET,
                 RobotMap.FRONT_RIGHT_CANCODER,
@@ -65,7 +66,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
                 false,
-                true,
+                false,
                 true,
                 Constants.Drivetrain.REAR_RIGHT_OFFSET,
                 RobotMap.REAR_RIGHT_CANCODER,
@@ -98,6 +99,32 @@ public class SwerveDrivetrain extends SubsystemBase {
         swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
         swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
         swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+        swerveTab.addDouble("RR_Accum", rR::getAccum);
+        swerveTab.addDouble("RL_Accum", rL::getAccum);
+    }
+
+    public SwerveDrivetrain(TelemetryFileLogger logger) {
+        this();
+
+        logger.addMetric("FL_Rotation", fL::getTurningHeading);
+        logger.addMetric("FR_Rotation", fR::getTurningHeading);
+        logger.addMetric("RL_Rotation", rL::getTurningHeading);
+        logger.addMetric("RR_Rotation", rR::getTurningHeading);
+
+        logger.addMetric("FL_Drive_Command", () -> fL.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("FR_Drive_Command", () -> fR.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("RL_Drive_Command", () -> rL.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("RR_Drive_Command", () -> rR.getDriveMotor().getMotorOutputPercent());
+
+        logger.addMetric("FL_Turn_Command", () -> fL.getTurnMotor().getAppliedOutput());
+        logger.addMetric("FR_Turn_Command", () -> fR.getTurnMotor().getAppliedOutput());
+        logger.addMetric("RL_Turn_Command", () -> rL.getTurnMotor().getAppliedOutput());
+        logger.addMetric("RR_Turn_Command", () -> rR.getTurnMotor().getAppliedOutput());
+
+        logger.addMetric("FL_Turn_Velocity", () -> fL.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("FR_Turn_Velocity", () -> fR.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("RL_Turn_Velocity", () -> rL.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("RR_Turn_Velocity", () -> rR.getTurnMotor().getEncoder().getVelocity());
     }
 
     /**

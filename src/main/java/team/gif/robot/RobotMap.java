@@ -13,9 +13,8 @@ public abstract class RobotMap {
     public static final int LEFT_DRIVETRAIN_TWO = 22;
 
     //SwerveDrivetrain
-
     public static final int FRONT_LEFT_DRIVE_MOTOR_PORT = 22;
-    public static final int REAR_LEFT_DRIVE_MOTOR_PORT = 21; // broken
+    public static final int REAR_LEFT_DRIVE_MOTOR_PORT = 21;
     public static final int FRONT_RIGHT_DRIVE_MOTOR_PORT = 20;
     public static final int REAR_RIGHT_DRIVE_MOTOR_PORT = 23;
     public static final int FRONT_LEFT_CANCODER = 6;

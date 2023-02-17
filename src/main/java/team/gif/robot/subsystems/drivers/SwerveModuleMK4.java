@@ -1,6 +1,7 @@
 package team.gif.robot.subsystems.drivers;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
@@ -23,6 +24,7 @@ public class SwerveModuleMK4 {
 
     private final double kFF;
     private final double kP;
+    private double accum = 0;
 
     private final boolean isAbsInverted;
 
@@ -57,6 +59,9 @@ public class SwerveModuleMK4 {
         this.driveMotor.setNeutralMode(NeutralMode.Brake);
         this.turnMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
+        this.turnMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.TURNING_ENCODER_ROT_TO_RAD);
+        this.turnMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.TURNING_ENCODER_RPM_2_RAD_PER_SECOND);
+
         this.driveMotor.setInverted(isDriveInverted);
         this.turnMotor.setInverted(isTurningInverted);
         this.isAbsInverted = isAbsInverted;
@@ -72,12 +77,24 @@ public class SwerveModuleMK4 {
 
     }
 
+    public TalonFX getDriveMotor() {
+        return this.driveMotor;
+    }
+
+    public CANSparkMax getTurnMotor() {
+        return this.turnMotor;
+    }
+
+    public double getAccum() {
+        return accum;
+    }
+
     /**
      * Get the active state of the swerve module
      * @return Returns the active state of the given swerveModule
      */
     public SwerveModuleState getState() {
-        return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurnVelocity()));
+        return new SwerveModuleState(getDriveVelocity(), new Rotation2d(Units.degreesToRadians(getTurnVelocity())));
     }
 
     /**
@@ -191,7 +208,8 @@ public class SwerveModuleMK4 {
         double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND;
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
         final double kff = kFF * Math.abs(error) / error;
-        final double turnOutput = kff + (kP * error);
+        //accum += error;
+        final double turnOutput = kff + (kP * error) + (0.001 * accum);
         driveMotor.set(driveOutput);
         turnMotor.set(turnOutput);
     }
