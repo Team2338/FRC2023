@@ -17,11 +17,19 @@ public class MotorRun extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if (Robot.telescopingArm.getVelocity() == Constants.TelescopingArm.MAX_VELOCITY) {
-            Robot.telescopingArm.setTelescopingMotor(0);
-        } else {
-            Robot.telescopingArm.setTelescopingMotor(Constants.TelescopingArm.TEST);
+//        if (Robot.telescopingArm.getVelocity() == Constants.TelescopingArm.MAX_VELOCITY) {
+//            Robot.telescopingArm.setTelescopingMotor(0);
+//        } else {
+//            Robot.telescopingArm.setTelescopingMotor(Constants.TelescopingArm.TEST);
+//        }
+
+        double speed = -Robot.oi.aux.getLeftY();
+
+        if (speed > -0.05 && speed < 0.05) {
+            speed = 0;
         }
+
+        Robot.telescopingArm.setTelescopingMotor(speed);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
