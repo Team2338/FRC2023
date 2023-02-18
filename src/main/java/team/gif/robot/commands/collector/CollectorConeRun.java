@@ -14,13 +14,13 @@ public class CollectorConeRun extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorPneumatics.collectorIn();
+        Robot.collectorPneumatics.pneumaticsIn();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        Robot.collector.setSpeedPercentCollector(Constants.Collector.CollectorRun);
+        Robot.collector.setSpeedPercentCollector(Constants.Collector.COLLECTOR_RUN);
     }
 
     // Called once the command ends or is interrupted.
