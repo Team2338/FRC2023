@@ -12,13 +12,11 @@ public class TelescopingArm extends SubsystemBase {
         telescopingMotor = new CANSparkMax(RobotMap.TELESCOPING_MOTOR, CANSparkMaxLowLevel.MotorType.kBrushless);
         telescopingMotor.setInverted(true);
         telescopingMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        telescopingMotor.restoreFactoryDefaults();
+//        telescopingMotor.setOpenLoopRampRate();
     }
 
-    public void setTelescopingMotor(double percent) {
+    public void setMotorSpeed(double percent) {
         telescopingMotor.set(percent);
-    }
-
-    public double getVelocity() {
-        return telescopingMotor.getBusVoltage();
     }
 }

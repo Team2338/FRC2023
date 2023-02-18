@@ -13,6 +13,8 @@ import team.gif.robot.commands.collector.CollectorIn;
 import team.gif.robot.commands.collector.CollectorRun;
 import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
+import team.gif.robot.commands.telescopingArm.ArmIn;
+import team.gif.robot.commands.telescopingArm.ArmOut;
 
 public class OI {
     /*
@@ -99,6 +101,9 @@ public class OI {
 
         // arm
         aB.onTrue(new MoveUp());
+
+        aA.whileTrue(new ArmOut());
+        aY.whileTrue(new ArmIn());
 
         // elevator
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
