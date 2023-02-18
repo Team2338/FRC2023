@@ -1,29 +1,51 @@
 package team.gif.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 
 public class Elevator extends SubsystemBase {
+    public final WPI_TalonSRX elevatorMotor;
 
-    private final TalonSRX elevatorMotor;
+    public boolean elevatorManualFlag = false;
+    private double elevatorTargetPos;
 
     public Elevator() {
-        elevatorMotor = new TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
+        elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_MOTOR_ID);
         configElevatorTalon();
-
-        // Soft Limits
-        elevatorMotor.configReverseSoftLimitEnable(true);
-        elevatorMotor.configReverseSoftLimitThreshold(Constants.Elevator.MIN_POS);
-        elevatorMotor.configForwardSoftLimitEnable(true);
-        elevatorMotor.configForwardSoftLimitThreshold(Constants.Elevator.MAX_POS);
-
         zeroEncoder();
     }
-    
+
+    public void move(double percent) {
+        elevatorMotor.set(ControlMode.PercentOutput, percent);
+    }
+
+    public void PIDMove() {
+        elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
+    }
+
+    public double getPosition() {
+        return elevatorMotor.getSelectedSensorPosition();
+    }
+
+    public double getPositionInches() {
+        return (elevatorMotor.getSelectedSensorPosition() + Constants.Elevator.ZERO_OFFSET_TICKS) / Constants.Elevator.EL_TICKS_PER_INCH;
+    }
+
+    public double convertInchesToPos(int inches ){
+        return inches * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS;
+    }
+
+    public double getTargetPosition() {
+        return elevatorTargetPos;
+    }
+
+    public double PIDError() {
+        return Math.abs(getPosition() - elevatorTargetPos);
+    }
+
     public void setPercentOutput(double percent) {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
@@ -40,12 +62,12 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.configMotionCruiseVelocity(ticksPer100ms);
     }
 
-    public void configF(double f) {
-        elevatorMotor.config_kF(0, f);
+    public void setElevatorTargetPos(double pos) {
+        elevatorTargetPos = pos;
     }
 
-    public double getPosition() {
-        return elevatorMotor.getSelectedSensorPosition();
+    public void configF(double f) {
+        elevatorMotor.config_kF(0, f);
     }
 
     public boolean getFwdLimit() {
@@ -57,14 +79,14 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isFinished() {
-        return Math.abs(elevatorMotor.getClosedLoopError()) < Constants.Elevator.ALLOWABLE_ERROR;
+        return  Math.abs(PIDError()) < Constants.Elevator.PID_TOLERANCE;
     }
 
     public double getOutputVoltage() {
         return elevatorMotor.getMotorOutputVoltage();
     }
 
-    public double getOutputCommand() {
+    public double getOutputPercent() {
         return elevatorMotor.getMotorOutputPercent();
     }
 
@@ -78,10 +100,6 @@ public class Elevator extends SubsystemBase {
 
     public void enableLowerSoftLimit(boolean engage) {
         elevatorMotor.configReverseSoftLimitEnable(engage);
-    }
-
-    public void move(double percent) {
-        elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
 
     public void zeroEncoder() {
