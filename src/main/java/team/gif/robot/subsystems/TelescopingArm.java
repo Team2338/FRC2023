@@ -13,7 +13,6 @@ public class TelescopingArm extends SubsystemBase {
         telescopingMotor.setInverted(true);
         telescopingMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
         telescopingMotor.restoreFactoryDefaults();
-//        telescopingMotor.setOpenLoopRampRate();
     }
 
     public void setMotorSpeed(double percent) {
