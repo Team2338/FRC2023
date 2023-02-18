@@ -3,38 +3,35 @@ package team.gif.robot.commands.elevator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
-import team.gif.robot.subsystems.Elevator;
 
 public class SetElevatorPosition extends CommandBase {
 
-    private final double position;
-    private int loopCounter;
+    private final double desiredPosition;
 
-    public SetElevatorPosition(int targetPosition) {
+    public SetElevatorPosition(double targetPosition) {
         super();
+        addRequirements(Robot.elevator);
+
         // do not allow code to set a point higher or lower than max/min
         if (targetPosition > Constants.Elevator.MAX_POS) { targetPosition = Constants.Elevator.MAX_POS; }
         if (targetPosition < Constants.Elevator.MIN_POS) { targetPosition = Constants.Elevator.MIN_POS; }
 
-        position = targetPosition;
-
-        addRequirements(Robot.elevator);
+        desiredPosition = targetPosition;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        Robot.elevator.setElevatorTargetPos(desiredPosition);
 
-        loopCounter = 0;
-
-        if (position > Robot.elevator.getPosition()) {
+        if (desiredPosition > Robot.elevator.getPosition()) {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.F);
-            Robot.elevator.setMotionMagic(position, Constants.Elevator.GRAV_FEED_FORWARD);
+            Robot.elevator.setMotionMagic(desiredPosition, Constants.Elevator.GRAV_FEED_FORWARD);
         } else {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.REV_MAX_VELOCITY);
             Robot.elevator.configF(Constants.Elevator.REV_F);
-            Robot.elevator.setMotionMagic(position, Constants.Elevator.REV_GRAV_FEED_FORWARD);
+            Robot.elevator.setMotionMagic(desiredPosition, Constants.Elevator.REV_GRAV_FEED_FORWARD);
         }
     }
 
@@ -45,10 +42,10 @@ public class SetElevatorPosition extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if( ++loopCounter > 20 ) // waiting for 20 cycles (400ms) to let error catch up
-            return Robot.elevator.isFinished();
-        else
-            return false;
+//        if( Robot.arm.getPositionDegrees() < Constants.Arm.MOVE_FROM_HOME_POS && Robot.elevator.getPosition() > Constants.Elevator.MAX_HOME_SAFE_POS)
+//            return false; // TODO: prevent arm from crashing into top rail
+
+        return Robot.elevator.isFinished();
     }
 
     // Called when the command ends or is interrupted.
