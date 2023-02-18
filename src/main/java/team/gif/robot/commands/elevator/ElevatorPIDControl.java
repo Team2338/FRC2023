@@ -5,8 +5,6 @@ import team.gif.robot.Robot;
 
 public class ElevatorPIDControl extends CommandBase {
 
-    private int counter=0;
-
     public ElevatorPIDControl() {
         super();
         addRequirements(Robot.elevator);
@@ -19,8 +17,6 @@ public class ElevatorPIDControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-//        Robot.elevator.PIDMove();
-//        System.out.println("PID CONTROL");
         Robot.elevator.move(0.05); // for now, just apply simple FF gain to keep the elevator from falling
     }
 

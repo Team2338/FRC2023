@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Globals;
 import team.gif.robot.Robot;
-import team.gif.robot.commands.arm.SetArmMid;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 
@@ -37,12 +36,11 @@ public class GoLocation extends CommandBase {
     @Override
     public void initialize() {
         double armTargetPos;
-        int elevatorTargetPos;
+        double elevatorTargetPos;
 
         if ( Robot.arm.getPositionDegrees() < 25) { // need to be in a safe place before going anywhere else
             Globals.goLocationTarget = location;
             new GoLocationFromHome().schedule();
-            System.out.println("going to safe location " + location);
         } else {
             switch (location) {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
@@ -83,7 +81,6 @@ public class GoLocation extends CommandBase {
                     break;
             }
             if( armTargetPos >= 0 ) {
-                System.out.println("Moving to location " + location);
                 new SetElevatorPosition(elevatorTargetPos).schedule();
                 new SetArmPosition(armTargetPos).schedule();
             }

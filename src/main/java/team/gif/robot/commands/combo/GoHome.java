@@ -14,7 +14,10 @@ public class GoHome extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (Robot.elevator.getPosition() < Constants.Elevator.MAX_HOME_SAFE_POS) {
+        if (Math.abs(Robot.elevator.getPosition() - Constants.Elevator.LOAD_FROM_GROUND_POS) < 500 ) {
+            System.out.println("Elevator pointing to floor");
+            new GoHomeFinal().schedule();
+        } else if (Robot.elevator.getPosition() < Constants.Elevator.MAX_HOME_SAFE_POS) {
             System.out.println("Elevator less than 5");
             new SetArmPosition(Constants.Arm.HOME_POS).schedule();
             new SetElevatorPosition(Constants.Elevator.HOME_POS).schedule();

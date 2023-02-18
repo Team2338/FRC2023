@@ -17,7 +17,6 @@ public class GoHomePreStage extends SequentialCommandGroup {
                 new SetArmPosition(Constants.Arm.HOME_POS),
                 new SetElevatorPosition(Constants.Elevator.HOME_POS)
             )
-//            new GoLocation()
         );
     }
 }

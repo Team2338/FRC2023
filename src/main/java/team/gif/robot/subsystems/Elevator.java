@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 
-
-
 public class Elevator extends SubsystemBase {
     public final WPI_TalonSRX elevatorMotor;
 
@@ -36,13 +34,16 @@ public class Elevator extends SubsystemBase {
         return (elevatorMotor.getSelectedSensorPosition() + Constants.Elevator.ZERO_OFFSET_TICKS) / Constants.Elevator.EL_TICKS_PER_INCH;
     }
 
+    public double convertInchesToPos(int inches ){
+        return inches * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS;
+    }
+
     public double getTargetPosition() {
         return elevatorTargetPos;
     }
 
     public double PIDError() {
         return Math.abs(getPosition() - elevatorTargetPos);
-        //elevatorMotor.getClosedLoopError();
     }
 
     public void setPercentOutput(double percent) {

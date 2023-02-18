@@ -33,12 +33,11 @@ public class Arm extends SubsystemBase {
 
     public void move(double percent) {
         if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
-                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)
-        ) {
+                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)) {
             armMotor.set(percent);
-        }
-        else
+        } else {
             armMotor.set(0);
+        }
     }
 
     public void PIDMove() {
@@ -68,7 +67,6 @@ public class Arm extends SubsystemBase {
     public double PIDError(){
         return getPosition() - armTargetPos;
     }
-    // limits
 
     public void currentLimitingEnable(boolean enableLimit) {
         armMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(enableLimit, MAX_SUPPLY_CURRENT_AMPS,MAX_STATOR_CURRENT_AMPS, 0));
@@ -76,7 +74,6 @@ public class Arm extends SubsystemBase {
 
     public boolean isFinished() {
         return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
-//        return  PIDError() < Constants.Arm.PID_TOLERANCE;
     }
 
     public boolean getArmManualFlag() { return armManualFlag;}

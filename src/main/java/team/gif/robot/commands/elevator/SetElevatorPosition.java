@@ -8,7 +8,7 @@ public class SetElevatorPosition extends CommandBase {
 
     private final double desiredPosition;
 
-    public SetElevatorPosition(int targetPosition) {
+    public SetElevatorPosition(double targetPosition) {
         super();
         addRequirements(Robot.elevator);
 
@@ -16,14 +16,13 @@ public class SetElevatorPosition extends CommandBase {
         if (targetPosition > Constants.Elevator.MAX_POS) { targetPosition = Constants.Elevator.MAX_POS; }
         if (targetPosition < Constants.Elevator.MIN_POS) { targetPosition = Constants.Elevator.MIN_POS; }
 
-        Robot.elevator.setElevatorTargetPos(targetPosition);
         desiredPosition = targetPosition;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("elevator start " + desiredPosition);
+        Robot.elevator.setElevatorTargetPos(desiredPosition);
 
         if (desiredPosition > Robot.elevator.getPosition()) {
             Robot.elevator.setCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
@@ -43,13 +42,13 @@ public class SetElevatorPosition extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
+//        if( Robot.arm.getPositionDegrees() < Constants.Arm.MOVE_FROM_HOME_POS && Robot.elevator.getPosition() > Constants.Elevator.MAX_HOME_SAFE_POS)
+//            return false; // TODO: prevent arm from crashing into top rail
+
         return Robot.elevator.isFinished();
     }
 
     // Called when the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-        System.out.println("elevator finish " + Robot.elevator.getPosition());
-//        Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
-    }
+    public void end(boolean interrupted) {}
 }

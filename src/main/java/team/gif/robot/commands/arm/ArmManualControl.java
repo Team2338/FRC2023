@@ -27,7 +27,6 @@ public class ArmManualControl extends CommandBase {
         double percent = Robot.oi.aux.getLeftY();
 
         if (percent > -0.05 && percent < 0.05) {
-            percent = 0;
             if( holdNeedFirstPID ) {
                 holdPIDPos = Robot.arm.getPosition();
                 holdNeedFirstPID = false;
@@ -37,16 +36,6 @@ public class ArmManualControl extends CommandBase {
             holdNeedFirstPID = true;
             Robot.arm.move(percent);
         }
-
-        // Allows user to run past 0 setpoint if pressing the right stick
-//        if (Robot.oi.aux.getRightStickButton()) {
-//            Robot.climber.enableLowerSoftLimit(false);
-//        } else {
-//            Robot.climber.enableLowerSoftLimit(true);
-//        }
-
-        // run the elevator either up or down
-//        Robot.arm.move(percent);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
