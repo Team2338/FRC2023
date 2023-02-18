@@ -91,6 +91,9 @@ public class Robot extends TimedRobot {
         elevator.setDefaultCommand(new ElevatorPIDControl());
 //        elevator.setDefaultCommand(new ElevatorManualControl());
 
+        // settings default wheels to WheelsIn;
+        collectorPneumatics.pneumaticsIn();
+
         oi = new OI();
 
         if (isSwervePBot || isCompBot) {

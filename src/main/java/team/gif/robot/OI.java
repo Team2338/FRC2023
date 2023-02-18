@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorRun;
+import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.collector.WheelsIn;
 import team.gif.robot.commands.collector.WheelsOut;
 import team.gif.robot.commands.combo.GoHome;
@@ -124,8 +125,8 @@ public class OI {
         // collector
         dRBump.whileTrue(new CollectorRun());
         dLBump.whileTrue(new CollectorEject());
-        dY.onTrue(new WheelsIn());
-        dB.onTrue(new WheelsOut());
+
+        dY.toggleOnTrue(new ToggleWheelsInAndOut());
 
         if( Robot.isSwervePBot || Robot.isCompBot )
             dA.onTrue(new ResetWheels());

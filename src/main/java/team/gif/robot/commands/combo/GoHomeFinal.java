@@ -13,7 +13,7 @@ import java.nio.file.Watchable;
 public class GoHomeFinal extends SequentialCommandGroup {
     public GoHomeFinal() {
         addCommands(
-            new SetArmPosition( Constants.Arm.ARM_80),
+            new SetArmPosition(Constants.Arm.ARM_80),
             new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.MOVE_FROM_HOME_PRE_POS),
                 new SetElevatorPosition(Constants.Elevator.MAX_HOME_SAFE_POS)
