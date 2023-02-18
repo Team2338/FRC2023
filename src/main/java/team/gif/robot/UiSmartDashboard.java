@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
-import static team.gif.robot.Robot.drivetrain;
 
 public class UiSmartDashboard {
 
@@ -17,7 +16,7 @@ public class UiSmartDashboard {
 
     public UiSmartDashboard() {
         ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard"); // Gets a reference to the shuffleboard tab
-        tab.add("BotHead", (x) -> {
+        tab.add("BotHaead", (x) -> {
                 x.setSmartDashboardType("Gyro");
                 x.addDoubleProperty("Value", () -> Robot.swervetrain.getHeading().getDegrees(), null);
             })
