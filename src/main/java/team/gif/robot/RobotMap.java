@@ -31,7 +31,7 @@ public abstract class RobotMap {
     // Arm
     public static final int ARM_MOTOR = 5; //30 TODO
     public static final int ARM_ENCODER = 6; //31 TODO
-    public static final int TELESCOPING_MOTOR = 0; // TODO: ID the motor
+    public static final int TELESCOPING_MOTOR = 16; // TODO: ID the motor
 
     // Pigeon
     public static final int PIGEON = 0;

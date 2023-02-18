@@ -114,8 +114,6 @@ public class OI {
         aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
         aDPadDown.onTrue(new GoFloor());
         aDPadLeft.onTrue(new GoHome());
-        aA.whileTrue(new ArmOut());
-        aY.whileTrue(new ArmIn());
 
         // combo placing cone actions
         aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH));
@@ -129,6 +127,8 @@ public class OI {
         // collector
         dRBump.whileTrue(new CollectorRun());
         dLBump.whileTrue(new CollectorEject());
+        tY.whileTrue(new ArmOut());
+        tX.whileTrue(new ArmIn());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
 

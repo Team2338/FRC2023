@@ -86,19 +86,17 @@ public class Robot extends TimedRobot {
             arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
-//        arm.setDefaultCommand(new ArmManualControl());
+
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
 
         elevator.setElevatorTargetPos(elevator.getPosition());
         elevator.setDefaultCommand(new ElevatorPIDControl());
-//        elevator.setDefaultCommand(new ElevatorManualControl());
 
         // settings default wheels to WheelsIn;
         collectorPneumatics.pneumaticsIn();
 
         oi = new OI();
-        telescopingArm.setDefaultCommand(new MotorRun());
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");

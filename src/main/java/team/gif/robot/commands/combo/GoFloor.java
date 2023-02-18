@@ -5,6 +5,7 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
+import team.gif.robot.commands.telescopingArm.ArmIn;
 
 public class GoFloor extends CommandBase {
     public GoFloor() {
@@ -18,6 +19,7 @@ public class GoFloor extends CommandBase {
             new GoFloorFromHome().schedule();
         }
         else {
+            new ArmIn().schedule();
             new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS).schedule();
             new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS).schedule();
         }

@@ -16,13 +16,16 @@ public class ArmIn extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.telescopingArm.setMotorSpeed(-0.2);
+        Robot.telescopingArm.setMotorSpeed(-0.3);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false;
+        if (Robot.telescopingArm.getPosition() < 0.002) {
+            return true;
+        } else
+            return false;
     }
 
     // Called when the command ends or is interrupted.

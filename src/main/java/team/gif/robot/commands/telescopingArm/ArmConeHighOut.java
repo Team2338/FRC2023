@@ -3,8 +3,8 @@ package team.gif.robot.commands.telescopingArm;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class ArmOut extends CommandBase {
-    public ArmOut() {
+public class ArmConeHighOut extends CommandBase {
+    public ArmConeHighOut() {
         super();
         addRequirements(Robot.telescopingArm);
     }
@@ -17,13 +17,13 @@ public class ArmOut extends CommandBase {
     @Override
     public void execute() {
         System.out.println("Arm Out");
-        Robot.telescopingArm.setMotorSpeed(0.07);
+        Robot.telescopingArm.setMotorSpeed(0.3);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if (Robot.telescopingArm.getPosition() > 8.0) {
+        if (Robot.telescopingArm.getPosition() > 64.0) {
             return true;
         } else
             return false;

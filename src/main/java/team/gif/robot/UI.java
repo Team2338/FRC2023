@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 import static team.gif.robot.Robot.arm;
 import static team.gif.robot.Robot.elevator;
+import static team.gif.robot.Robot.telescopingArm;
 
 public class UI {
 
@@ -46,5 +47,9 @@ public class UI {
 
         shuffleboardTab.addNumber("Arm Degrees", arm::getPositionDegrees)
                 .withPosition(3, 0);
+
+        shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
+                .withPosition(4, 0);
+
     }
 }
