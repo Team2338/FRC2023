@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 
+/**
+ * Controls all aspects of the arm
+ */
 /*
  * 0 position is approx compass heading of 350
  *    (offsets are used in constants to take into account straight up being non-zero)
  * 0 degrees is considered straight up
  */
-
 public class Arm extends SubsystemBase {
 
     public static WPI_TalonSRX armMotor;
@@ -40,6 +42,9 @@ public class Arm extends SubsystemBase {
         }
     }
 
+    /**
+     * Use PID to move the arm to a position
+     */
     public void PIDMove() {
         armMotor.set(ControlMode.Position, armTargetPos);
     }

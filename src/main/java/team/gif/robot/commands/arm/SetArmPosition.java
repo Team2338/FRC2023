@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
+/**
+ * Sets the arm to an angle
+ */
 public class SetArmPosition extends CommandBase {
 
     private final double targetPosition;
