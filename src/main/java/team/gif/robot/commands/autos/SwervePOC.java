@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import team.gif.lib.Pose2dFeet;
 import team.gif.robot.Robot;
 import team.gif.lib.RobotTrajectory;
 import java.util.List;
@@ -18,8 +19,8 @@ public class SwervePOC extends SequentialCommandGroup {
     public Command go() {
         trajectory = TrajectoryGenerator.generateTrajectory(
             List.of(
-                new Pose2d(0.0, 0.0, new Rotation2d()),
-                new Pose2d(30.0, 0.0, new Rotation2d())
+                Pose2dFeet.set(0.0, 0.0, 0.0),
+                Pose2dFeet.set(30.0, 0.0, 0.0)
             ),
             RobotTrajectory.getInstance().trajectoryConfig
         );
