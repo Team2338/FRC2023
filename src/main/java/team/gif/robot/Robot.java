@@ -9,13 +9,16 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
+import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
@@ -45,6 +48,8 @@ public class Robot extends TimedRobot {
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
+    public static UiSmartDashboard uiSmartDashboard;
+
     public static UI ui;
 
     /**
@@ -67,6 +72,7 @@ public class Robot extends TimedRobot {
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
+        uiSmartDashboard = new UiSmartDashboard();
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -78,10 +84,18 @@ public class Robot extends TimedRobot {
             arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
+//        arm.setDefaultCommand(new ArmManualControl());
+        arm.setTargetPosition(arm.getPosition());
+        arm.setDefaultCommand(new ArmPIDControl());
+
+        elevator.setElevatorTargetPos(elevator.getPosition());
+        elevator.setDefaultCommand(new ElevatorPIDControl());
+//        elevator.setDefaultCommand(new ElevatorManualControl());
+
+        // settings default wheels to WheelsIn;
+        collectorPneumatics.pneumaticsIn();
 
         oi = new OI();
-        arm.setDefaultCommand(new ArmManualControl());
-        elevator.setDefaultCommand(new ElevatorManualControl());
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
@@ -93,6 +107,8 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
             swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
+
+        SmartDashboard.putNumber("Collector Speed",.70);
 
         telemetryLogger.init();
     }
@@ -111,6 +127,9 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+
+        uiSmartDashboard.updateUI();
+
     }
 
     /** This function is called once each time the robot enters Disabled mode. */

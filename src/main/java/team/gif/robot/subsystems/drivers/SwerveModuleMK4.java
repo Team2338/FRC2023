@@ -70,6 +70,8 @@ public class SwerveModuleMK4 {
         this.canCoder.configFactoryDefault();
         this.canCoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
+        this.turnMotor.setSmartCurrentLimit(70, 50);
+
         this.turningOffset = turningOffset;
 
         this.kFF = kFF;
