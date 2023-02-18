@@ -20,9 +20,10 @@ abstract class FileLogger implements Closeable, Flushable {
     protected final FileWriter fw;
     protected double initTime = 0; // TODO: share this value among loggers
     private String[] directories = {
-//		"/home/lvuser/logs", // Local dir on roborio
         "/media/sda2/logs", // Samsung USB
-        "/media/sda1/logs" // Our new USB
+        "/media/sdb1/logs",
+        "/media/sda1/logs", // Our new USB
+		"/home/lvuser/logs", // Local dir on roborio
     };
 
 

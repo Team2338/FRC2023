@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
         eventLogger.init();
 
         telemetryLogger = new TelemetryFileLogger();
+        addMetricsToLogger();
 
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
@@ -74,7 +75,7 @@ public class Robot extends TimedRobot {
         uiSmartDashboard = new UiSmartDashboard();
 
         if (isSwervePBot || isCompBot) {
-            swervetrain = new SwerveDrivetrain();
+            swervetrain = new SwerveDrivetrain(telemetryLogger);
             driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
             swervetrain.resetHeading();
@@ -98,9 +99,13 @@ public class Robot extends TimedRobot {
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getRobotPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
+            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
+            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
+            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
+            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
+            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
+            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
 
         SmartDashboard.putNumber("Collector Speed",.70);
@@ -198,11 +203,13 @@ public class Robot extends TimedRobot {
         telemetryLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
 
         telemetryLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY());
+        telemetryLogger.addMetric("Driver_Left_X", () -> Robot.oi.driver.getLeftX());
+        telemetryLogger.addMetric("Driver_Angle", () -> Math.atan(-Robot.oi.driver.getLeftY() / Robot.oi.driver.getLeftX()));
         telemetryLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
     }
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = false;
-    public static boolean isTankPBot = true;
+    public static boolean isSwervePBot = true;
+    public static boolean isTankPBot = false;
 }

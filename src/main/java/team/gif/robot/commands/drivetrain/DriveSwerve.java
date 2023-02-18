@@ -30,9 +30,9 @@ public class DriveSwerve extends CommandBase {
             double x = Robot.oi.driver.getLeftX();
             x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0.0;
             double y = -Robot.oi.driver.getLeftY();
-            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0f; //0.00001;
+            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0.0; //0.00001;
             double rot = Robot.oi.driver.getRightX();
-            rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0;
+            rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
 
             //Forward speed, Sideways speed, Rotation Speed
             x = xLimiter.calculate(x) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;

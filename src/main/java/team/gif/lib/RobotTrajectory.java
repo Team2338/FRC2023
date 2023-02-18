@@ -9,6 +9,11 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
+/**
+ * Singleton class for creating a trajectory for a swerve bot
+ * @author Rohan Cherukuri
+ * @since 2/14/22
+ */
 public class RobotTrajectory {
     public RobotTrajectory() {
 
