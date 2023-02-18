@@ -41,9 +41,9 @@ public class RobotContainer {
     }
 
     private void buildAutoCommands() {
-        if (Robot.isSwervePBot) {
-            autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
-        }
+//        if (Robot.isSwervePBot) {
+//            autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
+//        }
     }
 
     /**

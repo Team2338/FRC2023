@@ -4,15 +4,14 @@
 
 package team.gif.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
-import team.gif.lib.delay;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
-import team.gif.robot.commands.drivetrain.DriveTank;
+import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.commands.arm.ArmManualControl;
 import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
@@ -30,10 +29,10 @@ import team.gif.robot.subsystems.drivers.Pigeon;
  * project.
  */
 public class Robot extends TimedRobot {
-    private Command autonomousCommand;
-
-    private RobotContainer robotContainer;
-
+    private Command m_autonomousCommand;
+    private RobotContainer m_robotContainer;
+    private static TelemetryFileLogger telemetryLogger;
+    public static EventFileLogger eventLogger;
     public static Drivetrain drivetrain;
     public static Pigeon pigeon;
     public static DriveTank tankDrive;
@@ -51,6 +50,7 @@ public class Robot extends TimedRobot {
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
+    public static UiSmartDashboard uiSmartDashboard;
 
 
     /**
@@ -59,31 +59,60 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        eventLogger = new EventFileLogger();
+        eventLogger.init();
+
+        telemetryLogger = new TelemetryFileLogger();
+        addMetricsToLogger();
+
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        robotContainer = new RobotContainer();
-
-        drivetrain = new Drivetrain(false, false);
-        tankDrive = new DriveTank();
-        arcadeDrive = new DriveArcade();
-        pigeon = new Pigeon();
-        swervetrain = new SwerveDrivetrain();
-        driveSwerve = new DriveSwerve();
-        pigeon.resetPigeonPosition();
+        m_robotContainer = new RobotContainer();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
+        ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
         oi = new OI();
 
-        if(isSwervePBot) {
+        if (isSwervePBot || isCompBot) {
+            swervetrain = new SwerveDrivetrain(telemetryLogger);
+            driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
-        } else if (isTankPBot) {
+            swervetrain.resetHeading();
+        } else {
+            drivetrain = new Drivetrain(false, false);
+            arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
-        arm.setDefaultCommand(new ArmManualControl());
-        elevator.setDefaultCommand(new ElevatorManualControl());
+//        arm.setDefaultCommand(new ArmManualControl());
+        arm.setTargetPosition(arm.getPosition());
+        arm.setDefaultCommand(new ArmPIDControl());
+
+        elevator.setElevatorTargetPos(elevator.getPosition());
+        elevator.setDefaultCommand(new ElevatorPIDControl());
+//        elevator.setDefaultCommand(new ElevatorManualControl());
+
+        // settings default wheels to WheelsIn;
+        collectorPneumatics.pneumaticsIn();
+
+        oi = new OI();
+
+        if (isSwervePBot || isCompBot) {
+            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
+            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
+            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
+            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
+            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
+            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
+            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
+        }
+
+        SmartDashboard.putNumber("Collector Speed",.70);
+
+        telemetryLogger.init();
     }
 
     /**
@@ -149,7 +178,13 @@ public class Robot extends TimedRobot {
 
     /** This function is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        double timeLeft = DriverStation.getMatchTime();
+        oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
+                (timeLeft <= 5.0 && timeLeft >= 3.0));
+
+        telemetryLogger.run();
+    }
 
     @Override
     public void testInit() {
@@ -169,8 +204,17 @@ public class Robot extends TimedRobot {
     @Override
     public void simulationPeriodic() {}
 
+    private void addMetricsToLogger() {
+        telemetryLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
+
+        telemetryLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY());
+        telemetryLogger.addMetric("Driver_Left_X", () -> Robot.oi.driver.getLeftX());
+        telemetryLogger.addMetric("Driver_Angle", () -> Math.atan(-Robot.oi.driver.getLeftY() / Robot.oi.driver.getLeftX()));
+        telemetryLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
+    }
+
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = false;
-    public static boolean isTankPBot = true;
+    public static boolean isSwervePBot = true;
+    public static boolean isTankPBot = false;
 }

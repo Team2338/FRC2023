@@ -1,105 +1,102 @@
 package team.gif.robot.subsystems.drivers;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team.gif.robot.Constants;
 
-public class SwerveModuleCANCoder {
-
-    private final WPI_TalonSRX turnMotor;
+/**
+ * @author Rohan Cherukuri
+ * @since 2/14/22
+ */
+public class SwerveModuleMK4 {
+    private final WPI_TalonFX driveMotor;
     private final CANCoder canCoder;
-    private final CANSparkMax driveMotor;
+    private final CANSparkMax turnMotor;
 
     private final double kFF;
     private final double kP;
+    private double accum = 0;
 
     private final boolean isAbsInverted;
 
     private double turningOffset;
 
-    private final ProfiledPIDController turningPID;
-
-//    private final PIDController drivePID =
-//            new PIDController(Constants.ModuleConstants.kPModuleDriveController, 0, 0);
-
-
     /**
      * Constructor for a TalonSRX, NEO based Swerve Module
-     * @param driveMotor NEO motor channel ID
-     * @param turnMotor TalonSRX motor channel ID
+     * @param driveMotor SparkMax (NEO) motor channel ID
+     * @param turnMotor TalonFX (Falcon) motor channel ID
      * @param isTurningInverted Boolean for if the motor turning the axle is inverted
      * @param isDriveInverted Boolean for if the motor driving the wheel is inverted
      * @param isAbsInverted Boolean for if the absolute encoder checking turn position is inverted
      * @param turningOffset Difference between the absolute encoder and the encoder on the turnMotor
      */
-    public SwerveModuleCANCoder (
-        int driveMotor,
-        int turnMotor,
-        boolean isTurningInverted,
-        boolean isDriveInverted,
-        boolean isAbsInverted,
-        double turningOffset,
-        int canCoder,
-        double kFF,
-        double kP
+    public SwerveModuleMK4(
+            int driveMotor,
+            int turnMotor,
+            boolean isTurningInverted,
+            boolean isDriveInverted,
+            boolean isAbsInverted,
+            double turningOffset,
+            int canCoder,
+            double kFF,
+            double kP
     ) {
-        this.driveMotor = new CANSparkMax(driveMotor, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.turnMotor = new WPI_TalonSRX(turnMotor);
+        this.driveMotor = new WPI_TalonFX(driveMotor);
+        this.turnMotor = new CANSparkMax(turnMotor, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        this.driveMotor.restoreFactoryDefaults();
-        this.turnMotor.configFactoryDefault();
+        this.driveMotor.configFactoryDefault();
+        this.turnMotor.restoreFactoryDefaults();
 
-        this.driveMotor.setIdleMode(CANSparkMax.IdleMode.kCoast); //TODO: Need confirmation on mode
-        this.turnMotor.setNeutralMode(NeutralMode.Brake);
+        this.driveMotor.setNeutralMode(NeutralMode.Brake);
+        this.turnMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        this.turnMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.TURNING_ENCODER_ROT_TO_RAD);
+        this.turnMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.TURNING_ENCODER_RPM_2_RAD_PER_SECOND);
 
         this.driveMotor.setInverted(isDriveInverted);
         this.turnMotor.setInverted(isTurningInverted);
         this.isAbsInverted = isAbsInverted;
 
-        this.turningOffset = turningOffset;
-
-        this.driveMotor.getEncoder().setPositionConversionFactor(Constants.ModuleConstants.kDriveEncoderRot2Meter);
-        this.driveMotor.getEncoder().setVelocityConversionFactor(Constants.ModuleConstants.kDriveEncoderRPM2MeterPerSec);
-
         this.canCoder = new CANCoder(canCoder);
         this.canCoder.configFactoryDefault();
         this.canCoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
-        this.canCoder.configMagnetOffset(turningOffset);
+
+        this.turnMotor.setSmartCurrentLimit(70, 50);
+
+        this.turningOffset = turningOffset;
 
         this.kFF = kFF;
         this.kP = kP;
 
-        this.turningPID =  new
-            ProfiledPIDController(kP, 0, 0,
-            new TrapezoidProfile.Constraints(
-                Constants.ModuleConstants.kMaxModuleAngularSpeedRadiansPerSecond, Constants.ModuleConstants.kMaxModuleAngularAccelerationRadiansPerSecondSquared
-            ));
-        turningPID.enableContinuousInput(-Math.PI, Math.PI);
+    }
 
-        this.driveMotor.setSmartCurrentLimit(20, 40);
+    public TalonFX getDriveMotor() {
+        return this.driveMotor;
+    }
+
+    public CANSparkMax getTurnMotor() {
+        return this.turnMotor;
+    }
+
+    public double getAccum() {
+        return accum;
     }
 
     /**
      * Get the active state of the swerve module
-     * @return Returns a SwerveModuleState of the drive velocity and turn velocity
-     * @deprecated no more need for getState other than debugging
+     * @return Returns the active state of the given swerveModule
      */
-    @Deprecated(forRemoval = true)
     public SwerveModuleState getState() {
-        return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurnVelocity()));
+        return new SwerveModuleState(getDriveVelocity(), new Rotation2d(Units.degreesToRadians(getTurnVelocity())));
     }
 
     /**
@@ -107,7 +104,7 @@ public class SwerveModuleCANCoder {
      * @return Returns the active drive velocity as a double in RPM
      */
     public double getDriveVelocity() {
-        return driveMotor.getEncoder().getVelocity();
+        return driveMotor.getSelectedSensorVelocity() * Constants.ModuleConstants.DRIVE_ENCODER_ROT_2_METER;
     }
 
     /**
@@ -119,21 +116,11 @@ public class SwerveModuleCANCoder {
     }
 
     /**
-     *
-     * @return The encoder position of the turn motor, in ticks, after the offset is applied
-     * @deprecated use getOffsetHeading instead
+     * Get the heading of the canCoder - will also include the offset
+     * @return Returns the raw heading of the canCoder (deg)
      */
-    @Deprecated(forRemoval = true)
-    public double getOffsetHeadingTicks() {
-        return 0; //turnMotor.getSelectedSensorPosition() - this.turningOffset;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public double getOffsetHeading() {
-        return Units.degreesToRadians(canCoder.getPosition() + turningOffset);
+    public double getRawHeading() {
+        return canCoder.getAbsolutePosition();
     }
 
     /**
@@ -141,13 +128,13 @@ public class SwerveModuleCANCoder {
      * @return Returns the heading of the module in radians as a double
      */
     public double getTurningHeading() {
-        double heading = getOffsetHeading() * (isAbsInverted ? -1.0: 1.0);
+        double heading = Units.degreesToRadians(getRawHeading() - turningOffset) * (isAbsInverted ? -1.0: 1.0);
         heading %= 2 * Math.PI;
         return heading;
     }
 
     /**
-     *
+     * Reset the wheels to their 0 positions
      */
     public void resetWheel() {
         final double error = getTurningHeading();
@@ -158,28 +145,28 @@ public class SwerveModuleCANCoder {
     }
 
     /**
-     *
-     * @param radians
-     * @return
+     * Find the reverse of a given angle (i.e. pi/4->7pi/4)
+     * @param radians the angle in radians to reverse
+     * @return the reversed angle
      */
     private double findRevAngle(double radians) {
         return (Math.PI * 2 + radians) % (2 * Math.PI) - Math.PI;
     }
 
     /**
-     *
-     * @param setpoint
-     * @param position
-     * @return
+     * Finds the distance in ticks between two setpoints
+     * @param setpoint initial/current point
+     * @param position desired position
+     * @return the distance between the two point
      */
     private double getDistance(double setpoint, double position) {
         return Math.abs(setpoint - position);
     }
 
     /**
-     *
-     * @param original
-     * @return
+     * Optimize the swerve module state by setting it to the closest equivalent vector
+     * @param original the original swerve module state
+     * @return the optimized swerve module state
      */
     private SwerveModuleState optimizeState(SwerveModuleState original) {
         // Compute all options for a setpoint
@@ -219,63 +206,36 @@ public class SwerveModuleCANCoder {
      * @param state The desired state of the swerve module
      */
     public void setDesiredState(SwerveModuleState state) {
-
-//        if(Math.abs(state.speedMetersPerSecond) < 0.001) {
-//            stop();
-//            return;
-//        }
-
-        // Modules will pick the closest equivalent angle, reversing drive motors if necessary
-//        var stateOptimized = SwerveModuleState.optimize(state,
-//                new Rotation2d(getTurningHeading()));
-
         SwerveModuleState stateOptimized = optimizeState(state);
-
-        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.kMaxSpeedMetersPerSecond;
-
-        // Calculate the turning motor output from the turning PID controller.
-//        final double turnOutput =
-//                turningPID.calculate(getTurningHeading(), stateOptimized.angle.getRadians());
+        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND;
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
         final double kff = kFF * Math.abs(error) / error;
-        final double turnOutput = kff + (kP * error);
-        SmartDashboard.putNumber("PF Error", turnOutput);
-
-        // Calculate the turning motor output from the turning PID controller.
+        //accum += error;
+        final double turnOutput = kff + (kP * error) + (0.001 * accum);
         driveMotor.set(driveOutput);
         turnMotor.set(turnOutput);
     }
 
+    /**
+     * Stop the swerve modules
+     */
     public void stop() {
         driveMotor.set(0);
         turnMotor.set(0);
     }
 
     /**
-     * Zeros all the SwerveModule encoders.
+     * Get the position of the swerve module - TODO: HAS BUG
+     * @return the position of the swerve module
      */
-    public void resetEncoders() {
-        driveMotor.getEncoder().setPosition(0);
-        canCoder.setPosition(0);
-    }
-
-    public double getPowPos() {
-        return driveMotor.getEncoder().getPosition();
-    }
-
-    public TalonSRX getTurn() {
-        return turnMotor;
-    }
-
     public SwerveModulePosition getPosition() {
-        return new SwerveModulePosition(driveMotor.getEncoder().getPosition(), new Rotation2d(getTurningHeading()));
+        return new SwerveModulePosition(driveMotor.getSelectedSensorPosition() * Constants.ModuleConstants.DRIVE_ENCODER_ROT_2_METER, new Rotation2d(getTurningHeading()));
     }
 
-    public CANSparkMax getDriveMotor() {
-        return driveMotor;
-    }
-
+    /**
+     * Resets the drive encoder
+     */
     public void resetDriveEncoders() {
-        driveMotor.getEncoder().setPosition(0.0);
+        driveMotor.setSelectedSensorPosition(0.0);
     }
 }
