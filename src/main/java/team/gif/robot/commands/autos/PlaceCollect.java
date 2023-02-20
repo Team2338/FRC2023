@@ -14,7 +14,7 @@ import team.gif.robot.Robot;
 
 import java.util.List;
 
-public class PlaceAndCollect extends SequentialCommandGroup {
+public class PlaceCollect extends SequentialCommandGroup {
     private Trajectory trajectory;
 
     public Command go() {

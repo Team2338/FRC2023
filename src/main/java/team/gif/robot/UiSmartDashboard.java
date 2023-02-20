@@ -23,7 +23,13 @@ public class UiSmartDashboard {
             .withPosition(5, 0);
 
         // Auto selections
-        autoModeChooser.addOption("Swerve POC", autoMode.SWERVE_POC);
+        autoModeChooser.setDefaultOption("Swerve POC", autoMode.SWERVE_POC);
+        autoModeChooser.addOption("Engage", autoMode.ENGAGE);
+        autoModeChooser.addOption("Place and Collect", autoMode.PLACE_COLLECT);
+        autoModeChooser.addOption("Place and Engage", autoMode.PLACE_ENGAGE);
+        autoModeChooser.addOption("Place and Mobility", autoMode.PLACE_MOBILITY);
+        autoModeChooser.addOption("Place, Mobility, and Engage", autoMode.PLACE_MOBILITY_ENGAGE);
+        autoModeChooser.addOption("Place, Collect, Place", autoMode.PLACE_COLlECT_PLACE);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)

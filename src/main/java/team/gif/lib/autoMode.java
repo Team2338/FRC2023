@@ -1,7 +1,13 @@
 package team.gif.lib;
 
 public enum autoMode {
-    SWERVE_POC(0);
+    SWERVE_POC(0),
+    ENGAGE(0),
+    PLACE_COLLECT(0),
+    PLACE_ENGAGE(0),
+    PLACE_MOBILITY(0),
+    PLACE_MOBILITY_ENGAGE(0),
+    PLACE_COLlECT_PLACE(0);
 
     private int value;
 
