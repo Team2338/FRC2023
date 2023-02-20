@@ -1,0 +1,115 @@
+{
+  "tabPane": [
+    {
+      "title": "Dashboard",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": false,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 1,
+        "tiles": {
+          "4,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///Shuffleboard/SmartDashboard/Auto Select",
+              "_title": "Auto Select",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Timers",
+              "_glyph": 149,
+              "_showGlyph": false,
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Time",
+                  "_title": "Time",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Timer",
+                  "_title": "Timer",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                }
+              ]
+            }
+          },
+          "3,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///Shuffleboard/SmartDashboard/Delay",
+              "_title": "Delay",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,0": {
+            "size": [
+              4,
+              3
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight",
+              "_title": "limelight",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "7,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///Shuffleboard/FRC2023/Manual Cntl",
+              "_title": "Manual Cntl",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": -6.400000095367432,
+    "y": 0.0,
+    "width": 1548.800048828125,
+    "height": 693.5999755859375
+  }
+}
