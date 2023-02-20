@@ -86,7 +86,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
 
 //        resetEncoders();
-        pigeonMotor = new TalonSRX(RobotMap.PIGEON);
         odometry = new SwerveDriveOdometry(Constants.Drivetrain.DRIVE_KINEMATICS, Robot.pigeon.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
         resetHeading();
