@@ -7,10 +7,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
 import team.gif.robot.commands.collector.CollectorEject;
-import team.gif.robot.commands.collector.CollectorRun;
+import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
-import team.gif.robot.commands.collector.WheelsIn;
-import team.gif.robot.commands.collector.WheelsOut;
 import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.combo.GoFloor;
@@ -123,7 +121,7 @@ public class OI {
         aA.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
 
         // collector
-        dRBump.whileTrue(new CollectorRun());
+        dRBump.whileTrue(new CollectorCollect());
         dLBump.whileTrue(new CollectorEject());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());

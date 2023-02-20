@@ -207,7 +207,7 @@ public final class Constants {
     }
 
     public static class Collector {
-        public static final double COLLECTOR_RUN = 0.8; //collector percent
+        public static final double COLLECTOR_RUN = 0.7; //collector percent
     }
 
     public static class Location {
