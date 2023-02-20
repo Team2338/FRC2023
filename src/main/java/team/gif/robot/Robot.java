@@ -69,7 +69,6 @@ public class Robot extends TimedRobot {
 
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        robotContainer = new RobotContainer();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
@@ -113,6 +112,7 @@ public class Robot extends TimedRobot {
 
         elapsedTime = new Timer();
         telemetryLogger.init();
+        robotContainer = new RobotContainer();
     }
 
     /**
@@ -219,6 +219,6 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = false;
-    public static boolean isTankPBot = true;
+    public static boolean isSwervePBot = true;
+    public static boolean isTankPBot = false;
 }
