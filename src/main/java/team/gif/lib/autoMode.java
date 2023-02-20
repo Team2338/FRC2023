@@ -7,7 +7,7 @@ public enum autoMode {
     PLACE_ENGAGE(0),
     PLACE_MOBILITY(0),
     PLACE_MOBILITY_ENGAGE(0),
-    PLACE_COLlECT_PLACE(0);
+    PLACE_COLLECT_PLACE(0);
 
     private int value;
 

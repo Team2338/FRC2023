@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
-import team.gif.robot.commands.autos.SwervePOC;
+import team.gif.robot.commands.autos.*;
 
 import java.util.HashMap;
 
@@ -42,6 +42,12 @@ public class RobotContainer {
 
     private void buildAutoCommands() {
         autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
+        autoCommands.put(autoMode.ENGAGE, new Engage());
+        autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE, new PlaceMobilityEngage());
+        autoCommands.put(autoMode.PLACE_COLLECT, new PlaceCollect());
+        autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
+        autoCommands.put(autoMode.PLACE_ENGAGE, new PlaceEngage());
+        autoCommands.put(autoMode.PLACE_MOBILITY, new PlaceMobility());
     }
 
     /**
