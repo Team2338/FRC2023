@@ -4,6 +4,7 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -78,7 +79,7 @@ public class Robot extends TimedRobot {
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
-        pigeon = new Pigeon(RobotMap.PIGEON);
+        pigeon = new Pigeon(new TalonSRX(RobotMap.PIGEON));
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -135,8 +136,6 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().run();
 
         uiSmartDashboard.updateUI();
-
-        System.out.println(pigeon.getCompassHeading());
 
         chosenAuto = uiSmartDashboard.autoModeChooser.getSelected();
         chosenDelay = uiSmartDashboard.delayChooser.getSelected();

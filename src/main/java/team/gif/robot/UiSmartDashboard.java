@@ -16,9 +16,9 @@ public class UiSmartDashboard {
 
     public UiSmartDashboard() {
         ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard"); // Gets a reference to the shuffleboard tab
-        tab.add("BotHaead", (x) -> {
+        tab.add("BotHead", (x) -> {
                 x.setSmartDashboardType("Gyro");
-                x.addDoubleProperty("Value", () -> Robot.swervetrain.getHeading().getDegrees(), null);
+                x.addDoubleProperty("Value", () -> Robot.pigeon.getCompassHeading(), null);
             })
             .withPosition(5, 0);
 
