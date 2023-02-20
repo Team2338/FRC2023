@@ -3,15 +3,17 @@ package team.gif.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
-import team.gif.robot.commands.arm.MoveUp;
 import team.gif.robot.commands.collector.CollectorEject;
-import team.gif.robot.commands.collector.CollectorIn;
-import team.gif.robot.commands.collector.CollectorRun;
+import team.gif.robot.commands.collector.CollectorCollect;
+import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
+import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.drivetrain.ResetWheels;
+import team.gif.robot.commands.combo.GoFloor;
+import team.gif.robot.commands.combo.GoLocation;
+import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.elevator.SmartElevatorPosition;
 import team.gif.robot.commands.limeLight.LedToggle;
 
@@ -40,8 +42,8 @@ public class OI {
     public final JoystickButton dStart = new JoystickButton(driver, 8);
     public final JoystickButton dLStickBtn = new JoystickButton(driver, 9);
     public final JoystickButton dRStickBtn = new JoystickButton(driver, 10);
-    public final AxisButton dRTrigger = new AxisButton(driver, 3, .05);
-    public final AxisButton dLTrigger = new AxisButton(driver, 2, .05);
+//    public final AxisButton dRTrigger = new AxisButton(driver, 3, .05);
+//    public final AxisButton dLTrigger = new AxisButton(driver, 2, .05);
 
     public final POVButton dDPadUp = new POVButton(driver, 0);
     public final POVButton dDPadRight = new POVButton(driver, 90);
@@ -58,8 +60,10 @@ public class OI {
     public final JoystickButton aStart = new JoystickButton(aux, 8);
     public final JoystickButton aLStickBtn = new JoystickButton(aux, 9);
     public final JoystickButton aRStickBtn = new JoystickButton(aux, 10);
-    public final AxisButton aRTrigger = new AxisButton(aux, 3, .05);
-    public final AxisButton aLTrigger = new AxisButton(aux, 2, .05);
+//    public final AxisButton aRTrigger = new AxisButton(aux, 3, .05);
+//    public final AxisButton aLTrigger = new AxisButton(aux, 2, .05);
+//    public final JoystickButton aRTrigger = new JoystickButton(aux, 11);
+//    public final JoystickButton aLTrigger = new JoystickButton(aux, 12);
     public final POVButton aDPadUp = new POVButton(aux, 0);
     public final POVButton aDPadRight = new POVButton(aux, 90);
     public final POVButton aDPadDown = new POVButton(aux, 180);
@@ -97,23 +101,35 @@ public class OI {
      *  whileTrue(new RepeatCommand()) (fka whileHeld)   Init->Execute repeats until IsFinished = true or button released->End, will start again at Init if still held down
      *
      */
-
-        // arm
-        aB.onTrue(new MoveUp());
-
         // elevator
-        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
-        aDPadUp.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_DOUBLE_SUBSTATION));
-        aDPadRight.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.LOAD_FROM_SINGLE_SUBSTATION));
-        aDPadDown.onTrue(new SmartElevatorPosition(SmartElevatorPosition.Location.COLLECT_FROM_GROUND));
+        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+
+        // manual mode
+        aBack.toggleOnTrue(new ToggleManualPIDControl());
+
+        // combo loading actions
+        aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
+        aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
+        aDPadDown.onTrue(new GoFloor());
+        aDPadLeft.onTrue(new GoHome());
+
+        // combo placing cone actions
+        aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH));
+        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
+
+        // combo placing cube actions
+        aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));
+        aB.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
+        aA.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
 
         // collector
-        aX.onTrue(new CollectorRun());
-        aA.onTrue(new CollectorEject());
-//        aB.onTrue(new Co)
-        aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        dRBump.whileTrue(new CollectorCollect());
+        dLBump.whileTrue(new CollectorEject());
+
+        dY.toggleOnTrue(new ToggleWheelsInAndOut());
+
         if( Robot.isSwervePBot || Robot.isCompBot )
-            dB.onTrue(new ResetWheels());
+            dA.onTrue(new ResetWheels());
 
         // limelight toggle
         dRTrigger.onTrue(new LedToggle());

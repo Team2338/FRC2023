@@ -8,18 +8,24 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
-import team.gif.robot.subsystems.drivers.SwerveModule;
-import team.gif.robot.subsystems.drivers.SwerveModuleCANCoder;
+import team.gif.robot.subsystems.drivers.SwerveModuleMK4;
 
+/**
+ * @author Rohan Cherukuri
+ * @since 2/14/22
+ */
 public class SwerveDrivetrain extends SubsystemBase {
-    public static SwerveModule fL;
-    public static SwerveModule fR;
-    public static SwerveModuleCANCoder rR;
-    public static SwerveModule rL;
+    public static SwerveModuleMK4 fL;
+    public static SwerveModuleMK4 fR;
+    public static SwerveModuleMK4 rR;
+    public static SwerveModuleMK4 rL;
 
     private static TalonSRX pigMotor;
     private static Pigeon pig;
@@ -32,29 +38,31 @@ public class SwerveDrivetrain extends SubsystemBase {
     public SwerveDrivetrain() {
         super();
 
-        fL = new SwerveModule(
+        fL = new SwerveModuleMK4 (
                 RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
                 false,
                 true,
                 true,
                 Constants.Drivetrain.FRONT_LEFT_OFFSET,
+                RobotMap.FRONT_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontLeftFF,
                 Constants.ModuleConstants.DrivetrainPID.frontLeftP
         );
 
-        fR = new SwerveModule(
+        fR = new SwerveModuleMK4 (
                 RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
                 false,
                 false,
                 true,
                 Constants.Drivetrain.FRONT_RIGHT_OFFSET,
+                RobotMap.FRONT_RIGHT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontRightFF,
                 Constants.ModuleConstants.DrivetrainPID.frontRightP
         );
 
-        rR = new SwerveModuleCANCoder(
+        rR = new SwerveModuleMK4 (
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
                 false,
@@ -66,13 +74,14 @@ public class SwerveDrivetrain extends SubsystemBase {
                 Constants.ModuleConstants.DrivetrainPID.rearRightP
         );
 
-        rL = new SwerveModule(
+        rL = new SwerveModuleMK4 (
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
                 false,
                 true,
                 true,
                 Constants.Drivetrain.REAR_LEFT_OFFSET,
+                RobotMap.REAR_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.rearLeftFF,
                 Constants.ModuleConstants.DrivetrainPID.rearLeftP
         );
@@ -85,8 +94,42 @@ public class SwerveDrivetrain extends SubsystemBase {
         resetHeading();
         resetDriveEncoders();
 
+        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
+        swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
+        swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
+        swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+        swerveTab.addDouble("RR_Accum", rR::getAccum);
+        swerveTab.addDouble("RL_Accum", rL::getAccum);
     }
 
+    public SwerveDrivetrain(TelemetryFileLogger logger) {
+        this();
+
+        logger.addMetric("FL_Rotation", fL::getTurningHeading);
+        logger.addMetric("FR_Rotation", fR::getTurningHeading);
+        logger.addMetric("RL_Rotation", rL::getTurningHeading);
+        logger.addMetric("RR_Rotation", rR::getTurningHeading);
+
+        logger.addMetric("FL_Drive_Command", () -> fL.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("FR_Drive_Command", () -> fR.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("RL_Drive_Command", () -> rL.getDriveMotor().getMotorOutputPercent());
+        logger.addMetric("RR_Drive_Command", () -> rR.getDriveMotor().getMotorOutputPercent());
+
+        logger.addMetric("FL_Turn_Command", () -> fL.getTurnMotor().getAppliedOutput());
+        logger.addMetric("FR_Turn_Command", () -> fR.getTurnMotor().getAppliedOutput());
+        logger.addMetric("RL_Turn_Command", () -> rL.getTurnMotor().getAppliedOutput());
+        logger.addMetric("RR_Turn_Command", () -> rR.getTurnMotor().getAppliedOutput());
+
+        logger.addMetric("FL_Turn_Velocity", () -> fL.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("FR_Turn_Velocity", () -> fR.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("RL_Turn_Velocity", () -> rL.getTurnMotor().getEncoder().getVelocity());
+        logger.addMetric("RR_Turn_Velocity", () -> rR.getTurnMotor().getEncoder().getVelocity());
+    }
+
+    /**
+     * periodic function to constantly update the odometry
+     */
     @Override
     public void periodic() {
         odometry.update(
@@ -95,10 +138,21 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
     }
 
+    /**
+     * Reset the odometry to a given pose
+     * @param pose the pose to reset to
+     */
     public void resetOdometry(Pose2d pose) {
         odometry.resetPosition(pig.getRotation2d(), new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()}, pose);
     }
 
+    /**
+     * Drive the bot with given params
+     * @param x dForward
+     * @param y dLeft
+     * @param rot dRot
+     * @param fieldRelative Field relativity
+     */
     public void drive(double x, double y, double rot, boolean fieldRelative) {
         SwerveModuleState[] swerveModuleStates =
                 Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(
@@ -151,10 +205,10 @@ public class SwerveDrivetrain extends SubsystemBase {
      * Reset the position of each of the wheels so that they all are pointing straight forward
      */
     public void resetEncoders() {
-        fL.resetEncoders();
-        fR.resetEncoders();
-        rL.resetEncoders();
-        rR.resetEncoders();
+        fL.resetDriveEncoders();
+        fR.resetDriveEncoders();
+        rL.resetDriveEncoders();
+        rR.resetDriveEncoders();
     }
 
     /**
@@ -173,10 +227,17 @@ public class SwerveDrivetrain extends SubsystemBase {
         return pig.getRotation2d();
     }
 
+    /**
+     * Get the current pose of the robot
+     * @return The current pose of the robot (Pose2D)
+     */
     public Pose2d getPose() {
         return odometry.getPoseMeters();
     }
 
+    /**
+     * Stop all of the modules
+     */
     public void stopModules() {
         fL.stop();
         fR.stop();
@@ -184,10 +245,17 @@ public class SwerveDrivetrain extends SubsystemBase {
         rL.stop();
     }
 
+    /**
+     * Get the current position of each of the swerve modules
+     * @return An array in form fL -> fR -> rL -> rR of each of the module positions
+     */
     public SwerveModulePosition[] getPosition() {
         return new SwerveModulePosition[] {fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()};
     }
 
+    /**
+     * Reset the drive encoders
+     */
     public void resetDriveEncoders() {
         fL.resetDriveEncoders();
         fR.resetDriveEncoders();
@@ -195,11 +263,11 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR.resetDriveEncoders();
     }
 
+    /**
+     * Get the current heading of the robot
+     * @return the heading of the robot in degrees
+     */
     public double getRobotHeading() {
         return pig.getCompassHeading();
-    }
-
-    public Pose2d getRobotPose() {
-        return odometry.getPoseMeters();
     }
 }
