@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
+        limelight = new Limelight();
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -212,6 +213,6 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = false;
-    public static boolean isTankPBot = true;
+    public static boolean isSwervePBot = true;
+    public static boolean isTankPBot = false;
 }
