@@ -24,7 +24,7 @@ public final class Pose2dFeet {
 
     public Pose2dFeet() {}
 
-    public static Pose2d set(double x, double y, double heading) {
+    public Pose2d set(double x, double y, double heading) {
 
         // If compass heading is being used, convert to -180:180 scale
         heading = heading > 180 ? -360 + heading : heading;
