@@ -22,8 +22,7 @@ import edu.wpi.first.math.util.Units;
 
 public final class Pose2dFeet {
 
-    public Pose2dFeet() {
-    }
+    public Pose2dFeet() {}
 
     public static Pose2d set(double x, double y, double heading) {
 

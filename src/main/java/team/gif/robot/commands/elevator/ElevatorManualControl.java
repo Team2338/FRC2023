@@ -13,10 +13,9 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
         double percent = -Robot.oi.aux.getRightY();
