@@ -27,6 +27,7 @@ import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
+import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -49,6 +50,8 @@ public class Robot extends TimedRobot {
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
+
+    public static Pigeon pigeon;
 
     public static UI ui;
 
@@ -73,6 +76,7 @@ public class Robot extends TimedRobot {
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
+        pigeon = new Pigeon();
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
