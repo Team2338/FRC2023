@@ -14,8 +14,8 @@ public class Pigeon {
 
 
 
-    public Pigeon(){
-        _pigeon = new PigeonIMU(RobotMap.PIGEON);
+    public Pigeon(int PigeonID){
+        _pigeon = new PigeonIMU(PigeonID);
     }
 
     public Pigeon(TalonSRX talon){

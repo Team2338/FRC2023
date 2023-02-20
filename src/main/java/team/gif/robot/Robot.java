@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
-        pigeon = new Pigeon();
+        pigeon = new Pigeon(RobotMap.PIGEON);
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
