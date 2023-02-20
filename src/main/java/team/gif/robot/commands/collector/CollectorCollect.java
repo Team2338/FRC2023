@@ -5,8 +5,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class CollectorEject extends CommandBase {
-    public CollectorEject() {
+public class CollectorCollect extends CommandBase {
+
+    public CollectorCollect() {
         super();
         addRequirements(Robot.collector);
     }
@@ -18,7 +19,8 @@ public class CollectorEject extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.collector.setSpeedPercentCollector(-Constants.Collector.COLLECTOR_RUN);
+        Robot.collector.setSpeedPercentCollector(Constants.Collector.COLLECTOR_RUN);
+//        Robot.collector.setSpeedPercentCollector(SmartDashboard.getNumber("Collector Speed", 0));
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
@@ -27,7 +29,7 @@ public class CollectorEject extends CommandBase {
         return false;
     }
 
-    // Called once the command ends or is interrupted.
+    // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         Robot.collector.setSpeedPercentCollector(0);

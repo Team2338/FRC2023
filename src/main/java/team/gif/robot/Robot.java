@@ -108,8 +108,6 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
 
-        SmartDashboard.putNumber("Collector Speed",.70);
-
         telemetryLogger.init();
     }
 
@@ -210,6 +208,6 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = false;
-    public static boolean isSwervePBot = true;
-    public static boolean isTankPBot = false;
+    public static boolean isSwervePBot = false;
+    public static boolean isTankPBot = true;
 }

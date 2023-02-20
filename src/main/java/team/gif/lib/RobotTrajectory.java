@@ -15,9 +15,7 @@ import team.gif.robot.Robot;
  * @since 2/14/22
  */
 public class RobotTrajectory {
-    public RobotTrajectory() {
-
-    }
+    public RobotTrajectory() {}
 
     private static RobotTrajectory instance = null;
 
