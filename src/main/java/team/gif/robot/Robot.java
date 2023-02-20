@@ -136,6 +136,8 @@ public class Robot extends TimedRobot {
 
         uiSmartDashboard.updateUI();
 
+        System.out.println(pigeon.getCompassHeading());
+
         chosenAuto = uiSmartDashboard.autoModeChooser.getSelected();
         chosenDelay = uiSmartDashboard.delayChooser.getSelected();
     }
