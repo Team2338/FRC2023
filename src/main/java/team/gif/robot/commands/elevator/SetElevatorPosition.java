@@ -44,7 +44,6 @@ public class SetElevatorPosition extends CommandBase {
     public boolean isFinished() {
 //        if( Robot.arm.getPositionDegrees() < Constants.Arm.MOVE_FROM_HOME_POS && Robot.elevator.getPosition() > Constants.Elevator.MAX_HOME_SAFE_POS)
 //            return false; // TODO: prevent arm from crashing into top rail
-
         return Robot.elevator.isFinished();
     }
 

@@ -8,13 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
-import team.gif.robot.commands.autos.Engage;
-import team.gif.robot.commands.autos.PlaceCollect;
-import team.gif.robot.commands.autos.PlaceMobilityEngage;
-import team.gif.robot.commands.autos.SwervePOC;
-import team.gif.robot.commands.autos.PlaceEngage;
-import team.gif.robot.commands.autos.PlaceCollectPlace;
-import team.gif.robot.commands.autos.PlaceMobility;
+import team.gif.robot.commands.autos.*;
+
 import java.util.HashMap;
 
 /**
@@ -46,13 +41,13 @@ public class RobotContainer {
     }
 
     private void buildAutoCommands() {
-        autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
-        autoCommands.put(autoMode.ENGAGE, new Engage());
+        //autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
+        //autoCommands.put(autoMode.ENGAGE, new Engage());
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE, new PlaceMobilityEngage());
         autoCommands.put(autoMode.PLACE_COLLECT, new PlaceCollect());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
         autoCommands.put(autoMode.PLACE_ENGAGE, new PlaceEngage());
-        autoCommands.put(autoMode.PLACE_MOBILITY, new PlaceMobility());
+        autoCommands.put(autoMode.PLACE_MOBILITY, new PlaceMobilityCone());
     }
 
     /**

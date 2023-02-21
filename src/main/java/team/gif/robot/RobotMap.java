@@ -32,7 +32,7 @@ public abstract class RobotMap {
     public static final int ARM_ENCODER = 6; //31 TODO
 
     // Pigeon
-    public static final int PIGEON = 5;
+    public static final int PIGEON = 12;
 
     // Elevator
     public static final int ELEVATOR_MOTOR_ID = 41;
