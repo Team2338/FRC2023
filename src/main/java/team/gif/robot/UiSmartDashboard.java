@@ -14,6 +14,15 @@ public class UiSmartDashboard {
     public SendableChooser<autoMode> autoModeChooser = new SendableChooser<>();
     public SendableChooser<delay> delayChooser = new SendableChooser<>();
 
+    /**
+     *  Widgets (e.g. gyro),
+     *  buttons (e.g. SmartDashboard.putData("Reset", new ResetHeading()); ),
+     *  and Chooser options (e.g. auto mode)
+     *
+     *  Placed on a dashboard tab
+     *  After SmartDashboard loads for the first time, place items from network table onto Dashboard tab
+     *  and save file as "YYYY shuffleboard layout.json"
+     */
     public UiSmartDashboard() {
         ShuffleboardTab tab = Shuffleboard.getTab("SmartDashboard"); // Gets a reference to the shuffleboard tab
         tab.add("BotHead", (x) -> {
@@ -59,6 +68,12 @@ public class UiSmartDashboard {
             .withSize(1, 1);
     }
 
+    /**
+     * Values which are updated periodically should be placed here
+     * 
+     * Convenient way to format a number is to use putString w/ format:
+     *     SmartDashboard.putString("Elevator", String.format("%11.2f", Elevator.getPosition()));
+     */
     public void updateUI() {
         // Timers
         SmartDashboard.putString("Time", String.format("%.4f", Timer.getFPGATimestamp()));
