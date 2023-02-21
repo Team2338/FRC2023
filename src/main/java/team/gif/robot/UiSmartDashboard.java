@@ -6,8 +6,11 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
+
+import static team.gif.robot.Robot.elevator;
 
 public class UiSmartDashboard {
 
@@ -66,11 +69,13 @@ public class UiSmartDashboard {
         tab.add("Delay", delayChooser)
             .withPosition(7, 0)
             .withSize(1, 1);
+
+        SmartDashboard.putData("Elevator", new InstantCommand(elevator::zeroEncoder).ignoringDisable(true));
     }
 
     /**
      * Values which are updated periodically should be placed here
-     * 
+     *
      * Convenient way to format a number is to use putString w/ format:
      *     SmartDashboard.putString("Elevator", String.format("%11.2f", Elevator.getPosition()));
      */
