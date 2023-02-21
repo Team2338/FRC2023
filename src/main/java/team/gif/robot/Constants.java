@@ -149,7 +149,7 @@ public final class Constants {
 
         public static final double TICKS_PER_DEGREE = 26.8;
         public static final double ZERO_OFFSET_TICKS = 375; // ticks between motor 0 and straight up (compass 0)
-        public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows PID to get closer
+        public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
@@ -161,14 +161,15 @@ public final class Constants {
         public static final double PLACE_CONE_HIGH_POS = 70.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
         public static final double PLACE_LOW_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double MOVE_FROM_HOME_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS;
+
+        public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
         public static final double HOME_POS = 20.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
         public static final double ARM_80 = 80 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
-        public static final double MAX_POS = PLACE_LOW_POS;
-        public static final double MIN_POS = HOME_POS;
+        public static final double MAX_POS = PLACE_LOW_POS; // should be the largest of all positions above
+        public static final double MIN_POS = HOME_POS; // should be the smallest of all positions above
     }
 
     public static class Elevator {
@@ -181,14 +182,15 @@ public final class Constants {
         public static final int MAX_VELOCITY = 375 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final int REV_MAX_VELOCITY = 500 * 10;
         public static final int MAX_ACCELERATION = 5000; // Elevator acceleration (ticks/100ms/s)
-        public static final double F = 0.8; // 0.4; // 0.3; // 0.425;
-        public static final double REV_F = 0.3; // 0.38;
-        public static final double GRAV_FEED_FORWARD = 400 / 1023.0; // 300 Percent constant to counteract gravity
+        public static final double F = 0.8;
+        public static final double REV_F = 0.3;
+        public static final double GRAV_FEED_FORWARD = 400 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
         public static final double EL_TICKS_PER_INCH = 1700;
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/4; // 1/4 inch ... allows PID to end without having to be exact
-        public static final double ZERO_OFFSET_TICKS = 11 * EL_TICKS_PER_INCH;
+        public static final double ZERO_OFFSET_TICKS = 11 * EL_TICKS_PER_INCH; // 11 inches above  ground
+
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_GROUND_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -197,8 +199,8 @@ public final class Constants {
         public static final double PLACE_CONE_HIGH_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS;
-        public static final double MAX_HOME_SAFE_POS = 14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+
+        public static final double MAX_HOME_SAFE_POS = 14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // maximum elevator height to allow arm to come under bar
         public static final double HOME_POS = 12.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
