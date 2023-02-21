@@ -4,6 +4,7 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -13,21 +14,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.lib.delay;
 import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
-import team.gif.robot.commands.arm.ArmManualControl;
-import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
-import team.gif.robot.subsystems.drivers.Limelight;
+import team.gif.robot.subsystems.drivers.Pigeon;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -36,8 +36,10 @@ import team.gif.robot.subsystems.drivers.Limelight;
  * project.
  */
 public class Robot extends TimedRobot {
-    private Command m_autonomousCommand;
-    private RobotContainer m_robotContainer;
+    private Command autonomousCommand;
+    private RobotContainer robotContainer;
+    private static autoMode chosenAuto;
+    private static delay chosenDelay;
     private static TelemetryFileLogger telemetryLogger;
     public static EventFileLogger eventLogger;
     public static Drivetrain drivetrain;
@@ -51,6 +53,10 @@ public class Robot extends TimedRobot {
     public static CollectorPneumatics collectorPneumatics;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
+    private Timer elapsedTime;
+    private boolean runAutoScheduler;
+
+    public static Pigeon pigeon;
 
     public static UI ui;
 
@@ -68,14 +74,13 @@ public class Robot extends TimedRobot {
 
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        m_robotContainer = new RobotContainer();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
-        limelight = new Limelight();
+        pigeon = new Pigeon(new TalonSRX(RobotMap.PIGEON));
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -111,7 +116,9 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
 
+        elapsedTime = new Timer();
         telemetryLogger.init();
+        robotContainer = new RobotContainer();
     }
 
     /**
@@ -131,6 +138,8 @@ public class Robot extends TimedRobot {
 
         uiSmartDashboard.updateUI();
 
+        chosenAuto = uiSmartDashboard.autoModeChooser.getSelected();
+        chosenDelay = uiSmartDashboard.delayChooser.getSelected();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */
@@ -143,23 +152,28 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
-        if (isSwervePBot) {
-            m_autonomousCommand = m_robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
-        } else {
-            m_autonomousCommand = m_robotContainer.getAutonomousCommand(null);
-        }
-//        m_autonomousCommand = m_robotContainer.getAutonomousCommand(chosenAuto);
+        eventLogger.addEvent("AUTO", "Auto Init");
+        eventLogger.addEvent("AUTO", "Reset sensors");
 
+        autonomousCommand = robotContainer.getAutonomousCommand(chosenAuto);
+        eventLogger.addEvent("AUTO", "Got command from container");
+        elapsedTime.reset();
+        elapsedTime.start();
 
-        // schedule the autonomous command (example)
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.schedule();
-        }
+        runAutoScheduler = true;
     }
 
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        if (runAutoScheduler && (elapsedTime.get() > (chosenDelay.getValue()))) {
+            if (autonomousCommand != null) {
+                autonomousCommand.schedule();
+            }
+            runAutoScheduler = false;
+            elapsedTime.stop();
+        }
+    }
 
     }
 
@@ -169,8 +183,8 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.cancel();
+        if (autonomousCommand != null) {
+            autonomousCommand.cancel();
         }
     }
 

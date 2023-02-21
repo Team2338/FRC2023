@@ -19,8 +19,8 @@ public class SwervePOC extends SequentialCommandGroup {
     public Command go() {
         trajectory = TrajectoryGenerator.generateTrajectory(
             List.of(
-                Pose2dFeet.set(0.0, 0.0, 0.0),
-                Pose2dFeet.set(30.0, 0.0, 0.0)
+                new Pose2dFeet().set(0.0, 0.0, 0.0),
+                new Pose2dFeet().set(5.0, 0.0, 0.0)
             ),
             RobotTrajectory.getInstance().trajectoryConfig
         );
