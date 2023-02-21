@@ -7,12 +7,11 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.subsystems.drivers.Limelight;
 
-
-public class LimeLightAutoAim extends CommandBase {
+public class LimeLightAutoAlign extends CommandBase {
 
     private final double yTolerence = 1.0;
     private double yOffset;
-    public LimeLightAutoAim() {}
+    public LimeLightAutoAlign() {}
 
     // Called when the command is initially scheduled.
     @Override
@@ -29,7 +28,9 @@ public class LimeLightAutoAim extends CommandBase {
         if (Robot.limelight.hasTarget()) {
 
             yOffset = -Robot.limelight.getXOffset();
+
             velocity = (yOffset > 0) ? -0.5 : 0.5;
+
             ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, velocity, 0.0);
             SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
             Robot.swervetrain.setModuleStates(moduleStates);

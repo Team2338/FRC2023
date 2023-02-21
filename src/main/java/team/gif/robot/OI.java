@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
-import team.gif.robot.commands.autoaim.LimeLightAutoAim;
+import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
+import team.gif.robot.commands.autoaim.LimeLightAutoRotate;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -15,8 +16,6 @@ import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
-
-import team.gif.robot.commands.limeLight.LedToggle;
 
 public class OI {
     /*
@@ -128,7 +127,8 @@ public class OI {
         dLBump.whileTrue(new CollectorEject());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dB.onTrue(new LimeLightAutoAim());
+        //dB.onTrue(new LimeLightAutoAlign());
+        dB.onTrue(new LimeLightAutoRotate());
 
         if( Robot.isSwervePBot || Robot.isCompBot )
             dA.onTrue(new ResetWheels());
