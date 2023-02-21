@@ -7,8 +7,12 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.subsystems.drivers.Limelight;
 
+import java.time.OffsetTime;
+
 public class LimeLightAutoAlign extends CommandBase {
 
+    private final double rTolerence = 3.0;
+    private double rOffset;
     private final double yTolerence = 1.0;
     private double yOffset;
     public LimeLightAutoAlign() {}
@@ -24,14 +28,17 @@ public class LimeLightAutoAlign extends CommandBase {
     public void execute() {
 
         double velocity;
+        double rotation;
 
         if (Robot.limelight.hasTarget()) {
 
+            rOffset = Robot.pigeon.getCompassHeading();
             yOffset = -Robot.limelight.getXOffset();
 
             velocity = (yOffset > 0) ? -0.5 : 0.5;
+            rotation = (rOffset > 180) ? 0.2 : -0.2;
 
-            ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, velocity, 0.0);
+            ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, velocity, rotation);
             SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
             Robot.swervetrain.setModuleStates(moduleStates);
         }
@@ -40,7 +47,8 @@ public class LimeLightAutoAlign extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if (Math.abs(yOffset) < yTolerence)
+        rOffset = (rOffset > 180) ? (360 - rOffset) : rOffset;
+        if (Math.abs(yOffset) < yTolerence && rOffset < rTolerence)
             return true;
         else
             return false;
