@@ -1,37 +1,29 @@
 package team.gif.robot.commands.limeLight;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import team.gif.robot.subsystems.drivers.Limelight;
-
-import static team.gif.robot.Robot.limelight;
-
+import team.gif.robot.Robot;
 
 public class LedToggle extends CommandBase {
     public LedToggle(){
-        addRequirements((Subsystem) limelight);
+        super();
     }
 
+    // Called when the command is initially scheduled.
     public void initialize() {
-
-        limelight.setLEDMode(Limelight.LED_ON);
+        Robot.limelight.setLEDMode(Limelight.LED_ON);
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {
+    public void execute() {}
 
-    }
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
+    @Override
+    public boolean isFinished() {return false;}
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        limelight.setLEDMode(Limelight.LED_OFF);
-    }
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return false;
+        Robot.limelight.setLEDMode(Limelight.LED_OFF);
     }
 }
