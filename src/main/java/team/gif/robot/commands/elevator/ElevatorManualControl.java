@@ -1,6 +1,5 @@
 package team.gif.robot.commands.elevator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
@@ -18,7 +17,7 @@ public class ElevatorManualControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double percent = -Robot.oi.aux2.getRightY();
+        double percent = -Robot.oi.aux.getRightY();
 
         if (percent > -0.05 && percent < 0.05) {
             percent = 0.05; // apply minimum FeedForward to keep the elevator from falling (0.10 is max before elevator begins to move)

@@ -24,7 +24,7 @@ public class ArmManualControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double percent = Robot.oi.aux2.getLeftY();
+        double percent = Robot.oi.aux.getLeftY();
         System.out.println("arm control %" + percent);
 
         if (percent > -0.05 && percent < 0.05) {
