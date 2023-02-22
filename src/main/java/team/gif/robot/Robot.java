@@ -82,6 +82,7 @@ public class Robot extends TimedRobot {
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
         pigeon = new Pigeon(new TalonSRX(RobotMap.PIGEON));
+        limelight = new Limelight();
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
