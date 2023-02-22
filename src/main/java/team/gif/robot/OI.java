@@ -23,16 +23,14 @@ public class OI {
      * Instantiate all joysticks/controllers and their buttons here
      *
      * Examples:
-     * public final Joystick leftStick = new Joystick(0);
-     * public final XboxController driver = new XboxController(0);
+     * public final CommandXboxController driver = new CommandXboxController(0);
      *
-     * private final JoystickButton leftTrigger = new JoystickButton(leftStick, 0);
+     * public final Trigger dA = driver.a();
      */
 
     public final CommandXboxController driver = new CommandXboxController(RobotMap.DRIVER_CONTROLLER_ID);
     public final CommandXboxController aux = new CommandXboxController(RobotMap.AUX_CONTROLLER_ID);
     public final CommandXboxController test = new CommandXboxController(RobotMap.TEST_CONTROLLER_ID);
-
 
     public final Trigger dA = driver.a();
     public final Trigger dB = driver.b();
@@ -142,9 +140,9 @@ public class OI {
     }
 
     public void setRumble(boolean rumble) {
-//        driver.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
-//        driver.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
-//        aux2.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
-//        aux2.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
+        driver.getHID().setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+        driver.getHID().setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
+        aux.getHID().setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+        aux.getHID().setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
     }
 }
