@@ -26,12 +26,11 @@ public class ElevatorManualControl extends CommandBase {
         Robot.elevator.move(percent);
 
         // Allows user to run past 0 setpoint if pressing the right stick
-/*        if (Robot.oi.aux.getRightStickButton()) {
+        if (Robot.oi.aux.getHID().getRightStickButton()) {
             Robot.elevator.enableLowerSoftLimit(false);
         } else {
             Robot.elevator.enableLowerSoftLimit(true);
         }
-*/
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.

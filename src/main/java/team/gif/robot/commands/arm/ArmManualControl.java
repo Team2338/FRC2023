@@ -25,7 +25,6 @@ public class ArmManualControl extends CommandBase {
     @Override
     public void execute() {
         double percent = Robot.oi.aux.getLeftY();
-        System.out.println("arm control %" + percent);
 
         if (percent > -0.05 && percent < 0.05) {
             if( holdNeedFirstPID ) {
