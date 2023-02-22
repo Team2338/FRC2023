@@ -222,13 +222,4 @@ public final class Constants {
         public static final int PLACE_CUBE_MID = 6;
         public static final int PLACE_LOW = 7;
     }
-
-    public static class Limelight {
-        public static final double staticFrictionCoefficient = 0.5;
-
-        public static final double xOffsetOffRange = 2.0;
-
-        public static final double xOffsetMax = 27.0;
-        public static final double kP = 0.5;
-    }
 }
