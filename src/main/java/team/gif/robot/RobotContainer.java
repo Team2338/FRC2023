@@ -46,8 +46,10 @@ public class RobotContainer {
     }
 
     private void buildAutoCommands() {
-        autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
-        autoCommands.put(autoMode.ENGAGE, new Engage());
+        if( Robot.isSwervePBot ) {
+            autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
+            autoCommands.put(autoMode.ENGAGE, new Engage());
+        }
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE, new PlaceMobilityEngage());
         autoCommands.put(autoMode.PLACE_COLLECT, new PlaceCollect());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
