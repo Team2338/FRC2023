@@ -20,7 +20,6 @@ public class CollectorCollect extends CommandBase {
     @Override
     public void execute() {
         Robot.collector.setSpeedPercentCollector(Constants.Collector.COLLECTOR_RUN);
-//        Robot.collector.setSpeedPercentCollector(SmartDashboard.getNumber("Collector Speed", 0));
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
