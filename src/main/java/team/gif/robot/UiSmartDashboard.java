@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
+import team.gif.robot.commands.drivetrain.ResetHeading;
 
 public class UiSmartDashboard {
 
@@ -23,10 +24,10 @@ public class UiSmartDashboard {
             .withPosition(5, 0);
 
         // Auto selections
-        autoModeChooser.setDefaultOption("Swerve POC", autoMode.SWERVE_POC);
+        autoModeChooser.addOption("Swerve POC", autoMode.SWERVE_POC);
         autoModeChooser.addOption("Engage", autoMode.ENGAGE);
         autoModeChooser.addOption("Place, Collect", autoMode.PLACE_COLLECT);
-        autoModeChooser.addOption("Place, Engage", autoMode.PLACE_ENGAGE);
+        autoModeChooser.setDefaultOption("Place, Engage", autoMode.PLACE_ENGAGE);
         autoModeChooser.addOption("Place, Mobility", autoMode.PLACE_MOBILITY);
         autoModeChooser.addOption("Place, Mobility, Engage", autoMode.PLACE_MOBILITY_ENGAGE);
         autoModeChooser.addOption("Place, Collect, Place", autoMode.PLACE_COLLECT_PLACE);
@@ -53,6 +54,8 @@ public class UiSmartDashboard {
         delayChooser.addOption("13", delay.DELAY_13);
         delayChooser.addOption("14", delay.DELAY_14);
         delayChooser.addOption("15", delay.DELAY_15);
+
+        SmartDashboard.putData("Reset", new ResetHeading());
 
         tab.add("Delay", delayChooser)
             .withPosition(7, 0)
