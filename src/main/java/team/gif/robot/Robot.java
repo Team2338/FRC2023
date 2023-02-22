@@ -28,6 +28,7 @@ import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
 import team.gif.robot.subsystems.drivers.Pigeon;
+import team.gif.robot.subsystems.drivers.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
+    public static Limelight limelight;
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
@@ -80,6 +82,7 @@ public class Robot extends TimedRobot {
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
         pigeon = new Pigeon(new TalonSRX(RobotMap.PIGEON));
+        limelight = new Limelight();
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);

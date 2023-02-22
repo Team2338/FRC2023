@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import team.gif.lib.AxisButton;
+import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -125,9 +126,13 @@ public class OI {
         dLBump.whileTrue(new CollectorEject());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
+        dB.onTrue(new LimeLightAutoAlign());
 
         if( Robot.isSwervePBot || Robot.isCompBot )
             dA.onTrue(new ResetWheels());
+
+        // limelight toggle
+//        dRTrigger.onTrue(new LedToggle());
     }
 
     public void setRumble(boolean rumble) {
