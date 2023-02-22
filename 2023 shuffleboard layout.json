@@ -198,6 +198,48 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "10,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Shuffleboard/FRC2023/Arm Degrees",
+              "_title": "Arm Degrees",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Elevator",
+              "_glyph": 149,
+              "_showGlyph": false,
+              "Layout/Label position": "HIDDEN",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Shuffleboard/FRC2023/Elevator Ticks",
+                  "_title": "",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Elevator",
+                  "_title": "reset",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                }
+              ]
+            }
           }
         }
       }

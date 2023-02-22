@@ -101,7 +101,7 @@ public class OI {
      *
      */
         // elevator
-        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
+        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
 
         // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());

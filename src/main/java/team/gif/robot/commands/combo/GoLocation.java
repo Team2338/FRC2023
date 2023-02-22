@@ -38,7 +38,7 @@ public class GoLocation extends CommandBase {
         double armTargetPos;
         double elevatorTargetPos;
 
-        if ( Robot.arm.getPositionDegrees() < 25) { // need to be in a safe place before going anywhere else
+        if (Robot.arm.getPositionDegrees() < 25) { // need to be in a safe place before going anywhere else
             Globals.goLocationTarget = location;
             new GoLocationFromHome().schedule();
         } else {
