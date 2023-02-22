@@ -18,7 +18,7 @@ public class ElevatorManualControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        double percent = -Robot.oi.aux.getRightY();
+        double percent = -Robot.oi.aux2.getRightY();
 
         if (percent > -0.05 && percent < 0.05) {
             percent = 0.05; // apply minimum FeedForward to keep the elevator from falling (0.10 is max before elevator begins to move)
@@ -27,11 +27,12 @@ public class ElevatorManualControl extends CommandBase {
         Robot.elevator.move(percent);
 
         // Allows user to run past 0 setpoint if pressing the right stick
-        if (Robot.oi.aux.getRightStickButton()) {
+/*        if (Robot.oi.aux.getRightStickButton()) {
             Robot.elevator.enableLowerSoftLimit(false);
         } else {
             Robot.elevator.enableLowerSoftLimit(true);
         }
+*/
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.

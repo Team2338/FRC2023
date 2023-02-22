@@ -3,8 +3,11 @@ package team.gif.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.lib.AxisButton;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.collector.CollectorEject;
@@ -28,8 +31,10 @@ public class OI {
      */
 
     public final XboxController driver = new XboxController(RobotMap.DRIVER_CONTROLLER_ID);
-    public final XboxController aux = new XboxController(RobotMap.AUX_CONTROLLER_ID);
+//    public final XboxController aux = new XboxController(RobotMap.AUX_CONTROLLER_ID);
     public final XboxController test = new XboxController(RobotMap.TEST_CONTROLLER_ID);
+    public final CommandXboxController aux2 = new CommandXboxController(RobotMap.AUX_CONTROLLER_ID);
+
 
     public final JoystickButton dA = new JoystickButton(driver, 1);
     public final JoystickButton dB = new JoystickButton(driver, 2);
@@ -49,24 +54,24 @@ public class OI {
     public final POVButton dDPadDown = new POVButton(driver, 180);
     public final POVButton dDPadLeft = new POVButton(driver, 270);
 
-    public final JoystickButton aA = new JoystickButton(aux, 1);
-    public final JoystickButton aB = new JoystickButton(aux, 2);
-    public final JoystickButton aX = new JoystickButton(aux, 3);
-    public final JoystickButton aY = new JoystickButton(aux, 4);
-    public final JoystickButton aLBump = new JoystickButton(aux, 5);
-    public final JoystickButton aRBump = new JoystickButton(aux, 6);
-    public final JoystickButton aBack = new JoystickButton(aux, 7);
-    public final JoystickButton aStart = new JoystickButton(aux, 8);
-    public final JoystickButton aLStickBtn = new JoystickButton(aux, 9);
-    public final JoystickButton aRStickBtn = new JoystickButton(aux, 10);
+    public final Trigger aA = aux2.a(); //new JoystickButton(aux, 1);
+    public final Trigger aB = aux2.b(); // new JoystickButton(aux, 2);
+    public final Trigger aX = aux2.x(); // new JoystickButton(aux, 3);
+    public final Trigger aY = aux2.y(); // new JoystickButton(aux, 4);
+    public final Trigger aLBump = aux2.leftBumper(); // new JoystickButton(aux, 5);
+    public final Trigger aRBump = aux2.rightBumper(); // new JoystickButton(aux, 6);
+    public final Trigger aBack = aux2.back(); // new JoystickButton(aux, 7);
+    public final Trigger aStart = aux2.start(); // new JoystickButton(aux, 8);
+    public final Trigger aLStickBtn = aux2.leftStick(); // new JoystickButton(aux, 9);
+    public final Trigger aRStickBtn = aux2.rightStick(); // new JoystickButton(aux, 10);
 //    public final AxisButton aRTrigger = new AxisButton(aux, 3, .05);
 //    public final AxisButton aLTrigger = new AxisButton(aux, 2, .05);
-//    public final JoystickButton aRTrigger = new JoystickButton(aux, 11);
-//    public final JoystickButton aLTrigger = new JoystickButton(aux, 12);
-    public final POVButton aDPadUp = new POVButton(aux, 0);
-    public final POVButton aDPadRight = new POVButton(aux, 90);
-    public final POVButton aDPadDown = new POVButton(aux, 180);
-    public final POVButton aDPadLeft = new POVButton(aux, 270);
+    public final Trigger aRTrigger = aux2.rightTrigger();
+    public final Trigger aLTrigger = aux2.leftTrigger(); // new JoystickButton(aux, 12);
+    public final Trigger aDPadUp = aux2.povUp(); //new POVButton(aux, 0);
+    public final Trigger aDPadRight = aux2.povRight() ; // new POVButton(aux, 90);
+    public final Trigger aDPadDown = aux2.povDown() ; //new POVButton(aux, 180);
+    public final Trigger aDPadLeft = aux2.povLeft() ; //new POVButton(aux, 270);
 
     public final JoystickButton tA = new JoystickButton(test, 1);
     public final JoystickButton tB = new JoystickButton(test, 2);
@@ -90,18 +95,24 @@ public class OI {
      *
      * Create controller actions here
      *
-     * Examples:
+     * Usages:
      * dRTrigger.whileTrue(new CollectCommand());
      * dLTrigger.onTrue(new EjectCommand());
      * dA.whileTrue(new RepeatCommand(new RapidFire());
+     * aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
      *
-     *  onTrue (fka whenPressed)    Init->Execute repeats until IsFinished = true->End, will not start again at Init if still held down
-     *  whileTrue (fka whenHeld)    Init->Execute repeats until IsFinished = true or button released->End, will not start again at Init if still held down
-     *  whileTrue(new RepeatCommand()) (fka whileHeld)   Init->Execute repeats until IsFinished = true or button released->End, will start again at Init if still held down
+     * onTrue (fka whenPressed)    Init->Execute repeats until IsFinished = true->End, will not start again at Init if still held down
+     * whileTrue (fka whenHeld)    Init->Execute repeats until IsFinished = true or button released->End, will not start again at Init if still held down
+     * whileTrue(new RepeatCommand()) (fka whileHeld)   Init->Execute repeats until IsFinished = true or button released->End, will start again at Init if still held down
      *
+     * Simple Test:
+     *   aX.onTrue(new PrintCommand("aX"));
      */
+
         // elevator
         aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
+
+        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
 
         // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());
@@ -138,7 +149,7 @@ public class OI {
     public void setRumble(boolean rumble) {
         driver.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
         driver.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
-        aux.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
-        aux.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
+//        aux2.setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
+//        aux2.setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
     }
 }
