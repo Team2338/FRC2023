@@ -8,40 +8,35 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import team.gif.robot.RobotMap;
 
 public class Pigeon {
+
     public static PigeonIMU _pigeon;
 
-    private PigeonIMU.GeneralStatus _pigeonGenStatus = new PigeonIMU.GeneralStatus();
+    private final PigeonIMU.GeneralStatus _pigeonGenStatus = new PigeonIMU.GeneralStatus();
 
-
-
-    public Pigeon(){
-        _pigeon = new PigeonIMU(RobotMap.PIGEON);
+    public Pigeon(int PigeonID) {
+        _pigeon = new PigeonIMU(PigeonID);
     }
 
-    public Pigeon(TalonSRX talon){
+    public Pigeon(TalonSRX talon) {
         _pigeon = new PigeonIMU(talon);
+    }
 
+    public void addToShuffleboard(String tabName, String widgetTitle) {
         // Puts a Gyro type widget on dashboard and assigns
         // the function getHeading_Shuffleboard
-        ShuffleboardTab   tab  = Shuffleboard.getTab("SmartDashboard"); //gets a reference to the shuffleboard tab
-        tab.add("BotHead",(x)->{x.setSmartDashboardType("Gyro");x.addDoubleProperty("Value", ()-> getCompassHeading(),null);});
-    }
-
-    /**
-     * returns Rotation2d object for swerve, from radians
-     * Added by Josh, 2/6/2021
-     */
-    public Rotation2d getRotation2d() {
-        Rotation2d rotation = new Rotation2d(getHeading() * 0.0174533);
-        return rotation;
+        ShuffleboardTab tab = Shuffleboard.getTab(tabName); //gets a reference to the shuffleboard tab
+        tab.add(widgetTitle, (x) -> {
+            x.setSmartDashboardType("Gyro");
+            x.addDoubleProperty("Value", () -> getCompassHeading(), null);
+        });
     }
 
     /**
      * Returns heading from pigeon
-     *      turning counterclockwise, values increase
-     *      turning clockwise, values decrease
-     *      no rollover, can go negative
-     *      valid range is 23040 to -23040
+     * turning counterclockwise, values increase
+     * turning clockwise, values decrease
+     * no rollover, can go negative
+     * valid range is 23040 to -23040
      */
     public double getHeading() {
         double[] ypr = new double[3];
@@ -52,21 +47,29 @@ public class Pigeon {
     }
 
     /**
+     * returns ROtation2d object for serve,from radians
+     */
+    public Rotation2d getRotation2d() {
+        Rotation2d rotation = new Rotation2d(getHeading() * 0.0174533);
+        return rotation;
+    }
+
+    /**
      * Returns heading values between -180 and 180
      * Does this by using the IEEEremainder function which
      * splits the remainder in half and returns anything greater than
      * half as negative.
      */
     public double get180Heading() {
-        return Math.IEEEremainder(getHeading(), 360.0d) ;
+        return Math.IEEEremainder(getHeading(), 360.0d);
     }
 
     /**
      * Returns heading from pigeon
-     *      from 0 to 359.99 turning counterclockwise
+     * from 0 to 359.99 turning counterclockwise
      */
     public double get360Heading() {
-        double heading = getHeading(); // returns heading from 23040 to -23040
+        double heading = getHeading(); // Returns heading from 23040 to -23040
 
         // Need to convert the heading to a value between 0 and 360
         heading = heading < 0 ? 360 + (heading % 360) : heading % 360;
@@ -79,14 +82,14 @@ public class Pigeon {
      * Some features need degrees to look like a compass,
      * increasing clockwise (0 North, 90 East, 180 South, 270 West)
      * with rollover (max value 359.99, min 0)
-     *
+     * <p>
      * Returns heading from pigeon
-     *      from 0 to 359.99 turning clockwise
+     * from 0 to 359.99 turning clockwise
      */
     public double getCompassHeading() {
         double heading = getHeading();
 
-        // get the heading. If the value is negative, need to flip it positive
+        // Get the heading. If the value is negative, need to flip it positive
         // also need to subtract from 360 to flip value to the correct compass heading
         heading = heading < 0 ? (0 - heading % 360) : (360 - (heading % 360));
 
@@ -106,45 +109,45 @@ public class Pigeon {
         setYaw(0);
     }
 
-    public void setYaw(double yaw){
+    public void setYaw(double yaw) {
         _pigeon.setYaw(yaw);
     }
 
-    public double[] getYPR(){
+    public double[] getYPR() {
         double[] ypr = new double[3];
         _pigeon.getYawPitchRoll(ypr);
-        System.out.format("YPR %.1f %.1f %.1f",ypr[0],ypr[1],ypr[2]);
+        System.out.format("YPR %.1f %.1f %.1f", ypr[0], ypr[1], ypr[2]);
         return ypr;
     }
 
     public double[] getQuaternions() {
-        //quaternions
+        // Quaternions
         double[] quaternions = new double[4];
         _pigeon.get6dQuaternion(quaternions);
         return quaternions;
     }
 
-    public double getTemp(){
+    public double getTemp() {
         return _pigeon.getTemp();
     }
 
-    public double[] getAccumulatedGyro(){
+    public double[] getAccumulatedGyro() {
         double[] accumGyro = new double[3];
         _pigeon.getAccumGyro(accumGyro);
         return accumGyro;
     }
 
-    public short[] getBiasedAccel(){
+    public short[] getBiasedAccel() {
         short[] biasedAccel = new short[3];
         _pigeon.getBiasedAccelerometer(biasedAccel);
         return biasedAccel;
     }
 
-    public double[] getRawGyro(){
+    public double[] getRawGyro() {
         double[] rawGyro = new double[3];
         _pigeon.getRawGyro(rawGyro);
         return rawGyro;
-    }// angular velocities
+    } // Angular velocities
 
     public double[] getAccelAngles() {
         double[] accelAngles = new double[3];
@@ -158,7 +161,7 @@ public class Pigeon {
         return biasedMagnet;
     }
 
-    // raw magnetometer
+    // Raw magnetometer
     public short[] getRawMagnet() {
         short[] rawMagnet = new short[3];
         _pigeon.getRawMagnetometer(rawMagnet);

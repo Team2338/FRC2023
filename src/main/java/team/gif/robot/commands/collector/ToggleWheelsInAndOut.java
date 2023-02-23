@@ -1,25 +1,23 @@
 package team.gif.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class CollectorEject extends CommandBase {
-    public CollectorEject() {
+public class ToggleWheelsInAndOut extends CommandBase {
+    public ToggleWheelsInAndOut() {
         super();
-        addRequirements(Robot.collector);
+        addRequirements(Robot.collectorPneumatics);
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        Robot.collectorPneumatics.pneumaticsIn();
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {
-        Robot.collector.setSpeedPercentCollector(-Constants.Collector.COLLECTOR_RUN);
-    }
+    public void execute() {}
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
@@ -30,6 +28,6 @@ public class CollectorEject extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.collector.setSpeedPercentCollector(0);
+        Robot.collectorPneumatics.pneumaticsOut();
     }
 }

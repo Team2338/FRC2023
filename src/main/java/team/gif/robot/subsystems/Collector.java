@@ -8,15 +8,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.RobotMap;
 
 public class Collector extends SubsystemBase {
-    public static WPI_TalonSRX leftMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_LEFT_MOTOR);
+//    public static WPI_TalonSRX leftMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_LEFT_MOTOR);
     public static WPI_TalonSRX rightMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_RIGHT_MOTOR);
 
     public Collector() {
-        leftMotor.configFactoryDefault();
-        leftMotor.setInverted(false);
-        leftMotor.setNeutralMode(NeutralMode.Brake); //setting to brake mode
-        leftMotor.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
-        leftMotor.setSensorPhase(true);
+//        leftMotor.configFactoryDefault();
+//        leftMotor.setInverted(false);
+//        leftMotor.setNeutralMode(NeutralMode.Brake); //setting to brake mode
+//        leftMotor.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat, 20);
+//        leftMotor.setSensorPhase(true);
 
         rightMotor.configFactoryDefault();
         rightMotor.setInverted(false);
@@ -26,15 +26,15 @@ public class Collector extends SubsystemBase {
     }
 
     public void setSpeedPercentCollector(double percent) {
-        leftMotor.set(ControlMode.PercentOutput, percent);
+//        leftMotor.set(ControlMode.PercentOutput, percent);
         rightMotor.set(ControlMode.PercentOutput, percent);
     }
 
-    public double getLeftTicks() {
-        return leftMotor.getSelectedSensorPosition();
-    }
+//    public double getLeftTicks() {
+//        return leftMotor.getSelectedSensorPosition();
+//    }
 
-    public double getRightTicks() {
-        return rightMotor.getSelectedSensorPosition();
-    }
+//    public double getRightTicks() {
+//        return rightMotor.getSelectedSensorPosition();
+//    }
 }
