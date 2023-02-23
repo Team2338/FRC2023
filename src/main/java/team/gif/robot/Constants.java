@@ -210,8 +210,11 @@ public final class Constants {
 
     public static class TelescopingArm {
         public static final double VELOCITY = 0.2;
-        public static final double MAX_VELOCITY = 0.4; // TODO: need more testing
-        public static final double MIN_VELOCITY = 0; // TODO: need more testing
+        public static final double HIGH_VELOCITY = 0.4; // TODO: need more testing
+        public static final double LOW_VELOCITY = 0.3; // TODO: need more testing
+
+        public static final double HIGH_POS = 64.0;
+        public static final double MID_POS = 8.0;
     }
 
     public static class Collector {

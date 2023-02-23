@@ -130,8 +130,6 @@ public class OI {
         // collector
         dRBump.whileTrue(new CollectorCollect());
         dLBump.whileTrue(new CollectorEject());
-        tY.whileTrue(new ArmOut());
-        tX.whileTrue(new ArmIn());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
         dB.onTrue(new LimeLightAutoAlign());

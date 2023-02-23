@@ -1,12 +1,17 @@
 package team.gif.robot.commands.telescopingArm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class ArmOut extends CommandBase {
-    public ArmOut() {
+
+    double location;
+
+    public ArmOut(double location) {
         super();
         addRequirements(Robot.telescopingArm);
+        this.location = location;
     }
 
     // Called when the command is initially scheduled.
@@ -17,13 +22,14 @@ public class ArmOut extends CommandBase {
     @Override
     public void execute() {
         System.out.println("Arm Out");
-        Robot.telescopingArm.setMotorSpeed(0.07);
+        Robot.telescopingArm.setMotorSpeed((location == Constants.TelescopingArm.HIGH_POS) ?
+                                            Constants.TelescopingArm.HIGH_VELOCITY : Constants.TelescopingArm.LOW_VELOCITY);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if (Robot.telescopingArm.getPosition() > 8.0) {
+        if (Robot.telescopingArm.getPosition() > location) {
             return true;
         } else
             return false;
