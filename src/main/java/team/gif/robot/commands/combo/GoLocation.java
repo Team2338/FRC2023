@@ -49,7 +49,7 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS;
-                    new ArmOut().schedule();
+                    new ArmIn().schedule();
                     break;
                 case Constants.Location.LOAD_FROM_SINGLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS;
@@ -64,12 +64,16 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.PLACE_CONE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
-                    new ArmConeHighOut().schedule();
+                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_MID_POS;
-                    new ArmOut().schedule();
+                    if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.MID_POS) {
+                        new ArmIn(Constants.TelescopingArm.MID_POS).schedule();
+                    } else {
+                        new ArmOut(Constants.TelescopingArm.MID_POS).schedule();
+                    }
                     break;
                 case Constants.Location.PLACE_CUBE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CUBE_HIGH_POS;

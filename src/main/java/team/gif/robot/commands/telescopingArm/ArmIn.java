@@ -5,9 +5,17 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class ArmIn extends CommandBase {
+    private double location;
+
     public ArmIn() {
         super();
         addRequirements(Robot.telescopingArm);
+        this.location = 0.002;
+    }
+
+    public ArmIn(double location) {
+        this();
+        this.location = location;
     }
 
     // Called when the command is initially scheduled.
@@ -17,7 +25,7 @@ public class ArmIn extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.HIGH_POS / 2) {
+        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.HIGH_POS / 3) {
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.HIGH_VELOCITY);
         } else {
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.LOW_VELOCITY);
@@ -27,7 +35,7 @@ public class ArmIn extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if (Robot.telescopingArm.getPosition() < 0.002) {
+        if (Robot.telescopingArm.getPosition() < location) {
             return true;
         } else
             return false;
