@@ -29,6 +29,7 @@ import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Limelight;
+import team.gif.robot.subsystems.TelescopingArm;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -52,6 +53,7 @@ public class Robot extends TimedRobot {
     public static Elevator elevator;
     public static Collector collector;
     public static CollectorPneumatics collectorPneumatics;
+    public static TelescopingArm telescopingArm;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
     private Timer elapsedTime;
@@ -79,6 +81,7 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         collector = new Collector();
         collectorPneumatics = new CollectorPneumatics();
+        telescopingArm = new TelescopingArm();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
         pigeon = isSwervePBot ? new Pigeon(new TalonSRX(RobotMap.PIGEON_SWERVE_PBOT)) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
@@ -94,13 +97,12 @@ public class Robot extends TimedRobot {
             arcadeDrive = new DriveArcade();
             drivetrain.setDefaultCommand(arcadeDrive);
         }
-//        arm.setDefaultCommand(new ArmManualControl());
+
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
 
         elevator.setElevatorTargetPos(elevator.getPosition());
         elevator.setDefaultCommand(new ElevatorPIDControl());
-//        elevator.setDefaultCommand(new ElevatorManualControl());
 
         // settings default wheels to WheelsIn;
         collectorPneumatics.pneumaticsIn();

@@ -208,6 +208,14 @@ public final class Constants {
         public static final double MIN_POS =  12 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
     }
 
+    public static class TelescopingArm {
+        public static final double HIGH_VELOCITY = 0.4; // TODO: need more testing
+        public static final double LOW_VELOCITY = 0.1; // TODO: need more testing
+
+        public static final double HIGH_POS = 64.0;
+        public static final double MID_POS = 8.0;
+    }
+
     public static class Collector {
         public static final double COLLECTOR_RUN = 0.7; //collector percent
     }

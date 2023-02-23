@@ -6,6 +6,8 @@ import team.gif.robot.Globals;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
+import team.gif.robot.commands.telescopingArm.ArmIn;
+import team.gif.robot.commands.telescopingArm.ArmOut;
 
 /*
  *
@@ -46,34 +48,46 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS;
+                    new ArmIn().schedule();
                     break;
                 case Constants.Location.LOAD_FROM_SINGLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_SINGLE_SUBSTATION_POS;
+                    new ArmIn().schedule();
                     break;
                 case Constants.Location.LOAD_FROM_FLOOR:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_GROUND_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_GROUND_POS;
+                    new ArmIn().schedule();
                     break;
                 case Constants.Location.PLACE_CONE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
+                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_MID_POS;
+                    if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.MID_POS) {
+                        new ArmIn(Constants.TelescopingArm.MID_POS).schedule();
+                    } else {
+                        new ArmOut(Constants.TelescopingArm.MID_POS).schedule();
+                    }
                     break;
                 case Constants.Location.PLACE_CUBE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CUBE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CUBE_HIGH_POS;
+                    new ArmIn().schedule();
                     break;
                 case Constants.Location.PLACE_CUBE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CUBE_MID_POS;
                     armTargetPos = Constants.Arm.PLACE_CUBE_MID_POS;
+                    new ArmIn().schedule();
                     break;
                case Constants.Location.PLACE_LOW:
                     elevatorTargetPos = Constants.Elevator.PLACE_LOW_POS;
                     armTargetPos = Constants.Arm.PLACE_LOW_POS;
+                    new ArmIn().schedule();
                     break;
                 default:
                     elevatorTargetPos = -1;
