@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
+import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
 
 public class Elevator extends SubsystemBase {
@@ -111,7 +112,7 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         elevatorMotor.enableVoltageCompensation(true);
         elevatorMotor.setSensorPhase(true);
-        elevatorMotor.setInverted(false);
+        elevatorMotor.setInverted(Robot.isCompBot ? true : false);
         elevatorMotor.setNeutralMode(NeutralMode.Brake);
 
         elevatorMotor.config_kP(0, Constants.Elevator.P);
