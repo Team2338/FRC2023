@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
@@ -128,9 +129,7 @@ public class OI {
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
         dB.onTrue(new LimeLightAutoAlign());
-
-        if( Robot.isSwervePBot || Robot.isCompBot )
-            dA.onTrue(new ResetWheels());
+        dA.onTrue(new ArmLift());
 
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
