@@ -40,7 +40,10 @@ public class UiSmartDashboard {
         autoModeChooser.addOption("Engage", autoMode.ENGAGE);
         autoModeChooser.addOption("Place Collect", autoMode.PLACE_COLLECT);
         autoModeChooser.setDefaultOption("Place Engage", autoMode.PLACE_ENGAGE);
-        autoModeChooser.addOption("Place Mobility", autoMode.PLACE_MOBILITY);
+        autoModeChooser.addOption("Place Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
+        autoModeChooser.addOption("Place Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
+        autoModeChooser.addOption("Place Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
+        autoModeChooser.addOption("Place Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
         autoModeChooser.addOption("Place Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
         autoModeChooser.addOption("Place Collect Place", autoMode.PLACE_COLLECT_PLACE);
 
