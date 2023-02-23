@@ -1,36 +1,43 @@
-package team.gif.robot.commands.collector;
+package team.gif.robot.commands.arm;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class CollectorCollect extends CommandBase {
+/**
+ * Lifts the arm a set degrees (currently 2deg)
+ */
+public class ArmLift extends CommandBase {
 
-    public CollectorCollect() {
+    private double initialPos;
+
+    public ArmLift() {
         super();
-        addRequirements(Robot.collector);
+        addRequirements(Robot.arm);
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        initialPos = Robot.arm.getPosition();
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.collector.setSpeedPercentCollector(Constants.Collector.COLLECTOR_RUN);
+        Robot.arm.move(-0.4);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false;
+        return Robot.arm.getPosition() < (initialPos - 2 * Constants.Arm.TICKS_PER_DEGREE);
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.collector.setSpeedPercentCollector(0);
+        Robot.arm.move(0);
+        Robot.arm.setTargetPosition(Robot.arm.getPosition());
     }
 }
