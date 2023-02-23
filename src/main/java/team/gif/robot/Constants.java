@@ -220,8 +220,7 @@ public final class Constants {
     public static class Collector {
         public static final double COLLECTOR_RUN = 0.7; //collector percent
     }
-
-    }
+    public static class Location {
         public static final int PLACE_LOW = 7;
         public static final int PLACE_CUBE_MID = 6;
         public static final int PLACE_CUBE_HIGH = 5;
@@ -232,5 +231,9 @@ public final class Constants {
         public static final int LOAD_FROM_FLOOR = 2;
         public static final int LOAD_FROM_DOUBLE_SUBSTATION = 1;
         public static final int LOAD_FROM_SINGLE_SUBSTATION = 0;
-    public static class Location {
+    }
+    public static class LEDsubsystem {
+        public static final int NUM_LEDS = 32;
+        public static final int PWM_PORT = 1;
+    }
 }

@@ -26,10 +26,11 @@ import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
+import team.gif.robot.subsystems.LEDsubsystem;
 import team.gif.robot.subsystems.SwerveDrivetrain;
+import team.gif.robot.subsystems.TelescopingArm;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Limelight;
-import team.gif.robot.subsystems.TelescopingArm;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -56,8 +57,10 @@ public class Robot extends TimedRobot {
     public static TelescopingArm telescopingArm;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
+    public static LEDsubsystem led;
     private Timer elapsedTime;
     private boolean runAutoScheduler;
+
 
     public static Pigeon pigeon;
 
@@ -86,6 +89,7 @@ public class Robot extends TimedRobot {
         uiSmartDashboard = new UiSmartDashboard();
         pigeon = isSwervePBot ? new Pigeon(new TalonSRX(RobotMap.PIGEON_SWERVE_PBOT)) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
+        led = new LEDsubsystem();
 
         if (isSwervePBot || isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
