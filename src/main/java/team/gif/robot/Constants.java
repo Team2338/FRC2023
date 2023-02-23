@@ -60,6 +60,7 @@ public final class Constants {
             (Math.PI * Constants.ModuleConstants.kWheelDiameterMeters) /
             (60.0 * Constants.ModuleConstants.kGearRatio);
         public static double kMaxAccelerationMetersPerSecondSquared = 2;// TODO
+
     }
 
     public static final class ModuleConstants {
@@ -159,5 +160,9 @@ public final class Constants {
         public static final int CollectorRun = 0; //collector percent
     }
 
+    public static class LEDsubsystem{
+        public static final int NUM_LEDS = 32;
+        public static final int PWM_PORT = 1;
+    }
     
 }

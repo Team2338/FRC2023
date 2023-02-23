@@ -41,7 +41,4 @@ public abstract class RobotMap {
     public static final int COLLECTOR_LEFT_MOTOR = 0;
     public static final int COLLECTOR_RIGHT_MOTOR = 0;
 
-    //Led
-    public static final int LED_LENGTH = 32;
-    public static final int PWM_PORT = 9;
 }

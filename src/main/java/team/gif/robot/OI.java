@@ -29,29 +29,28 @@ public class OI {
      * private final JoystickButton leftTrigger = new JoystickButton(leftStick, 0);
      */
 
-    public final CommandXboxController driver = new CommandXboxController(RobotMap.DRIVER_CONTROLLER_ID);
+    public final XboxController driver = new XboxController(RobotMap.DRIVER_CONTROLLER_ID);
     public final XboxController aux = new XboxController(RobotMap.AUX_CONTROLLER_ID);
     public final XboxController test = new XboxController(RobotMap.TEST_CONTROLLER_ID);
 
-//    public final JoystickButton dA = new JoystickButton(driver, 1);
-//    public final JoystickButton dB = new JoystickButton(driver, 2);
-//    public final JoystickButton dX = new JoystickButton(driver, 3);
-//    public final JoystickButton dY = new JoystickButton(driver, 4);
-//    public final JoystickButton dLBump = new JoystickButton(driver, 5);
-//    public final JoystickButton dRBump = new JoystickButton(driver, 6);
-//    public final JoystickButton dBack = new JoystickButton(driver, 7);
-//    public final JoystickButton dStart = new JoystickButton(driver, 8);
-//    public final JoystickButton dLStickBtn = new JoystickButton(driver, 9);
-//    public final JoystickButton dRStickBtn = new JoystickButton(driver, 10);
-    public final Trigger dRTrigger = driver.rightTrigger();
+    public final JoystickButton dA = new JoystickButton(driver, 1);
+    public final JoystickButton dB = new JoystickButton(driver, 2);
+    public final JoystickButton dX = new JoystickButton(driver, 3);
+    public final JoystickButton dY = new JoystickButton(driver, 4);
+    public final JoystickButton dLBump = new JoystickButton(driver, 5);
+    public final JoystickButton dRBump = new JoystickButton(driver, 6);
+    public final JoystickButton dBack = new JoystickButton(driver, 7);
+    public final JoystickButton dStart = new JoystickButton(driver, 8);
+    public final JoystickButton dLStickBtn = new JoystickButton(driver, 9);
+    public final JoystickButton dRStickBtn = new JoystickButton(driver, 10);
 
-    //public final Trigger dRTrigger =  new JoystickButton(driver, XboxController.Axis.RightTrigger);
-//    public final AxisButton dLTrigger = new AxisButton(driver, 2, .05);
-//
-//    public final POVButton dDPadUp = new POVButton(driver, 0);
-//    public final POVButton dDPadRight = new POVButton(driver, 90);
-//    public final POVButton dDPadDown = new POVButton(driver, 180);
-//    public final POVButton dDPadLeft = new POVButton(driver, 270);
+
+    public final AxisButton dLTrigger = new AxisButton(driver, 2, .05);
+
+    public final POVButton dDPadUp = new POVButton(driver, 0);
+    public final POVButton dDPadRight = new POVButton(driver, 90);
+    public final POVButton dDPadDown = new POVButton(driver, 180);
+    public final POVButton dDPadLeft = new POVButton(driver, 270);
 
     public final JoystickButton aA = new JoystickButton(aux, 1);
     public final JoystickButton aB = new JoystickButton(aux, 2);
@@ -110,8 +109,7 @@ public class OI {
 //        aB.onTrue(new Co)
         aA.onTrue(new InstantCommand(Robot.elevator::zeroEncoder));
 
-//        dStart.onTrue(new ConeLEDs());
-//        dBack.onTrue(new CubeLEDs());
-        dRTrigger.onTrue(new PrintCommand("Can this work jesus christ"));
+        dStart.onTrue(new ConeLEDs());
+        dBack.onTrue(new CubeLEDs());
     }
 }
