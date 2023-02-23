@@ -21,7 +21,6 @@ public class ArmOut extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        System.out.println("Arm Out");
         Robot.telescopingArm.setMotorSpeed((location == Constants.TelescopingArm.HIGH_POS) ?
                                             Constants.TelescopingArm.HIGH_VELOCITY : Constants.TelescopingArm.LOW_VELOCITY);
     }

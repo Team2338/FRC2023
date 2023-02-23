@@ -6,7 +6,6 @@ import team.gif.robot.Globals;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
-import team.gif.robot.commands.telescopingArm.ArmConeHighOut;
 import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.commands.telescopingArm.ArmOut;
 

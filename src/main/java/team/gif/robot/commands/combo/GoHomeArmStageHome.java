@@ -6,7 +6,6 @@ import team.gif.robot.Constants;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
-import team.gif.robot.subsystems.Arm;
 
 public class GoHomeArmStageHome extends SequentialCommandGroup {
     public GoHomeArmStageHome() {
