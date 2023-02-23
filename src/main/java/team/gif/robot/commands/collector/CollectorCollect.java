@@ -1,14 +1,15 @@
-package team.gif.robot.commands.combo;
+package team.gif.robot.commands.collector;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class GoLocationFromHomeArm extends CommandBase {
+public class CollectorCollect extends CommandBase {
 
-    public GoLocationFromHomeArm() {
+    public CollectorCollect() {
         super();
-        addRequirements(Robot.arm);
+        addRequirements(Robot.collector);
     }
 
     // Called when the command is initially scheduled.
@@ -18,22 +19,18 @@ public class GoLocationFromHomeArm extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.arm.move(0.4);
+        Robot.collector.setSpeedPercentCollector(Constants.Collector.COLLECTOR_RUN);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if ( Robot.arm.getPosition() > Constants.Arm.MOVE_FROM_HOME_POS)
-            return true;
-        else
-            return false;
+        return false;
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.arm.move(0);
-        Robot.arm.setTargetPosition(Constants.Arm.MOVE_FROM_HOME_POS);
+        Robot.collector.setSpeedPercentCollector(0);
     }
 }

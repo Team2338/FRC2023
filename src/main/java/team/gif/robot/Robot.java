@@ -4,6 +4,7 @@
 
 package team.gif.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -13,20 +14,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
+import team.gif.lib.delay;
 import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
-import team.gif.robot.commands.arm.ArmManualControl;
-import team.gif.robot.commands.elevator.ElevatorManualControl;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorPneumatics;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.SwerveDrivetrain;
+import team.gif.robot.subsystems.drivers.Pigeon;
+import team.gif.robot.subsystems.drivers.Limelight;
 import team.gif.robot.subsystems.TelescopingArm;
 
 /**
@@ -36,14 +38,17 @@ import team.gif.robot.subsystems.TelescopingArm;
  * project.
  */
 public class Robot extends TimedRobot {
-    private Command m_autonomousCommand;
-    private RobotContainer m_robotContainer;
+    private Command autonomousCommand;
+    private RobotContainer robotContainer;
+    private static autoMode chosenAuto;
+    private static delay chosenDelay;
     private static TelemetryFileLogger telemetryLogger;
     public static EventFileLogger eventLogger;
     public static Drivetrain drivetrain;
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
+    public static Limelight limelight;
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
@@ -51,6 +56,10 @@ public class Robot extends TimedRobot {
     public static TelescopingArm telescopingArm;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
+    private Timer elapsedTime;
+    private boolean runAutoScheduler;
+
+    public static Pigeon pigeon;
 
     public static UI ui;
 
@@ -64,10 +73,10 @@ public class Robot extends TimedRobot {
         eventLogger.init();
 
         telemetryLogger = new TelemetryFileLogger();
+        addMetricsToLogger();
 
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        m_robotContainer = new RobotContainer();
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
@@ -75,9 +84,11 @@ public class Robot extends TimedRobot {
         telescopingArm = new TelescopingArm();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
+        pigeon = isSwervePBot ? new Pigeon(new TalonSRX(RobotMap.PIGEON_SWERVE_PBOT)) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
+        limelight = new Limelight();
 
         if (isSwervePBot || isCompBot) {
-            swervetrain = new SwerveDrivetrain();
+            swervetrain = new SwerveDrivetrain(telemetryLogger);
             driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
             swervetrain.resetHeading();
@@ -100,14 +111,18 @@ public class Robot extends TimedRobot {
 
         if (isSwervePBot || isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getRobotPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getRobotPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getRobotPose().getRotation()::getDegrees);
+            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
+            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
+            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
+            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
+            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
+            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
+            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
         }
 
-        SmartDashboard.putNumber("Collector Speed",.70);
-
+        elapsedTime = new Timer();
         telemetryLogger.init();
+        robotContainer = new RobotContainer();
     }
 
     /**
@@ -127,6 +142,8 @@ public class Robot extends TimedRobot {
 
         uiSmartDashboard.updateUI();
 
+        chosenAuto = uiSmartDashboard.autoModeChooser.getSelected();
+        chosenDelay = uiSmartDashboard.delayChooser.getSelected();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */
@@ -139,23 +156,28 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
-        if (isSwervePBot) {
-            m_autonomousCommand = m_robotContainer.getAutonomousCommand(autoMode.SWERVE_POC);
-        } else {
-            m_autonomousCommand = m_robotContainer.getAutonomousCommand(null);
-        }
-//        m_autonomousCommand = m_robotContainer.getAutonomousCommand(chosenAuto);
+        eventLogger.addEvent("AUTO", "Auto Init");
+        eventLogger.addEvent("AUTO", "Reset sensors");
 
+        autonomousCommand = robotContainer.getAutonomousCommand(chosenAuto);
+        eventLogger.addEvent("AUTO", "Got command from container");
+        elapsedTime.reset();
+        elapsedTime.start();
 
-        // schedule the autonomous command (example)
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.schedule();
-        }
+        runAutoScheduler = true;
     }
 
     /** This function is called periodically during autonomous. */
     @Override
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+        if (runAutoScheduler && (elapsedTime.get() > (chosenDelay.getValue()))) {
+            if (autonomousCommand != null) {
+                autonomousCommand.schedule();
+            }
+            runAutoScheduler = false;
+            elapsedTime.stop();
+        }
+    }
 
     @Override
     public void teleopInit() {
@@ -163,8 +185,8 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.cancel();
+        if (autonomousCommand != null) {
+            autonomousCommand.cancel();
         }
     }
 
@@ -200,6 +222,8 @@ public class Robot extends TimedRobot {
         telemetryLogger.addMetric("TimeStamp", Timer::getFPGATimestamp);
 
         telemetryLogger.addMetric("Driver_Left_Y", () -> -Robot.oi.driver.getLeftY());
+        telemetryLogger.addMetric("Driver_Left_X", () -> Robot.oi.driver.getLeftX());
+        telemetryLogger.addMetric("Driver_Angle", () -> Math.atan(-Robot.oi.driver.getLeftY() / Robot.oi.driver.getLeftX()));
         telemetryLogger.addMetric("Driver_Right_X", () -> Robot.oi.driver.getRightX());
     }
 

@@ -1,6 +1,5 @@
 package team.gif.robot.commands.elevator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
@@ -13,10 +12,9 @@ public class ElevatorManualControl extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
         double percent = -Robot.oi.aux.getRightY();
@@ -28,7 +26,7 @@ public class ElevatorManualControl extends CommandBase {
         Robot.elevator.move(percent);
 
         // Allows user to run past 0 setpoint if pressing the right stick
-        if (Robot.oi.aux.getRightStickButton()) {
+        if (Robot.oi.aux.getHID().getRightStickButton()) {
             Robot.elevator.enableLowerSoftLimit(false);
         } else {
             Robot.elevator.enableLowerSoftLimit(true);

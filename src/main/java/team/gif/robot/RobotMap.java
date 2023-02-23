@@ -13,19 +13,18 @@ public abstract class RobotMap {
     public static final int LEFT_DRIVETRAIN_TWO = 22;
 
     //SwerveDrivetrain
-
-    public static final int FRONT_LEFT_DRIVE_MOTOR_PORT = 11;
-    public static final int REAR_LEFT_DRIVE_MOTOR_PORT = 13; // broken
-    public static final int FRONT_RIGHT_DRIVE_MOTOR_PORT = 7;
+    public static final int FRONT_LEFT_DRIVE_MOTOR_PORT = 22;
+    public static final int REAR_LEFT_DRIVE_MOTOR_PORT = 21;
+    public static final int FRONT_RIGHT_DRIVE_MOTOR_PORT = 20;
     public static final int REAR_RIGHT_DRIVE_MOTOR_PORT = 23;
     public static final int FRONT_LEFT_CANCODER = 6;
     public static final int FRONT_RIGHT_CANCODER = 9;
     public static final int REAR_LEFT_CANCODER = 11;
     public static final int REAR_RIGHT_CANCODER = 7;
 
-    public static final int FRONT_LEFT_TURNING_MOTOR_PORT = 3; //not 12
-    public static final int REAR_LEFT_TURNING_MOTOR_PORT = 2; //not 8
-    public static final int FRONT_RIGHT_TURNING_MOTOR_PORT = 8;
+    public static final int FRONT_LEFT_TURNING_MOTOR_PORT = 11; //not 12
+    public static final int REAR_LEFT_TURNING_MOTOR_PORT = 13; //not 8
+    public static final int FRONT_RIGHT_TURNING_MOTOR_PORT = 7;
     public static final int REAR_RIGHT_TURNING_MOTOR_PORT = 10;
 
     // Arm
@@ -34,7 +33,8 @@ public abstract class RobotMap {
     public static final int TELESCOPING_MOTOR = 16; // TODO: ID the motor
 
     // Pigeon
-    public static final int PIGEON = 0;
+    public static final int PIGEON_TANK_PBOT = 12;
+    public static final int PIGEON_SWERVE_PBOT = 5;
 
     // Elevator
     public static final int ELEVATOR_MOTOR_ID = 41;

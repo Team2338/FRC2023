@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.Pigeon;
 
@@ -67,8 +68,8 @@ public class Drivetrain extends SubsystemBase {
 
 //        differentialDrive.setDeadband(0.02 : .05);
 
-        pigeon = new Pigeon();
-        pigeon.resetPigeonPosition();
+        //pigeon = new Pigeon();
+        Robot.pigeon.resetPigeonPosition();
     }
 
     public void resetEncoder() {

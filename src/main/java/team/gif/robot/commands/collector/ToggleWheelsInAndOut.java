@@ -15,11 +15,11 @@ public class ToggleWheelsInAndOut extends CommandBase {
         Robot.collectorPneumatics.pneumaticsIn();
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {}
 
-    // Returns true when the command should end.
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
         return false;

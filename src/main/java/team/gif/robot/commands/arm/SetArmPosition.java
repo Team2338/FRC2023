@@ -24,7 +24,7 @@ public class SetArmPosition extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize( ) {
+    public void initialize() {
         Robot.arm.setTargetPosition(targetPosition);
 
         if (Robot.arm.PIDError() > 0){
