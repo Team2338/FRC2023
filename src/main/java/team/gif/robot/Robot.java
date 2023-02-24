@@ -228,5 +228,5 @@ public class Robot extends TimedRobot {
     }
 
     //TODO: Change and check before each usage
-    public static boolean isCompBot = true;
+    public static boolean isCompBot = false;
 }
