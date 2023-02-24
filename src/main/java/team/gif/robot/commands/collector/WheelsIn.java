@@ -17,9 +17,7 @@ public class WheelsIn extends CommandBase {
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {
-        System.out.println("WheelsIn running");
-    }
+    public void execute() {}
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
@@ -29,7 +27,5 @@ public class WheelsIn extends CommandBase {
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-        System.out.println("Ended Wheels In");
-    }
+    public void end(boolean interrupted) {}
 }

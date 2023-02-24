@@ -21,7 +21,6 @@ public class ArmIn extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("Entered ArmIn");
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -46,7 +45,6 @@ public class ArmIn extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        System.out.println("Finished ArmIn");
         Robot.telescopingArm.setMotorSpeed(0);
     }
 }
