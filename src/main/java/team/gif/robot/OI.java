@@ -14,6 +14,8 @@ import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
+import team.gif.robot.commands.leds.ConeLEDs;
+import team.gif.robot.commands.leds.CubeLEDs;
 
 public class OI {
     /*
@@ -123,11 +125,14 @@ public class OI {
         aA.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
 
         // collector
-        dRBump.whileTrue(new CollectorCollect());
-        dLBump.whileTrue(new CollectorEject());
+        dRTrigger.whileTrue(new CollectorCollect());
+        dB.whileTrue(new CollectorEject());
+
+        dRBump.whileTrue(new ConeLEDs());
+        dLBump.whileTrue(new CubeLEDs());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dB.onTrue(new LimeLightAutoAlign());
+        //dB.onTrue(new LimeLightAutoAlign());
 
         if( Robot.isSwervePBot || Robot.isCompBot )
             dA.onTrue(new ResetWheels());

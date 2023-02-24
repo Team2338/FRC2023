@@ -14,7 +14,7 @@ public class LEDsubsystem extends SubsystemBase {
         //initializes by inputting PWM port number from Roborio
         led = new AddressableLED(Constants.LEDsubsystem.PWM_PORT);
 
-        //initialize by inputting length of LEDs (# of LEDS)
+        //initialize by inputting length of LED (# of LED)
         ledBuffer = new AddressableLEDBuffer(Constants.LEDsubsystem.NUM_LEDS);
         led.setLength(ledBuffer.getLength());
 
@@ -24,7 +24,7 @@ public class LEDsubsystem extends SubsystemBase {
     }
 
     public void setLEDColor(int r, int g, int b) {
-        for (var i = 0; i < ledBuffer.getLength(); i++) {
+        for (var i = 0; i < 5; i++) {
             // Sets the specified LED to the RGB values for Orange
             ledBuffer.setRGB(i, r, g, b);
 
