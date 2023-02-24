@@ -22,7 +22,7 @@ public class WheelsIn extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once the command ends or is interrupted.
