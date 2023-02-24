@@ -1,11 +1,12 @@
+
 package team.gif.robot.commands.led;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class ConeLED extends CommandBase {
+public class CubeLED extends CommandBase {
 
-    public ConeLED() {
+    public CubeLED() {
         super();
         addRequirements(Robot.led);
     }
@@ -14,13 +15,12 @@ public class ConeLED extends CommandBase {
     public void initialize() {}
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
-    @Override
     public void execute() {
-        Robot.led.setLEDColor(100,100,0);
+        Robot.led.setLEDColor(60,50,100);
     }
 
+
     // Returns true when the command should end.
-    @Override
     public boolean isFinished() {
         return false;
     }
