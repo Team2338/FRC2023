@@ -136,8 +136,8 @@ public class OI {
         dB.onTrue(new LimeLightAutoAlign());
         dA.onTrue(new ArmLift());
 
-        tY.whileTrue(new MoveArm(-0.2)); // goes in
-        tX.whileTrue(new MoveArm(0.2)); // goes out
+        tX.whileTrue(new MoveArm(-0.2)); // goes in
+        tY.whileTrue(new MoveArm(0.2)); // goes out
 
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());

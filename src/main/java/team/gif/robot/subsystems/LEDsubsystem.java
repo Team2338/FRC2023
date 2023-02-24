@@ -3,7 +3,9 @@ package team.gif.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import team.gif.robot.RobotMap;
 import team.gif.robot.Constants;
+
 
 public class LEDsubsystem extends SubsystemBase {
     private static AddressableLED led;
@@ -12,7 +14,7 @@ public class LEDsubsystem extends SubsystemBase {
     public LEDsubsystem() {
         super();
         //initializes by inputting PWM port number from Roborio
-        led = new AddressableLED(Constants.LEDsubsystem.PWM_PORT);
+        led = new AddressableLED(RobotMap.LED_PWM_PORT);
 
         //initialize by inputting length of LED (# of LED)
         ledBuffer = new AddressableLEDBuffer(Constants.LEDsubsystem.NUM_LEDS);

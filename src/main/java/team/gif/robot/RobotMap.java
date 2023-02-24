@@ -22,9 +22,9 @@ public abstract class RobotMap {
     public static final int REAR_LEFT_CANCODER = 11;
     public static final int REAR_RIGHT_CANCODER = 7;
 
-    public static final int FRONT_LEFT_TURNING_MOTOR_PORT = 11; //not 12
-    public static final int REAR_LEFT_TURNING_MOTOR_PORT = 13; //not 8
-    public static final int FRONT_RIGHT_TURNING_MOTOR_PORT = 7;
+    public static final int FRONT_LEFT_TURNING_MOTOR_PORT = 18;
+    public static final int REAR_LEFT_TURNING_MOTOR_PORT = 13;
+    public static final int FRONT_RIGHT_TURNING_MOTOR_PORT = 17;
     public static final int REAR_RIGHT_TURNING_MOTOR_PORT = 10;
 
     // Arm
@@ -33,17 +33,16 @@ public abstract class RobotMap {
 
     // Pigeon
     public static final int PIGEON_TANK_PBOT = 12;
-    public static final int PIGEON_COMP_PBOT = 5;
+    public static final int PIGEON_COMP_PBOT = 42;
 
     // Elevator
     public static final int ELEVATOR_MOTOR_ID = 41;
 
     //Collector
-    public static final int SOLENOID_COLLECTOR_LEFT_FORWARD = 0;
-    public static final int SOLENOID_COLLECTOR_RIGHT_FORWARD = 0;
-    public static final int SOLENOID_COLLECTOR_LEFT_REVERSE = 2;
-    public static final int SOLENOID_COLLECTOR_RIGHT_REVERSE = 1;
-    public static final int SOLENOID_COLLECTOR_REVERSE = 0;
-    public static final int COLLECTOR_LEFT_MOTOR = 0;
-    public static final int COLLECTOR_RIGHT_MOTOR = 6;
+    public static final int SOLENOID_COLLECTOR_FORWARD = 0;
+    public static final int SOLENOID_COLLECTOR_REVERSE = 1;
+    public static final int COLLECTOR_MOTOR = 43;
+
+    // LED
+    public static final int LED_PWM_PORT = 9;
 }

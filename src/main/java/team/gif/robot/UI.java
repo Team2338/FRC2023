@@ -50,6 +50,5 @@ public class UI {
 
         shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
                 .withPosition(4, 0);
-
     }
 }

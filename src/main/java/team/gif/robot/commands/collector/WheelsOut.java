@@ -6,13 +6,13 @@ import team.gif.robot.Robot;
 public class WheelsOut extends CommandBase {
     public WheelsOut() {
         super();
-        addRequirements(Robot.collectorPneumatics);
+        addRequirements(Robot.collectorWheels);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorPneumatics.pneumaticsOut();
+        Robot.collectorWheels.wheelsOut();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

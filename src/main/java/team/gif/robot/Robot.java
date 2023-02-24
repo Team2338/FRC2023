@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.lib.autoMode;
@@ -24,7 +23,7 @@ import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.commands.led.DefaultLED;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
-import team.gif.robot.subsystems.CollectorPneumatics;
+import team.gif.robot.subsystems.CollectorWheels;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
 import team.gif.robot.subsystems.LEDsubsystem;
@@ -54,7 +53,7 @@ public class Robot extends TimedRobot {
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
-    public static CollectorPneumatics collectorPneumatics;
+    public static CollectorWheels collectorWheels;
     public static TelescopingArm telescopingArm;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
@@ -83,7 +82,7 @@ public class Robot extends TimedRobot {
         arm = new Arm();
         elevator = new Elevator();
         collector = new Collector();
-        collectorPneumatics = new CollectorPneumatics();
+        collectorWheels = new CollectorWheels();
         telescopingArm = new TelescopingArm();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
@@ -111,7 +110,7 @@ public class Robot extends TimedRobot {
         elevator.setDefaultCommand(new ElevatorPIDControl());
 
         // settings default wheels to WheelsIn;
-        collectorPneumatics.pneumaticsIn();
+        collectorWheels.wheelsIn();
 
         oi = new OI();
 
@@ -234,5 +233,5 @@ public class Robot extends TimedRobot {
     }
 
     //TODO: Change and check before each usage
-    public static boolean isCompBot = false;
+    public static boolean isCompBot = true;
 }

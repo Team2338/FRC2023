@@ -234,7 +234,6 @@ public final class Constants {
     }
 
     public static class LEDsubsystem {
-        public static final int PWM_PORT = 1;
         public static final int NUM_LEDS = 5;
     }
 }
