@@ -84,10 +84,10 @@ public class Robot extends TimedRobot {
         telescopingArm = new TelescopingArm();
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
-        pigeon = isSwervePBot ? new Pigeon(new TalonSRX(RobotMap.PIGEON_SWERVE_PBOT)) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
+        pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
 
-        if (isSwervePBot || isCompBot) {
+        if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
             driveSwerve = new DriveSwerve();
             swervetrain.setDefaultCommand(driveSwerve);
@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
 
-        if (isSwervePBot || isCompBot) {
+        if (isCompBot) {
             ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
             swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
             swerveTab.addDouble("robot y", swervetrain.getPose()::getY);

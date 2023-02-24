@@ -33,7 +33,7 @@ public abstract class RobotMap {
 
     // Pigeon
     public static final int PIGEON_TANK_PBOT = 12;
-    public static final int PIGEON_SWERVE_PBOT = 5;
+    public static final int PIGEON_COMP_PBOT = 5;
 
     // Elevator
     public static final int ELEVATOR_MOTOR_ID = 41;
