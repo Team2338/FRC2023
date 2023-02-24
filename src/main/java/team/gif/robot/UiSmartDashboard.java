@@ -24,7 +24,7 @@ public class UiSmartDashboard {
      *  and Chooser options (e.g. auto mode)
      *
      *  Placed on a dashboard tab
-     *  After SmartDashboard loads for the first time, place items from network table onto Dashboard tab
+     *  After SmartDashboard loads for the first time, items from network table onto Dashboard tab
      *  and save file as "YYYY shuffleboard layout.json"
      */
     public UiSmartDashboard() {
@@ -38,14 +38,14 @@ public class UiSmartDashboard {
         // Auto selections
         autoModeChooser.addOption("Swerve POC", autoMode.SWERVE_POC);
         autoModeChooser.addOption("Engage", autoMode.ENGAGE);
-        autoModeChooser.addOption("Place Collect", autoMode.PLACE_COLLECT);
-        autoModeChooser.setDefaultOption("Place Engage", autoMode.PLACE_ENGAGE);
-        autoModeChooser.addOption("Place Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
-        autoModeChooser.addOption("Place Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
-        autoModeChooser.addOption("Place Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
-        autoModeChooser.addOption("Place Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
-        autoModeChooser.addOption("Place Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
-        autoModeChooser.addOption("Place Collect Place", autoMode.PLACE_COLLECT_PLACE);
+        autoModeChooser.addOption("Collect", autoMode.PLACE_COLLECT);
+        autoModeChooser.setDefaultOption("Engage", autoMode.PLACE_ENGAGE);
+        autoModeChooser.addOption("Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
+        autoModeChooser.addOption("Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
+        autoModeChooser.addOption("Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
+        autoModeChooser.addOption("Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
+        autoModeChooser.addOption("Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
+        autoModeChooser.addOption("Collect Place", autoMode.PLACE_COLLECT_PLACE);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)
