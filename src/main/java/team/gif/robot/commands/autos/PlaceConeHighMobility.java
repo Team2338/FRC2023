@@ -11,8 +11,8 @@ import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.commands.telescopingArm.ArmOut;
 
-public class ConeHighMobility extends SequentialCommandGroup {
-    public ConeHighMobility() {
+public class PlaceConeHighMobility extends SequentialCommandGroup {
+    public PlaceConeHighMobility() {
         addCommands(
 //            new SetArmPosition(30 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS),
 //            new SetElevatorPosition(Constants.Elevator.MAX_HOME_SAFE_POS),

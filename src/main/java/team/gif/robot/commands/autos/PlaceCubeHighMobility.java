@@ -8,8 +8,8 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.combo.GoHomeStageHome;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 
-public class CubeHighMobility extends SequentialCommandGroup {
-    public CubeHighMobility() {
+public class PlaceCubeHighMobility extends SequentialCommandGroup {
+    public PlaceCubeHighMobility() {
         addCommands(
             new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
