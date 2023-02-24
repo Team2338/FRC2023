@@ -15,6 +15,8 @@ import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.telescopingArm.MoveArm;
+import team.gif.robot.commands.led.ConeLED;
+import team.gif.robot.commands.led.CubeLED;
 
 public class OI {
     /*
@@ -124,8 +126,11 @@ public class OI {
         aA.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
 
         // collector
-        dRBump.whileTrue(new CollectorCollect());
-        dLBump.whileTrue(new CollectorEject());
+        dRTrigger.whileTrue(new CollectorCollect());
+        dLTrigger.whileTrue(new CollectorEject());
+
+        dRBump.whileTrue(new CubeLED());
+        dLBump.whileTrue(new ConeLED());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
         dB.onTrue(new LimeLightAutoAlign());
