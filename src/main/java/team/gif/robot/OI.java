@@ -11,10 +11,10 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
-import team.gif.robot.commands.drivetrain.ResetWheels;
 import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
+import team.gif.robot.commands.telescopingArm.MoveArm;
 
 public class OI {
     /*
@@ -130,6 +130,9 @@ public class OI {
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
         dB.onTrue(new LimeLightAutoAlign());
         dA.onTrue(new ArmLift());
+
+        tY.whileTrue(new MoveArm(-0.2)); // goes in
+        tX.whileTrue(new MoveArm(0.2)); // goes out
 
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
