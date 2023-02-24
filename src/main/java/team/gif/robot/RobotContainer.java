@@ -49,7 +49,7 @@ public class RobotContainer {
         autoCommands.put(autoMode.PLACE_COLLECT, new PlaceCollect());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
         autoCommands.put(autoMode.PLACE_ENGAGE, new PlaceEngage());
-        autoCommands.put(autoMode.PLACE_CONE_HIGH_MOBILITY, new PlaceMobilityConeHigh());
+        autoCommands.put(autoMode.PLACE_CONE_HIGH_MOBILITY, new ConeHighMobility());
         autoCommands.put(autoMode.PLACE_CONE_MID_MOBILITY, new PlaceMobilityConeMid());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY, new PlaceMobilityCubeHigh());
         autoCommands.put(autoMode.PLACE_CUBE_MID_MOBILITY, new PlaceMobilityCubeMid());
