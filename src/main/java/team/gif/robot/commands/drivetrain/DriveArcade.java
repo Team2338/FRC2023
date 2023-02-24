@@ -18,7 +18,7 @@ public class DriveArcade extends CommandBase {
     public void execute() {
         double currSpd = Robot.oi.driver.getLeftY();
         double rot = Robot.oi.driver.getRightX();
-        if (Robot.isTankPBot) {
+        if (!Robot.isCompBot) {
             Robot.drivetrain.driveArcade(currSpd, -rot);
         }
     }

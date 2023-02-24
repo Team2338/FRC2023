@@ -26,7 +26,7 @@ public class DriveSwerve extends CommandBase {
 
     @Override
     public void execute() {
-        if (Robot.isSwervePBot) {
+        if (Robot.isCompBot) {
             double x = Robot.oi.driver.getLeftX();
             x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0.0;
             double y = -Robot.oi.driver.getLeftY();

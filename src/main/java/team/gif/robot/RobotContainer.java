@@ -50,7 +50,7 @@ public class RobotContainer {
     }
 
     private void buildAutoCommands() {
-        if( Robot.isSwervePBot ) {
+        if( Robot.isCompBot ) {
             autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
             autoCommands.put(autoMode.ENGAGE, new Engage());
         }
