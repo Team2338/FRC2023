@@ -232,8 +232,8 @@ public final class Constants {
         public static final int PLACE_CUBE_MID = 6;
         public static final int PLACE_LOW = 7;
     }
-    public static class LEDsubsystem {
 
+    public static class LEDsubsystem {
         public static final int PWM_PORT = 1;
         public static final int NUM_LEDS = 5;
     }

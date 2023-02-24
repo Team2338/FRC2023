@@ -23,14 +23,17 @@ public class LEDsubsystem extends SubsystemBase {
         led.start();
     }
 
-    public void setLEDColor(int r, int g, int b) {
+    /**
+     * Sets the specified LED to the RGB values
+     * @param r red
+     * @param g green
+     * @param b blue
+     */
+    public void setLEDColor (int r, int g, int b) {
         for (var i = 0; i < Constants.LEDsubsystem.NUM_LEDS; i++) {
-            // Sets the specified LED to the RGB values for Orange
             ledBuffer.setRGB(i, r, g, b);
-
             led.setData(ledBuffer);
         }
     }
-
 }
 
