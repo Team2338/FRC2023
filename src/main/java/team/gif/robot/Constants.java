@@ -147,8 +147,8 @@ public final class Constants {
         public static final double F = 16.0; // 0.8; // 0.4; // 0.3; // 0.425;
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
-        public static final double TICKS_PER_DEGREE = 26.8;
-        public static final double ZERO_OFFSET_TICKS = 375; // ticks between motor 0 and straight up (compass 0)
+        public static final double TICKS_PER_DEGREE = 31.411; // PBOT 26.8
+        public static final double ZERO_OFFSET_TICKS = 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
         public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
@@ -164,7 +164,7 @@ public final class Constants {
 
         public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
-        public static final double HOME_POS = 20.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double HOME_POS = 25.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // PBOT 20
 
         public static final double ARM_80 = 80 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
@@ -187,9 +187,9 @@ public final class Constants {
         public static final double GRAV_FEED_FORWARD = 400 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
-        public static final double EL_TICKS_PER_INCH = 1700;
+        public static final double EL_TICKS_PER_INCH = 1757; // PBOT 1700;
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/4; // 1/4 inch ... allows PID to end without having to be exact
-        public static final double ZERO_OFFSET_TICKS = 11 * EL_TICKS_PER_INCH; // 11 inches above  ground
+        public static final double ZERO_OFFSET_TICKS = 13 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -200,20 +200,22 @@ public final class Constants {
         public static final double PLACE_CONE_MID_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
-        public static final double MAX_HOME_SAFE_POS = 14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // maximum elevator height to allow arm to come under bar
-        public static final double HOME_POS = 12.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double MAX_HOME_SAFE_POS = 15.6 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 14 maximum elevator height to allow arm to come under bar
+        public static final double HOME_POS = 14.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_POS = 49 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MIN_POS =  12 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double MIN_POS =  14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
     public static class TelescopingArm {
         public static final double HIGH_VELOCITY = 0.5; // TODO: need more testing
         public static final double LOW_VELOCITY = 0.2; // TODO: need more testing
 
-        public static final double HIGH_POS = 64.0;
+        public static final double MAX_POS = 39.0; // 40.5;
+        public static final double HIGH_POS = 38.5; // 40.0; // PBOT 64.0;
         public static final double MID_POS = 8.0;
+        public static final double MIN_POS = 2.0; // PBOT 0.002
     }
 
     public static class Collector {
@@ -233,7 +235,11 @@ public final class Constants {
         public static final int PLACE_LOW = 7;
     }
 
-    public static class LEDsubsystem {
-        public static final int NUM_LEDS = 5;
+    public static class LED {
+        public static final int NUM_LEDS_TOTAL = 5;
+        public static final int LED_HP_START = 0;
+        public static final int LED_HP_END = 1;
+        public static final int LED_CAPTURE_START = 3;
+        public static final int LED_CAPTURE_END = 4;
     }
 }

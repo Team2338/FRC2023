@@ -9,7 +9,7 @@ import team.gif.robot.commands.elevator.SetElevatorPosition;
 public class GoFloorFromHome extends SequentialCommandGroup {
     public GoFloorFromHome() {
         addCommands(
-            new SetElevatorPosition(Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS),
+            new GoLocationFromHomeArmStage(),
             new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS),
                 new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS)

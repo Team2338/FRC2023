@@ -10,7 +10,7 @@ public class ArmIn extends CommandBase {
     public ArmIn() {
         super();
         addRequirements(Robot.telescopingArm);
-        this.location = 0.002;
+        this.location = Constants.TelescopingArm.MIN_POS; // arm safe position
     }
 
     public ArmIn(double location) {
@@ -25,7 +25,7 @@ public class ArmIn extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.HIGH_POS / 3) {
+        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.MID_POS) { // use the mid position to start slowing down
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.HIGH_VELOCITY);
         } else {
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.LOW_VELOCITY);

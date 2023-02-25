@@ -20,13 +20,13 @@ import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
-import team.gif.robot.commands.led.DefaultLED;
+import team.gif.robot.commands.led.LEDSubsystemDefault;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorWheels;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
-import team.gif.robot.subsystems.LEDsubsystem;
+import team.gif.robot.subsystems.LEDSubsystem;
 import team.gif.robot.subsystems.SwerveDrivetrain;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Limelight;
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
     public static TelescopingArm telescopingArm;
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
-    public static LEDsubsystem led;
+    public static LEDSubsystem ledSubsystem;
     private Timer elapsedTime;
     private boolean runAutoScheduler;
 
@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
         uiSmartDashboard = new UiSmartDashboard();
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
-        led = new LEDsubsystem();
+        ledSubsystem = new LEDSubsystem();
 
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
 
-        led.setDefaultCommand(new DefaultLED());
+        ledSubsystem.setDefaultCommand(new LEDSubsystemDefault());
 
         elevator.setElevatorTargetPos(elevator.getPosition());
         elevator.setDefaultCommand(new ElevatorPIDControl());

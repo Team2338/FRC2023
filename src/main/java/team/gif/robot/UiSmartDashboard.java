@@ -89,5 +89,7 @@ public class UiSmartDashboard {
         // Timers
         SmartDashboard.putString("Time", String.format("%.4f", Timer.getFPGATimestamp()));
         SmartDashboard.putString("Timer",String.format("%.2f",Timer.getMatchTime()));
+
+        SmartDashboard.putBoolean("Cone/Cube", Robot.arm.getSensor());
     }
 }

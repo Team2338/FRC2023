@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
 import team.gif.robot.RobotMap;
@@ -27,10 +28,13 @@ public class Arm extends SubsystemBase {
 
     private static final int MAX_SUPPLY_CURRENT_AMPS = 20;
     private static final int MAX_STATOR_CURRENT_AMPS = 90;
+    public static DigitalInput armGamePieceSensor;
 
     public Arm() {
         armMotor = new WPI_TalonSRX(RobotMap.ARM_MOTOR);
         configArmTalon();
+
+        armGamePieceSensor = new DigitalInput(9);
     }
 
     public void move(double percent) {
@@ -97,6 +101,10 @@ public class Arm extends SubsystemBase {
 
     public void configP(double p) {
         armMotor.config_kP(0, p);
+    }
+
+    public boolean getSensor() {
+        return armGamePieceSensor.get();
     }
 
     private void configArmTalon() {
