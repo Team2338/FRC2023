@@ -13,22 +13,18 @@ public class GoLocationFromHomeArmStage extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        System.out.println("init");
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        System.out.println("moving arm");
         Robot.arm.move(0.4);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        System.out.println(Robot.arm.getPosition() + " " + Constants.Arm.STAGE_POS);
-        if ( Robot.arm.getPosition() > Constants.Arm.STAGE_POS)
+        if (Robot.arm.getPosition() > Constants.Arm.STAGE_POS)
             return true;
         else
             return false;
@@ -37,8 +33,7 @@ public class GoLocationFromHomeArmStage extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        System.out.println("ending");
-        Robot.arm.move(0);
-        Robot.arm.setTargetPosition(Constants.Arm.STAGE_POS);
+        //Robot.arm.move(0);
+        //Robot.arm.setTargetPosition(Constants.Arm.STAGE_POS);
     }
 }
