@@ -1,6 +1,7 @@
 package team.gif.robot.commands.combo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.robot.Constants;
 import team.gif.robot.Globals;
 import team.gif.robot.Robot;
@@ -64,7 +65,8 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.PLACE_CONE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
-                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
+//                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
+                    new WaitCommand(1.5).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS)).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
