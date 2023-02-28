@@ -140,6 +140,8 @@ public final class Constants {
         public static final double Ticks_Move = 3;
 
         public static final int MAX_VELOCITY = 16000; // 5000; // ticks/100ms
+        public static final int VELOCITY_GO_HIGH_FROM_HOME = 8000;
+
         public static final int REV_MAX_VELOCITY = 16000;
         public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
         public static final double GRAV_FEED_FORWARD = 700 / 1023.0; // Percent constant to counteract gravity
@@ -162,8 +164,8 @@ public final class Constants {
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
         public static final double PLACE_LOW_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
-        public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
+        public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // this is the location which is safe to go to/from home
+//        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
         public static final double HOME_POS = 25.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // PBOT 20
 
         public static final double ARM_80 = 80 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;

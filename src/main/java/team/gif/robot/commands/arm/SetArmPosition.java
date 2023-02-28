@@ -9,9 +9,10 @@ import team.gif.robot.Robot;
  */
 public class SetArmPosition extends CommandBase {
 
-    private final double targetPosition;
+    private double targetPosition = 0;
+    private int speed = 0;
 
-    public SetArmPosition(double targetPos) {
+    public SetArmPosition(double targetPos, int speed) {
         super();
         addRequirements(Robot.arm);
 
@@ -20,6 +21,11 @@ public class SetArmPosition extends CommandBase {
         if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
 
         targetPosition = targetPos;
+        this.speed = speed;
+    }
+
+    public SetArmPosition(double targetPos) {
+        new SetArmPosition(targetPos,Constants.Arm.MAX_VELOCITY);
     }
 
     // Called when the command is initially scheduled.
@@ -27,6 +33,7 @@ public class SetArmPosition extends CommandBase {
     public void initialize() {
         Robot.arm.setTargetPosition(targetPosition);
 
+        Robot.arm.configVelocity(speed);
         if (Robot.arm.PIDError() > 0){
             Robot.arm.configF(Constants.Arm.FF);
             Robot.arm.configP(Constants.Arm.P);

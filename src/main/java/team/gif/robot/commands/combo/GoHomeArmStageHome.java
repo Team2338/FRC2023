@@ -11,18 +11,16 @@ import team.gif.robot.commands.telescopingArm.ArmIn;
 public class GoHomeArmStageHome extends SequentialCommandGroup {
     public GoHomeArmStageHome() {
         addCommands(
-//                new ParallelCommandGroup(
-//                    new ArmIn(),
-//                    new SetArmPosition(Constants.Arm.ARM_80)
-//                ),
-//                new ParallelCommandGroup(
-//                    new SetArmPosition(Constants.Arm.MOVE_FROM_HOME_PRE_POS),
-//                    new SetElevatorPosition(Constants.Elevator.MAX_HOME_SAFE_POS)
-//            ),
-//            new ParallelCommandGroup(
-//                new SetArmPosition(Constants.Arm.HOME_POS),
-//                new SetElevatorPosition(Constants.Elevator.HOME_POS)
-//            )
+            new ArmIn(),
+            new SetArmPosition(Constants.Arm.ARM_80),
+            new ParallelCommandGroup(
+                new SetArmPosition(Constants.Arm.STAGE_POS),
+                new SetElevatorPosition(Constants.Elevator.MAX_HOME_SAFE_POS)
+            ),
+            new ParallelCommandGroup(
+                new SetArmPosition(Constants.Arm.HOME_POS),
+                new SetElevatorPosition(Constants.Elevator.HOME_POS)
+            )
         );
     }
 }

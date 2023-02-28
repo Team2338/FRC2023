@@ -10,7 +10,7 @@ public class GoHomeStageHome extends SequentialCommandGroup {
     public GoHomeStageHome() {
         addCommands(
             new ParallelCommandGroup(
-                new SetArmPosition(Constants.Arm.MOVE_FROM_HOME_PRE_POS),
+                new SetArmPosition(Constants.Arm.STAGE_POS),
                 new SetElevatorPosition(Constants.Elevator.MAX_HOME_SAFE_POS)
             ),
             new ParallelCommandGroup(

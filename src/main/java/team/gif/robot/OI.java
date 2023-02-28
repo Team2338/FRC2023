@@ -11,7 +11,7 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
-import team.gif.robot.commands.combo.GoFloor;
+//import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.led.ConeLED;
@@ -117,7 +117,7 @@ public class OI {
         // combo loading actions
         aDPadUp.onTrue(new GoLocation(Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION));
         aDPadRight.onTrue(new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION));
-        aDPadDown.onTrue(new GoFloor());
+        aDPadDown.onTrue(new GoLocation(Constants.Location.LOAD_FROM_FLOOR)); // GoFloor());
         aDPadLeft.onTrue(new GoHome());
 
         // combo placing cone actions
