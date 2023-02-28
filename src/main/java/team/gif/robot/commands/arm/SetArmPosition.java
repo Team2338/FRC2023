@@ -9,8 +9,8 @@ import team.gif.robot.Robot;
  */
 public class SetArmPosition extends CommandBase {
 
-    private double targetPosition = 0;
-    private int speed = 0;
+    private final double targetPosition;
+    private final int speed;
 
     public SetArmPosition(double targetPos, int speed) {
         super();
@@ -25,7 +25,7 @@ public class SetArmPosition extends CommandBase {
     }
 
     public SetArmPosition(double targetPos) {
-        new SetArmPosition(targetPos,Constants.Arm.MAX_VELOCITY);
+        this(targetPos, Constants.Arm.MAX_VELOCITY);
     }
 
     // Called when the command is initially scheduled.
