@@ -139,15 +139,21 @@ public final class Constants {
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
 
-        public static final int MAX_VELOCITY = 16000; // 5000; // ticks/100ms
-        public static final int VELOCITY_GO_HIGH_FROM_HOME = 8000;
-
-        public static final int REV_MAX_VELOCITY = 16000;
-        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
         public static final double GRAV_FEED_FORWARD = 700 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 700 / 1023.0;
         public static final double F = 16.0; // 0.8; // 0.4; // 0.3; // 0.425;
         public static final double REV_F = 16.0; // 0.3; // 0.38;
+
+        // general motor function parameters
+        public static final double PEAK_OUTPUT_FORWARD = 0.5; // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.25;
+        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25;
+        public static final double PEAK_OUTPUT_REVERSE = -0.5;
+
+        // motion magic parameters (not currently used)
+//        public static final int MAX_VELOCITY = 16000; //16000 // 5000; // ticks/100ms
+//        public static final int REV_MAX_VELOCITY = 16000;
+//        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
 
         public static final double TICKS_PER_DEGREE = 31.411; // PBOT 26.8
         public static final double ZERO_OFFSET_TICKS = 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)

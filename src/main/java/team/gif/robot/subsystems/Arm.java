@@ -107,8 +107,8 @@ public class Arm extends SubsystemBase {
         return armGamePieceSensor.get();
     }
 
-    public void configVelocity(int speed) {
-        armMotor.configMotionCruiseVelocity(speed);
+    public void configPeakOutputForward(double output) {
+        armMotor.configPeakOutputForward(output);
     }
 
     private void configArmTalon() {
@@ -138,12 +138,13 @@ public class Arm extends SubsystemBase {
         armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);
         armMotor.configNominalOutputForward(0);     // nominal = minimum
         armMotor.configNominalOutputReverse(0);     // nominal = minimum
-        armMotor.configPeakOutputReverse(-0.5);     // use max 50% power
-        armMotor.configPeakOutputForward(0.5);      // use max 50% power
+        armMotor.configPeakOutputReverse(Constants.Arm.PEAK_OUTPUT_REVERSE);     // use max 50% power
+        armMotor.configPeakOutputForward(Constants.Arm.PEAK_OUTPUT_FORWARD);      // use max 50% power
         armMotor.configClosedloopRamp(1); // time in seconds to get to peak output power
 
         // additional Motions Magic settings
-        armMotor.configMotionCruiseVelocity(Constants.Arm.MAX_VELOCITY);
-        armMotor.configMotionAcceleration(Constants.Arm.MAX_ACCELERATION);
+        // *** arm is not currently using motion magic ***
+        //armMotor.configMotionCruiseVelocity(Constants.Arm.MAX_VELOCITY);
+        //armMotor.configMotionAcceleration(Constants.Arm.MAX_ACCELERATION);
     }
 }
