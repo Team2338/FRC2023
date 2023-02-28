@@ -25,7 +25,7 @@ public class ArmIn extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.MID_POS) { // use the mid position to start slowing down
+        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.SLOW_POS) { // use the mid position to start slowing down
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.HIGH_VELOCITY);
         } else {
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.LOW_VELOCITY);
