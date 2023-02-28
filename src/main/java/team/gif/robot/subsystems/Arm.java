@@ -107,6 +107,10 @@ public class Arm extends SubsystemBase {
         return armGamePieceSensor.get();
     }
 
+    public void configVelocity(int speed) {
+        armMotor.configMotionCruiseVelocity(speed);
+    }
+
     private void configArmTalon() {
         armMotor.configFactoryDefault();
 

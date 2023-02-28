@@ -21,8 +21,8 @@ public class PlaceConeHighMobility extends SequentialCommandGroup {
 //                new SetElevatorPosition(30 * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS)
 //            ),
             new ParallelCommandGroup(
-                new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS),
                 new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
+                new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS, Constants.Arm.VELOCITY_GO_HIGH_FROM_HOME),
                 new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS))
             ),
             new WheelsIn(),

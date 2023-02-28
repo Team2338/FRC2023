@@ -2,6 +2,7 @@ package team.gif.robot.commands.combo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
+import team.gif.robot.Globals;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
@@ -16,12 +17,15 @@ public class GoFloor extends CommandBase {
     @Override
     public void initialize() {
         if (Robot.elevator.getPosition() < Constants.Elevator.MAX_HOME_SAFE_POS) {
-            new GoFloorFromHome().schedule();
+            //new GoFloorFromHome().schedule();
+            Globals.goLocationTarget = Constants.Location.LOAD_FROM_FLOOR;
+//-            new GoLocationFromHome().schedule();
         }
         else {
-            new ArmIn().schedule();
-            new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS).schedule();
-            new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS).schedule();
+            new GoLocation(Constants.Location.LOAD_FROM_FLOOR);
+//            new ArmIn().schedule();
+//            new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS).schedule();
+//            new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS).schedule();
         }
     }
 
