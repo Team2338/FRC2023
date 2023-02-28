@@ -45,4 +45,6 @@ public abstract class RobotMap {
 
     // LED
     public static final int LED_PWM_PORT = 9;
+    public static final int[] HP_LEDS = {0,1,3,4};
+    public static final int[] GAME_PIECE_LEDS = {6,7};
 }

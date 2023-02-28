@@ -52,12 +52,12 @@ public class LEDSubsystem extends SubsystemBase {
     }
 
     public void setColors() {
-        for (var i = Constants.LED.LED_HP_START; i <= Constants.LED.LED_HP_END; i++) {
-            ledBuffer.setRGB(i, HP[0],HP[1], HP[2]);
+        for (var i = 0; i < RobotMap.HP_LEDS.length; i++) {
+            ledBuffer.setRGB(RobotMap.HP_LEDS[i],HP[0],HP[1], HP[2]);
             led.setData(ledBuffer);
         }
-        for (int j = Constants.LED.LED_CAPTURE_START; j <= Constants.LED.LED_CAPTURE_END; j++) {
-            ledBuffer.setRGB(j, GamePiece[0], GamePiece[1], GamePiece[2]);
+        for (int j = 0; j < RobotMap.GAME_PIECE_LEDS.length; j++) {
+            ledBuffer.setRGB(RobotMap.GAME_PIECE_LEDS[j], GamePiece[0], GamePiece[1], GamePiece[2]);
             led.setData(ledBuffer);
         }
     }

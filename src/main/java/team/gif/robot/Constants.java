@@ -237,10 +237,6 @@ public final class Constants {
     }
 
     public static class LED {
-        public static final int NUM_LEDS_TOTAL = 5;
-        public static final int LED_HP_START = 0;
-        public static final int LED_HP_END = 1;
-        public static final int LED_CAPTURE_START = 3;
-        public static final int LED_CAPTURE_END = 4;
+        public static final int NUM_LEDS_TOTAL = 8;
     }
 }
