@@ -6,13 +6,13 @@ import team.gif.robot.Robot;
 public class ToggleWheelsInAndOut extends CommandBase {
     public ToggleWheelsInAndOut() {
         super();
-        addRequirements(Robot.collectorPneumatics);
+        addRequirements(Robot.collectorWheels);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorPneumatics.pneumaticsIn();
+        Robot.collectorWheels.wheelsIn();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -28,6 +28,6 @@ public class ToggleWheelsInAndOut extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.collectorPneumatics.pneumaticsOut();
+        Robot.collectorWheels.wheelsOut();
     }
 }

@@ -1,12 +1,14 @@
 package team.gif.robot.commands.combo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.robot.Constants;
 import team.gif.robot.Globals;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
+import team.gif.robot.commands.telescopingArm.ArmMid;
 import team.gif.robot.commands.telescopingArm.ArmOut;
 
 /*
@@ -63,16 +65,13 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.PLACE_CONE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
-                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
+//                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
+                    new WaitCommand(1.5).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS)).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_MID_POS;
-                    if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.MID_POS) {
-                        new ArmIn(Constants.TelescopingArm.MID_POS).schedule();
-                    } else {
-                        new ArmOut(Constants.TelescopingArm.MID_POS).schedule();
-                    }
+                    new ArmMid().schedule();
                     break;
                 case Constants.Location.PLACE_CUBE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CUBE_HIGH_POS;

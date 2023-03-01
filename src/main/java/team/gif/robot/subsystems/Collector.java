@@ -9,7 +9,7 @@ import team.gif.robot.RobotMap;
 
 public class Collector extends SubsystemBase {
 //    public static WPI_TalonSRX leftMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_LEFT_MOTOR);
-    public static WPI_TalonSRX rightMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_RIGHT_MOTOR);
+    public static WPI_TalonSRX rightMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_MOTOR);
 
     public Collector() {
 //        leftMotor.configFactoryDefault();

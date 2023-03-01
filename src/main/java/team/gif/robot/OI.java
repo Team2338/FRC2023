@@ -14,9 +14,11 @@ import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
-import team.gif.robot.commands.telescopingArm.MoveArm;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
+import team.gif.robot.commands.telescopingArm.ArmIn;
+import team.gif.robot.commands.telescopingArm.ArmOut;
+import team.gif.robot.commands.telescopingArm.MoveArm;
 
 public class OI {
     /*
@@ -83,6 +85,8 @@ public class OI {
     public final Trigger tDPadDown = test.povDown();
     public final Trigger tDPadLeft = test.povLeft();
 
+    public final Trigger gamePieceSensor = new Trigger(Robot.arm.armGamePieceSensor::get);
+
     public OI() {
     /*
      *
@@ -136,9 +140,13 @@ public class OI {
         dB.onTrue(new LimeLightAutoAlign());
         dA.onTrue(new ArmLift());
 
-        tY.whileTrue(new MoveArm(-0.2)); // goes in
-        tX.whileTrue(new MoveArm(0.2)); // goes out
+        tX.whileTrue(new MoveArm(-0.2)); // goes in
+        tY.whileTrue(new MoveArm(0.2)); // goes out
+        tDPadRight.onTrue(new ArmOut(Constants.TelescopingArm.MAX_POS));
+        tDPadLeft.onTrue(new ArmIn()); // move arm all in
 
+        gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor));
+        gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
     }
