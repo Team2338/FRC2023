@@ -39,10 +39,7 @@ public class DriveSwerve extends CommandBase {
             y = yLimiter.calculate(y) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
             rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.TELE_DRIVE_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND;
 
-            ChassisSpeeds chassisSpeeds = new ChassisSpeeds(y, x, rot);
-
-            SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-            Robot.swervetrain.setModuleStates(moduleStates);
+            Robot.swervetrain.fieldRelativeDrive(y, x, rot);
         }
     }
 
