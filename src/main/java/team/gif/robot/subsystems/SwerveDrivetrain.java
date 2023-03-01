@@ -166,6 +166,22 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR.setDesiredState(swerveModuleStates[3]);
     }
 
+    public void fieldRelativeDrive(double x, double y, double rot) {
+        double angRad = Math.toRadians(Robot.pigeon.getCompassHeading());
+
+        double xSpd = Math.cos(angRad) * x + Math.sin(angRad) * y;
+        double ySpd = -Math.sin(angRad) * x + Math.cos(angRad) * y;
+
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(xSpd, ySpd, rot);
+        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
+        SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND);
+
+        fL.setDesiredState(moduleStates[0]);
+        fR.setDesiredState(moduleStates[1]);
+        rL.setDesiredState(moduleStates[2]);
+        rR.setDesiredState(moduleStates[3]);
+    }
+
 
     /**
      * Set the desired states for each of the 4 swerve modules using a SwerveModuleState array
