@@ -186,6 +186,8 @@ public class SwerveDrivetrain extends SubsystemBase {
     /**
      * Set the desired states for each of the 4 swerve modules using a SwerveModuleState array
      * @param desiredStates SwerveModuleState array of desired states for each of the modules
+     * @implNote Only for use in the SwerveDrivetrain class and the RobotTrajectory Singleton, for any general use
+     * @see SwerveDrivetrain#drive(double, double, double, boolean)
      */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(
