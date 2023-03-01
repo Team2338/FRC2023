@@ -24,7 +24,7 @@ public class GoLocationFromHomeArmStage extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if ( Robot.arm.getPosition() > Constants.Arm.STAGE_POS)
+        if (Robot.arm.getPosition() > Constants.Arm.STAGE_POS)
             return true;
         else
             return false;
@@ -33,7 +33,7 @@ public class GoLocationFromHomeArmStage extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.arm.move(0);
-        Robot.arm.setTargetPosition(Constants.Arm.STAGE_POS);
+        //Robot.arm.move(0);
+        //Robot.arm.setTargetPosition(Constants.Arm.STAGE_POS);
     }
 }

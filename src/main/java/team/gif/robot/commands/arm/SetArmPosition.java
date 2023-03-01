@@ -10,8 +10,16 @@ import team.gif.robot.Robot;
 public class SetArmPosition extends CommandBase {
 
     private final double targetPosition;
+    private final double peakOutputForward;
 
-    public SetArmPosition(double targetPos) {
+    /**
+     * Moves the arm using PID
+     * Arm moves at a provided percentage
+     * 
+     * @param targetPos = ticks to move to
+     * @param peakOutputForward = percent motor output command in the forward direction
+     */
+    public SetArmPosition(double targetPos, double peakOutputForward) {
         super();
         addRequirements(Robot.arm);
 
@@ -20,12 +28,25 @@ public class SetArmPosition extends CommandBase {
         if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
 
         targetPosition = targetPos;
+        this.peakOutputForward = peakOutputForward;
+    }
+
+    /**
+     * Moves the arm using PID
+     * Arm will move at maximum speed
+     *
+     * @param targetPos = ticks to move to
+     */
+    public SetArmPosition(double targetPos) {
+        this(targetPos, Constants.Arm.PEAK_OUTPUT_FORWARD);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         Robot.arm.setTargetPosition(targetPosition);
+
+        Robot.arm.configPeakOutputForward(peakOutputForward);
 
         if (Robot.arm.PIDError() > 0){
             Robot.arm.configF(Constants.Arm.FF);

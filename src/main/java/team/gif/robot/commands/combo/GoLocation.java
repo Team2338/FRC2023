@@ -41,8 +41,9 @@ public class GoLocation extends CommandBase {
     public void initialize() {
         double armTargetPos;
         double elevatorTargetPos;
+        double armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD;
 
-        if (Robot.arm.getPositionDegrees() < 25) { // need to be in a safe place before going anywhere else
+        if (Robot.arm.getPosition() < Constants.Arm.STAGE_POS) { // need to be in a safe place before going anywhere else
             Globals.goLocationTarget = location;
             new GoLocationFromHome().schedule();
         } else {
@@ -65,8 +66,9 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.PLACE_CONE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
+                    armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS;
 //                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
-                    new WaitCommand(1.5).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS)).schedule();
+                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS)).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
@@ -76,6 +78,7 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.PLACE_CUBE_HIGH:
                     elevatorTargetPos = Constants.Elevator.PLACE_CUBE_HIGH_POS;
                     armTargetPos = Constants.Arm.PLACE_CUBE_HIGH_POS;
+                    armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS;
                     new ArmIn().schedule();
                     break;
                 case Constants.Location.PLACE_CUBE_MID:
@@ -95,7 +98,7 @@ public class GoLocation extends CommandBase {
             }
             if( armTargetPos >= 0 ) {
                 new SetElevatorPosition(elevatorTargetPos).schedule();
-                new SetArmPosition(armTargetPos).schedule();
+                new SetArmPosition(armTargetPos,armPeakOutput).schedule();
             }
         }
     }
