@@ -47,4 +47,9 @@ public abstract class RobotMap {
     public static final int LED_PWM_PORT = 9;
     public static final int[] HP_LEDS = {0,1,3,4};
     public static final int[] GAME_PIECE_LEDS = {6,7};
+
+    // Compressors
+    public static final int COMPRESSOR = 0;
+    public static final int SENSOR_AIR_PRESSURE = 3;
+
 }

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
 import team.gif.robot.commands.arm.ArmPIDControl;
@@ -31,7 +32,7 @@ import team.gif.robot.subsystems.SwerveDrivetrain;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Limelight;
 import team.gif.robot.subsystems.TelescopingArm;
-
+import team.gif.robot.subsystems.drivers.RobotCompressor;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -58,6 +59,7 @@ public class Robot extends TimedRobot {
     public static OI oi;
     public static UiSmartDashboard uiSmartDashboard;
     public static LEDSubsystem ledSubsystem;
+    public static RobotCompressor compressor;
     private Timer elapsedTime;
     private boolean runAutoScheduler;
 
@@ -89,6 +91,7 @@ public class Robot extends TimedRobot {
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
         ledSubsystem = new LEDSubsystem();
+        compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.CTREPCM);
 
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -170,6 +173,8 @@ public class Robot extends TimedRobot {
         elapsedTime.start();
 
         runAutoScheduler = true;
+
+        compressor.disable();
     }
 
     /** This function is called periodically during autonomous. */
@@ -190,6 +195,8 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
+
+        compressor.enableDigital();
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
