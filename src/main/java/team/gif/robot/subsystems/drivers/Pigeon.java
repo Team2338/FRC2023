@@ -167,4 +167,12 @@ public class Pigeon {
         _pigeon.getRawMagnetometer(rawMagnet);
         return rawMagnet;
     }
+
+    public double getPitch() {
+        double[] ypr = new double[3];
+
+        _pigeon.getYawPitchRoll(ypr);
+
+        return ypr[1];
+    }
 }
