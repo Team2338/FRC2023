@@ -49,7 +49,7 @@ public abstract class RobotMap {
     public static final int[] GAME_PIECE_LEDS = {6,7};
 
     // Compressors
-    public static final int COMPRESSOR = 0;
+    public static final int COMPRESSOR = 1;
     public static final int SENSOR_AIR_PRESSURE = 3;
 
 }

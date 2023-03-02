@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
         ledSubsystem = new LEDSubsystem();
-        compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.CTREPCM);
+        compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -195,11 +195,11 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-
-        compressor.enableDigital();
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
+
+        compressor.enableDigital();
     }
 
     /** This function is called periodically during operator control. */
