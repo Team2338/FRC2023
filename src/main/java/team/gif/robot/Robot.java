@@ -86,12 +86,13 @@ public class Robot extends TimedRobot {
         collector = new Collector();
         collectorWheels = new CollectorWheels();
         telescopingArm = new TelescopingArm();
-        ui = new UI();
-        uiSmartDashboard = new UiSmartDashboard();
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
+
+        ui = new UI();
+        uiSmartDashboard = new UiSmartDashboard();
 
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);

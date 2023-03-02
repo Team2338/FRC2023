@@ -50,5 +50,10 @@ public class UI {
 
         shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
                 .withPosition(4, 0);
+
+        shuffleboardTab.addNumber("Gyro Pitch", Robot.pigeon::getPitch)
+                .withPosition(5, 0)
+                .withSize(2,3);
+
     }
 }

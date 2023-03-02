@@ -39,7 +39,7 @@ public class UiSmartDashboard {
         autoModeChooser.addOption("Swerve POC", autoMode.SWERVE_POC);
         autoModeChooser.addOption("Engage", autoMode.ENGAGE);
         autoModeChooser.addOption("Collect", autoMode.PLACE_COLLECT);
-        autoModeChooser.setDefaultOption("Engage", autoMode.PLACE_ENGAGE);
+        autoModeChooser.setDefaultOption("Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
         autoModeChooser.addOption("Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
         autoModeChooser.addOption("Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
         autoModeChooser.addOption("Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
