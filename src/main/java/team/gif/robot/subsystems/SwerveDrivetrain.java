@@ -1,6 +1,5 @@
 package team.gif.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -156,19 +155,6 @@ public class SwerveDrivetrain extends SubsystemBase {
                                 : new ChassisSpeeds(x, y, rot));
         setModuleStates(swerveModuleStates);
     }
-
-    public void fieldRelativeDrive(double x, double y, double rot) {
-        double angRad = Math.toRadians(Robot.pigeon.getCompassHeading());
-
-        double xSpd = Math.cos(angRad) * x + Math.sin(angRad) * y;
-        double ySpd = -Math.sin(angRad) * x + Math.cos(angRad) * y;
-
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(xSpd, ySpd, rot);
-        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-
-        setModuleStates(moduleStates);
-    }
-
 
     /**
      * Set the desired states for each of the 4 swerve modules using a SwerveModuleState array
