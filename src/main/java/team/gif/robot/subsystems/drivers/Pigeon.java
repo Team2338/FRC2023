@@ -168,4 +168,12 @@ public class Pigeon {
         _pigeon.getRawMagnetometer(rawMagnet);
         return rawMagnet;
     }
+
+    /**
+     * Reset the pigeon position to something other than 0
+     * @param initialAngle the initial angle in radians
+     */
+    public void resetPigeonPosition(double initialAngle) {
+        _pigeon.setYaw(Units.degreesToRadians(initialAngle));
+    }
 }
