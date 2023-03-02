@@ -39,7 +39,7 @@ public class DriveSwerve extends CommandBase {
             y = yLimiter.calculate(y) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
             rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.TELE_DRIVE_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND;
 
-            Robot.swervetrain.fieldRelativeDrive(y, x, rot);
+            Robot.swervetrain.drive(-y, -x, rot, true);
         }
     }
 

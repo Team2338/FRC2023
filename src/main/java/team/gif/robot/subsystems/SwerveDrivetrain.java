@@ -27,8 +27,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     public static SwerveModuleMK4 rR;
     public static SwerveModuleMK4 rL;
 
-    private static TalonSRX pigeonMotor;
-
     private static SwerveDriveOdometry odometry;
 
     /**
@@ -156,14 +154,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                         fieldRelative ?
                                 ChassisSpeeds.fromFieldRelativeSpeeds(x, y, rot, Robot.pigeon.getRotation2d())
                                 : new ChassisSpeeds(x, y, rot));
-        SwerveDriveKinematics.desaturateWheelSpeeds(
-                swerveModuleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
-        );
-
-        fL.setDesiredState(swerveModuleStates[0]);
-        fR.setDesiredState(swerveModuleStates[1]);
-        rL.setDesiredState(swerveModuleStates[2]);
-        rR.setDesiredState(swerveModuleStates[3]);
+        setModuleStates(swerveModuleStates);
     }
 
     public void fieldRelativeDrive(double x, double y, double rot) {
@@ -174,20 +165,15 @@ public class SwerveDrivetrain extends SubsystemBase {
 
         ChassisSpeeds chassisSpeeds = new ChassisSpeeds(xSpd, ySpd, rot);
         SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(moduleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND);
 
-        fL.setDesiredState(moduleStates[0]);
-        fR.setDesiredState(moduleStates[1]);
-        rL.setDesiredState(moduleStates[2]);
-        rR.setDesiredState(moduleStates[3]);
+        setModuleStates(moduleStates);
     }
 
 
     /**
      * Set the desired states for each of the 4 swerve modules using a SwerveModuleState array
      * @param desiredStates SwerveModuleState array of desired states for each of the modules
-     * @implNote Only for use in the SwerveDrivetrain class and the RobotTrajectory Singleton, for any general use
-     * @see SwerveDrivetrain#drive(double, double, double, boolean)
+     * @implNote Only for use in the SwerveDrivetrain class and the RobotTrajectory Singleton, for any general use {@link SwerveDrivetrain#drive(double, double, double, boolean)}
      */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(
@@ -203,6 +189,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     /**
      * Set the desired states for each of the 4 swerve modules using a ChassisSpeeds class
      * @param chassisSpeeds Field Relative ChassisSpeeds to apply to wheel speeds
+     * @implNote Use only in {@link SwerveDrivetrain} or {@link team.gif.lib.RobotTrajectory}
      */
     public void setModuleStates(ChassisSpeeds chassisSpeeds) {
         SwerveModuleState[] swerveModuleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);

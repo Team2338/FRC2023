@@ -55,7 +55,7 @@ public final class Constants {
 
         public static final boolean kGyroReversed = false;
 
-        public static final double MAX_DRIVE_RPM = 3500; //4800 demo speed //2750
+        public static final double MAX_DRIVE_RPM = 3500; // 2750; //4800 demo speed //2750
 
         public static final double MAX_SPEED_METERS_PER_SECOND = MAX_DRIVE_RPM *
             (Math.PI * Constants.ModuleConstants.WHEEL_DIAMETER_METERS) /
