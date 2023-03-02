@@ -3,6 +3,7 @@ package team.gif.robot.subsystems.drivers;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import team.gif.robot.RobotMap;
@@ -50,7 +51,7 @@ public class Pigeon {
      * returns ROtation2d object for serve,from radians
      */
     public Rotation2d getRotation2d() {
-        Rotation2d rotation = new Rotation2d(getHeading() * 0.0174533);
+        Rotation2d rotation = new Rotation2d(Units.degreesToRadians(-getHeading()));
         return rotation;
     }
 
