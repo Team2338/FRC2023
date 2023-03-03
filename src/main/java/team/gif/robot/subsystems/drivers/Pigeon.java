@@ -107,7 +107,15 @@ public class Pigeon {
     }
 
     public void resetPigeonPosition() {
-        setYaw(0);
+        resetPigeonPosition(0);
+    }
+
+    /**
+     * Reset the pigeon position to something other than 0
+     * @param angle the initial angle in degrees
+     */
+    public void resetPigeonPosition(double angle) {
+        setYaw(angle);
     }
 
     public void setYaw(double yaw) {
