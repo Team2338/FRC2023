@@ -166,4 +166,20 @@ public class MotionProfile {
     public void clear() {
         segments.clear();
     }
+
+    public void trimBeforeTime(double t) {
+        for (Iterator<MotionSegment> iterator = segments.iterator(); iterator.hasNext(); ) {
+            MotionSegment s = iterator.next();
+            if (s.end().t() <= t) {
+                // Segment is fully before t.
+                iterator.remove();
+                continue;
+            }
+            if (s.start().t() <= t) {
+                // Segment begins before t; let's shorten the segment.
+                s.setStart(s.start().extrapolate(t));
+            }
+            break;
+        }
+    }
 }
