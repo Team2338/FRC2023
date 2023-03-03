@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
+import team.gif.robot.commands.autos.EngageTestCommand;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -149,6 +150,7 @@ public class OI {
         gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
+        dBack.onTrue(new EngageTestCommand());
     }
 
     public void setRumble(boolean rumble) {

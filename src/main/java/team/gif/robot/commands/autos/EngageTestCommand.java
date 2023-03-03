@@ -10,10 +10,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class Reverse extends CommandBase {
+public class EngageTestCommand extends CommandBase {
 
-    public Reverse() {
-        addRequirements(Robot.swervetrain);
+    public EngageTestCommand() {
     }
 
     // Called when the command is initially scheduled.
@@ -23,22 +22,18 @@ public class Reverse extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.3, 0.0, 0.0);
-        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-        Robot.swervetrain.setModuleStates(moduleStates);
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
-        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-        Robot.swervetrain.setModuleStates(moduleStates);
+        new EngageTest().schedule();
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-      return false;
-  }
+        return true;
+    }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
+
 }

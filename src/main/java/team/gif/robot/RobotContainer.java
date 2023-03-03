@@ -8,14 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
-import team.gif.robot.commands.autos.ForwardFast;
 import team.gif.robot.commands.autos.PlaceCollect;
 import team.gif.robot.commands.autos.PlaceConeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceMobilityConeMid;
 import team.gif.robot.commands.autos.PlaceMobilityCubeMid;
 import team.gif.robot.commands.autos.PlaceMobilityEngage;
-import team.gif.robot.commands.autos.SwervePOC;
 import team.gif.robot.commands.autos.PlaceCubeHighEngage;
 import team.gif.robot.commands.autos.PlaceCollectPlace;
 
@@ -50,10 +48,6 @@ public class RobotContainer {
     }
 
     private void buildAutoCommands() {
-        if( Robot.isCompBot ) {
-            autoCommands.put(autoMode.SWERVE_POC, new SwervePOC());
-            autoCommands.put(autoMode.ENGAGE, new ForwardFast());
-        }
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE, new PlaceMobilityEngage());
         autoCommands.put(autoMode.PLACE_COLLECT, new PlaceCollect());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());

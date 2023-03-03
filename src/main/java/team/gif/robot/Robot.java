@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
     private boolean runAutoScheduler;
 
     public static Pigeon pigeon;
+    public double engageDriveTime = 2.3;
 
     public static UI ui;
 
@@ -127,6 +128,7 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
             swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
             swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
+            swerveTab.addDouble("auto time", Robot::setEngageDriveTime);
         }
 
         elapsedTime = new Timer();
@@ -243,4 +245,7 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = true;
+    public static void setEngageDriveTime(double engageDriveTime) {
+        this.engageDriveTime = engageDriveTime;
+    }
 }

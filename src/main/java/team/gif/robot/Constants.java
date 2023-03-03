@@ -124,6 +124,12 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
                     MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
+
+        public static final double DRIVE_SUPER_FAST = 1.0;
+        public static final double DRIVE_FAST = 0.8;
+        public static final double DRIVE_MEDIUM = 0.6;
+        public static final double DRIVE_SLOW = 0.4;
+        public static final double DRIVE_SUPER_SLOW = 0.2;
     }
 
     public static final class Joystick {

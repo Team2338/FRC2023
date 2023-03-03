@@ -1,14 +1,11 @@
 package team.gif.robot.commands.autos;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import team.gif.robot.Constants;
-import team.gif.robot.commands.arm.SetArmPosition;
-import team.gif.robot.commands.collector.CollectorEject;
-import team.gif.robot.commands.combo.GoHomeStageHome;
-import team.gif.robot.commands.elevator.SetElevatorPosition;
+import team.gif.robot.commands.autos.lib.AutoDrive;
+import team.gif.robot.commands.autos.lib.UntilBotIsAngled;
+import team.gif.robot.commands.autos.lib.UntilBotIsFalling;
 
 public class PlaceMobilityEngage extends SequentialCommandGroup {
     public PlaceMobilityEngage() {
@@ -20,28 +17,30 @@ public class PlaceMobilityEngage extends SequentialCommandGroup {
 //                ),
 //                new CollectorEject().withTimeout(0.4),
 //                new GoHomeStageHome(),
-                new ForwardFast().withTimeout(3),
+                new AutoDrive(-0.8).withTimeout(1),
+                new AutoDrive(-0.8).withTimeout(3),
                 new ParallelDeadlineGroup(
                         new UntilBotIsFalling(),               // monitor gyro until level
-                        new ForwardFast()
+                        new AutoDrive(-0.8)
+
                 ),
-                new ForwardFast().withTimeout(1),
-                new ReverseFast().withTimeout(1.2),
+                new AutoDrive(-0.8).withTimeout(1),
+                new AutoDrive(0.8).withTimeout(1),
                 new ParallelDeadlineGroup(
                         new UntilBotIsAngled(),               // monitor gyro until level
-                        new ReverseFast()
+                        new AutoDrive(0.8)
                 ),
-                new ReverseFast().withTimeout(1.2),
+                new AutoDrive(0.8).withTimeout(1.2),
                 new ParallelDeadlineGroup(
                         new UntilBotIsAngled(),               // monitor gyro until level
-                        new ReverseFast()
+                        new AutoDrive(-0.8)
                 ),
                 new WaitCommand(0.5),               // given pigeon time to settle
                 new ParallelDeadlineGroup(
                         new UntilBotIsFalling(),               // monitor gyro until level
-                        new ReverseSlow()                      // drove forward slowly
+                        new AutoDrive(0.8)
                 ),
-                new ForwardSlow().withTimeout(.2)       // give the bot a little push back to stop momentum
+                new AutoDrive(0.4).withTimeout(.2)
 
 //                new WaitCommand(.25),               // given pigeon time to settle
 //                new ParallelDeadlineGroup(
