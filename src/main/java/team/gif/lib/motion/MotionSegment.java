@@ -60,4 +60,9 @@ public class MotionSegment {
     public String toString() {
         return "Start: " + start() + ", End: " + end();
     }
+
+    public MotionSegment(MotionState start, MotionState finish) {
+        this.start = start;
+        this.finish = finish;
+    }
 }

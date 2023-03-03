@@ -35,6 +35,10 @@ public class MotionProfileGoal {
         compatCheck();
     }
 
+    public double pos() {
+        return pos;
+    }
+
     public MotionProfileGoal(double pos, double maxAbsVel, CompletionBehavior completionBehavior) {
         this.pos = pos;
         this.maxAbsVel = maxAbsVel;
@@ -63,20 +67,12 @@ public class MotionProfileGoal {
         return pos;
     }
 
-    public double getMaxAbsVel() {
-        return maxAbsVel;
-    }
-
     public CompletionBehavior getCompletionBehavior() {
         return completionBehavior;
     }
 
     public double getPosTolerance() {
         return posTolerance;
-    }
-
-    public double getVelTolerance() {
-        return velTolerance;
     }
 
     public boolean atGoalState(MotionState state) {
@@ -97,5 +93,17 @@ public class MotionProfileGoal {
         return (other.getCompletionBehavior() == getCompletionBehavior()) && (other.getPos() == getPos())
                 && (other.getMaxAbsVel() == getMaxAbsVel()) && (other.getPosTolerance() == getPosTolerance())
                 && (other.getVelTolerance() == getVelTolerance());
+    }
+
+    public CompletionBehavior completion_behavior() {
+        return completionBehavior;
+    }
+
+    public double getMaxAbsVel() {
+        return maxAbsVel;
+    }
+
+    public double getVelTolerance() {
+        return velTolerance;
     }
 }
