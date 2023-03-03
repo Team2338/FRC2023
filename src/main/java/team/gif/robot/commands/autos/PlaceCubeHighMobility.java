@@ -18,7 +18,8 @@ public class PlaceCubeHighMobility extends SequentialCommandGroup {
             ),
             new CollectorEject().withTimeout(0.4),
             new GoHomeStageHome(),
-            new ForwardFast().withTimeout(3.0)
+//            new ForwardFast().withTimeout(3.0)
+            new AutoDrive(-0.8).withTimeout(3.0)
         );
     }
 }

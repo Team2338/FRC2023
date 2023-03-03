@@ -21,13 +21,16 @@ public class PlaceCubeHighEngage extends SequentialCommandGroup {
             new CollectorEject().withTimeout(0.4),
             new GoHomeStageHome(),
 
-            new ForwardFast().withTimeout(2.3), // drive (time and speed based) until we are angled
+//            new ForwardFast().withTimeout(2.3), // drive (time and speed based) until we are angled
+            new AutoDrive(-0.8).withTimeout(2.3), // drive (time and speed based) until we are angled
             new WaitCommand(.25),               // given pigeon time to settle
             new ParallelDeadlineGroup(
                 new UntilBotIsFalling(),               // monitor gyro until level
-                new ForwardSlow()                      // drove forward slowly
+                new AutoDrive(-0.4)
+//                new ForwardSlow()                      // drove forward slowly
             ),
-            new Reverse().withTimeout(.2)       // give the bot a little push back to stop momentum
+//            new Reverse().withTimeout(.2)       // give the bot a little push back to stop momentum
+            new AutoDrive(0.3).withTimeout(.2)       // give the bot a little push back to stop momentum
         );
     }
 }

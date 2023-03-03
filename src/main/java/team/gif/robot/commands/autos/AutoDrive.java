@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
-public class Drive extends CommandBase {
+public class AutoDrive extends CommandBase {
 
     private double speed;
 
-    public Drive(double speed) {
+    public AutoDrive(double speed) {
         addRequirements(Robot.swervetrain);
         this.speed = speed;
     }
