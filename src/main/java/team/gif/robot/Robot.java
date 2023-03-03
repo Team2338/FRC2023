@@ -167,6 +167,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         eventLogger.addEvent("AUTO", "Auto Init");
         eventLogger.addEvent("AUTO", "Reset sensors");
+        pigeon.resetPigeonPosition(180);
 
         autonomousCommand = robotContainer.getAutonomousCommand(chosenAuto);
         eventLogger.addEvent("AUTO", "Got command from container");
