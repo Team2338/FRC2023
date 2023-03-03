@@ -11,12 +11,14 @@ import team.gif.robot.commands.elevator.SetElevatorPosition;
 public class PlaceCubeHighMobility extends SequentialCommandGroup {
     public PlaceCubeHighMobility() {
         addCommands(
+            new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
-                new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
-                new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)
+                    new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
+                    new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)
             ),
             new CollectorEject().withTimeout(0.4),
-            new GoHomeStageHome()
+            new GoHomeStageHome(),
+            new ForwardFast().withTimeout(3.0)
         );
     }
 }

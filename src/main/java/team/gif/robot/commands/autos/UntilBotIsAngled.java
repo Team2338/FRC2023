@@ -7,9 +7,9 @@ package team.gif.robot.commands.autos;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class UntilBotIsFalling extends CommandBase {
+public class UntilBotIsAngled extends CommandBase {
 
-    public UntilBotIsFalling() {
+    public UntilBotIsAngled() {
         super();
     }
 
@@ -25,10 +25,12 @@ public class UntilBotIsFalling extends CommandBase {
     @Override
     public boolean isFinished() {
         System.out.println("checking pitch " + Robot.pigeon.getPitch());
-        return Robot.pigeon.getPitch() > -12.0 && Robot.pigeon.getPitch() < 8.0; // was -14.0
+        return Robot.pigeon.getPitch() > 10.0;
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted){}
+    public void end(boolean interrupted){
+        System.out.println("ending");
+    }
 }

@@ -14,6 +14,8 @@ public class Pigeon {
 
     private final PigeonIMU.GeneralStatus _pigeonGenStatus = new PigeonIMU.GeneralStatus();
 
+    private double pitchOffset = 0;
+
     public Pigeon(int PigeonID) {
         _pigeon = new PigeonIMU(PigeonID);
     }
@@ -116,10 +118,15 @@ public class Pigeon {
      */
     public void resetPigeonPosition(double angle) {
         setYaw(angle);
+        zeroPitch();
     }
 
     public void setYaw(double yaw) {
         _pigeon.setYaw(yaw);
+    }
+
+    public void zeroPitch() {
+        pitchOffset = getYPR()[1];
     }
 
     public double[] getYPR() {
@@ -182,6 +189,6 @@ public class Pigeon {
 
         _pigeon.getYawPitchRoll(ypr);
 
-        return ypr[1];
+        return ypr[1] - pitchOffset;
     }
 }
