@@ -169,12 +169,12 @@ public final class Constants {
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
-        public static final double LOAD_FROM_GROUND_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 99.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 95.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double PLACE_CONE_HIGH_POS = 80.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_HIGH_POS = 78.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
-        public static final double PLACE_LOW_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_LOW_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
         public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // this is the location which is safe to go to/from home
 //        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
@@ -205,9 +205,9 @@ public final class Constants {
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/4; // 1/4 inch ... allows PID to end without having to be exact
         public static final double ZERO_OFFSET_TICKS = 13 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
-        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
+        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_GROUND_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 40 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -215,11 +215,11 @@ public final class Constants {
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_HOME_SAFE_POS = 15.6 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 14 maximum elevator height to allow arm to come under bar
-        public static final double HOME_POS = 14.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
+        public static final double HOME_POS = 14.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_POS = 49 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MIN_POS =  14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
+        public static final double MIN_POS =  13.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
     public static class TelescopingArm {
@@ -234,7 +234,8 @@ public final class Constants {
     }
 
     public static class Collector {
-        public static final double COLLECTOR_RUN = 0.5; //collector percent
+        public static final double COLLECTOR_RUN_COLLECT = 0.75; // 0.5; //collector percent
+        public static final double COLLECTOR_RUN_EJECT = 0.50; // 0.5; //collector percent
     }
 
     public static class Location {

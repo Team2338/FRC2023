@@ -61,6 +61,7 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_FLOOR:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_GROUND_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_GROUND_POS;
+                    //new ArmOut(Constants.TelescopingArm.MID_POS).schedule();
                     new ArmIn().schedule();
                     break;
                 case Constants.Location.PLACE_CONE_HIGH:
