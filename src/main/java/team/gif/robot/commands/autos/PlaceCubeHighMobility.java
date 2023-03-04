@@ -6,12 +6,15 @@ import team.gif.robot.Constants;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.AutoDrive;
 import team.gif.robot.commands.collector.CollectorEject;
+import team.gif.robot.commands.collector.WheelsIn;
+import team.gif.robot.commands.collector.WheelsOut;
 import team.gif.robot.commands.combo.GoHomeStageHome;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 
 public class PlaceCubeHighMobility extends SequentialCommandGroup {
     public PlaceCubeHighMobility() {
         addCommands(
+            new WheelsIn(),
             new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
                     new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
