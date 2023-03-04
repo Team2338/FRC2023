@@ -38,12 +38,12 @@ public class UiSmartDashboard {
         // Auto selections
         autoModeChooser.addOption("NONE", autoMode.NONE);
         autoModeChooser.setDefaultOption("P Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
-        autoModeChooser.addOption("P Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
-        autoModeChooser.addOption("P Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
+//        autoModeChooser.addOption("P Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
+//        autoModeChooser.addOption("P Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
         autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
-        autoModeChooser.addOption("P Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
-        autoModeChooser.addOption("P Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
-        autoModeChooser.addOption("P Collect Place", autoMode.PLACE_COLLECT_PLACE);
+//        autoModeChooser.addOption("P Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
+        autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
+//        autoModeChooser.addOption("P Collect Place", autoMode.PLACE_COLLECT_PLACE);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)

@@ -17,7 +17,7 @@ public class DriveAndEngage extends SequentialCommandGroup {
                 new UntilBotIsFalling(),               // monitor gyro until level
                 new AutoDrive(-Constants.AutoConstants.DRIVE_SLOW)
             ),
-            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.2) // give the bot a little push back to stop momentum
+            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.3) // give the bot a little push back to stop momentum
         );
     }
 }

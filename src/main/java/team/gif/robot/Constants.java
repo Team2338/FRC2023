@@ -136,11 +136,11 @@ public final class Constants {
                     MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
 
         public static final double DRIVE_SUPER_FAST = 1.0;
-        public static final double DRIVE_FAST = 0.8;
+        public static final double DRIVE_FAST = 0.7;
         public static final double DRIVE_MEDIUM = 0.6;
-        public static final double DRIVE_SLOW = 0.4;
-        public static final double DRIVE_SUPER_SLOW = 0.3;
-        public static final double DRIVE_TIME_DEFAULT = 2.3;
+        public static final double DRIVE_SLOW = 0.3;
+        public static final double DRIVE_SUPER_SLOW = 0.2;
+        public static final double DRIVE_TIME_DEFAULT = 2.3; // seconds until the bot gets to the charging station
     }
 
     public static final class Joystick {
@@ -148,11 +148,11 @@ public final class Constants {
     }
 
     public static class Arm {
-        public static final double FF = -0.02;
-        public static final double REV_FF = -0.03;
+        public static final double FF = -0.02; // -0.02
+        public static final double REV_FF = -0.04; // -0.03
         public static final double P = 2.0; // 2.0; // 1.2;
         public static final double REV_P = 1.0; // 0.5; // ToDo needs tuning (orig test only used P)
-        public static final double I = 0.0;
+        public static final double I = 0.002;
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
 
@@ -181,7 +181,7 @@ public final class Constants {
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
         public static final double LOAD_FROM_GROUND_POS = 99.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_HIGH_POS = 95.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_HIGH_POS = 78.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
