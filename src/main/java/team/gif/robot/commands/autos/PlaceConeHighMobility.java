@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.robot.Constants;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.collector.WheelsIn;
+import team.gif.robot.commands.collector.WheelsOut;
 import team.gif.robot.commands.combo.GoHomeStageHome;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
@@ -20,6 +21,7 @@ public class PlaceConeHighMobility extends SequentialCommandGroup {
 //                new SetArmPosition(45 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS),
 //                new SetElevatorPosition(30 * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS)
 //            ),
+            new WheelsOut(),
             new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
                 new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
