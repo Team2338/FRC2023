@@ -14,7 +14,7 @@ public class GoHighFromHome extends SequentialCommandGroup {
             new ParallelCommandGroup(
                 new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
                 new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS),
-                new WaitCommand(1).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS))
+                new WaitCommand(1).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS))
             )
         );
     }

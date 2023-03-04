@@ -203,7 +203,7 @@ public final class Constants {
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
         public static final double EL_TICKS_PER_INCH = 1757; // PBOT 1700;
-        public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/4; // 1/4 inch ... allows PID to end without having to be exact
+        public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/4 inch ... allows PID to end without having to be exact
         public static final double ZERO_OFFSET_TICKS = 13 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
@@ -227,8 +227,9 @@ public final class Constants {
         public static final double HIGH_VELOCITY = 0.40; // 0.5 // TODO: need more testing
         public static final double LOW_VELOCITY = 0.1; // was 0.2 // TODO: need more testing
 
-        public static final double MAX_POS = 39.0; // 40.5;
-        public static final double HIGH_POS =  37.6;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
+        public static final double MAX_POS = 39.8; // 40.5;
+        public static final double HIGH_CONE_POS =  39.5;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
+        public static final double HIGH_COLLECT_POS =  4.0;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
         public static final double SLOW_POS = 8.0; // 6.0; // PBOT 8.0
         public static final double MID_POS = 2.0; // 6.0; // PBOT 8.0
         public static final double MIN_POS = 1.5; // 2.0; // PBOT 0.002
