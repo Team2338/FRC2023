@@ -12,6 +12,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import team.gif.robot.Constants;
+import team.gif.robot.subsystems.SwerveDrivetrain;
 
 /**
  * @author Rohan Cherukuri
@@ -207,7 +208,7 @@ public class SwerveModuleMK4 {
      */
     public void setDesiredState(SwerveModuleState state) {
         SwerveModuleState stateOptimized = optimizeState(state);
-        double driveOutput = stateOptimized.speedMetersPerSecond / Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND;
+        double driveOutput = stateOptimized.speedMetersPerSecond / SwerveDrivetrain.getDrivePace().getValue();
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
         final double kff = kFF * Math.abs(error) / error;
         //accum += error;

@@ -15,6 +15,7 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
 import team.gif.robot.subsystems.drivers.SwerveModuleMK4;
+import team.gif.lib.drivePace;
 
 /**
  * @author Rohan Cherukuri
@@ -27,6 +28,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     public static SwerveModuleMK4 rL;
 
     private static SwerveDriveOdometry odometry;
+    private static drivePace drivePace;
 
     /**
      * Constructor for swerve drivetrain using 4 swerve modules using NEOs to drive and TalonSRX to control turning
@@ -88,6 +90,8 @@ public class SwerveDrivetrain extends SubsystemBase {
         resetHeading();
         resetDriveEncoders();
 
+        drivePace = drivePace.COAST_FR;
+
         ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
         swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
         swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
@@ -145,12 +149,11 @@ public class SwerveDrivetrain extends SubsystemBase {
      * @param x dForward
      * @param y dLeft
      * @param rot dRot
-     * @param fieldRelative Field relativity
      */
-    public void drive(double x, double y, double rot, boolean fieldRelative) {
+    public void drive(double x, double y, double rot) {
         SwerveModuleState[] swerveModuleStates =
                 Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(
-                        fieldRelative ?
+                        drivePace.getIsFieldRelative() ?
                                 ChassisSpeeds.fromFieldRelativeSpeeds(x, y, rot, Robot.pigeon.getRotation2d())
                                 : new ChassisSpeeds(x, y, rot));
         setModuleStates(swerveModuleStates);
@@ -159,11 +162,11 @@ public class SwerveDrivetrain extends SubsystemBase {
     /**
      * Set the desired states for each of the 4 swerve modules using a SwerveModuleState array
      * @param desiredStates SwerveModuleState array of desired states for each of the modules
-     * @implNote Only for use in the SwerveDrivetrain class and the RobotTrajectory Singleton, for any general use {@link SwerveDrivetrain#drive(double, double, double, boolean)}
+     * @implNote Only for use in the SwerveDrivetrain class and the RobotTrajectory Singleton, for any general use {@link SwerveDrivetrain#drive(double, double, double)}
      */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(
-                desiredStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
+                desiredStates, drivePace.getValue()
         );
 
         fL.setDesiredState(desiredStates[0]);
@@ -180,7 +183,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     public void setModuleStates(ChassisSpeeds chassisSpeeds) {
         SwerveModuleState[] swerveModuleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(
-                swerveModuleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
+                swerveModuleStates, drivePace.getValue()
         );
 
         fL.setDesiredState(swerveModuleStates[0]);
@@ -257,5 +260,13 @@ public class SwerveDrivetrain extends SubsystemBase {
      */
     public double getRobotHeading() {
         return Robot.pigeon.getCompassHeading();
+    }
+
+    public void setDrivePace(drivePace drivePace) {
+        this.drivePace = drivePace;
+    }
+
+    public static drivePace getDrivePace() {
+        return drivePace;
     }
 }
