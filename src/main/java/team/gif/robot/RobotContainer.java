@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
-import team.gif.robot.commands.autos.PlaceCollect;
+import team.gif.robot.commands.autos.NoAuto;
 import team.gif.robot.commands.autos.PlaceConeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceMobilityConeMid;
@@ -49,7 +49,7 @@ public class RobotContainer {
 
     private void buildAutoCommands() {
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE, new PlaceMobilityEngage());
-        autoCommands.put(autoMode.PLACE_COLLECT, new PlaceCollect());
+        autoCommands.put(autoMode.NONE, new NoAuto());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_ENGAGE, new PlaceCubeHighEngage());
         autoCommands.put(autoMode.PLACE_CONE_HIGH_MOBILITY, new PlaceConeHighMobility());

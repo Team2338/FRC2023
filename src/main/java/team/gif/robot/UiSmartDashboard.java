@@ -36,7 +36,7 @@ public class UiSmartDashboard {
             .withPosition(5, 0);
 
         // Auto selections
-        autoModeChooser.addOption("P Collect", autoMode.PLACE_COLLECT);
+        autoModeChooser.addOption("NONE", autoMode.NONE);
         autoModeChooser.setDefaultOption("P Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
         autoModeChooser.addOption("P Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
         autoModeChooser.addOption("P Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
