@@ -27,7 +27,7 @@ public class SwervePOC extends SequentialCommandGroup {
 
         SwerveControllerCommand sCC = new RobotTrajectory().swerveControllerCommand(trajectory);
 
-        return sCC.andThen(() -> Robot.swervetrain.drive(0.0, 0.0, 0.0, false));
+        return sCC.andThen(() -> Robot.swervetrain.drive(0.0, 0.0, 0.0));
     }
 
     public SwervePOC() {

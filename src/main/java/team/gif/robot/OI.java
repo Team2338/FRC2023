@@ -14,6 +14,7 @@ import team.gif.robot.commands.combo.GoHome;
 //import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
+import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
 import team.gif.robot.commands.telescopingArm.ArmIn;
@@ -144,6 +145,8 @@ public class OI {
         tY.whileTrue(new MoveArm(0.2)); // goes out
         tDPadRight.onTrue(new ArmOut(Constants.TelescopingArm.MAX_POS));
         tDPadLeft.onTrue(new ArmIn()); // move arm all in
+
+        dLStickBtn.whileTrue(new EnableBoost());
 
         gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor));
         gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
