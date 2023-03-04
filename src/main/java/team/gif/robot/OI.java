@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
-import team.gif.robot.commands.autos.EngageTestCommand;
+import team.gif.robot.commands.autos.DriveAndEngageCommand;
+import team.gif.robot.commands.autos.DriveToChargingStationCommand;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
-//import team.gif.robot.commands.combo.GoFloor;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.led.ConeLED;
@@ -150,7 +150,8 @@ public class OI {
         gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
-        dBack.onTrue(new EngageTestCommand());
+        dBack.onTrue(new DriveAndEngageCommand());
+        dStart.onTrue(new DriveToChargingStationCommand());
     }
 
     public void setRumble(boolean rumble) {

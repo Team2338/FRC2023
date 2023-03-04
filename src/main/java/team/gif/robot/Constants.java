@@ -129,7 +129,8 @@ public final class Constants {
         public static final double DRIVE_FAST = 0.8;
         public static final double DRIVE_MEDIUM = 0.6;
         public static final double DRIVE_SLOW = 0.4;
-        public static final double DRIVE_SUPER_SLOW = 0.2;
+        public static final double DRIVE_SUPER_SLOW = 0.3;
+        public static final double DRIVE_TIME_DEFAULT = 2.3;
     }
 
     public static final class Joystick {

@@ -67,7 +67,6 @@ public class Robot extends TimedRobot {
     private boolean runAutoScheduler;
 
     public static Pigeon pigeon;
-    public double engageDriveTime = 2.3;
 
     public static UI ui;
 
@@ -132,7 +131,7 @@ public class Robot extends TimedRobot {
             swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
             swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
 
-            SmartDashboard.putNumber("AutoTime",2.3);
+            SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
         }
 
         elapsedTime = new Timer();
@@ -215,6 +214,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         double timeLeft = DriverStation.getMatchTime();
         oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
+                (timeLeft <= 25.0 && timeLeft >= 21.0) ||
                 (timeLeft <= 5.0 && timeLeft >= 3.0));
 
         telemetryLogger.run();
