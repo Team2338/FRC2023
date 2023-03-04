@@ -5,9 +5,9 @@ import team.gif.lib.drivePace;
 import team.gif.robot.Robot;
 import team.gif.robot.subsystems.SwerveDrivetrain;
 
-public class PushPush extends CommandBase {
+public class EnableBoost extends CommandBase {
     private drivePace drivePace;
-    public PushPush() {
+    public EnableBoost() {
         super();
     }
 
