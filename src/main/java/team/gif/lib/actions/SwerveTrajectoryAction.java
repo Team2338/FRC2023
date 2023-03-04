@@ -95,8 +95,9 @@ public class SwerveTrajectoryAction implements Action {
         Trajectory.State desiredState = trajectory.sample(currTime);
         Rotation2d desiredRotation = new Rotation2d();
 
-        if(wantsVisionAlign.get()) {
-        }
+        ChassisSpeeds targetChassisSpeeds = controller.calculate(pose.get(), desiredState, desiredRotation);
+        SwerveModuleState[] targetModuleStates = kinematics.toSwerveModuleStates(targetChassisSpeeds);
+        outputModuleStates.accept(targetModuleStates);
     }
 
     @Override
