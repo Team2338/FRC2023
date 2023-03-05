@@ -28,6 +28,8 @@ public class ArmIn extends CommandBase {
         System.out.println("ARM IN");
         if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.SLOW_POS) { // use the mid position to start slowing down
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.HIGH_VELOCITY);
+        } else if(Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MIN_POS) {
+            Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
         } else {
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.LOW_VELOCITY);
         }

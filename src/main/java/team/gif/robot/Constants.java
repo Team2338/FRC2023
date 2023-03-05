@@ -234,6 +234,10 @@ public final class Constants {
     }
 
     public static class TelescopingArm {
+        public static final double P = 0.00;
+        public static final double FF = 0.00;
+        public static final double I = 0.00;
+        public static final double D = 0.00;
         public static final double HIGH_VELOCITY = 0.40; // 0.5 // TODO: need more testing
         public static final double LOW_VELOCITY = 0.1; // was 0.2 // TODO: need more testing
 
