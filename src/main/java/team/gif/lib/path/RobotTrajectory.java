@@ -1,18 +1,17 @@
 package team.gif.lib.path;
 
+import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.*;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
-import team.gif.robot.subsystems.SwerveDrivetrain;
 
 import java.util.HashMap;
 
@@ -40,7 +39,7 @@ public class RobotTrajectory {
         .setKinematics(Constants.Drivetrain.DRIVE_KINEMATICS);
 
     public SwerveControllerCommand swerveControllerCommand(Trajectory trajectory) {
-        ProfiledPIDController kThetaController = new ProfiledPIDController(Constants.AutoConstants.kPThetaController, 0, 0,
+        ProfiledPIDController kThetaController = new ProfiledPIDController(Constants.AutoConstants.P_THETA_CONTROLLER, 0, 0,
             new TrapezoidProfile.Constraints(
                 Constants.ModuleConstants.MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND, Constants.ModuleConstants.MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
             ));
@@ -50,8 +49,8 @@ public class RobotTrajectory {
             trajectory,
             Robot.swervetrain::getPose,
             Constants.Drivetrain.DRIVE_KINEMATICS,
-            new PIDController(Constants.AutoConstants.kPXController, 0, 0),
-            new PIDController(Constants.AutoConstants.kPYController, 0, 0),
+            new PIDController(Constants.AutoConstants.PX_CONTROLLER, 0, 0),
+            new PIDController(Constants.AutoConstants.PY_CONTROLLER, 0, 0),
             kThetaController,
             Robot.swervetrain::setModuleStates,
             Robot.swervetrain
@@ -66,7 +65,7 @@ public class RobotTrajectory {
     /**
      *
      * @param eventMap
-     * @param subsystems
+     * @param subsystems All subsystems needed to run the auto; must also include {@link Robot#swervetrain}
      * @return
      */
     public SwerveAutoBuilder buildConfig(HashMap<String, Command> eventMap, Subsystem... subsystems) {
@@ -82,5 +81,31 @@ public class RobotTrajectory {
         );
 
         return autoBuilder;
+    }
+
+    /**
+     *
+     * @param traj
+     * @param isFirstPath
+     * @return
+     */
+    public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFirstPath) {
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> {
+                    if(isFirstPath) {
+                        Robot.swervetrain.resetOdometry(traj.getInitialPose());
+                    }
+                }),
+                new PPSwerveControllerCommand(
+                        traj,
+                        Robot.swervetrain::getPose,
+                        Constants.Drivetrain.DRIVE_KINEMATICS,
+                        new PIDController(Constants.AutoConstants.PX_CONTROLLER, 0, 0),
+                        new PIDController(Constants.AutoConstants.PY_CONTROLLER, 0, 0),
+                        new PIDController(Constants.AutoConstants.P_THETA_CONTROLLER, 0, 0),
+                        Robot.swervetrain::setModuleStates,
+                        Robot.swervetrain
+                )
+        );
     }
 }
