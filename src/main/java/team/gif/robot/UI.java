@@ -55,7 +55,6 @@ public class UI {
                 .withPosition(5, 0)
                 .withSize(2,3);
 
-
-
+        shuffleboardTab.addNumber("Compressor", Robot.compressor::getPressure);
     }
 }
