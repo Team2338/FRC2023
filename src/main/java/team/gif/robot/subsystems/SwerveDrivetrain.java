@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.lib.logging.TelemetryFileLogger;
+import team.gif.lib.path.RobotTrajectory;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
@@ -170,23 +171,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         fR.setDesiredState(desiredStates[1]);
         rL.setDesiredState(desiredStates[2]);
         rR.setDesiredState(desiredStates[3]);
-    }
-
-    /**
-     * Set the desired states for each of the 4 swerve modules using a ChassisSpeeds class
-     * @param chassisSpeeds Field Relative ChassisSpeeds to apply to wheel speeds
-     * @implNote Use only in {@link SwerveDrivetrain} or {@link team.gif.lib.RobotTrajectory}
-     */
-    public void setModuleStates(ChassisSpeeds chassisSpeeds) {
-        SwerveModuleState[] swerveModuleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(
-                swerveModuleStates, Constants.Drivetrain.MAX_SPEED_METERS_PER_SECOND
-        );
-
-        fL.setDesiredState(swerveModuleStates[0]);
-        fR.setDesiredState(swerveModuleStates[1]);
-        rL.setDesiredState(swerveModuleStates[2]);
-        rR.setDesiredState(swerveModuleStates[3]);
     }
 
     /**

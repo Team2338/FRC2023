@@ -1,18 +1,25 @@
-package team.gif.lib;
+package team.gif.lib.path;
 
+import com.pathplanner.lib.auto.PIDConstants;
+import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
+import team.gif.robot.subsystems.SwerveDrivetrain;
+
+import java.util.HashMap;
 
 /**
  * Singleton class for creating a trajectory for a swerve bot
  * @author Rohan Cherukuri
- * @since 2/14/22
+ * @since 2/14/23
  */
 public class RobotTrajectory {
     public RobotTrajectory() {}
@@ -53,5 +60,27 @@ public class RobotTrajectory {
         Robot.swervetrain.resetOdometry(trajectory.getInitialPose());
 
         return sCC;
+    }
+
+
+    /**
+     *
+     * @param eventMap
+     * @param subsystems
+     * @return
+     */
+    public SwerveAutoBuilder buildConfig(HashMap<String, Command> eventMap, Subsystem... subsystems) {
+        SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
+            Robot.swervetrain::getPose,
+            Robot.swervetrain::resetOdometry,
+            Constants.Drivetrain.DRIVE_KINEMATICS,
+            new PIDConstants(5.0, 0.0, 0.0),
+            new PIDConstants(0.5, 0, 0),
+            Robot.swervetrain::setModuleStates,
+            eventMap,
+            subsystems
+        );
+
+        return autoBuilder;
     }
 }
