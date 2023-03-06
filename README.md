@@ -28,14 +28,6 @@
    * Drive Modes
 6. [LED Subsystem](#led-subsystem-a-nameled-a)
    * LED Control and Management
-7. [Drivers & Libraries](#drivers--libraries-a-namedrivers-a)
-   * Limelight
-   * Pigeon
-   * Compressor
-   * Logging
-8. [Autos & Routines](#autos--routines-a-nameautos-a)
-   * Time-Based Autos
-   * Combo Commands
 
 ******
 Collector<a name="collector"></a>
@@ -157,12 +149,4 @@ Subsystems and Commands to reference: <br />
 * [LEDSubsystemDefault.java](src%2Fmain%2Fjava%2Fteam%2Fgif%2Frobot%2Fcommands%2Fled%2FLEDSubsystemDefault.java)
 * [CubeLED.java](src%2Fmain%2Fjava%2Fteam%2Fgif%2Frobot%2Fcommands%2Fled%2FCubeLED.java)
 * [ConeLED.java](src%2Fmain%2Fjava%2Fteam%2Fgif%2Frobot%2Fcommands%2Fled%2FConeLED.java)
-***
-Drivers & Libraries<a name="drivers"></a>
----
-
-***
-Autos & Routines<a name="autos"></a>
----
-
 ***
