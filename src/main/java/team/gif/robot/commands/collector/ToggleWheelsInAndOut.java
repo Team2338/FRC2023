@@ -6,7 +6,6 @@ import team.gif.robot.Robot;
 public class ToggleWheelsInAndOut extends CommandBase {
     public ToggleWheelsInAndOut() {
         super();
-        addRequirements(Robot.collectorWheels);
     }
 
     // Called when the command is initially scheduled.

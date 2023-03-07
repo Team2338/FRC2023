@@ -7,16 +7,19 @@ public class WheelsDefault extends CommandBase {
 
     public WheelsDefault() {
         super();
-        addRequirements(Robot.collectorWheels); // uncomment
+        addRequirements(Robot.collectorWheels);
+        // uncomment
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
+        System.out.println("set state");
         Robot.collectorWheels.setWheelState();
     }
 

@@ -6,12 +6,12 @@ import team.gif.robot.Robot;
 public class WheelsOut extends CommandBase {
     public WheelsOut() {
         super();
-        addRequirements(Robot.collectorWheels);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("setting wheels out");
         Robot.collectorWheels.wheelsOut();
     }
 
