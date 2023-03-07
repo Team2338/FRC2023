@@ -8,12 +8,17 @@ import team.gif.robot.RobotMap;
 
 public class CollectorWheels extends SubsystemBase {
     private static final DoubleSolenoid solenoid = new DoubleSolenoid( (Robot.isCompBot ? PneumaticsModuleType.REVPH : PneumaticsModuleType.CTREPCM), RobotMap.SOLENOID_COLLECTOR_FORWARD, RobotMap.SOLENOID_COLLECTOR_REVERSE);
+    private DoubleSolenoid.Value state = DoubleSolenoid.Value.kForward;
 
     public void wheelsIn() {
-        solenoid.set(DoubleSolenoid.Value.kForward);
+        state = DoubleSolenoid.Value.kForward;
     }
 
     public void wheelsOut() {
-        solenoid.set(DoubleSolenoid.Value.kReverse);
+        state = DoubleSolenoid.Value.kReverse;
+    }
+
+    public void setWheelState() {
+        solenoid.set(state);
     }
 }

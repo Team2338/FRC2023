@@ -21,6 +21,7 @@ import team.gif.lib.delay;
 import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
+import team.gif.robot.commands.collector.WheelsDefault;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
@@ -115,6 +116,8 @@ public class Robot extends TimedRobot {
 
         elevator.setElevatorTargetPos(elevator.getPosition());
         elevator.setDefaultCommand(new ElevatorPIDControl());
+
+        collectorWheels.setDefaultCommand(new WheelsDefault());
 
         // settings default wheels to WheelsIn;
         collectorWheels.wheelsIn();
