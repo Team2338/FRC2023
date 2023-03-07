@@ -124,17 +124,11 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
 
-        if (isCompBot) {
-            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
-            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
-            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
-            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
-            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
+        SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
 
-            SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
+        if (isCompBot) {
+//SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+
         }
 
         elapsedTime = new Timer();

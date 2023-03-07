@@ -84,7 +84,6 @@ public class SwerveDrivetrain extends SubsystemBase {
                 Constants.ModuleConstants.DrivetrainPID.rearLeftP
         );
 
-//        resetEncoders();
         odometry = new SwerveDriveOdometry(Constants.Drivetrain.DRIVE_KINEMATICS, Robot.pigeon.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
         resetHeading();
@@ -93,12 +92,10 @@ public class SwerveDrivetrain extends SubsystemBase {
         drivePace = drivePace.COAST_FR;
 
         ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
-        swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
-        swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
-        swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
-        swerveTab.addDouble("RR_Accum", rR::getAccum);
-        swerveTab.addDouble("RL_Accum", rL::getAccum);
+//SB        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
+//SB       swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
+//SB       swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
+//SB       swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
     }
 
     public SwerveDrivetrain(TelemetryFileLogger logger) {
