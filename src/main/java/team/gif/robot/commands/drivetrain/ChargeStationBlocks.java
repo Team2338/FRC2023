@@ -1,4 +1,4 @@
-package team.gif.robot.commands.blocks;
+package team.gif.robot.commands.drivetrain;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -15,9 +15,7 @@ public class ChargeStationBlocks extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override

@@ -15,7 +15,7 @@ import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
-import team.gif.robot.commands.blocks.ChargeStationBlocks;
+import team.gif.robot.commands.drivetrain.ChargeStationBlocks;
 import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
