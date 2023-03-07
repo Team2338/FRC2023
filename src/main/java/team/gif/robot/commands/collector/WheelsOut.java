@@ -11,7 +11,6 @@ public class WheelsOut extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("setting wheels out");
         Robot.collectorWheels.wheelsOut();
     }
 
@@ -22,7 +21,7 @@ public class WheelsOut extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once the command ends or is interrupted.

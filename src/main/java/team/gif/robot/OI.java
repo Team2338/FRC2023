@@ -15,6 +15,8 @@ import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
+import team.gif.robot.commands.drivetrain.MoveAwaySlow;
+import team.gif.robot.commands.drivetrain.MoveCloserSlow;
 import team.gif.robot.commands.drivetrain.MoveLeftSlow;
 import team.gif.robot.commands.drivetrain.MoveRightSlow;
 import team.gif.robot.commands.driveModes.EnableBoost;
@@ -142,12 +144,15 @@ public class OI {
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
         dB.onTrue(new LimeLightAutoAlign());
+        //dX kills limelight auto align
         dA.onTrue(new ArmLift());
 
-        tX.whileTrue(new MoveArm(-0.2)); // goes in
-        tY.whileTrue(new MoveArm(0.2)); // goes out
-        tDPadRight.onTrue(new ArmOut(Constants.TelescopingArm.MAX_POS));
-        tDPadLeft.onTrue(new ArmIn()); // move arm all in
+        // enable these for testing purposes
+        // commented out so it doesn't throw errors on the console
+//        tX.whileTrue(new MoveArm(-0.2)); // goes in
+//        tY.whileTrue(new MoveArm(0.2)); // goes out
+//        tDPadRight.onTrue(new ArmOut(Constants.TelescopingArm.MAX_POS));
+//        tDPadLeft.onTrue(new ArmIn()); // move arm all in
 
         dLStickBtn.whileTrue(new EnableBoost());
 
@@ -158,8 +163,10 @@ public class OI {
         dBack.onTrue(new DriveAndEngageCommand());
         dStart.onTrue(new DriveToChargingStationCommand());
 
-        dDPadLeft.whileTrue(new MoveLeftSlow());
+        dDPadUp.whileTrue(new MoveAwaySlow());
         dDPadRight.whileTrue(new MoveRightSlow());
+        dDPadLeft.whileTrue(new MoveLeftSlow());
+        dDPadDown.whileTrue(new MoveCloserSlow());
     }
 
     public void setRumble(boolean rumble) {

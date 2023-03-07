@@ -12,10 +12,12 @@ public class CollectorWheels extends SubsystemBase {
 
     public void wheelsIn() {
         state = DoubleSolenoid.Value.kForward;
+        Robot.ledSubsystem.LEDWheelsIn();
     }
 
     public void wheelsOut() {
         state = DoubleSolenoid.Value.kReverse;
+        Robot.ledSubsystem.LEDWheelsOut();
     }
 
     public void setWheelState() {

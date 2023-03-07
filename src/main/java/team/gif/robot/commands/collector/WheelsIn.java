@@ -11,7 +11,6 @@ public class WheelsIn extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("setting wheels in");
         Robot.collectorWheels.wheelsIn();
     }
 

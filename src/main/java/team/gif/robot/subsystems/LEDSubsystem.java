@@ -12,6 +12,7 @@ public class LEDSubsystem extends SubsystemBase {
 
     private final int [] HP = {0,0,0};
     private final int [] GamePiece = {0,0,0};
+    private final int [] WheelState = {0,0,0};
 
     public LEDSubsystem() {
         super();
@@ -51,6 +52,18 @@ public class LEDSubsystem extends SubsystemBase {
         GamePiece[2] = 0;
     }
 
+    public void LEDWheelsIn() {
+        WheelState[0] = 0;
+        WheelState[1] = 0;
+        WheelState[2] = 0;
+    }
+
+    public void LEDWheelsOut() {
+        WheelState[0] = 0;
+        WheelState[1] = 0;
+        WheelState[2] = 255;
+    }
+
     public void setColors() {
         for (int i = 0; i < RobotMap.HP_LEDS.length; i++) {
             ledBuffer.setRGB(RobotMap.HP_LEDS[i],HP[0],HP[1], HP[2]);
@@ -58,6 +71,10 @@ public class LEDSubsystem extends SubsystemBase {
         }
         for (int j = 0; j < RobotMap.GAME_PIECE_LEDS.length; j++) {
             ledBuffer.setRGB(RobotMap.GAME_PIECE_LEDS[j], GamePiece[0], GamePiece[1], GamePiece[2]);
+            led.setData(ledBuffer);
+        }
+        for (int k = 0; k < RobotMap.WHEEL_STATE_LEDS.length; k++) {
+            ledBuffer.setRGB(RobotMap.WHEEL_STATE_LEDS[k], WheelState[0], WheelState[1], WheelState[2]);
             led.setData(ledBuffer);
         }
     }

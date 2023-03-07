@@ -3,9 +3,9 @@ package team.gif.robot.commands.drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class MoveLeftSlow extends CommandBase {
+public class MoveAwaySlow extends CommandBase {
 
-    public MoveLeftSlow() {
+    public MoveAwaySlow() {
         addRequirements(Robot.swervetrain); // uncomment
     }
 
@@ -20,9 +20,9 @@ public class MoveLeftSlow extends CommandBase {
 //        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
 //        Robot.swervetrain.setModuleStates(moduleStates);
         if( Robot.oi.driver.getHID().getRightStickButton())
-            Robot.swervetrain.drive(0.0, -0.5, 0.0);
+            Robot.swervetrain.drive(0.5, 0, 0.0);
         else
-            Robot.swervetrain.drive(0.0, -0.2, 0.0);
+            Robot.swervetrain.drive(0.2, 0, 0.0);
     }
 
     // Called when the command ends or is interrupted.

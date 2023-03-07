@@ -10,7 +10,7 @@ public class LedToggle extends CommandBase {
 
     // Called when the command is initially scheduled.
     public void initialize() {
-        Robot.limelight.setLEDMode(Limelight.LED_ON);
+        Robot.limelightLow.setLEDMode(Limelight.LED_ON);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -24,6 +24,6 @@ public class LedToggle extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.limelight.setLEDMode(Limelight.LED_OFF);
+        Robot.limelightLow.setLEDMode(Limelight.LED_OFF);
     }
 }

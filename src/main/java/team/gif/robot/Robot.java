@@ -5,13 +5,9 @@
 package team.gif.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -54,7 +50,8 @@ public class Robot extends TimedRobot {
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
-    public static Limelight limelight;
+    public static Limelight limelightHigh;
+    public static Limelight limelightLow;
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
@@ -91,7 +88,8 @@ public class Robot extends TimedRobot {
         collectorWheels = new CollectorWheels();
         telescopingArm = new TelescopingArm();
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
-        limelight = new Limelight();
+        limelightHigh = new Limelight();
+        limelightLow = new Limelight("limelight-low");
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
@@ -121,6 +119,9 @@ public class Robot extends TimedRobot {
 
         // settings default wheels to WheelsIn;
         collectorWheels.wheelsIn();
+
+        limelightLow.setLEDOff();
+        limelightHigh.setLEDOff();
 
         oi = new OI();
 

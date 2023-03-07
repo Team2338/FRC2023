@@ -19,7 +19,11 @@ public class MoveRightSlow extends CommandBase {
 //        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, -0.20, 0.0);
 //        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
 //        Robot.swervetrain.setModuleStates(moduleStates);
-        Robot.swervetrain.drive(0.0, 0.20, 0.0);
+        if( Robot.oi.driver.getHID().getRightStickButton())
+            Robot.swervetrain.drive(0.0, 0.5, 0.0);
+        else
+            Robot.swervetrain.drive(0.0, 0.2, 0.0);
+
     }
 
     // Called when the command ends or is interrupted.
