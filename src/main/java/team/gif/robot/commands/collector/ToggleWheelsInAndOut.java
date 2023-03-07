@@ -12,7 +12,7 @@ public class ToggleWheelsInAndOut extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorWheels.wheelsIn();
+        Robot.collectorWheels.wheelsOut();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -28,6 +28,6 @@ public class ToggleWheelsInAndOut extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.collectorWheels.wheelsOut();
+        Robot.collectorWheels.wheelsIn();
     }
 }
