@@ -5,11 +5,14 @@
 package team.gif.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -87,12 +90,13 @@ public class Robot extends TimedRobot {
         collector = new Collector();
         collectorWheels = new CollectorWheels();
         telescopingArm = new TelescopingArm();
-        ui = new UI();
-        uiSmartDashboard = new UiSmartDashboard();
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelight = new Limelight();
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
+
+        ui = new UI();
+        uiSmartDashboard = new UiSmartDashboard();
 
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -120,15 +124,11 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
 
+        SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
+
         if (isCompBot) {
-            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
-            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
-            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
-            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
-            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
+//SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+
         }
 
         elapsedTime = new Timer();
@@ -211,6 +211,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         double timeLeft = DriverStation.getMatchTime();
         oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
+                (timeLeft <= 25.0 && timeLeft >= 21.0) ||
                 (timeLeft <= 5.0 && timeLeft >= 3.0));
 
         telemetryLogger.run();
@@ -245,4 +246,5 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = true;
+
 }

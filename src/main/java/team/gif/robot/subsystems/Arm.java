@@ -129,7 +129,7 @@ public class Arm extends SubsystemBase {
         armMotor.config_kP(0, Constants.Arm.P); // proportional
         armMotor.config_kI(0,Constants.Arm.I);
         armMotor.config_kD(0,Constants.Arm.D);
-        armMotor.config_IntegralZone(0,200);
+        armMotor.config_IntegralZone(0,314);
 
         // soft limits
         armMotor.configReverseSoftLimitEnable(true);

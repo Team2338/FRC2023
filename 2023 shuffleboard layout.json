@@ -227,7 +227,7 @@
                 {
                   "_type": "Text View",
                   "_source0": "network_table:///Shuffleboard/FRC2023/Elevator Ticks",
-                  "_title": "",
+                  "_title": "Shuffleboard/FRC2023/Elevator Ticks",
                   "_glyph": 148,
                   "_showGlyph": false
                 },
@@ -239,6 +239,19 @@
                   "_showGlyph": false
                 }
               ]
+            }
+          },
+          "8,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Auto Time",
+              "_title": "Auto Time",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }

@@ -8,17 +8,21 @@ import team.gif.robot.subsystems.drivers.Limelight;
 
 public class LimeLightAutoAlign extends CommandBase {
 
-    private final double rTolerence = 2.0; // degrees
+    private final double rTolerence = 1.0; // degrees
     private double rOffset;
     private final double yTolerence = 1.0; // degrees
     private double yOffset;
+    private int passCount;
 
-    public LimeLightAutoAlign() {}
+    public LimeLightAutoAlign() {
+        addRequirements(Robot.swervetrain);
+    }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         Robot.limelight.setLEDMode(Limelight.LED_ON); // turn on - just in case they were turned off somehow
+        passCount = 0;
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -27,8 +31,8 @@ public class LimeLightAutoAlign extends CommandBase {
         double velocity = 0;
         double rotation = 0;
 
-        rOffset = -Robot.pigeon.get180Heading();
-        rotation = (Math.abs(rOffset) < rTolerence) ? 0 : ((rOffset > 0) ? -0.8 : 0.8);
+        rOffset = -(Robot.pigeon.get360Heading() - 180); // bot faces 180 degrees when placing game pieces
+        rotation = (Math.abs(rOffset) < rTolerence) ? 0 : ((rOffset > 0) ? -0.4 : 0.4);
 
         if (Robot.limelight.hasTarget()) {
             yOffset = -Robot.limelight.getXOffset();
@@ -43,10 +47,18 @@ public class LimeLightAutoAlign extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        if (Math.abs(yOffset) < yTolerence && Math.abs(rOffset) < rTolerence)
-            return true;
-        else
+        if( Robot.oi.driver.getHID().getXButtonPressed()) // need a kill switch
             return false;
+
+        if (Math.abs(yOffset) < yTolerence && Math.abs(rOffset) < rTolerence) {
+            if (++passCount < 11) {
+                return false; // need to check that the bot didn't overrun
+            } else {
+                return true; // aligned! Fire away!!
+            }
+        } else {
+            return false; // not in tolerance, return false
+        }
     }
 
     // Called when the command ends or is interrupted.
