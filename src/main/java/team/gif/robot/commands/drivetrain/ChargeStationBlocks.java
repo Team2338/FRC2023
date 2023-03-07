@@ -20,7 +20,7 @@ public class ChargeStationBlocks extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, 0.5, 90.0);
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, -0.20, 0.0);
         SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         Robot.swervetrain.setModuleStates(moduleStates);
     }
