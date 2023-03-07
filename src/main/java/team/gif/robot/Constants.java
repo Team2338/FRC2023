@@ -118,7 +118,7 @@ public final class Constants {
 
         public static final double PX_CONTROLLER = 1;
         public static final double PY_CONTROLLER = 1;
-        public static final double P_THETA_CONTROLLER = 0.65;
+        public static final double P_THETA_CONTROLLER = 1.0;
 
         // Constraint for the motion profiled robot angle controller
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =

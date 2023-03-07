@@ -108,4 +108,20 @@ public class RobotTrajectory {
                 )
         );
     }
+
+    public PPSwerveControllerCommand baseSwerveCommand(PathPlannerTrajectory trajectory) {
+        PPSwerveControllerCommand swerveControllerCommand =
+                new PPSwerveControllerCommand(
+                        trajectory,
+                        Robot.swervetrain::getPose,
+                        Constants.Drivetrain.DRIVE_KINEMATICS,
+                        new PIDController(Constants.AutoConstants.PX_CONTROLLER, 0, 0),
+                        new PIDController(Constants.AutoConstants.PY_CONTROLLER, 0, 0),
+                        new PIDController(Constants.AutoConstants.P_THETA_CONTROLLER, 0, 0),
+                        Robot.swervetrain::setModuleStates,
+                        Robot.swervetrain
+                );
+
+        return swerveControllerCommand;
+    }
 }
