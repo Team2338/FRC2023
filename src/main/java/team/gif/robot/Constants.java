@@ -270,6 +270,6 @@ public final class Constants {
     }
 
     public static class LED {
-        public static final int NUM_LEDS_TOTAL = 8;
+        public static final int NUM_LEDS_TOTAL = 11;
     }
 }

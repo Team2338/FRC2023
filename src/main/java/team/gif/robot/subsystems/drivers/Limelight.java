@@ -51,6 +51,15 @@ public class Limelight {
         }
     }
 
+    public void setLEDOn() {
+        setLEDMode(3);
+    }
+
+    public void setLEDOff() {
+        setLEDMode(1);
+    }
+
+
     /**
      * Sets the limelight's mode of operation.
      * mode 0 activates vision processing (decreased exposure)
