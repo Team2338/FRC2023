@@ -15,7 +15,8 @@ import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
-import team.gif.robot.commands.drivetrain.ChargeStationBlocks;
+import team.gif.robot.commands.drivetrain.MoveLeftSlow;
+import team.gif.robot.commands.drivetrain.MoveRightSlow;
 import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
@@ -157,7 +158,8 @@ public class OI {
         dBack.onTrue(new DriveAndEngageCommand());
         dStart.onTrue(new DriveToChargingStationCommand());
 
-        dDPadLeft.whileTrue(new ChargeStationBlocks());
+        dDPadLeft.whileTrue(new MoveLeftSlow());
+        dDPadRight.whileTrue(new MoveRightSlow());
     }
 
     public void setRumble(boolean rumble) {
