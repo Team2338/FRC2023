@@ -10,23 +10,23 @@
   * WPILibNewCommands
 ****
 ## Sections
-1. [Collector](#collector-a-namecollector-a)
+1. [Collector](#collector)
    * Motor System
    * Pneumatic System
-2. [Arm](#arm-a-namearm-a)
+2. [Arm](#arm)
    * Angle Control
    * Set Positions
-3. [Telescoping Arm](#telescoping-arm-a-nametelearm-a)
+3. [Telescoping Arm](#telearm)
     * Arm telescoping
     * Set Positions
-4. [Elevator](#elevator-a-nameelevator-a)
+4. [Elevator](#elevator)
    * Elevator control
    * Set Positions
-5. [Swerve Drivetrain](#swerve-drivetrain-a-nameswerve-a)
+5. [Swerve Drivetrain](#swerve)
    * MK4 Swerve Modules
    * Swerve Drivetrain Control
    * Drive Modes
-6. [LED Subsystem](#led-subsystem-a-nameled-a)
+6. [LED Subsystem](#led)
    * LED Control and Management
 
 ******
