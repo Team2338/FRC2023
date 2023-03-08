@@ -25,11 +25,11 @@ public class ArmIn extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.SLOW_POS) { // slow down before we get to end
+        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.SLOW_POS) {      // Go fast until we get to designated slow position
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.HIGH_VELOCITY);
         } else if(Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MIN_POS) { // move arm out if less than MIN_POS
             Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
-        } else {
+        } else {                                                                           // go slow until we get to end
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.LOW_VELOCITY);
         }
     }
