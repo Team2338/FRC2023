@@ -246,7 +246,7 @@ public final class Constants {
         public static final double MAX_POS = 39.8; // 40.5;
         public static final double HIGH_CONE_POS =  39.5;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
         public static final double HIGH_COLLECT_POS =  4.0;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
-        public static final double SLOW_POS = 8.0; // 6.0; // PBOT 8.0
+        public static final double SLOW_POS = 4.0; // 6.0; // PBOT 8.0
         public static final double MID_POS = 2.0; // 6.0; // PBOT 8.0
         public static final double MIN_POS = 1.5; // 2.0; // PBOT 0.002
     }
