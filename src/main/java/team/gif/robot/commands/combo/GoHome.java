@@ -5,7 +5,6 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
-import team.gif.robot.commands.telescopingArm.ArmIn;
 
 public class GoHome extends CommandBase {
     public GoHome() {
