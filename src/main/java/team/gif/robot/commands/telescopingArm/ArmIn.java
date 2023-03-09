@@ -25,12 +25,11 @@ public class ArmIn extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        System.out.println("ARM IN");
-        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.SLOW_POS) { // use the mid position to start slowing down
+        if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.SLOW_POS) {      // Go fast until we get to designated slow position
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.HIGH_VELOCITY);
-        } else if(Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MIN_POS) {
+        } else if(Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MIN_POS) { // move arm out if less than MIN_POS
             Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
-        } else {
+        } else {                                                                           // go slow until we get to end
             Robot.telescopingArm.setMotorSpeed(-Constants.TelescopingArm.LOW_VELOCITY);
         }
     }
@@ -39,7 +38,6 @@ public class ArmIn extends CommandBase {
     @Override
     public boolean isFinished() {
         if (Robot.telescopingArm.getPosition() < location) {
-            System.out.println("arm done");
             return true;
         } else
             return false;

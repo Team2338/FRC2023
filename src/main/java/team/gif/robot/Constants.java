@@ -94,10 +94,8 @@ public final class Constants {
 
         public static final double PHYSICAL_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 4 * Math.PI;
         public static final double TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND = PHYSICAL_MAX_SPEED_METERS_PER_SECOND / 4;
-        public static final double TELE_DRIVE_SLOW_SPEED_METERS_PER_SECOND = PHYSICAL_MAX_SPEED_METERS_PER_SECOND / 1;
 
         public static final double TELE_DRIVE_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = PHYSICAL_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 4;
-        public static final double TELE_DRIVE_SLOW_ANGULAR_SPEED_RADIANS_PER_SECOND = PHYSICAL_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 1;
 
         public static final double TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND = 3;
 
@@ -142,7 +140,7 @@ public final class Constants {
         public static final double DRIVE_MEDIUM = 0.6;
         public static final double DRIVE_SLOW = 0.3;
         public static final double DRIVE_SUPER_SLOW = 0.2;
-        public static final double DRIVE_TIME_DEFAULT = 2.3; // seconds until the bot gets to the charging station
+        public static final double DRIVE_TIME_DEFAULT = 1.5; // seconds until the bot gets to the charging station
     }
 
     public static final class Joystick {
@@ -246,7 +244,7 @@ public final class Constants {
         public static final double MAX_POS = 39.8; // 40.5;
         public static final double HIGH_CONE_POS =  39.5;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
         public static final double HIGH_COLLECT_POS =  4.0;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
-        public static final double SLOW_POS = 8.0; // 6.0; // PBOT 8.0
+        public static final double SLOW_POS = 6.0; // 6.0; // PBOT 8.0
         public static final double MID_POS = 2.0; // 6.0; // PBOT 8.0
         public static final double MIN_POS = 1.5; // 2.0; // PBOT 0.002
     }
