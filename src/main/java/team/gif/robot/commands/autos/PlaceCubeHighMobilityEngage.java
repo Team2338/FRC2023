@@ -24,7 +24,7 @@ public class PlaceCubeHighMobilityEngage extends SequentialCommandGroup {
                 new CollectorEject().withTimeout(0.15),
                 new ParallelCommandGroup(
                     new GoHomeStageHome(),
-                    new WaitCommand(0.10).andThen(new AutoDrive(-0.7).withTimeout(4) )
+                    new WaitCommand(0.10).andThen(new AutoDrive(-0.7).withTimeout(3.2) )
                 ),
 
                 new ParallelDeadlineGroup(
@@ -48,7 +48,7 @@ public class PlaceCubeHighMobilityEngage extends SequentialCommandGroup {
                         new UntilBotIsFalling(),               // monitor gyro until level
                         new AutoDrive(0.3)
                 ),
-                new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.2)
+                new AutoDrive(-Constants.AutoConstants.DRIVE_SLOW).withTimeout(.4)
         );
     }
 }

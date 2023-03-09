@@ -24,13 +24,10 @@ public class UntilBotIsAngled extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        System.out.println("checking pitch " + Robot.pigeon.getPitch());
         return Robot.pigeon.getPitch() > 10.0;
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted){
-        System.out.println("ending");
-    }
+    public void end(boolean interrupted){}
 }

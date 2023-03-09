@@ -20,9 +20,7 @@ public class DriveSwerve extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        System.out.println("INITIALIZED DRIVE COMMAND");
-    }
+    public void initialize() {}
 
     @Override
     public void execute() {
