@@ -138,7 +138,7 @@ public final class Constants {
         public static final double DRIVE_SUPER_FAST = 1.0;
         public static final double DRIVE_FAST = 0.7;
         public static final double DRIVE_MEDIUM = 0.6;
-        public static final double DRIVE_SLOW = 0.3;
+        public static final double DRIVE_SLOW = 0.27; // 0.3;
         public static final double DRIVE_SUPER_SLOW = 0.2;
         public static final double DRIVE_TIME_DEFAULT = 1.7; // seconds until the bot gets to the charging station
     }

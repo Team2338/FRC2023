@@ -7,27 +7,41 @@ package team.gif.robot.commands.autos.lib;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class UntilBotIsFalling extends CommandBase {
+public class UntilBotIsLevel extends CommandBase {
 
-    public UntilBotIsFalling() {
+    private int posAngle = 0;
+    public UntilBotIsLevel() {
         super();
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        posAngle = 0;
+        if (Robot.pigeon.getPitch() > 2.0) {
+            posAngle = 2;
+        } else if (Robot.pigeon.getPitch() < -2.0) {
+            posAngle = 1;
+        }
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        if(posAngle == 2) {
+            Robot.swervetrain.drive(-0.2, 0, 0);
+        } else if(posAngle == 1) {
+            Robot.swervetrain.drive(0.2, 0, 0);
+        }
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
 //        System.out.println("checking pitch " + Robot.pigeon.getPitch());
-        // > -X is coming from alliance station and falling to become level
+        // > -X is coming fron alliance station and falling to become level
         // < X is falling from opponent side
-        return Robot.pigeon.getPitch() > -10.0 && Robot.pigeon.getPitch() < 12.0; // was -14.0
+        return Math.abs(Robot.pigeon.getPitch()) < 2.0;
     }
 
     // Called once the command ends or is interrupted.
