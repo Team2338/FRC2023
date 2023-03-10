@@ -5,6 +5,7 @@
 package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.commands.autos.lib.EngageWrapper;
 
 public class DriveToChargingStationCommand extends CommandBase {
 
@@ -17,7 +18,7 @@ public class DriveToChargingStationCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        new DriveToChargingStation().schedule();
+        new EngageWrapper().schedule();
     }
 
     // Returns true when the command should end.

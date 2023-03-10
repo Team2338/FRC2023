@@ -23,7 +23,7 @@ public class DriveAndEngage extends SequentialCommandGroup {
             new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.35), // give the bot a little push back to stop momentum
             new WaitCommand(0.5),
 
-            new UntilBotIsLevel().withTimeout(0.5),
+            new UntilBotIsLevel().withTimeout(3.0),
             new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.000001))
         );
     }
