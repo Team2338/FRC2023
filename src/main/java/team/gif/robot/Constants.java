@@ -173,7 +173,7 @@ public final class Constants {
 //        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
 
         public static final double TICKS_PER_DEGREE = 31.411; // PBOT 26.8
-        public static final double ZERO_OFFSET_TICKS = 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
+        public static final double ZERO_OFFSET_TICKS = 278; // was 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
         public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
