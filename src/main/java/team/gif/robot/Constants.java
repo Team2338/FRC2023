@@ -162,8 +162,8 @@ public final class Constants {
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
         // general motor function parameters
-        public static final double PEAK_OUTPUT_FORWARD = .75; // Percent motor command, arm is much faster than elevator
-        public static final double PEAK_OUTPUT_REVERSE = .75;
+        public static final double PEAK_OUTPUT_FORWARD = .75; //.5 // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_REVERSE = -.75; //-.5
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.25;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25;
 
@@ -199,16 +199,16 @@ public final class Constants {
 
     public static class Elevator {
         // PID constants
+        public static final double F = 0.8;
+        public static final double REV_F = 0.3;
         public static final double P = 4.0;
         public static final double I = 0.0;
         public static final double D = 0.0;
 
         // Motion Magic constants
-        public static final int MAX_VELOCITY = 375 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
+        public static final int MAX_VELOCITY = 425 * 10; //375 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final int REV_MAX_VELOCITY = 500 * 10;
-        public static final int MAX_ACCELERATION = 5000; // Elevator acceleration (ticks/100ms/s)
-        public static final double F = 0.8;
-        public static final double REV_F = 0.3;
+        public static final int MAX_ACCELERATION = 7000; //5000 // Elevator acceleration (ticks/100ms/s)
         public static final double GRAV_FEED_FORWARD = 400 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
