@@ -51,7 +51,9 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS;
-                    new ArmIn().schedule();
+//                    new ArmIn().schedule();
+                    armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS;
+                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_COLLECT_POS)).schedule();
                     break;
                 case Constants.Location.LOAD_FROM_SINGLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS;
@@ -61,6 +63,7 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_FLOOR:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_GROUND_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_GROUND_POS;
+                    //new ArmOut(Constants.TelescopingArm.MID_POS).schedule();
                     new ArmIn().schedule();
                     break;
                 case Constants.Location.PLACE_CONE_HIGH:
@@ -68,7 +71,7 @@ public class GoLocation extends CommandBase {
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
                     armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS;
 //                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
-                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_POS)).schedule();
+                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS)).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;

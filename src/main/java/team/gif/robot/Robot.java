@@ -8,8 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -18,6 +17,7 @@ import team.gif.lib.delay;
 import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
+import team.gif.robot.commands.collector.WheelsDefault;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
@@ -50,7 +50,8 @@ public class Robot extends TimedRobot {
     public static DriveArcade arcadeDrive;
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
-    public static Limelight limelight;
+    public static Limelight limelightHigh;
+    public static Limelight limelightLow;
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
@@ -86,12 +87,14 @@ public class Robot extends TimedRobot {
         collector = new Collector();
         collectorWheels = new CollectorWheels();
         telescopingArm = new TelescopingArm();
-        ui = new UI();
-        uiSmartDashboard = new UiSmartDashboard();
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
-        limelight = new Limelight();
+        limelightHigh = new Limelight();
+        limelightLow = new Limelight("limelight-low");
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
+
+        ui = new UI();
+        uiSmartDashboard = new UiSmartDashboard();
 
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
@@ -112,20 +115,21 @@ public class Robot extends TimedRobot {
         elevator.setElevatorTargetPos(elevator.getPosition());
         elevator.setDefaultCommand(new ElevatorPIDControl());
 
+        collectorWheels.setDefaultCommand(new WheelsDefault());
+
         // settings default wheels to WheelsIn;
         collectorWheels.wheelsIn();
 
+        limelightLow.setLEDOff();
+        limelightHigh.setLEDOff();
+
         oi = new OI();
 
+        SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
+
         if (isCompBot) {
-            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-            swerveTab.addDouble("robot x", swervetrain.getPose()::getX);
-            swerveTab.addDouble("robot y", swervetrain.getPose()::getY);
-            swerveTab.addDouble("robot rot", swervetrain.getPose().getRotation()::getDegrees);
-            swerveTab.addDouble("fR", SwerveDrivetrain.fR::getTurningHeading);
-            swerveTab.addDouble("fL", SwerveDrivetrain.fL::getTurningHeading);
-            swerveTab.addDouble("rR", SwerveDrivetrain.rR::getTurningHeading);
-            swerveTab.addDouble("rL", SwerveDrivetrain.rL::getTurningHeading);
+//SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+
         }
 
         elapsedTime = new Timer();
@@ -166,6 +170,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         eventLogger.addEvent("AUTO", "Auto Init");
         eventLogger.addEvent("AUTO", "Reset sensors");
+        pigeon.resetPigeonPosition(180);
 
         autonomousCommand = robotContainer.getAutonomousCommand(chosenAuto);
         eventLogger.addEvent("AUTO", "Got command from container");
@@ -207,6 +212,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         double timeLeft = DriverStation.getMatchTime();
         oi.setRumble((timeLeft <= 40.0 && timeLeft >= 36.0) ||
+                (timeLeft <= 25.0 && timeLeft >= 21.0) ||
                 (timeLeft <= 5.0 && timeLeft >= 3.0));
 
         telemetryLogger.run();
@@ -241,4 +247,5 @@ public class Robot extends TimedRobot {
 
     //TODO: Change and check before each usage
     public static boolean isCompBot = true;
+
 }

@@ -3,28 +3,30 @@ package team.gif.robot.commands.collector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class WheelsOut extends CommandBase {
-    public WheelsOut() {
+public class WheelsDefault extends CommandBase {
+
+    public WheelsDefault() {
         super();
+        addRequirements(Robot.collectorWheels);
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        Robot.collectorWheels.wheelsOut();
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        Robot.collectorWheels.setWheelState();
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 
-    // Called once the command ends or is interrupted.
+    // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
 }

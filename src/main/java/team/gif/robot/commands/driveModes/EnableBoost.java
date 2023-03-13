@@ -1,17 +1,21 @@
-package team.gif.robot.commands.collector;
+package team.gif.robot.commands.driveModes;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.lib.drivePace;
 import team.gif.robot.Robot;
+import team.gif.robot.subsystems.SwerveDrivetrain;
 
-public class ToggleWheelsInAndOut extends CommandBase {
-    public ToggleWheelsInAndOut() {
+public class EnableBoost extends CommandBase {
+    private drivePace drivePace;
+    public EnableBoost() {
         super();
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorWheels.wheelsOut();
+        drivePace = SwerveDrivetrain.getDrivePace();
+        Robot.swervetrain.setDrivePace(drivePace.BOOST_FR);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -24,9 +28,9 @@ public class ToggleWheelsInAndOut extends CommandBase {
         return false;
     }
 
-    // Called once the command ends or is interrupted.
+    // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.collectorWheels.wheelsIn();
+        Robot.swervetrain.setDrivePace(drivePace);
     }
 }

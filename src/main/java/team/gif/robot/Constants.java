@@ -55,11 +55,21 @@ public final class Constants {
 
         public static final boolean kGyroReversed = false;
 
-        public static final double MAX_DRIVE_RPM = 3500; // 2750; //4800 demo speed //2750
+        public static final double COAST_DRIVE_RPM = 2750; // 2750; //4800 demo speed //2750
+        public static final double BOOST_DRIVE_RPM = 2000;
+        public static final double SLOW_DRIVE_RPM = 3500;
 
-        public static final double MAX_SPEED_METERS_PER_SECOND = MAX_DRIVE_RPM *
+        public static final double COAST_SPEED_METERS_PER_SECOND = COAST_DRIVE_RPM *
             (Math.PI * Constants.ModuleConstants.WHEEL_DIAMETER_METERS) /
             (60.0 * Constants.ModuleConstants.GEAR_RATIO);
+
+        public static final double BOOST_SPEED_METERS_PER_SECOND = BOOST_DRIVE_RPM *
+                (Math.PI * Constants.ModuleConstants.WHEEL_DIAMETER_METERS) /
+                (60.0 * Constants.ModuleConstants.GEAR_RATIO);
+
+        public static final double SLOW_SPEED_METERS_PER_SECOND = SLOW_DRIVE_RPM *
+                (Math.PI * Constants.ModuleConstants.WHEEL_DIAMETER_METERS) /
+                (60.0 * Constants.ModuleConstants.GEAR_RATIO);
         public static double kMaxAccelerationMetersPerSecondSquared = 2;// TODO
     }
 
@@ -124,6 +134,13 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
                     MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
+
+        public static final double DRIVE_SUPER_FAST = 1.0;
+        public static final double DRIVE_FAST = 0.7;
+        public static final double DRIVE_MEDIUM = 0.6;
+        public static final double DRIVE_SLOW = 0.3;
+        public static final double DRIVE_SUPER_SLOW = 0.2;
+        public static final double DRIVE_TIME_DEFAULT = 1.5; // seconds until the bot gets to the charging station
     }
 
     public static final class Joystick {
@@ -131,11 +148,11 @@ public final class Constants {
     }
 
     public static class Arm {
-        public static final double FF = -0.02;
-        public static final double REV_FF = -0.03;
+        public static final double FF = -0.02; // -0.02
+        public static final double REV_FF = -0.04; // -0.03
         public static final double P = 2.0; // 2.0; // 1.2;
         public static final double REV_P = 1.0; // 0.5; // ToDo needs tuning (orig test only used P)
-        public static final double I = 0.0;
+        public static final double I = 0.002;
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
 
@@ -163,12 +180,12 @@ public final class Constants {
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
-        public static final double LOAD_FROM_GROUND_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_HIGH_POS = 95.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 99.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double PLACE_CONE_HIGH_POS = 80.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_HIGH_POS = 78.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
-        public static final double PLACE_LOW_POS = 110.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_LOW_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
         public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // this is the location which is safe to go to/from home
 //        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
@@ -196,12 +213,12 @@ public final class Constants {
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
         public static final double EL_TICKS_PER_INCH = 1757; // PBOT 1700;
-        public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/4; // 1/4 inch ... allows PID to end without having to be exact
+        public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/4 inch ... allows PID to end without having to be exact
         public static final double ZERO_OFFSET_TICKS = 13 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
-        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
+        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_GROUND_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 40 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -209,26 +226,32 @@ public final class Constants {
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_HOME_SAFE_POS = 15.6 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 14 maximum elevator height to allow arm to come under bar
-        public static final double HOME_POS = 14.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
+        public static final double HOME_POS = 14.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_POS = 49 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MIN_POS =  14 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
+        public static final double MIN_POS =  13.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
     public static class TelescopingArm {
+        public static final double P = 0.00;
+        public static final double FF = 0.00;
+        public static final double I = 0.00;
+        public static final double D = 0.00;
         public static final double HIGH_VELOCITY = 0.40; // 0.5 // TODO: need more testing
         public static final double LOW_VELOCITY = 0.1; // was 0.2 // TODO: need more testing
 
-        public static final double MAX_POS = 39.0; // 40.5;
-        public static final double HIGH_POS =  37.6;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
-        public static final double SLOW_POS = 8.0; // 6.0; // PBOT 8.0
+        public static final double MAX_POS = 39.8; // 40.5;
+        public static final double HIGH_CONE_POS =  39.5;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
+        public static final double HIGH_COLLECT_POS =  4.0;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
+        public static final double SLOW_POS = 6.0; // 6.0; // PBOT 8.0
         public static final double MID_POS = 2.0; // 6.0; // PBOT 8.0
         public static final double MIN_POS = 1.5; // 2.0; // PBOT 0.002
     }
 
     public static class Collector {
-        public static final double COLLECTOR_RUN = 0.5; //collector percent
+        public static final double COLLECTOR_RUN_COLLECT = 0.75; // 0.5; //collector percent
+        public static final double COLLECTOR_RUN_EJECT = 0.50; // 0.5; //collector percent
     }
 
     public static class Location {
@@ -245,6 +268,6 @@ public final class Constants {
     }
 
     public static class LED {
-        public static final int NUM_LEDS_TOTAL = 8;
+        public static final int NUM_LEDS_TOTAL = 11;
     }
 }
