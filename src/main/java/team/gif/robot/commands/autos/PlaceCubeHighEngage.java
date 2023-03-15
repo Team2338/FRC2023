@@ -24,7 +24,7 @@ public class PlaceCubeHighEngage extends SequentialCommandGroup {
             new CollectorEject().withTimeout(0.4),
             new GoHomeStageHome(),
 
-            new DriveAndEngage()// Drive to the charging station and engage
+            new DriveAndEngage() // Drive to the charging station and engage
 
 //            new AutoDrive(-Constants.AutoConstants.DRIVE_FAST).withTimeout(2.6), // drive (time and speed based) until we are angled
 //            new WaitCommand(.25),               // given pigeon time to settle

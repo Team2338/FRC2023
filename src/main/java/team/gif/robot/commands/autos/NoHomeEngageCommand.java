@@ -8,20 +8,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class NoHomeEngageCommand extends CommandBase {
 
-    public NoHomeEngageCommand() {
-    }
+    public NoHomeEngageCommand() {}
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize(){}
 
-    // Called every time the scheduler runs while the command is scheduled.
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
         new PlaceCubeHighNoHomeEngage().schedule();
     }
 
-    // Returns true when the command should end.
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
         return true;
@@ -29,7 +28,5 @@ public class NoHomeEngageCommand extends CommandBase {
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted) {
-    }
-
+    public void end(boolean interrupted) {}
 }
