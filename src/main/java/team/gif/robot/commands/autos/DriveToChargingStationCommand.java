@@ -18,7 +18,7 @@ public class DriveToChargingStationCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        new EngageWrapper().schedule();
+        new DriveToChargingStation().schedule();
     }
 
     // Returns true when the command should end.
