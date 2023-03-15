@@ -38,9 +38,6 @@ public class UntilBotIsLevel extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-//        System.out.println("checking pitch " + Robot.pigeon.getPitch());
-        // > -X is coming fron alliance station and falling to become level
-        // < X is falling from opponent side
         return Math.abs(Robot.pigeon.getPitch()) < 2.0;
     }
 
