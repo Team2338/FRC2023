@@ -138,9 +138,9 @@ public final class Constants {
         public static final double DRIVE_SUPER_FAST = 1.0;
         public static final double DRIVE_FAST = 0.7;
         public static final double DRIVE_MEDIUM = 0.6;
-        public static final double DRIVE_SLOW = 0.3;
+        public static final double DRIVE_SLOW = 0.27; // 0.3;
         public static final double DRIVE_SUPER_SLOW = 0.2;
-        public static final double DRIVE_TIME_DEFAULT = 1.5; // seconds until the bot gets to the charging station
+        public static final double DRIVE_TIME_DEFAULT = 1.7; // seconds until the bot gets to the charging station
     }
 
     public static final class Joystick {
@@ -163,9 +163,9 @@ public final class Constants {
 
         // general motor function parameters
         public static final double PEAK_OUTPUT_FORWARD = 0.5; // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_REVERSE = -0.5;
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.25;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25;
-        public static final double PEAK_OUTPUT_REVERSE = -0.5;
 
         // motion magic parameters (not currently used)
 //        public static final int MAX_VELOCITY = 16000; //16000 // 5000; // ticks/100ms
@@ -173,7 +173,7 @@ public final class Constants {
 //        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
 
         public static final double TICKS_PER_DEGREE = 31.411; // PBOT 26.8
-        public static final double ZERO_OFFSET_TICKS = 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
+        public static final double ZERO_OFFSET_TICKS = 278; // was 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
         public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
@@ -244,7 +244,7 @@ public final class Constants {
         public static final double MAX_POS = 39.8; // 40.5;
         public static final double HIGH_CONE_POS =  39.5;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
         public static final double HIGH_COLLECT_POS =  4.0;//36.6; // PBOT 38.5; // 40.0; // PBOT 64.0;
-        public static final double SLOW_POS = 6.0; // 6.0; // PBOT 8.0
+        public static final double SLOW_POS = 8.0; // 6.0; // PBOT 8.0
         public static final double MID_POS = 2.0; // 6.0; // PBOT 8.0
         public static final double MIN_POS = 1.5; // 2.0; // PBOT 0.002
     }

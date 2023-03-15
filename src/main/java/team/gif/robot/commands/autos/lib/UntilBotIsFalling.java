@@ -24,8 +24,9 @@ public class UntilBotIsFalling extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        System.out.println("checking pitch " + Robot.pigeon.getPitch());
-        // > -12 is falling from alliance side ... < 12 is falling from opponent side
+//        System.out.println("checking pitch " + Robot.pigeon.getPitch());
+        // > -X is coming from alliance station and falling to become level
+        // < X is falling from opponent side
         return Robot.pigeon.getPitch() > -10.0 && Robot.pigeon.getPitch() < 12.0; // was -14.0
     }
 
