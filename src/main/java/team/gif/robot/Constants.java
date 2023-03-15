@@ -163,9 +163,9 @@ public final class Constants {
 
         // general motor function parameters
         public static final double PEAK_OUTPUT_FORWARD = 0.5; // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_REVERSE = -0.5;
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.25;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25;
-        public static final double PEAK_OUTPUT_REVERSE = -0.5;
 
         // motion magic parameters (not currently used)
 //        public static final int MAX_VELOCITY = 16000; //16000 // 5000; // ticks/100ms
