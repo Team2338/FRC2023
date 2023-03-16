@@ -55,8 +55,8 @@ public final class Constants {
 
         public static final boolean kGyroReversed = false;
 
-        public static final double COAST_DRIVE_RPM = 2750; // 2750; //4800 demo speed //2750
-        public static final double BOOST_DRIVE_RPM = 2000;
+        public static final double COAST_DRIVE_RPM = 2500; // 2750; //4800 demo speed //2750
+        public static final double BOOST_DRIVE_RPM = 1750; // 2000;
         public static final double SLOW_DRIVE_RPM = 3500;
 
         public static final double COAST_SPEED_METERS_PER_SECOND = COAST_DRIVE_RPM *
@@ -162,10 +162,10 @@ public final class Constants {
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
         // general motor function parameters
-        public static final double PEAK_OUTPUT_FORWARD = 0.5; // Percent motor command, arm is much faster than elevator
-        public static final double PEAK_OUTPUT_REVERSE = -0.5;
-        public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.25;
-        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25;
+        public static final double PEAK_OUTPUT_FORWARD = 0.55; // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
+        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.35;
+        public static final double PEAK_OUTPUT_REVERSE = -0.55;
 
         // motion magic parameters (not currently used)
 //        public static final int MAX_VELOCITY = 16000; //16000 // 5000; // ticks/100ms
@@ -204,22 +204,22 @@ public final class Constants {
         public static final double D = 0.0;
 
         // Motion Magic constants
-        public static final int MAX_VELOCITY = 375 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
+        public static final int MAX_VELOCITY = 500 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final int REV_MAX_VELOCITY = 500 * 10;
-        public static final int MAX_ACCELERATION = 5000; // Elevator acceleration (ticks/100ms/s)
+        public static final int MAX_ACCELERATION = 9000; // Elevator acceleration (ticks/100ms/s)
         public static final double F = 0.8;
         public static final double REV_F = 0.3;
         public static final double GRAV_FEED_FORWARD = 400 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
-        public static final double EL_TICKS_PER_INCH = 1757; // PBOT 1700;
+        public static final double EL_TICKS_PER_INCH = 1750; // PBOT 1700;
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/4 inch ... allows PID to end without having to be exact
-        public static final double ZERO_OFFSET_TICKS = 13 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
+        public static final double ZERO_OFFSET_TICKS = 12.5 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_HIGH_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_HIGH_POS = 47.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 40 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
@@ -230,7 +230,7 @@ public final class Constants {
         public static final double HOME_POS = 14.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
-        public static final double MAX_POS = 49 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double MAX_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double MIN_POS =  13.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
