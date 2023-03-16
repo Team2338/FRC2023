@@ -226,6 +226,7 @@ public final class Constants {
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_HOME_SAFE_POS = 15.6 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 14 maximum elevator height to allow arm to come under bar
+        public static final double STAGE_POS = MAX_HOME_SAFE_POS;
         public static final double HOME_POS = 14.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
