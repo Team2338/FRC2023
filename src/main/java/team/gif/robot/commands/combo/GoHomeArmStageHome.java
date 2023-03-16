@@ -13,7 +13,7 @@ public class GoHomeArmStageHome extends SequentialCommandGroup {
         addCommands(
             new ParallelCommandGroup(
                 new ArmIn(),
-                new SetArmPosition(Constants.Arm.ARM_50),
+                new SetArmPosition(Constants.Arm.ARM_80),
                 new SetElevatorPosition(Constants.Elevator.HOME_POS),
                 new WaitCommand(1).andThen(new SetArmPosition(Constants.Arm.HOME_POS))
             )
