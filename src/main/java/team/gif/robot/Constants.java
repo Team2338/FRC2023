@@ -191,7 +191,7 @@ public final class Constants {
 //        public static final double MOVE_FROM_HOME_PRE_POS = LOAD_FROM_SINGLE_SUBSTATION_POS; // TODO is this necessary?
         public static final double HOME_POS = 25.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // PBOT 20
 
-        public static final double ARM_80 = 80 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double ARM_50 = 50 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //80
 
         public static final double MAX_POS = PLACE_LOW_POS; // should be the largest of all positions above
         public static final double MIN_POS = HOME_POS; // should be the smallest of all positions above

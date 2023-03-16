@@ -15,7 +15,7 @@ public class GoHome extends CommandBase {
     @Override
     public void initialize() {
         if (Math.abs(Robot.elevator.getPosition() - Constants.Elevator.LOAD_FROM_GROUND_POS) < Constants.Elevator.EL_TICKS_PER_INCH &&
-                (Robot.arm.getPosition() > Constants.Arm.ARM_80)) {
+                (Robot.arm.getPosition() > Constants.Arm.ARM_50)) {
             System.out.println("Elevator/Arm pointing to floor, move arm and then stage and home");
             new GoHomeArmStageHome().schedule();
         } else if (Robot.elevator.getPosition() < Constants.Elevator.MAX_HOME_SAFE_POS) {

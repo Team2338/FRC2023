@@ -9,10 +9,7 @@ import team.gif.robot.commands.elevator.SetElevatorPosition;
 public class GoHomeStageHome extends SequentialCommandGroup {
     public GoHomeStageHome() {
         addCommands(
-            new ParallelCommandGroup(
-                new SetArmPosition(Constants.Arm.STAGE_POS),
-                new SetElevatorPosition(Constants.Elevator.MAX_HOME_SAFE_POS)
-            ),
+            new SetArmPosition(Constants.Arm.ARM_50), // safe pos
             new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.HOME_POS),
                 new SetElevatorPosition(Constants.Elevator.HOME_POS)
