@@ -144,15 +144,16 @@ public final class Constants {
     }
 
     public static final class Joystick {
-        public static final double DEADBAND = 0.1;
+        public static final double DEADBAND = 0.05;
     }
 
     public static class Arm {
-        public static final double FF = -0.02; // -0.02
-        public static final double REV_FF = -0.04; // -0.03
-        public static final double P = 2.0; // 2.0; // 1.2;
-        public static final double REV_P = 1.0; // 0.5; // ToDo needs tuning (orig test only used P)
-        public static final double I = 0.002;
+        public static final double FF = -0.04; // -0.02 // arm is going down
+        public static final double P = 1.0; // 2.0; // 2.0; // 1.2; // arm is going down
+        public static final double REV_FF = -0.02; // -0.02; // -0.03 // arm is going up
+        public static final double REV_P = 2.0; // 2.0; // // arm is going up
+        public static final double I_GT_45 = 0.003; // 0.002
+        public static final double I_LT_45 = 0.0;
         public static final double D = 0.0;
         public static final double Ticks_Move = 3;
 
@@ -162,10 +163,10 @@ public final class Constants {
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
         // general motor function parameters
-        public static final double PEAK_OUTPUT_FORWARD = 0.55; // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_FORWARD = 0.55; // 0.55; // down // Percent motor command, arm is much faster than elevator
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.35;
-        public static final double PEAK_OUTPUT_REVERSE = -0.55;
+        public static final double PEAK_OUTPUT_REVERSE = -0.55; // -0.55 // arm is going up
 
         // motion magic parameters (not currently used)
 //        public static final int MAX_VELOCITY = 16000; //16000 // 5000; // ticks/100ms

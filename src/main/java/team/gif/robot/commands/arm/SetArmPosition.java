@@ -48,12 +48,21 @@ public class SetArmPosition extends CommandBase {
 
         Robot.arm.configPeakOutputForward(peakOutputForward);
 
+        // when the arm is less than 45 degrees, we don't want to use I because it causes the arm to overshoot
+        if( Robot.arm.getPositionDegrees() > 45 )
+            Robot.arm.configI(Constants.Arm.I_GT_45);
+        else
+            Robot.arm.configI(Constants.Arm.I_LT_45);
+
+        // use different constants if the arm is going up vs going down
         if (Robot.arm.PIDError() > 0){
-            Robot.arm.configF(Constants.Arm.FF);
-            Robot.arm.configP(Constants.Arm.P);
-        } else {
+            // arm is going up
             Robot.arm.configF(Constants.Arm.REV_FF);
             Robot.arm.configP(Constants.Arm.REV_P);
+        } else {
+            // arm is going down
+            Robot.arm.configF(Constants.Arm.FF);
+            Robot.arm.configP(Constants.Arm.P);
         }
         Robot.arm.PIDMove();
     }

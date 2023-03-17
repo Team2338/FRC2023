@@ -32,6 +32,12 @@ public class DriveSwerve extends CommandBase {
             double rot = Robot.oi.driver.getRightX();
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
 
+            if (x != 0)
+                x = x * Math.abs(x);
+
+            if (y != 0)
+                y = y * Math.abs(y);
+
             //Forward speed, Sideways speed, Rotation Speed
             x = xLimiter.calculate(x) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
             y = yLimiter.calculate(y) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
