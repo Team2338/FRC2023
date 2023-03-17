@@ -182,7 +182,7 @@ public final class Constants {
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
         public static final double LOAD_FROM_GROUND_POS = 99.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_MID_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
         public static final double PLACE_CONE_HIGH_POS = 78.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
         public static final double PLACE_LOW_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
@@ -220,7 +220,7 @@ public final class Constants {
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 47.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_MID_POS = 40 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_MID_POS = 20.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -269,6 +269,6 @@ public final class Constants {
     }
 
     public static class LED {
-        public static final int NUM_LEDS_TOTAL = 11;
+        public static final int NUM_LEDS_TOTAL = 10;
     }
 }
