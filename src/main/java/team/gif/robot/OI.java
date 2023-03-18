@@ -14,7 +14,7 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
-import team.gif.robot.commands.combo.GoHomeConditional;
+import team.gif.robot.commands.combo.GoHomeTimeCondition;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.drivetrain.MoveAwaySlow;
@@ -24,9 +24,6 @@ import team.gif.robot.commands.drivetrain.MoveRightSlow;
 import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
-import team.gif.robot.commands.telescopingArm.ArmIn;
-import team.gif.robot.commands.telescopingArm.ArmOut;
-import team.gif.robot.commands.telescopingArm.MoveArm;
 
 public class OI {
     /*
@@ -158,10 +155,15 @@ public class OI {
 
         dLStickBtn.whileTrue(new EnableBoost());
 
-        //gamePieceSensor.onTrue(new GoHome());
-        //gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)).onTrue(new GoHome());
-        gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor).andThen(new GoHomeConditional()));
-        gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
+        gamePieceSensor.onTrue(
+            new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
+            .andThen(Robot.collector::resetTimer)
+            .andThen(new GoHome())
+        );
+        gamePieceSensor.onFalse(
+            new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
+            .andThen(new GoHomeTimeCondition())
+        );
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
         dBack.onTrue(new NoHomeEngageCommand());
