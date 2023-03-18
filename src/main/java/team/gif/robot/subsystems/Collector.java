@@ -26,9 +26,12 @@ public class Collector extends SubsystemBase {
 
     public void resetTimer() {
         elaspedTime.reset();
+        elaspedTime.start();
+        System.out.println("Timer reset: " + getTimer());
     }
 
     public double getTimer() {
+        System.out.println("get timer" + elaspedTime.get());
         return elaspedTime.get();
     }
 }
