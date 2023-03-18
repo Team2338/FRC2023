@@ -14,11 +14,13 @@ public class GoHomeConditional extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if(Robot.elevator.getPosition() > Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS - 20 && Robot.elevator.getPosition() < Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS + 20) {
-            if(Robot.arm.getPosition() > Constants.Arm.LOAD_FROM_SINGLE_SUBSTATION_POS - 20 && Robot.arm.getPosition() < Constants.Arm.LOAD_FROM_SINGLE_SUBSTATION_POS + 20) {
-                new GoHome();
+        if(Math.abs(Robot.elevator.getPosition() - Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS) < (1 * Constants.Elevator.EL_TICKS_PER_INCH)) {
+            if(Math.abs(Robot.arm.getPosition() - Constants.Arm.LOAD_FROM_SINGLE_SUBSTATION_POS) < (3 * Constants.Arm.TICKS_PER_DEGREE)) {
+                return;
             }
         }
+
+        new GoHome().schedule();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
