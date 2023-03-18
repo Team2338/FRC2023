@@ -6,9 +6,9 @@ package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveToChargingStationCommand extends CommandBase {
+public class NoHomeEngageCommand extends CommandBase {
 
-    public DriveToChargingStationCommand() {}
+    public NoHomeEngageCommand() {}
 
     // Called when the command is initially scheduled.
     @Override
@@ -17,7 +17,7 @@ public class DriveToChargingStationCommand extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        new DriveToChargingStation().schedule();
+        new PlaceCubeHighNoHomeEngage().schedule();
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
@@ -26,7 +26,7 @@ public class DriveToChargingStationCommand extends CommandBase {
         return true;
     }
 
-    // Called when the command ends or is interrupted.
+    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
 }

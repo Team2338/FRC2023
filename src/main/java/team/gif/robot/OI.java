@@ -9,6 +9,7 @@ import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
+import team.gif.robot.commands.autos.NoHomeEngageCommand;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -165,7 +166,7 @@ public class OI {
         );
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
-        dBack.onTrue(new DriveAndEngageCommand());
+        dBack.onTrue(new NoHomeEngageCommand());
         dStart.onTrue(new DriveToChargingStationCommand());
 
         dDPadUp.whileTrue(new MoveAwaySlow());

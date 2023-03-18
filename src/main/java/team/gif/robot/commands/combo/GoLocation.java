@@ -71,7 +71,10 @@ public class GoLocation extends CommandBase {
                     armTargetPos = Constants.Arm.PLACE_CONE_HIGH_POS;
                     armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS;
 //                    new ArmOut(Constants.TelescopingArm.HIGH_POS).schedule();
-                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS)).schedule();
+                    if( Robot.elevator.getPosition() < Constants.Elevator.PLACE_CONE_MID_POS)
+                        new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS)).schedule();
+                    else
+                        new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS).schedule();
                     break;
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
