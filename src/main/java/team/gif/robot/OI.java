@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
-import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
+import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
 import team.gif.robot.commands.collector.CollectorEject;
@@ -22,9 +22,6 @@ import team.gif.robot.commands.drivetrain.MoveRightSlow;
 import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
-import team.gif.robot.commands.telescopingArm.ArmIn;
-import team.gif.robot.commands.telescopingArm.ArmOut;
-import team.gif.robot.commands.telescopingArm.MoveArm;
 
 public class OI {
     /*
@@ -143,7 +140,8 @@ public class OI {
         dLBump.whileTrue(new ConeLED());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dB.onTrue(new LimeLightAutoAlign());
+        //dB.onTrue(new LimeLightAutoAlign()); --temporarily off
+        dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
         dA.onTrue(new ArmLift());
 
