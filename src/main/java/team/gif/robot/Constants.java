@@ -204,6 +204,11 @@ public final class Constants {
         public static final double I = 0.0;
         public static final double D = 0.0;
 
+        public static final double P_HOLD = 0.0;
+        public static final double I_HOLD = 0.0;
+        public static final double D_HOLD = 0.0;
+        public static final double F_HOLD = 0.0;
+
         // Motion Magic constants
         public static final int MAX_VELOCITY = 500 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final int REV_MAX_VELOCITY = 500 * 10;
