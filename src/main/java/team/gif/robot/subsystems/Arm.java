@@ -103,6 +103,10 @@ public class Arm extends SubsystemBase {
         armMotor.config_kP(0, p);
     }
 
+    public void configI(double i) {
+        armMotor.config_kI(0, i);
+    }
+
     public boolean getSensor() {
         return armGamePieceSensor.get();
     }
@@ -127,7 +131,7 @@ public class Arm extends SubsystemBase {
         // PID
         armMotor.config_kF(0, Constants.Arm.FF); // feed forward
         armMotor.config_kP(0, Constants.Arm.P); // proportional
-        armMotor.config_kI(0,Constants.Arm.I);
+        armMotor.config_kI(0,Constants.Arm.I_GT_45);
         armMotor.config_kD(0,Constants.Arm.D);
         armMotor.config_IntegralZone(0,314);
 
@@ -140,7 +144,7 @@ public class Arm extends SubsystemBase {
         armMotor.configNominalOutputReverse(0);     // nominal = minimum
         armMotor.configPeakOutputReverse(Constants.Arm.PEAK_OUTPUT_REVERSE);     // use max 50% power
         armMotor.configPeakOutputForward(Constants.Arm.PEAK_OUTPUT_FORWARD);      // use max 50% power
-        armMotor.configClosedloopRamp(1); // time in seconds to get to peak output power
+        armMotor.configClosedloopRamp(0.25); // time in seconds to get to peak output power
 
         // additional Motions Magic settings
         // *** arm is not currently using motion magic ***

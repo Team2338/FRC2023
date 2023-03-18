@@ -2,6 +2,7 @@ package team.gif.robot.commands.autoaim;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
@@ -12,6 +13,7 @@ public class LimeLightAutoCollect extends CommandBase {
     private double rOffset;
     private final double yTolerence = 5.0; // degrees
     private double yOffset;
+    private Command collectorCollectSchedule = new CollectorCollect();
 
     int count = 0;
 
@@ -20,7 +22,13 @@ public class LimeLightAutoCollect extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        new CollectorCollect().schedule();
+//        if (Robot.collectorWheels.getWheelState()) {
+//            Robot.limelightHigh.setPipeline(1);
+//        } else {
+//            Robot.limelightHigh.setPipeline(0);
+//        }
+        collectorCollectSchedule.schedule();
+        count = 0;
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -42,8 +50,10 @@ public class LimeLightAutoCollect extends CommandBase {
             SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
             Robot.swervetrain.setModuleStates(moduleStates);
         }
-        if (count == 20) {
-            Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
+        if (count == 20 && Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MAX_POS) {
+            Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.HIGH_VELOCITY);
+        } else {
+            Robot.telescopingArm.setMotorSpeed(0);
         }
 
     }
@@ -51,6 +61,8 @@ public class LimeLightAutoCollect extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
+        if( Robot.oi.driver.getHID().getXButtonPressed()) // need a kill switch
+            return true;
         return Robot.arm.armGamePieceSensor.get();
     }
 
@@ -60,5 +72,6 @@ public class LimeLightAutoCollect extends CommandBase {
         ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0.0);
         SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         Robot.swervetrain.setModuleStates(moduleStates);
+        collectorCollectSchedule.cancel();
     }
 }

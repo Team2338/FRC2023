@@ -6,13 +6,16 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
+import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
+import team.gif.robot.commands.autos.NoHomeEngageCommand;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
+import team.gif.robot.commands.combo.GoHomeTimeCondition;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.drivetrain.MoveAwaySlow;
@@ -140,10 +143,10 @@ public class OI {
         dLBump.whileTrue(new ConeLED());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        //dB.onTrue(new LimeLightAutoAlign()); --temporarily off
+        dA.onTrue(new LimeLightAutoAlign()); //--temporarily off
         dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
-        dA.onTrue(new ArmLift());
+//        dA.onTrue(new ArmLift());
 
         // enable these for testing purposes
         // commented out so it doesn't throw errors on the console
@@ -154,11 +157,18 @@ public class OI {
 
         dLStickBtn.whileTrue(new EnableBoost());
 
-        gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor));
-        gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
+        gamePieceSensor.onTrue(
+            new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
+            .andThen(Robot.collector::resetTimer)
+            .andThen(new GoHome())
+        );
+        gamePieceSensor.onFalse(
+            new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
+            .andThen(new GoHomeTimeCondition())
+        );
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
-        dBack.onTrue(new DriveAndEngageCommand());
+        dBack.onTrue(new NoHomeEngageCommand());
         dStart.onTrue(new DriveToChargingStationCommand());
 
         dDPadUp.whileTrue(new MoveAwaySlow());
