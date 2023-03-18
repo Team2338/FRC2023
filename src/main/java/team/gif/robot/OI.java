@@ -9,6 +9,7 @@ import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
+import team.gif.robot.commands.autos.TwoSecondsGoHome;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -156,9 +157,11 @@ public class OI {
 
         dLStickBtn.whileTrue(new EnableBoost());
 
-        //gamePieceSensor.onTrue(new GoHome());
-        //gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)).onTrue(new GoHome());
-        gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor).andThen(new GoHome()));
+        gamePieceSensor.onTrue(
+            new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
+            .andThen(new GoHome())
+            .andThen(new TwoSecondsGoHome())
+        );
         gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
