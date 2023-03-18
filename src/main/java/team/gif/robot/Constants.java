@@ -144,7 +144,7 @@ public final class Constants {
     }
 
     public static final class Joystick {
-        public static final double DEADBAND = 0.05;
+        public static final double DEADBAND = 0.1;
     }
 
     public static class Arm {
@@ -222,7 +222,7 @@ public final class Constants {
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/4 inch ... allows PID to end without having to be exact
         public static final double ZERO_OFFSET_TICKS = 12.5 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
-        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 46 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
+        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 44.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 47.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
