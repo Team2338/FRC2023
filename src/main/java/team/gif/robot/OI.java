@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
+import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
 import team.gif.robot.commands.autos.NoHomeEngageCommand;
@@ -142,9 +143,10 @@ public class OI {
         dLBump.whileTrue(new ConeLED());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dB.onTrue(new LimeLightAutoAlign());
+        dA.onTrue(new LimeLightAutoAlign()); //--temporarily off
+        dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
-        dA.onTrue(new ArmLift());
+//        dA.onTrue(new ArmLift());
 
         // enable these for testing purposes
         // commented out so it doesn't throw errors on the console

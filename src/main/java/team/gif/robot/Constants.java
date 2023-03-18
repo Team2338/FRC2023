@@ -241,6 +241,7 @@ public final class Constants {
         public static final double I = 0.00;
         public static final double D = 0.00;
         public static final double HIGH_VELOCITY = 0.40; // 0.5 // TODO: need more testing
+        public static final double MID_VELOCITY = 0.25;
         public static final double LOW_VELOCITY = 0.1; // was 0.2 // TODO: need more testing
 
         public static final double MAX_POS = 39.8; // 40.5;
