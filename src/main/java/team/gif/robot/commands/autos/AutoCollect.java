@@ -10,10 +10,7 @@ public class AutoCollect extends SequentialCommandGroup {
 
     public AutoCollect() {
         addCommands(
-            new ParallelDeadlineGroup(
-                    new UntilCollect(),
-                    new LimeLightAutoCollect()
-            )
+            new LimeLightAutoCollect()
         );
     }
 }
