@@ -15,9 +15,8 @@ import java.util.HashMap;
 public class PlaceCollectPlace extends SequentialCommandGroup {
 
     public PlaceCollectPlace() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("Collect GP One Barrier", 3, 6);
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("Collect GP One Barrier", 1, 3);
         HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("collector", new GoFloorFromHome().andThen(new CollectorCollectAutos().withTimeout(3.0)));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
                 RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
@@ -36,10 +35,7 @@ public class PlaceCollectPlace extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PlaceConeHighMobility(),
-            trajectoryWithEvents,
-            new CollectorCollect().withTimeout(0.3),
-            trajectoryWithEventsReturn
+            trajectoryWithEvents
         );
     }
 }

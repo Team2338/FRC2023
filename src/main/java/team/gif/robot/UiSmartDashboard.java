@@ -43,7 +43,7 @@ public class UiSmartDashboard {
         autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
 //        autoModeChooser.addOption("P Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
         autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
-//        autoModeChooser.addOption("P Collect Place", autoMode.PLACE_COLLECT_PLACE);
+        autoModeChooser.addOption("P Collect Place", autoMode.PLACE_COLLECT_PLACE);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)
