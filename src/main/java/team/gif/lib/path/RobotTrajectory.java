@@ -10,6 +10,8 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.*;
+import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.targeting.PhotonPipelineResult;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
@@ -125,5 +127,20 @@ public class RobotTrajectory {
         return swerveControllerCommand;
     }
 
+    public PhotonPipelineResult getResult() {
+        return Robot.limelightLow.getLatestResult();
+    }
 
+    public boolean lLHasTargets() {
+        return getResult().hasTargets();
+    }
+
+    public PhotonPoseEstimator getEstimatedPose() {
+        if(!lLHasTargets()) {
+            System.out.println("Couldn't find a target");
+            return null;
+        }
+
+
+    }
 }

@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import org.photonvision.PhotonCamera;
+import org.photonvision.common.hardware.VisionLEDMode;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
 import team.gif.robot.commands.arm.ArmPIDControl;
@@ -51,7 +53,7 @@ public class Robot extends TimedRobot {
     public static SwerveDrivetrain swervetrain = null;
     public static DriveSwerve driveSwerve;
     public static Limelight limelightHigh;
-    public static Limelight limelightLow;
+    public static PhotonCamera limelightLow;
     public static Arm arm;
     public static Elevator elevator;
     public static Collector collector;
@@ -89,7 +91,7 @@ public class Robot extends TimedRobot {
         telescopingArm = new TelescopingArm();
         pigeon = isCompBot ? new Pigeon(RobotMap.PIGEON_COMP_PBOT) : new Pigeon(new TalonSRX(RobotMap.PIGEON_TANK_PBOT));
         limelightHigh = new Limelight();
-        limelightLow = new Limelight("limelight-low");
+        limelightLow = new PhotonCamera("limelight-low");
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
@@ -120,7 +122,7 @@ public class Robot extends TimedRobot {
         // settings default wheels to WheelsIn;
         collectorWheels.wheelsIn();
 
-        limelightLow.setLEDOff();
+        limelightLow.setLED(VisionLEDMode.kOff);
         limelightHigh.setLEDOff();
 
         oi = new OI();
