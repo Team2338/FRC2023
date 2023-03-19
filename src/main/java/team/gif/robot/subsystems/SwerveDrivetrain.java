@@ -128,7 +128,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         odometry.update(
-                new Rotation2d().fromDegrees(Robot.pigeon.get360Heading()), //TODO: Check getHeading Function
+                Robot.pigeon.getRotation2d(), //TODO: Check getHeading Function
                 getPosition()
         );
     }
