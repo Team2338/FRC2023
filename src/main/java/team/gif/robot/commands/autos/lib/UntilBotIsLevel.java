@@ -39,7 +39,9 @@ public class UntilBotIsLevel extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return Math.abs(Robot.pigeon.getPitch()) < 2.0;
+        // use non-zero degree because we want to allow the bot to fall as opposed
+        // to stopping when it is level, otherwise it will overshoot
+        return Math.abs(Robot.pigeon.getPitch()) < 10.0;
     }
 
     // Called once the command ends or is interrupted.

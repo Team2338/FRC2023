@@ -179,10 +179,10 @@ public class OI {
         aLStickBtn.onTrue(new DriveAndEngageFastCommand());
 
         // Test joystick used during practice matches to determine which auto to use
-//        tBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
-//        tStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
-//        tDPadRight.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
-//        tDPadLeft.onTrue(new DriveAndEngageFastCommand());
+        tBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
+        tStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
+        tDPadRight.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
+        tDPadLeft.onTrue(new DriveAndEngageFastCommand());
 
         dDPadUp.whileTrue(new MoveAwaySlow());
         dDPadRight.whileTrue(new MoveRightSlow());

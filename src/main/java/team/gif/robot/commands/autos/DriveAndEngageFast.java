@@ -18,6 +18,7 @@ public class DriveAndEngageFast extends SequentialCommandGroup {
         addCommands(
 //            new AutoDrive(-Constants.AutoConstants.DRIVE_FAST).withTimeout(SmartDashboard.getNumber("AutoTime", 2.3)), // drive (time and speed based) until we are angled
             new DriveToChargingStation(),
+            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001)),
             new WaitCommand(.25),               // give pigeon time to settle
             new ParallelDeadlineGroup(
                 new UntilBotIsFalling(),               // monitor gyro until level
