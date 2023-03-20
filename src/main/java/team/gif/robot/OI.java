@@ -116,7 +116,7 @@ public class OI {
         // elevator
         aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
 
-        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
+//        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
 
         // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());
@@ -144,10 +144,10 @@ public class OI {
         dLBump.whileTrue(new ConeLED());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dA.onTrue(new LimeLightAutoAlign()); //--temporarily off
+        dA.onTrue(new LimeLightAutoAlign());
+//        dA.onTrue(new ArmLift());
         dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
-//        dA.onTrue(new ArmLift());
 
         // enable these for testing purposes
         // commented out so it doesn't throw errors on the console
