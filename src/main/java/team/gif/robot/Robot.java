@@ -180,11 +180,13 @@ public class Robot extends TimedRobot {
         runAutoScheduler = true;
 
         compressor.disable();
+
     }
 
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        collector.resetTimer();
         if (runAutoScheduler && (elapsedTime.get() > (chosenDelay.getValue()))) {
             if (autonomousCommand != null) {
                 autonomousCommand.schedule();

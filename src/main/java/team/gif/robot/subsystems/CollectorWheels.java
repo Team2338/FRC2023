@@ -13,14 +13,29 @@ public class CollectorWheels extends SubsystemBase {
     public void wheelsIn() {
         state = DoubleSolenoid.Value.kForward;
         Robot.ledSubsystem.LEDWheelsIn();
+        Robot.limelightHigh.setPipeline(0);
     }
 
     public void wheelsOut() {
         state = DoubleSolenoid.Value.kReverse;
         Robot.ledSubsystem.LEDWheelsOut();
+        Robot.limelightHigh.setPipeline(1);
     }
 
     public void setWheelState() {
         solenoid.set(state);
+    }
+
+    /**
+     * Gets the state of the collector wheel position
+     *
+     * @return boolean - true if wheels are out (cube), false if wheels are in (cone)
+     */
+    public boolean getWheelState() {
+        if (solenoid.get() == DoubleSolenoid.Value.kReverse) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
+import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
 import team.gif.robot.commands.autos.NoHomeEngageCommand;
@@ -14,6 +15,8 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
+import team.gif.robot.commands.combo.GoHomeConditional;
+import team.gif.robot.commands.combo.GoHomeTimeCondition;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
 import team.gif.robot.commands.drivetrain.MoveAwaySlow;
@@ -23,9 +26,6 @@ import team.gif.robot.commands.drivetrain.MoveRightSlow;
 import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
-import team.gif.robot.commands.telescopingArm.ArmIn;
-import team.gif.robot.commands.telescopingArm.ArmOut;
-import team.gif.robot.commands.telescopingArm.MoveArm;
 
 public class OI {
     /*
@@ -116,7 +116,7 @@ public class OI {
         // elevator
         aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
 
-        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
+//        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
 
         // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());
@@ -144,9 +144,10 @@ public class OI {
         dLBump.whileTrue(new ConeLED());
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dB.onTrue(new LimeLightAutoAlign());
+        dA.onTrue(new LimeLightAutoAlign());
+//        dA.onTrue(new ArmLift());
+        dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
-        dA.onTrue(new ArmLift());
 
         // enable these for testing purposes
         // commented out so it doesn't throw errors on the console
@@ -157,12 +158,27 @@ public class OI {
 
         dLStickBtn.whileTrue(new EnableBoost());
 
-        gamePieceSensor.onTrue(new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor));
-        gamePieceSensor.onFalse(new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor));
+        gamePieceSensor.onTrue(
+            new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
+            .andThen(Robot.collector::resetTimer)
+            .andThen(new GoHomeConditional())
+        );
+        gamePieceSensor.onFalse(
+            new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
+            .andThen(new GoHomeTimeCondition())
+        );
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
-        dBack.onTrue(new NoHomeEngageCommand());
-        dStart.onTrue(new DriveToChargingStationCommand());
+
+        // Test joystick commands used during practice matches to determine which auto to use
+        dBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
+        aLBump.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
+        dStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
+
+        // Test joystick used during practice matches to determine which auto to use
+//        tBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
+//        tStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
+//        tDPadRight.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
 
         dDPadUp.whileTrue(new MoveAwaySlow());
         dDPadRight.whileTrue(new MoveRightSlow());
