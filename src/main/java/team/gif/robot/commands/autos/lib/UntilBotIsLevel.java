@@ -5,11 +5,13 @@
 package team.gif.robot.commands.autos.lib;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class UntilBotIsLevel extends CommandBase {
 
-    private int posAngle = 0;
+    private double initialPitch;
+
     public UntilBotIsLevel() {
         super();
     }
@@ -17,21 +19,16 @@ public class UntilBotIsLevel extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        posAngle = 0;
-        if (Robot.pigeon.getPitch() > 4.0) {
-            posAngle = 2;
-        } else if (Robot.pigeon.getPitch() < -4.0) {
-            posAngle = 1;
-        }
+        initialPitch = Robot.pigeon.getPitch();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if(posAngle == 2) {
-            Robot.swervetrain.drive(-0.2, 0, 0);
-        } else if(posAngle == 1) {
-            Robot.swervetrain.drive(0.2, 0, 0);
+        if (initialPitch > 4.0) {
+            Robot.swervetrain.drive(-Constants.AutoConstants.DRIVE_SUPER_SLOW, 0, 0);
+        } else if (initialPitch < -4.0) {
+            Robot.swervetrain.drive(Constants.AutoConstants.DRIVE_SUPER_SLOW, 0, 0);
         }
     }
 

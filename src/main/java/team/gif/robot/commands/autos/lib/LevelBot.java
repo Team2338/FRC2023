@@ -24,9 +24,13 @@ public class LevelBot extends CommandBase {
         // continuously monitor the gyro angle
         double pitch = Robot.pigeon.getPitch();
 
-        if (pitch > -2.0 && pitch < 2.0)
+        double [] accel = Robot.pigeon.getAccelAngles();
+
+        System.out.println("accel :" + accel[0] + " " + accel[1] + " " + accel[2]);
+
+        if (Math.abs(pitch) < 10.0)
             Robot.swervetrain.drive(0,0,0.0001);
-        else if (pitch > 2.0)
+        else if (pitch > 0)
             Robot.swervetrain.drive(Constants.AutoConstants.DRIVE_SLOW, 0, 0);
         else
             Robot.swervetrain.drive(-Constants.AutoConstants.DRIVE_SLOW, 0, 0);
