@@ -254,7 +254,7 @@ public final class Constants {
 
     public static class Collector {
         public static final double COLLECTOR_RUN_COLLECT = 0.75; // 0.5; //collector percent
-        public static final double COLLECTOR_RUN_EJECT = 0.50; // 0.5; //collector percent
+        public static final double COLLECTOR_RUN_EJECT = 0.45; // 0.5; //collector percent
     }
 
     public static class Location {
