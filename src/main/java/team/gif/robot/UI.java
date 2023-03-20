@@ -31,11 +31,11 @@ public class UI {
 //        shuffleboardTab.addNumber("Elevator target", elevator::getTargetPosition)
 //                .withPosition(1, 2);
 
-        shuffleboardTab.addNumber("Arm Output", arm::getOutput)
-                .withPosition(2, 1);
-
-        shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
-                .withPosition(3, 1);
+//        shuffleboardTab.addNumber("Arm Output", arm::getOutput)
+//                .withPosition(2, 1);
+//
+//        shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
+//                .withPosition(3, 1);
 //
 //        shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
 //                .withPosition(0, 1);
