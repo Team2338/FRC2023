@@ -114,6 +114,7 @@ public class Pigeon {
 
     /**
      * Reset the pigeon position to something other than 0
+     * Also calibrates the pigeon pitch to 0
      * @param angle the initial angle in degrees
      */
     public void resetPigeonPosition(double angle) {
