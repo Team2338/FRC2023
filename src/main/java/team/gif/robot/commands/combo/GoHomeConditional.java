@@ -7,6 +7,13 @@ import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 
 public class GoHomeConditional extends CommandBase {
+    /**
+     * Going Home is now automatic when the robot detects a game piece.
+     * <br>
+     * <b>Exceptions:</b><br>
+     * <i>Single Substation:</i> This is drive team controlled in order to back out of the station
+     * before moving the arm/elevator. Otherwise, the robot crashes into the loading station
+     */
     public GoHomeConditional() {
         super();
     }

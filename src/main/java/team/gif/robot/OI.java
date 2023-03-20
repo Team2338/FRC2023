@@ -15,6 +15,7 @@ import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
+import team.gif.robot.commands.combo.GoHomeConditional;
 import team.gif.robot.commands.combo.GoHomeTimeCondition;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
@@ -160,7 +161,7 @@ public class OI {
         gamePieceSensor.onTrue(
             new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
             .andThen(Robot.collector::resetTimer)
-            .andThen(new GoHome())
+            .andThen(new GoHomeConditional())
         );
         gamePieceSensor.onFalse(
             new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
@@ -168,8 +169,16 @@ public class OI {
         );
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
-        dBack.onTrue(new NoHomeEngageCommand());
-        dStart.onTrue(new DriveToChargingStationCommand());
+
+        // Test joystick commands used during practice matches to determine which auto to use
+        dBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
+        aLBump.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
+        dStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
+
+        // Test joystick used during practice matches to determine which auto to use
+//        tBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
+//        tStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
+//        tDPadRight.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
 
         dDPadUp.whileTrue(new MoveAwaySlow());
         dDPadRight.whileTrue(new MoveRightSlow());
