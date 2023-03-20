@@ -19,15 +19,19 @@ public class UntilBotIsLevel extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("Checking for Level Bot (UntilBotIsLevel)");
         initialPitch = Robot.pigeon.getPitch();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
+        System.out.println("Checking ...");
         if (initialPitch > 4.0) {
+            System.out.println("         ... bot is not level");
             Robot.swervetrain.drive(-Constants.AutoConstants.DRIVE_SUPER_SLOW, 0, 0);
         } else if (initialPitch < -4.0) {
+            System.out.println("         ... bot is not level");
             Robot.swervetrain.drive(Constants.AutoConstants.DRIVE_SUPER_SLOW, 0, 0);
         }
     }
@@ -41,6 +45,6 @@ public class UntilBotIsLevel extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted){
-        System.out.println("Finishing Until Bot Is Level");
+        System.out.println("Bot is level. Exiting");
     }
 }
