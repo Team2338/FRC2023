@@ -23,9 +23,9 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
 
-    public void PIDMove(double position) {
+    public void PIDHold() {
         elevatorMotor.selectProfileSlot(1,0);
-        elevatorMotor.set(ControlMode.Position, position); // closed loop position control
+        elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
     }
 
     public double getPosition() {

@@ -17,7 +17,7 @@ public class ElevatorPIDControl extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.elevator.PIDMove(Robot.elevator.getPosition()); // for now, just apply simple FF gain to keep the elevator from falling
+        Robot.elevator.PIDHold(); // for now, just apply simple FF gain to keep the elevator from falling
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.

@@ -42,7 +42,7 @@ public class ElevatorManualControl extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.elevator.PIDMove(Robot.elevator.getPosition());
+        Robot.elevator.PIDHold();
         Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
         Robot.elevator.enableLowerSoftLimit(true);
     }
