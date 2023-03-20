@@ -16,9 +16,7 @@ public class MoveCloserSlow extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-//        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, -0.20, 0.0);
-//        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-//        Robot.swervetrain.setModuleStates(moduleStates);
+        // move at 0.5 m/s (or 0.2 m/s if right stick is pressed)
         if( Robot.oi.driver.getHID().getRightStickButton())
             Robot.swervetrain.drive(-0.2, 0, 0.0);
         else
@@ -28,9 +26,6 @@ public class MoveCloserSlow extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-//        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
-//        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-//        Robot.swervetrain.setModuleStates(moduleStates);
         Robot.swervetrain.drive(0.0, 0.0, 0.0);
     }
 

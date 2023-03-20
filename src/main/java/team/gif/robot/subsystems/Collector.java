@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.RobotMap;
 
 public class Collector extends SubsystemBase {
-    private Timer elaspedTime = new Timer();
+    private final Timer elapsedTime = new Timer();
     public static WPI_TalonSRX collectorMotor = new WPI_TalonSRX(RobotMap.COLLECTOR_MOTOR);
 
     public Collector() {
@@ -25,13 +25,11 @@ public class Collector extends SubsystemBase {
     }
 
     public void resetTimer() {
-        elaspedTime.reset();
-        elaspedTime.start();
-        System.out.println("Timer reset: " + getTimer());
+        elapsedTime.reset();
+        elapsedTime.start();
     }
 
     public double getTimer() {
-        System.out.println("get timer" + elaspedTime.get());
-        return elaspedTime.get();
+        return elapsedTime.get();
     }
 }
