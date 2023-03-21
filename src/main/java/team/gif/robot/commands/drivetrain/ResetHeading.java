@@ -8,7 +8,7 @@ public class ResetHeading extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.pigeon.resetPigeonPosition(180);
+        Robot.pigeon.resetPigeonPosition(0);
         //Robot.drivetrain.resetEncoders();
         //Robot.drivetrain.resetPose();
     }

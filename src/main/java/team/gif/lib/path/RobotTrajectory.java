@@ -6,9 +6,12 @@ import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
@@ -110,20 +113,21 @@ public class RobotTrajectory {
     }
 
     public PPSwerveControllerCommand baseSwerveCommand(PathPlannerTrajectory trajectory) {
+        Robot.swervetrain.resetOdometry(trajectory.getInitialPose());
+
         PPSwerveControllerCommand swerveControllerCommand =
                 new PPSwerveControllerCommand(
                         trajectory,
                         Robot.swervetrain::getPose,
                         Constants.Drivetrain.DRIVE_KINEMATICS,
-                        new PIDController(Constants.AutoConstants.PX_CONTROLLER, 0, 0),
-                        new PIDController(Constants.AutoConstants.PY_CONTROLLER, 0, 0),
-                        new PIDController(Constants.AutoConstants.P_THETA_CONTROLLER, 0, 0),
+                        new PIDController(SmartDashboard.getNumber("kPX", 1.0), 0, 0),
+                        new PIDController(SmartDashboard.getNumber("kPY", 1.0), 0, 0),
+                        new PIDController(SmartDashboard.getNumber("kPTheta", 1.0), 0, 0),
                         Robot.swervetrain::setModuleStates,
+                        //true,
                         Robot.swervetrain
                 );
 
         return swerveControllerCommand;
     }
-
-
 }

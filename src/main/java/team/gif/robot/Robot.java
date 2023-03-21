@@ -5,6 +5,8 @@
 package team.gif.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -93,7 +95,7 @@ public class Robot extends TimedRobot {
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
-        ui = new UI();
+
         uiSmartDashboard = new UiSmartDashboard();
 
         if (isCompBot) {
@@ -107,6 +109,7 @@ public class Robot extends TimedRobot {
             drivetrain.setDefaultCommand(arcadeDrive);
         }
 
+        ui = new UI();
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
 
@@ -126,6 +129,9 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
+        SmartDashboard.putNumber("kPX", 5.0);
+        SmartDashboard.putNumber("kPY", 1.3);
+        SmartDashboard.putNumber("kPTheta", 3.0);
 
         if (isCompBot) {
 //SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
@@ -134,7 +140,7 @@ public class Robot extends TimedRobot {
 
         elapsedTime = new Timer();
         telemetryLogger.init();
-        robotContainer = new RobotContainer();
+//        robotContainer = new RobotContainer();
     }
 
     /**
@@ -168,6 +174,7 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
+        robotContainer = new RobotContainer();
         eventLogger.addEvent("AUTO", "Auto Init");
         eventLogger.addEvent("AUTO", "Reset sensors");
 //        pigeon.resetPigeonPosition(180);
@@ -180,6 +187,9 @@ public class Robot extends TimedRobot {
         runAutoScheduler = true;
 
         compressor.disable();
+
+//        pigeon.resetPigeonPosition();
+//        swervetrain.resetOdometry(new Pose2d(0.0, 0.0, new Rotation2d()));
     }
 
     /** This function is called periodically during autonomous. */
