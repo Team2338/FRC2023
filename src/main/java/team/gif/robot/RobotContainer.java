@@ -13,6 +13,7 @@ import team.gif.robot.commands.autos.PlaceCollectPlace;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighEngage;
+import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
 
 import java.util.HashMap;
 
@@ -52,6 +53,7 @@ public class RobotContainer {
 //        autoCommands.put(autoMode.PLACE_CONE_HIGH_MOBILITY, new PlaceConeHighMobility());
 //        autoCommands.put(autoMode.PLACE_CONE_MID_MOBILITY, new PlaceMobilityConeMid());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY, new PlaceCubeHighMobility());
+        autoCommands.put(autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE, new PlaceCubeHighNoHomeEngage());
 //        autoCommands.put(autoMode.PLACE_CUBE_MID_MOBILITY, new PlaceMobilityCubeMid());
     }
 

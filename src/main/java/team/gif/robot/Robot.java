@@ -187,14 +187,12 @@ public class Robot extends TimedRobot {
         runAutoScheduler = true;
 
         compressor.disable();
-
-//        pigeon.resetPigeonPosition();
-//        swervetrain.resetOdometry(new Pose2d(0.0, 0.0, new Rotation2d()));
     }
 
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        collector.resetTimer();
         if (runAutoScheduler && (elapsedTime.get() > (chosenDelay.getValue()))) {
             if (autonomousCommand != null) {
                 autonomousCommand.schedule();

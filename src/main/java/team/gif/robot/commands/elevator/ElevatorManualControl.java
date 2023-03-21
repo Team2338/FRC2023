@@ -19,8 +19,8 @@ public class ElevatorManualControl extends CommandBase {
     public void execute() {
         double percent = -Robot.oi.aux.getRightY();
 
-        if (percent > -0.05 && percent < 0.05) {
-            percent = 0.05; // apply minimum FeedForward to keep the elevator from falling (0.10 is max before elevator begins to move)
+        if (percent > -0.15 && percent < 0.15) {
+            percent = 0.15; // apply minimum FeedForward to keep the elevator from falling (0.10 is max before elevator begins to move)
         }
 
         Robot.elevator.move(percent);
@@ -42,7 +42,7 @@ public class ElevatorManualControl extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.elevator.move(0.05);
+        Robot.elevator.move(0.15);
         Robot.elevator.setElevatorTargetPos(Robot.elevator.getPosition());
         Robot.elevator.enableLowerSoftLimit(true);
     }

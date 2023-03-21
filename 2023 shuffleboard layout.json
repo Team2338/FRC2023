@@ -292,6 +292,19 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "9,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///Shuffleboard/FRC2023/Gyro Pitch",
+              "_title": "Gyro Pitch",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }

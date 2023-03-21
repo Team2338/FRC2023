@@ -18,9 +18,7 @@ public class DriveSwerve extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        System.out.println("INITIALIZED DRIVE COMMAND");
-    }
+    public void initialize() {}
 
     @Override
     public void execute() {
@@ -33,6 +31,11 @@ public class DriveSwerve extends CommandBase {
 
             double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
+
+            // Use a parabolic curve (instead if linear) for the joystick to speed ratio
+            // This allows for small joystick inputs to use slower speeds
+            x = x * Math.abs(x);
+            y = y * Math.abs(y);
 
             //Forward speed, Sideways speed, Rotation Speed
             forward = forwardLimiter.calculate(forward) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
