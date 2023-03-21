@@ -124,7 +124,7 @@ public class RobotTrajectory {
                         new PIDController(SmartDashboard.getNumber("kPY", 5.0), 0, 0),
                         new PIDController(SmartDashboard.getNumber("kPTheta", 3.7), 0, 0),
                         Robot.swervetrain::setModuleStates,
-                        //true,
+                        //true, <-- currently not working
                         Robot.swervetrain
                 );
 
