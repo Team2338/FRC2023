@@ -120,9 +120,9 @@ public class RobotTrajectory {
                         trajectory,
                         Robot.swervetrain::getPose,
                         Constants.Drivetrain.DRIVE_KINEMATICS,
-                        new PIDController(SmartDashboard.getNumber("kPX", 1.0), 0, 0),
-                        new PIDController(SmartDashboard.getNumber("kPY", 1.0), 0, 0),
-                        new PIDController(SmartDashboard.getNumber("kPTheta", 1.0), 0, 0),
+                        new PIDController(SmartDashboard.getNumber("kPX", 5.0), 0, 0),
+                        new PIDController(SmartDashboard.getNumber("kPY", 5.0), 0, 0),
+                        new PIDController(SmartDashboard.getNumber("kPTheta", 3.7), 0, 0),
                         Robot.swervetrain::setModuleStates,
                         //true,
                         Robot.swervetrain

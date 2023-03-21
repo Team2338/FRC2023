@@ -227,7 +227,7 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Auto Time",
+              "_source0": "network_table:///SmartDashboard/kPY",
               "_title": "Auto Time",
               "_glyph": 148,
               "_showGlyph": false
@@ -253,6 +253,45 @@
               "imageWidth": -1,
               "imageHeight": -1
             }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/kPX",
+              "_title": "SmartDashboard/kPX",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/kPY",
+              "_title": "SmartDashboard/kPY",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/kPTheta",
+              "_title": "SmartDashboard/kPTheta",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -262,6 +301,6 @@
     "x": -8.0,
     "y": 0.0,
     "width": 1548.800048828125,
-    "height": 688.0
+    "height": 680.7999877929688
   }
 }

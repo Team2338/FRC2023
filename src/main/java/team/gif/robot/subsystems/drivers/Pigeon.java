@@ -50,10 +50,10 @@ public class Pigeon {
     }
 
     /**
-     * returns ROtation2d object for serve,from radians
+     * returns Rotation2d object for swerve
      */
     public Rotation2d getRotation2d() {
-        Rotation2d rotation = new Rotation2d(Units.degreesToRadians(-getHeading()));
+        Rotation2d rotation = new Rotation2d(Units.degreesToRadians(getHeading()));
         return rotation;
     }
 

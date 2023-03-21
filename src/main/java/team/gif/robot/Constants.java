@@ -48,10 +48,10 @@ public final class Constants {
         // Distance between front and back wheels on robot
         public static final SwerveDriveKinematics DRIVE_KINEMATICS =
             new SwerveDriveKinematics(
-                new Translation2d(TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // x was +, y was +
-                new Translation2d(TRACK_LENGTH / 2, TRACK_WIDTH / 2), // x was +, y was -
-                new Translation2d(-TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // x was -, y was +
-                new Translation2d(-TRACK_LENGTH / 2, TRACK_WIDTH / 2)); // x was -, y was -
+                new Translation2d(TRACK_LENGTH / 2, TRACK_WIDTH / 2), // x was +, y was +
+                new Translation2d(TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // x was +, y was -
+                new Translation2d(-TRACK_LENGTH / 2, TRACK_WIDTH / 2), // x was -, y was +
+                new Translation2d(-TRACK_LENGTH / 2, -TRACK_WIDTH / 2)); // x was -, y was -
 
         public static final boolean kGyroReversed = false;
 

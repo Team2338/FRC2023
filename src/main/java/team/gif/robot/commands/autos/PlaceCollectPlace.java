@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class PlaceCollectPlace extends SequentialCommandGroup {
 
     public PlaceCollectPlace() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("Collect GP One Barrier", 2, 2);
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("Collect GP One Barrier", 1.8, 1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(

@@ -130,8 +130,8 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
         SmartDashboard.putNumber("kPX", 5.0);
-        SmartDashboard.putNumber("kPY", 1.3);
-        SmartDashboard.putNumber("kPTheta", 3.0);
+        SmartDashboard.putNumber("kPY", 5.0);
+        SmartDashboard.putNumber("kPTheta", 3.7);
 
         if (isCompBot) {
 //SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");

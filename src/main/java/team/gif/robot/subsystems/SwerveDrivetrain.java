@@ -40,9 +40,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         fL = new SwerveModuleMK4 (
                 RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.FRONT_LEFT_OFFSET,
                 RobotMap.FRONT_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontLeftFF,
@@ -52,9 +52,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         fR = new SwerveModuleMK4 (
                 RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.FRONT_RIGHT_OFFSET,
                 RobotMap.FRONT_RIGHT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontRightFF,
@@ -64,9 +64,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR = new SwerveModuleMK4 (
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.REAR_RIGHT_OFFSET,
                 RobotMap.REAR_RIGHT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.rearRightFF,
@@ -76,9 +76,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         rL = new SwerveModuleMK4 (
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.REAR_LEFT_OFFSET,
                 RobotMap.REAR_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.rearLeftFF,
@@ -132,10 +132,9 @@ public class SwerveDrivetrain extends SubsystemBase {
                 getPosition()
         );
 
-        System.out.println("CurrX"+ Robot.swervetrain.getPose().getX());
-        System.out.println("CurrY"+ Robot.swervetrain.getPose().getY());
-        System.out.println("Curr Rot"+ Robot.swervetrain.getPose().getRotation().getDegrees());
-        System.out.println("\n\n\n");
+        System.out.println("X "+ String.format("%3.2f", Robot.swervetrain.getPose().getX()) +
+                           "  Y "+ String.format("%3.2f", Robot.swervetrain.getPose().getY()) +
+                           "  R "+ String.format("%3.2f", Robot.swervetrain.getPose().getRotation().getDegrees()));
     }
 
     /**
