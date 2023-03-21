@@ -42,16 +42,23 @@ public final class Constants {
         public static final double FRONT_RIGHT_OFFSET = -20.3906;
         public static final double REAR_RIGHT_OFFSET = 157.85156;
 
-        public static final double TRACK_WIDTH = Units.inchesToMeters(21.4375);
         // Distance between centers of right and left wheels on robot
         public static final double TRACK_LENGTH = Units.inchesToMeters(25);
+
         // Distance between front and back wheels on robot
+        public static final double TRACK_WIDTH = Units.inchesToMeters(21.4375);
+
+        // location of wheels from center of robot using following axis
+        //        +x
+        //         ^
+        //         |
+        //  +y  <---
         public static final SwerveDriveKinematics DRIVE_KINEMATICS =
             new SwerveDriveKinematics(
-                new Translation2d(TRACK_LENGTH / 2, TRACK_WIDTH / 2), // x was +, y was +
-                new Translation2d(TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // x was +, y was -
-                new Translation2d(-TRACK_LENGTH / 2, TRACK_WIDTH / 2), // x was -, y was +
-                new Translation2d(-TRACK_LENGTH / 2, -TRACK_WIDTH / 2)); // x was -, y was -
+                new Translation2d(TRACK_LENGTH / 2, TRACK_WIDTH / 2), // front left
+                new Translation2d(TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // front right
+                new Translation2d(-TRACK_LENGTH / 2, TRACK_WIDTH / 2), // back left
+                new Translation2d(-TRACK_LENGTH / 2, -TRACK_WIDTH / 2)); // back right
 
         public static final boolean kGyroReversed = false;
 
