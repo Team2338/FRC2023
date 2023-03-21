@@ -18,9 +18,9 @@ public class MoveLeftSlow extends CommandBase {
     public void execute() {
         // move at 0.5 m/s (or 0.2 m/s if right stick is pressed)
         if( Robot.oi.driver.getHID().getRightStickButton())
-            Robot.swervetrain.drive(0.0, -0.2, 0.0);
+            Robot.swervetrain.drive(0.0, 0.2, 0.0);
         else
-            Robot.swervetrain.drive(0.0, -0.5, 0.0);
+            Robot.swervetrain.drive(0.0, 0.5, 0.0);
     }
 
     // Called when the command ends or is interrupted.

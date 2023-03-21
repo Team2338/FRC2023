@@ -34,8 +34,8 @@ public class DriveSwerve extends CommandBase {
 
             // Use a parabolic curve (instead if linear) for the joystick to speed ratio
             // This allows for small joystick inputs to use slower speeds
-            x = x * Math.abs(x);
-            y = y * Math.abs(y);
+            forward = forward * Math.abs(forward);
+            strafe = strafe * Math.abs(strafe);
 
             //Forward speed, Sideways speed, Rotation Speed
             forward = forwardLimiter.calculate(forward) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
