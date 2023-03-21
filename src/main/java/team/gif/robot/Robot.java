@@ -175,7 +175,9 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
+        // TODO SwerveAuto remove after PID constants are finalized and autos are running well
         robotContainer = new RobotContainer();
+        
         eventLogger.addEvent("AUTO", "Auto Init");
         eventLogger.addEvent("AUTO", "Reset sensors");
 //        pigeon.resetPigeonPosition(180);
