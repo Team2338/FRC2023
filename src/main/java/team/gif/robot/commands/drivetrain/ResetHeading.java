@@ -9,8 +9,6 @@ public class ResetHeading extends CommandBase {
     @Override
     public void initialize() {
         Robot.pigeon.resetPigeonPosition(0);
-        //Robot.drivetrain.resetEncoders();
-        //Robot.drivetrain.resetPose();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

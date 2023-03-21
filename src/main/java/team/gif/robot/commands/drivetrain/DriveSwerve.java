@@ -26,7 +26,7 @@ public class DriveSwerve extends CommandBase {
             double forward = -Robot.oi.driver.getLeftY(); // need to invert because -Y is away, +Y is pull back
             forward = (Math.abs(forward) > Constants.Joystick.DEADBAND) ? forward : 0.0; //0.00001;
 
-            double strafe = -Robot.oi.driver.getLeftX(); // -X is left, +X is right
+            double strafe = -Robot.oi.driver.getLeftX(); // need to invert because -X is left, +X is right
             strafe = (Math.abs(strafe) > Constants.Joystick.DEADBAND) ? strafe : 0.0;
 
             double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive

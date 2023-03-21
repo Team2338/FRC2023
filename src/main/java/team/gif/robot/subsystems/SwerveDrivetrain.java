@@ -92,10 +92,11 @@ public class SwerveDrivetrain extends SubsystemBase {
 
         drivePace = drivePace.COAST_FR;
 
+//SB        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
 //SB        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
-//SB       swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
-//SB       swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
-//SB       swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+//SB        swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
+//SB        swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
+//SB        swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
     }
 
     public SwerveDrivetrain(TelemetryFileLogger logger) {
@@ -123,16 +124,18 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     /**
-     * periodic function to constantly update the odometry
+     * Periodic function
+     * - constantly update the odometry
      */
     @Override
     public void periodic() {
         odometry.update(
-                Robot.pigeon.getRotation2d(), //TODO: Check getHeading Function
-                getPosition()
+            Robot.pigeon.getRotation2d(),
+            getPosition()
         );
 
-        System.out.println("X "+ String.format("%3.2f", Robot.swervetrain.getPose().getX()) +
+        //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
+        System.out.println(  "X "+ String.format("%3.2f", Robot.swervetrain.getPose().getX()) +
                            "  Y "+ String.format("%3.2f", Robot.swervetrain.getPose().getY()) +
                            "  R "+ String.format("%3.2f", Robot.swervetrain.getPose().getRotation().getDegrees()));
     }

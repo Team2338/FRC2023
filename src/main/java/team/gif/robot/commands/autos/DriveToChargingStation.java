@@ -10,7 +10,7 @@ import team.gif.robot.Robot;
 public class DriveToChargingStation extends SequentialCommandGroup {
     public DriveToChargingStation(){
         addCommands(
-//            new AutoDrive(-Constants.AutoConstants.DRIVE_FAST).withTimeout(SmartDashboard.getNumber("Auto Time", Constants.AutoConstants.DRIVE_TIME_DEFAULT))
+            new AutoDrive(-Constants.AutoConstants.DRIVE_FAST).withTimeout(SmartDashboard.getNumber("Auto Time", Constants.AutoConstants.DRIVE_TIME_DEFAULT))
         );
     }
 }

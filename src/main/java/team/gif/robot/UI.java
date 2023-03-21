@@ -25,8 +25,8 @@ public class UI {
         /*
         *  Everything below here is for debugging
         */
-        shuffleboardTab.addNumber("Arm Ticks", arm::getPosition)
-                .withPosition(0, 0);
+//        shuffleboardTab.addNumber("Arm Ticks", arm::getPosition)
+//                .withPosition(0, 0);
 
 //        shuffleboardTab.addNumber("Elevator target", elevator::getTargetPosition)
 //                .withPosition(1, 2);
@@ -56,7 +56,7 @@ public class UI {
                 .withPosition(5, 0)
                 .withSize(2,3);
 
-
+        //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
         ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
         swerveTab.add("CurrX", Robot.swervetrain.getPose().getX());
         swerveTab.add("CurrY", Robot.swervetrain.getPose().getY());

@@ -95,9 +95,6 @@ public class Robot extends TimedRobot {
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
-
-        uiSmartDashboard = new UiSmartDashboard();
-
         if (isCompBot) {
             swervetrain = new SwerveDrivetrain(telemetryLogger);
             driveSwerve = new DriveSwerve();
@@ -110,6 +107,8 @@ public class Robot extends TimedRobot {
         }
 
         ui = new UI();
+        uiSmartDashboard = new UiSmartDashboard();
+
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
 
@@ -129,7 +128,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
-        SmartDashboard.putNumber("kPX", 5.0);
+        SmartDashboard.putNumber("kPX", 5.0); // these can be removed once we are happy with the PID constants
         SmartDashboard.putNumber("kPY", 5.0);
         SmartDashboard.putNumber("kPTheta", 3.7);
 
@@ -140,6 +139,7 @@ public class Robot extends TimedRobot {
 
         elapsedTime = new Timer();
         telemetryLogger.init();
+        // TODO SwerveAuto put back after PID constants are finalized and autos are running well
 //        robotContainer = new RobotContainer();
     }
 

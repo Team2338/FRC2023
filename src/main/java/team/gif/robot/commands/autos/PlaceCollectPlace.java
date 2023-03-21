@@ -4,13 +4,8 @@ import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import team.gif.lib.path.RobotTrajectory;
-import team.gif.robot.Robot;
-import team.gif.robot.commands.collector.CollectorCollect;
-import team.gif.robot.commands.collector.CollectorCollectAutos;
-import team.gif.robot.commands.combo.GoFloorFromHome;
+import team.gif.lib.RobotTrajectory;
 
 import java.util.HashMap;
 
