@@ -50,7 +50,7 @@ public class Pigeon {
     }
 
     /**
-     * Returns Rotation2d object from the pigeon
+     * Returns Rotation2d object using heading from the pigeon
      */
     public Rotation2d getRotation2d() {
         return new Rotation2d(Units.degreesToRadians(getHeading()));

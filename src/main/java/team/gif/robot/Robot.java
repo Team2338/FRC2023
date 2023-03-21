@@ -128,7 +128,8 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
-        SmartDashboard.putNumber("kPX", 5.0); // these can be removed once we are happy with the PID constants
+        // TODO SwerveAuto remove after PID constants are finalized and autos are running well
+        SmartDashboard.putNumber("kPX", 5.0);
         SmartDashboard.putNumber("kPY", 5.0);
         SmartDashboard.putNumber("kPTheta", 3.7);
 

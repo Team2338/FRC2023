@@ -32,6 +32,7 @@ public class RobotTrajectory {
             trajectory,
             Robot.swervetrain::getPose,
             Constants.Drivetrain.DRIVE_KINEMATICS,
+            // TODO SwerveAuto can remove and add after PID constants are finalized and autos are running well
             new PIDController(SmartDashboard.getNumber("kPX", 5.0), 0, 0),
             new PIDController(SmartDashboard.getNumber("kPY", 5.0), 0, 0),
             new PIDController(SmartDashboard.getNumber("kPTheta", 3.7), 0, 0),
