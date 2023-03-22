@@ -95,16 +95,11 @@ public class Robot extends TimedRobot {
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
-        if (isCompBot) {
-            swervetrain = new SwerveDrivetrain(telemetryLogger);
-            driveSwerve = new DriveSwerve();
-            swervetrain.setDefaultCommand(driveSwerve);
-            swervetrain.resetHeading();
-        } else {
-            drivetrain = new Drivetrain(false, false);
-            arcadeDrive = new DriveArcade();
-            drivetrain.setDefaultCommand(arcadeDrive);
-        }
+        swervetrain = new SwerveDrivetrain(telemetryLogger);
+        driveSwerve = new DriveSwerve();
+        swervetrain.setDefaultCommand(driveSwerve);
+        swervetrain.resetHeading();
+
 
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();

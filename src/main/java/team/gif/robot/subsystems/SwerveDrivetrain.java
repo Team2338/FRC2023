@@ -87,7 +87,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
         odometry = new SwerveDriveOdometry(Constants.Drivetrain.DRIVE_KINEMATICS, Robot.pigeon.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
-        resetHeading();
+//        resetHeading();
         resetDriveEncoders();
 
         drivePace = drivePace.COAST_FR;
@@ -135,9 +135,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         );
 
         //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
-        System.out.println(  "X "+ String.format("%3.2f", Robot.swervetrain.getPose().getX()) +
-                           "  Y "+ String.format("%3.2f", Robot.swervetrain.getPose().getY()) +
-                           "  R "+ String.format("%3.2f", Robot.swervetrain.getPose().getRotation().getDegrees()));
+//        System.out.println(  "X "+ String.format("%3.2f", Robot.swervetrain.getPose().getX()) +
+//                           "  Y "+ String.format("%3.2f", Robot.swervetrain.getPose().getY()) +
+//                           "  R "+ String.format("%3.2f", Robot.swervetrain.getPose().getRotation().getDegrees()));
     }
 
     /**

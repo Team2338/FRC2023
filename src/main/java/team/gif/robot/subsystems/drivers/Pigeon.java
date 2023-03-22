@@ -108,6 +108,7 @@ public class Pigeon {
     }
 
     public void resetPigeonPosition() {
+        System.out.println("resetting pigeon empty");
         resetPigeonPosition(0);
     }
 
@@ -116,6 +117,7 @@ public class Pigeon {
      * @param angle the initial angle in degrees
      */
     public void resetPigeonPosition(double angle) {
+        System.out.println("resetting pigeon " + angle);
         setYaw(angle);
         zeroPitch();
     }
