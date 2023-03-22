@@ -38,8 +38,9 @@ public class Arm extends SubsystemBase {
     }
 
     public void move(double percent) {
-        if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
-                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)) {
+//        if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
+//                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)) {
+        if (true) {
             armMotor.set(percent);
         } else {
             armMotor.set(0);
@@ -136,7 +137,7 @@ public class Arm extends SubsystemBase {
         armMotor.config_IntegralZone(0,314);
 
         // soft limits
-        armMotor.configReverseSoftLimitEnable(true);
+        armMotor.configReverseSoftLimitEnable(false);
         armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         armMotor.configForwardSoftLimitEnable(true);
         armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);

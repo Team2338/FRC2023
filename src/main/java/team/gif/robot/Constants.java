@@ -180,14 +180,14 @@ public final class Constants {
 //        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
 
         public static final double TICKS_PER_DEGREE = 31.411; // PBOT 26.8
-        public static final double ZERO_OFFSET_TICKS = 360; // 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
+        public static final double ZERO_OFFSET_TICKS = 400; // 360 // 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
         public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
-        public static final double LOAD_FROM_GROUND_POS = 99.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 102.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
         public static final double PLACE_CONE_HIGH_POS = 78.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;

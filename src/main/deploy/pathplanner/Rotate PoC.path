@@ -1,0 +1,102 @@
+{
+  "waypoints": [
+    {
+      "anchorPoint": {
+        "x": 1.919997038374644,
+        "y": 0.5409079644070225
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.8473434236440895,
+        "y": 0.5323295384322142
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 7.0,
+        "y": 0.76
+      },
+      "prevControl": {
+        "x": 4.49051188700668,
+        "y": 0.6166350794240054
+      },
+      "nextControl": {
+        "x": 4.49051188700668,
+        "y": 0.6166350794240054
+      },
+      "holonomicAngle": 0.0,
+      "isReversal": true,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 1.966875728623252,
+        "y": 1.17
+      },
+      "prevControl": {
+        "x": 2.435061622259997,
+        "y": 0.6903949382257728
+      },
+      "nextControl": null,
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    }
+  ],
+  "maxVelocity": 1.8,
+  "maxAcceleration": 1.2,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 0.2618181818181878,
+      "names": [
+        "armDown"
+      ]
+    },
+    {
+      "position": 1.018181818181818,
+      "names": [
+        "armUp"
+      ]
+    },
+    {
+      "position": 1.614545454545433,
+      "names": [
+        "armPlace"
+      ]
+    },
+    {
+      "position": 0.0,
+      "names": [
+        "goHome"
+      ]
+    }
+  ]
+}

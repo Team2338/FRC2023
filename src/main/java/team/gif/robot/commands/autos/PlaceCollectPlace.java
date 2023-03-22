@@ -5,14 +5,20 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Constants;
 import team.gif.robot.commands.arm.SetArmPosition;
+import team.gif.robot.commands.collector.CollectorCollect;
+import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.WheelsIn;
 import team.gif.robot.commands.collector.WheelsOut;
+import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.combo.GoHomeStageHome;
+import team.gif.robot.commands.combo.GoLocation;
+import team.gif.robot.commands.combo.GoLocationFromHome;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.commands.telescopingArm.ArmOut;
@@ -22,8 +28,22 @@ import java.util.HashMap;
 public class PlaceCollectPlace extends SequentialCommandGroup {
 
     public PlaceCollectPlace() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("Collect GP One Barrier", 1.8, 1.2);
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("Rotate PoC", 1.8, 1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
+        eventMap.put("goHome", new ParallelCommandGroup(
+                new SetArmPosition(Constants.Arm.STAGE_POS),
+                new ArmIn(),
+                new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
+        eventMap.put("armDown", new ParallelCommandGroup(
+                new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS),
+                new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS),
+                new WaitCommand(1).andThen( new CollectorCollect().withTimeout(3.0))));
+        eventMap.put("armUp", new ParallelCommandGroup(
+                new SetArmPosition(Constants.Arm.STAGE_POS),
+                new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
+        eventMap.put("armPlace", new ParallelCommandGroup(
+                new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
+                new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
                 RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
@@ -42,8 +62,8 @@ public class PlaceCollectPlace extends SequentialCommandGroup {
             new WheelsIn(),
             new WaitCommand(0.2),
             new ArmIn(),
-            new GoHomeStageHome(),
-            trajectoryWithEvents
+            trajectoryWithEvents,
+            new CollectorEject().withTimeout(1.0)
         );
     }
 }
