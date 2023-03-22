@@ -204,6 +204,11 @@ public final class Constants {
         public static final double I = 0.0;
         public static final double D = 0.0;
 
+        public static final double P_HOLD = 0.1;
+        public static final double I_HOLD = 0.0;
+        public static final double D_HOLD = 0.0;
+        public static final double F_HOLD = 0.004;
+
         // Motion Magic constants
         public static final int MAX_VELOCITY = 500 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final int REV_MAX_VELOCITY = 500 * 10;
@@ -214,7 +219,7 @@ public final class Constants {
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
         public static final double EL_TICKS_PER_INCH = 1750; // PBOT 1700;
-        public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/4 inch ... allows PID to end without having to be exact
+        public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/x inch ... allows PID to end without having to be exact
         public static final double ZERO_OFFSET_TICKS = 12.5 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 44.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
