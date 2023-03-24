@@ -2,18 +2,18 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.919997038374644,
-        "y": 0.5409079644070225
+        "x": 1.0,
+        "y": 3.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9603433565841497,
-        "y": 0.6851500882488947
+        "x": 2.0,
+        "y": 3.0
       },
-      "holonomicAngle": 180.0,
+      "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
-      "isLocked": true,
+      "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
@@ -24,22 +24,22 @@
     },
     {
       "anchorPoint": {
-        "x": 7.0,
-        "y": 1.0
+        "x": 3.0,
+        "y": 5.0
       },
       "prevControl": {
-        "x": 4.49051188700668,
-        "y": 0.8566350794240054
+        "x": 3.0,
+        "y": 4.0
       },
       "nextControl": {
-        "x": 4.49051188700668,
-        "y": 0.8566350794240054
+        "x": 3.0,
+        "y": 4.0
       },
-      "holonomicAngle": 0.0,
+      "holonomicAngle": 0,
       "isReversal": true,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": true,
+      "isStopPoint": false,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -49,18 +49,18 @@
     },
     {
       "anchorPoint": {
-        "x": 1.966875728623252,
-        "y": 1.17
+        "x": 5.0,
+        "y": 3.0
       },
       "prevControl": {
-        "x": 2.435061622259997,
-        "y": 0.6903949382257728
+        "x": 4.0,
+        "y": 3.0
       },
       "nextControl": null,
-      "holonomicAngle": 180.0,
+      "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
-      "isLocked": true,
+      "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
@@ -70,33 +70,5 @@
       }
     }
   ],
-  "maxVelocity": 1.8,
-  "maxAcceleration": 1.2,
-  "isReversed": null,
-  "markers": [
-    {
-      "position": 0.2618181818181878,
-      "names": [
-        "armDown"
-      ]
-    },
-    {
-      "position": 1.018181818181818,
-      "names": [
-        "armUp"
-      ]
-    },
-    {
-      "position": 1.614545454545433,
-      "names": [
-        "armPlace"
-      ]
-    },
-    {
-      "position": 0.0,
-      "names": [
-        "goHome"
-      ]
-    }
-  ]
+  "markers": []
 }
