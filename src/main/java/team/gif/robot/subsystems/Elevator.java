@@ -25,6 +25,13 @@ public class Elevator extends SubsystemBase {
 
     public void PIDHold() {
         elevatorMotor.selectProfileSlot(1,0);
+        // the elevator needs a different kF when it is lower to the ground, otherwise it doesn't stay at the position
+        if( elevatorTargetPos < Constants.Elevator.PLACE_CUBE_MID_POS) {
+            elevatorMotor.config_kF(1, Constants.Elevator.F_HOLD_LOW);
+        }
+        else
+            elevatorMotor.config_kF(1, Constants.Elevator.F_HOLD);
+
         elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
     }
 
