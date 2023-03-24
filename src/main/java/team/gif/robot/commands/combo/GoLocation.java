@@ -80,6 +80,7 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.PLACE_CONE_MID:
                     elevatorTargetPos = Constants.Elevator.PLACE_CONE_MID_POS;
                     armTargetPos = Constants.Arm.PLACE_CONE_MID_POS;
+                    armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CUBE_MID_POS;
                     new ArmMid().schedule();
                     break;
                 case Constants.Location.PLACE_CUBE_HIGH:
@@ -104,7 +105,8 @@ public class GoLocation extends CommandBase {
                     break;
             }
             if( armTargetPos >= 0 ) {
-                new SetElevatorPosition(elevatorTargetPos).schedule();
+                if (Math.abs(Robot.elevator.getPosition() - elevatorTargetPos) > Constants.Elevator.PID_TOLERANCE)
+                    new SetElevatorPosition(elevatorTargetPos).schedule();
                 new SetArmPosition(armTargetPos,armPeakOutput).schedule();
             }
         }

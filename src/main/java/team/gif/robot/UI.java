@@ -22,6 +22,10 @@ public class UI {
         shuffleboardTab.addNumber("Arm Degrees", arm::getPositionDegrees)
                 .withPosition(3, 0);
 
+        shuffleboardTab.addNumber("Gyro Pitch", Robot.pigeon::getPitch)
+                .withPosition(5, 0)
+                .withSize(2,3);
+
         /*
         *  Everything below here is for debugging
         */
@@ -52,14 +56,10 @@ public class UI {
 //        shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
 //                .withPosition(4, 0);
 //
-        shuffleboardTab.addNumber("Gyro Pitch", Robot.pigeon::getPitch)
-                .withPosition(5, 0)
-                .withSize(2,3);
 
         //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
         ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-        swerveTab.add("CurrX", Robot.swervetrain.getPose().getX());
         swerveTab.add("CurrY", Robot.swervetrain.getPose().getY());
-        swerveTab.add("Curr Rot", Robot.swervetrain.getPose().getRotation().getDegrees());
+        swerveTab.add("CurrX", Robot.swervetrain.getPose().getX());
     }
 }

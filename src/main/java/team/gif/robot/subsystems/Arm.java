@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import team.gif.robot.Constants;
+import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
 
 /**
@@ -38,12 +39,14 @@ public class Arm extends SubsystemBase {
     }
 
     public void move(double percent) {
-        if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
-                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)) {
-            armMotor.set(percent);
+        if (Robot.oi.aux.getHID().getRightStickButton()) {
+            armMotor.configReverseSoftLimitThreshold(0);
         } else {
-            armMotor.set(0);
+            armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         }
+
+        // soft limits will keep the robot arm in allowable range
+        armMotor.set(percent);
     }
 
     /**
@@ -109,6 +112,10 @@ public class Arm extends SubsystemBase {
 
     public void resetI() {
         armMotor.setIntegralAccumulator(0);
+    }
+
+    public double getI() {
+        return armMotor.getIntegralAccumulator(0);
     }
 
     public boolean getSensor() {
