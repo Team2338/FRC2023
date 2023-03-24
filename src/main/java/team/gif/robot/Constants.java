@@ -184,7 +184,7 @@ public final class Constants {
         public static final double LOAD_FROM_GROUND_POS = 99.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
-        public static final double PLACE_CONE_HIGH_POS = 78.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_HIGH_POS = 83.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
         public static final double PLACE_LOW_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
@@ -222,11 +222,11 @@ public final class Constants {
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/x inch ... allows PID to end without having to be exact
         public static final double ZERO_OFFSET_TICKS = 12.5 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
-        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 44.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
+        public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 43.16 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_HIGH_POS = 47.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_MID_POS = 20.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
+        public static final double PLACE_CUBE_HIGH_POS = 44.9 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double PLACE_CUBE_MID_POS = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 45 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
