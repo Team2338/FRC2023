@@ -158,15 +158,15 @@ public class OI {
 
         dLStickBtn.whileTrue(new EnableBoost());
 
-//        gamePieceSensor.onTrue(
-//            new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
-//            .andThen(Robot.collector::resetTimer)
-//            .andThen(new GoHomeConditional())
-//        );
-//        gamePieceSensor.onFalse(
-//            new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
-//            .andThen(new GoHomeTimeCondition())
-//        );
+        gamePieceSensor.onTrue(
+            new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
+               .andThen(Robot.collector::resetTimer)
+               .andThen(new GoHomeConditional())
+        );
+        gamePieceSensor.onFalse(
+            new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
+            .andThen(new GoHomeTimeCondition())
+        );
         // limelight toggle
 //        dRTrigger.onTrue(new LedToggle());
 

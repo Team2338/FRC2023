@@ -189,7 +189,7 @@ public final class Constants {
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
-        public static final double LOAD_FROM_GROUND_POS = 100.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 103.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
         public static final double PLACE_CONE_HIGH_POS = 82.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
@@ -233,7 +233,7 @@ public final class Constants {
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 43.16 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 13.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 44.9 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -246,7 +246,7 @@ public final class Constants {
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MIN_POS =  13.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
+        public static final double MIN_POS =  12.75 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
     public static class TelescopingArm {

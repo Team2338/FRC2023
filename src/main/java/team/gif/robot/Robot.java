@@ -5,8 +5,6 @@
 package team.gif.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -65,6 +63,7 @@ public class Robot extends TimedRobot {
     public static RobotCompressor compressor;
     private Timer elapsedTime;
     private boolean runAutoScheduler;
+    public static boolean runningAutonomousMode;
 
     public static Pigeon pigeon;
 
@@ -137,6 +136,7 @@ public class Robot extends TimedRobot {
         telemetryLogger.init();
         // TODO SwerveAuto put back after PID constants are finalized and autos are running well
 //        robotContainer = new RobotContainer();
+        runningAutonomousMode = false;
     }
 
     /**
@@ -172,7 +172,9 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         // TODO SwerveAuto remove after PID constants are finalized and autos are running well
         robotContainer = new RobotContainer();
-        
+
+        runningAutonomousMode = true;
+
         eventLogger.addEvent("AUTO", "Auto Init");
         eventLogger.addEvent("AUTO", "Reset sensors");
 //        pigeon.resetPigeonPosition(180);
@@ -209,6 +211,7 @@ public class Robot extends TimedRobot {
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
+        runningAutonomousMode = false;
 
         compressor.enableDigital();
     }

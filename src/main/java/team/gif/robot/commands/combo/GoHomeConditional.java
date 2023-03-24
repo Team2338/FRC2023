@@ -3,8 +3,6 @@ package team.gif.robot.commands.combo;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
-import team.gif.robot.commands.arm.SetArmPosition;
-import team.gif.robot.commands.elevator.SetElevatorPosition;
 
 public class GoHomeConditional extends CommandBase {
     /**
@@ -27,7 +25,8 @@ public class GoHomeConditional extends CommandBase {
             }
         }
 
-        new GoHome().schedule();
+        if( !Robot.runningAutonomousMode)
+            new GoHome().schedule();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
