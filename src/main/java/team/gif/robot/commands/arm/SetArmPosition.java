@@ -48,6 +48,8 @@ public class SetArmPosition extends CommandBase {
 
         Robot.arm.configPeakOutputForward(peakOutputForward);
 
+        Robot.arm.resetI();
+
         // when the arm is less than 45 degrees, we don't want to use I because it causes the arm to overshoot
         if( Robot.arm.getPositionDegrees() > 45 )
             Robot.arm.configI(Constants.Arm.I_GT_45);
