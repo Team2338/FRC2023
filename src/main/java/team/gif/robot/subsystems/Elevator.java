@@ -23,7 +23,8 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.set(ControlMode.PercentOutput, percent);
     }
 
-    public void PIDMove() {
+    public void PIDHold() {
+        elevatorMotor.selectProfileSlot(1,0);
         elevatorMotor.set(ControlMode.Position, elevatorTargetPos); // closed loop position control
     }
 
@@ -56,6 +57,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public void setMotionMagic(double position, double arbitraryFeedForward) {
+        elevatorMotor.selectProfileSlot(0,0);
         elevatorMotor.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, arbitraryFeedForward);
     }
 
@@ -119,6 +121,12 @@ public class Elevator extends SubsystemBase {
         elevatorMotor.config_kI(0, Constants.Elevator.I);
         elevatorMotor.config_kD(0, Constants.Elevator.D);
         elevatorMotor.config_kF(0, Constants.Elevator.F);
+
+        elevatorMotor.config_kP(1, Constants.Elevator.P_HOLD);
+        elevatorMotor.config_kI(1, Constants.Elevator.I_HOLD);
+        elevatorMotor.config_kD(1, Constants.Elevator.D_HOLD);
+        elevatorMotor.config_kF(1, Constants.Elevator.F_HOLD);
+
         elevatorMotor.configMotionCruiseVelocity(Constants.Elevator.MAX_VELOCITY);
         elevatorMotor.configMotionAcceleration(Constants.Elevator.MAX_ACCELERATION);
         elevatorMotor.configNominalOutputForward(0);
