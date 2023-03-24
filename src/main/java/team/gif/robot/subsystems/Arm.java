@@ -147,7 +147,7 @@ public class Arm extends SubsystemBase {
         armMotor.config_IntegralZone(0,314);
 
         // soft limits
-        armMotor.configReverseSoftLimitEnable(false);
+        armMotor.configReverseSoftLimitEnable(true);
         armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         armMotor.configForwardSoftLimitEnable(true);
         armMotor.configForwardSoftLimitThreshold(Constants.Arm.MAX_POS);
