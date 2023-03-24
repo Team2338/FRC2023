@@ -24,6 +24,10 @@ public class LimeLightAutoAlign extends CommandBase {
         Robot.limelightLow.setLEDOn();
         passCount = 0;
         executeCount=0;
+
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0,0.01,0);
+        SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
+        Robot.swervetrain.setModuleStates(moduleStates);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -69,7 +73,7 @@ public class LimeLightAutoAlign extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Robot.limelightLow.setLEDOff();
-        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0.0);
+        ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0.01, 0, 0);
         SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         Robot.swervetrain.setModuleStates(moduleStates);
     }

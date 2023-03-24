@@ -12,7 +12,7 @@ public class LimeLightAutoCollect extends CommandBase {
     private final double rTolerence = 1.0; // degrees
     private double rOffset;
     private final double yTolerence = 5.0; // degrees
-    private double yOffset;
+    private double xOffset;
     private Command collectorCollectSchedule = new CollectorCollect();
 
     int count = 0;
@@ -37,8 +37,8 @@ public class LimeLightAutoCollect extends CommandBase {
         double rotationSpeed = 0;
         if (count < 20) {
             if (Robot.limelightHigh.hasTarget()) {
-                yOffset = -Robot.limelightHigh.getXOffset();
-                rotationSpeed = (Math.abs(yOffset) < yTolerence) ? 0 : ((yOffset > 0) ? -0.4 : 0.4);
+                xOffset = -Robot.limelightHigh.getXOffset();
+                rotationSpeed = (Math.abs(xOffset) < yTolerence) ? 0 : ((xOffset > 0) ? -0.4 : 0.4);
                 if (rotationSpeed == 0) {
                     count++;
                 } else {
