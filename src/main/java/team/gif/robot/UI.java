@@ -37,11 +37,11 @@ public class UI {
 //        shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
 //                .withPosition(3, 1);
 //
-        shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
-                .withPosition(0, 1);
+//        shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
+//                .withPosition(0, 1);
 //
-        shuffleboardTab.addNumber("Arm target", arm::getTargetPosition)
-                .withPosition(0, 2);
+//        shuffleboardTab.addNumber("Arm target", arm::getTargetPosition)
+//                .withPosition(0, 2);
 //
 //        shuffleboardTab.addNumber("Elevator PID Error", elevator::PIDError)
 //                .withPosition(1, 1);

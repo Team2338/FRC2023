@@ -172,6 +172,7 @@ public final class Constants {
         public static final double PEAK_OUTPUT_FORWARD = 0.55; // 0.55; // down // Percent motor command, arm is much faster than elevator
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.35;
+        public static final double AUTO_OUTPUT_CONE_HIGH_POS = .25;
         public static final double PEAK_OUTPUT_REVERSE = -0.55; // -0.55 // arm is going up
 
         // motion magic parameters (not currently used)

@@ -38,9 +38,8 @@ public class Arm extends SubsystemBase {
     }
 
     public void move(double percent) {
-//        if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
-//                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)) {
-        if (true) {
+        if( (percent > 0 && getPosition() < Constants.Arm.MAX_POS) ||
+                (percent < 0 && getPosition() > Constants.Arm.MIN_POS)) {
             armMotor.set(percent);
         } else {
             armMotor.set(0);
@@ -106,6 +105,10 @@ public class Arm extends SubsystemBase {
 
     public void configI(double i) {
         armMotor.config_kI(0, i);
+    }
+
+    public void resetI() {
+        armMotor.setIntegralAccumulator(0);
     }
 
     public boolean getSensor() {

@@ -6,11 +6,14 @@ import com.pathplanner.lib.commands.FollowPathWithEvents;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Constants;
+import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
+import team.gif.robot.commands.autos.lib.AutoArmConeHigh;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.WheelsIn;
@@ -37,7 +40,7 @@ public class PlaceCollectPlace extends SequentialCommandGroup {
         eventMap.put("armDown", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS),
                 new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS),
-                new WaitCommand(1).andThen( new CollectorCollect().withTimeout(3.0))));
+                new WaitCommand(1).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
         eventMap.put("armUp", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.STAGE_POS),
                 new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
@@ -56,8 +59,9 @@ public class PlaceCollectPlace extends SequentialCommandGroup {
             new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
                 new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
-                new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS, Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS),
-                new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS))
+                new AutoArmConeHigh(),
+                //new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS),
+                new WaitCommand(0.2).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS))
             ),
             new WheelsIn(),
             new WaitCommand(0.2),
