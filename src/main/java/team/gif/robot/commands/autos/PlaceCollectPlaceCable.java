@@ -12,6 +12,7 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.AutoArmConeHigh;
+import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.WheelsIn;
@@ -49,6 +50,7 @@ public class PlaceCollectPlaceCable extends SequentialCommandGroup {
         );
 
         addCommands(
+            new SetInitialHeading(trajectory),
             new WheelsOut(),
             new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
