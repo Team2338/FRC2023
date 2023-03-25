@@ -39,7 +39,7 @@ public class DriveSwerve extends CommandBase {
 
             // From Circle to Square
             x = .5 * Math.sqrt(2 + x*x - y*y + 2*x*Math.sqrt(2)) - .5 * Math.sqrt(2 + x*x - y*y - 2*x*Math.sqrt(2));
-            y = .5 * Math.sqrt(2 - x*x + y*y + 2*x*Math.sqrt(2)) - .5 * Math.sqrt(2 - x*x + y*y - 2*x*Math.sqrt(2));
+            y = .5 * Math.sqrt(2 - x*x + y*y + 2*y*Math.sqrt(2)) - .5 * Math.sqrt(2 - x*x + y*y - 2*y*Math.sqrt(2));
 
 //            x = x * Math.abs(x);
 //            y = y * Math.abs(y);
