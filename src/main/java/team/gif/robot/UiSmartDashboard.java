@@ -44,8 +44,10 @@ public class UiSmartDashboard {
 //        autoModeChooser.addOption("P Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
         autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
         autoModeChooser.addOption("P Cube High No Home Engage", autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE);
-        autoModeChooser.addOption("P Collect Place Blue", autoMode.PLACE_COLLECT_PLACE_BLUE);
-        autoModeChooser.addOption("P Collect Place Red", autoMode.PLACE_COLLECT_PLACE_RED);
+        autoModeChooser.addOption("P Collect Place Cable", autoMode.PLACE_COLLECT_PLACE_CABLE);
+        autoModeChooser.addOption("P Collect Place Barrier", autoMode.PLACE_COLLECT_PLACE_BARRIER);
+        autoModeChooser.addOption("P Collect Engage Cable", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
+        autoModeChooser.addOption("P Mobility Engage Barrier", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)

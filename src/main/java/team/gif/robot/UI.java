@@ -57,8 +57,8 @@ public class UI {
                 .withPosition(4, 0);
 
         //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
-        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-        swerveTab.add("CurrY", Robot.swervetrain.getPose().getY());
-        swerveTab.add("CurrX", Robot.swervetrain.getPose().getX());
+       //SA  ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+        //SAswerveTab.add("CurrY", Robot.swervetrain.getPose().getY());
+        //SAswerveTab.add("CurrX", Robot.swervetrain.getPose().getX());
     }
 }

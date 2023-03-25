@@ -22,10 +22,10 @@ import team.gif.robot.commands.telescopingArm.ArmOut;
 
 import java.util.HashMap;
 
-public class PlaceCollectPlaceBlue extends SequentialCommandGroup {
+public class PlaceCollectPlaceBarrier extends SequentialCommandGroup {
 
-    public PlaceCollectPlaceBlue() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Blue", 1.8, 1.2);
+    public PlaceCollectPlaceBarrier() {
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Red", 1.8, 1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("goHome", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.STAGE_POS),
