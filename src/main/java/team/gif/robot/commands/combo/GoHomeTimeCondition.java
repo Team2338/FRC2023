@@ -11,7 +11,7 @@ public class GoHomeTimeCondition extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (Robot.collector.getTimer() > 2.0) {
+        if (!Robot.runningAutonomousMode && Robot.collector.getTimer() > 2.0) {
             new GoHome().schedule();
         }
     }

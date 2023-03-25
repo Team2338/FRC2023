@@ -50,11 +50,10 @@ public class Pigeon {
     }
 
     /**
-     * returns ROtation2d object for serve,from radians
+     * Returns Rotation2d object using heading from the pigeon
      */
     public Rotation2d getRotation2d() {
-        Rotation2d rotation = new Rotation2d(Units.degreesToRadians(-getHeading()));
-        return rotation;
+        return new Rotation2d(Units.degreesToRadians(getHeading()));
     }
 
     /**
@@ -109,6 +108,7 @@ public class Pigeon {
     }
 
     public void resetPigeonPosition() {
+        System.out.println("resetting pigeon empty");
         resetPigeonPosition(0);
     }
 
@@ -117,6 +117,7 @@ public class Pigeon {
      * @param angle the initial angle in degrees
      */
     public void resetPigeonPosition(double angle) {
+        System.out.println("resetting pigeon " + angle);
         setYaw(angle);
         zeroPitch();
     }

@@ -1,8 +1,6 @@
 package team.gif.robot.commands.drivetrain;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
@@ -10,13 +8,13 @@ import team.gif.robot.Robot;
 import static java.lang.Math.cos;
 
 public class DriveSwerve extends CommandBase {
-    private final SlewRateLimiter xLimiter;
-    private final SlewRateLimiter yLimiter;
+    private final SlewRateLimiter forwardLimiter;
+    private final SlewRateLimiter strafeLimiter;
     private final SlewRateLimiter turnLimiter;
 
     public DriveSwerve() {
-        this.xLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
-        this.yLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
+        this.forwardLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
+        this.strafeLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ACCELERATION_UNITS_PER_SECOND);
         this.turnLimiter = new SlewRateLimiter(Constants.ModuleConstants.TELE_DRIVE_MAX_ANGULAR_ACCELERATION_UNITS_PER_SECOND);
         addRequirements(Robot.swervetrain);
     }
@@ -27,30 +25,27 @@ public class DriveSwerve extends CommandBase {
     @Override
     public void execute() {
         if (Robot.isCompBot) {
-            double x = Robot.oi.driver.getLeftX();
-            x = (Math.abs(x) > Constants.Joystick.DEADBAND) ? x : 0.0;
-            double y = -Robot.oi.driver.getLeftY();
-            y = (Math.abs(y) > Constants.Joystick.DEADBAND) ? y : 0.0; //0.00001;
-            double rot = Robot.oi.driver.getRightX();
+            double forward = -Robot.oi.driver.getLeftY(); // need to invert because -Y is away, +Y is pull back
+            forward = (Math.abs(forward) > Constants.Joystick.DEADBAND) ? forward : 0.0; //0.00001;
+
+            double strafe = -Robot.oi.driver.getLeftX(); // need to invert because -X is left, +X is right
+            strafe = (Math.abs(strafe) > Constants.Joystick.DEADBAND) ? strafe : 0.0;
+
+            double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
 
             // Use a parabolic curve (instead if linear) for the joystick to speed ratio
             // This allows for small joystick inputs to use slower speeds
-
-            // From Circle to Square
-            x = .5 * Math.sqrt(2 + x*x - y*y + 2*x*Math.sqrt(2)) - .5 * Math.sqrt(2 + x*x - y*y - 2*x*Math.sqrt(2));
-            y = .5 * Math.sqrt(2 - x*x + y*y + 2*y*Math.sqrt(2)) - .5 * Math.sqrt(2 - x*x + y*y - 2*y*Math.sqrt(2));
-
-//            x = x * Math.abs(x);
-//            y = y * Math.abs(y);
+            forward = forward * Math.abs(forward);
+            strafe = strafe * Math.abs(strafe);
 
             //Forward speed, Sideways speed, Rotation Speed
-            x = xLimiter.calculate(x) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
-            y = yLimiter.calculate(y) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
+            forward = forwardLimiter.calculate(forward) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
+            strafe = strafeLimiter.calculate(strafe) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
             rot = turnLimiter.calculate(rot) * Constants.ModuleConstants.TELE_DRIVE_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND;
 
             // the robot starts facing the driver station so for this year negating y and x
-            Robot.swervetrain.drive(y, x, rot);
+            Robot.swervetrain.drive(forward, strafe, rot);
         }
     }
 

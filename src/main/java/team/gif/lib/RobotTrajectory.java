@@ -1,18 +1,16 @@
 package team.gif.lib;
 
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 /**
  * Singleton class for creating a trajectory for a swerve bot
  * @author Rohan Cherukuri
- * @since 2/14/22
+ * @since 2/14/23
  */
 public class RobotTrajectory {
     public RobotTrajectory() {}
@@ -26,32 +24,25 @@ public class RobotTrajectory {
         return instance;
     }
 
-    public TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-        Constants.AutoConstants.MAX_SPEED_METERS_PER_SECOND,
-        Constants.AutoConstants.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED
-    )
-        .setKinematics(Constants.Drivetrain.DRIVE_KINEMATICS);
+    public PPSwerveControllerCommand baseSwerveCommand(PathPlannerTrajectory trajectory) {
+        // rest odometry to the initial position of the path
+        Robot.pigeon.resetPigeonPosition( trajectory.getInitialHolonomicPose().getRotation().getDegrees());
+        Robot.swervetrain.resetOdometry(trajectory.getInitialHolonomicPose());
 
-    public SwerveControllerCommand swerveControllerCommand(Trajectory trajectory) {
-        ProfiledPIDController kThetaController = new ProfiledPIDController(Constants.AutoConstants.kPThetaController, 0, 0,
-            new TrapezoidProfile.Constraints(
-                Constants.ModuleConstants.MAX_MODULE_ANGULAR_SPEED_RADIANS_PER_SECOND, Constants.ModuleConstants.MAX_MODULE_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
-            ));
-
-        kThetaController.enableContinuousInput(-Math.PI, Math.PI);
-        SwerveControllerCommand sCC = new SwerveControllerCommand(
+        return new PPSwerveControllerCommand(
             trajectory,
             Robot.swervetrain::getPose,
             Constants.Drivetrain.DRIVE_KINEMATICS,
-            new PIDController(Constants.AutoConstants.kPXController, 0, 0),
-            new PIDController(Constants.AutoConstants.kPYController, 0, 0),
-            kThetaController,
+            // TODO SwerveAuto can remove and add after PID constants are finalized and autos are running well
+            new PIDController(SmartDashboard.getNumber("kPX", 5.0), 0, 0),
+            new PIDController(SmartDashboard.getNumber("kPY", 5.0), 0, 0),
+            new PIDController(SmartDashboard.getNumber("kPTheta", 3.7), 0, 0),
+//                new PIDController(Constants.AutoConstants.PX_CONTROLLER, 0, 0),
+//                new PIDController(Constants.AutoConstants.PY_CONTROLLER, 0, 0),
+//                new PIDController(Constants.AutoConstants.P_THETA_CONTROLLER, 0, 0),
             Robot.swervetrain::setModuleStates,
+            //true <-- currently not working
             Robot.swervetrain
         );
-
-        Robot.swervetrain.resetOdometry(trajectory.getInitialPose());
-
-        return sCC;
     }
 }

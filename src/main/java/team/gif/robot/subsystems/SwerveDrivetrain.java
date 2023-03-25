@@ -14,6 +14,7 @@ import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
+import team.gif.robot.UI;
 import team.gif.robot.subsystems.drivers.SwerveModuleMK4;
 import team.gif.lib.drivePace;
 
@@ -39,9 +40,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         fL = new SwerveModuleMK4 (
                 RobotMap.FRONT_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_LEFT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.FRONT_LEFT_OFFSET,
                 RobotMap.FRONT_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontLeftFF,
@@ -51,9 +52,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         fR = new SwerveModuleMK4 (
                 RobotMap.FRONT_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.FRONT_RIGHT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.FRONT_RIGHT_OFFSET,
                 RobotMap.FRONT_RIGHT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.frontRightFF,
@@ -63,9 +64,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR = new SwerveModuleMK4 (
                 RobotMap.REAR_RIGHT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_RIGHT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.REAR_RIGHT_OFFSET,
                 RobotMap.REAR_RIGHT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.rearRightFF,
@@ -75,9 +76,9 @@ public class SwerveDrivetrain extends SubsystemBase {
         rL = new SwerveModuleMK4 (
                 RobotMap.REAR_LEFT_DRIVE_MOTOR_PORT,
                 RobotMap.REAR_LEFT_TURNING_MOTOR_PORT,
+                true,
+                true,
                 false,
-                true,
-                true,
                 Constants.Drivetrain.REAR_LEFT_OFFSET,
                 RobotMap.REAR_LEFT_CANCODER,
                 Constants.ModuleConstants.DrivetrainPID.rearLeftFF,
@@ -86,16 +87,16 @@ public class SwerveDrivetrain extends SubsystemBase {
 
         odometry = new SwerveDriveOdometry(Constants.Drivetrain.DRIVE_KINEMATICS, Robot.pigeon.getRotation2d(), getPosition(), new Pose2d(0, 0, new Rotation2d(0)));
 
-        resetHeading();
+//        resetHeading();
         resetDriveEncoders();
 
         drivePace = drivePace.COAST_FR;
 
-        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+//SB        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
 //SB        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
-//SB       swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
-//SB       swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
-//SB       swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+//SB        swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
+//SB        swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
+//SB        swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
     }
 
     public SwerveDrivetrain(TelemetryFileLogger logger) {
@@ -123,14 +124,20 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     /**
-     * periodic function to constantly update the odometry
+     * Periodic function
+     * - constantly update the odometry
      */
     @Override
     public void periodic() {
         odometry.update(
-                new Rotation2d().fromDegrees(Robot.pigeon.get360Heading()), //TODO: Check getHeading Function
-                getPosition()
+            Robot.pigeon.getRotation2d(),
+            getPosition()
         );
+
+        //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
+//        System.out.println(  "X "+ String.format("%3.2f", Robot.swervetrain.getPose().getX()) +
+//                           "  Y "+ String.format("%3.2f", Robot.swervetrain.getPose().getY()) +
+//                           "  R "+ String.format("%3.2f", Robot.swervetrain.getPose().getRotation().getDegrees()));
     }
 
     /**
@@ -238,6 +245,7 @@ public class SwerveDrivetrain extends SubsystemBase {
      * @return An array in form fL -> fR -> rL -> rR of each of the module positions
      */
     public SwerveModulePosition[] getPosition() {
+
         return new SwerveModulePosition[] {fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()};
     }
 
