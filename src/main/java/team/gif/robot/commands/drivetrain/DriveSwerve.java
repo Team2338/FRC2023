@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
+import static java.lang.Math.cos;
+
 public class DriveSwerve extends CommandBase {
     private final SlewRateLimiter xLimiter;
     private final SlewRateLimiter yLimiter;
@@ -34,8 +36,13 @@ public class DriveSwerve extends CommandBase {
 
             // Use a parabolic curve (instead if linear) for the joystick to speed ratio
             // This allows for small joystick inputs to use slower speeds
-            x = x * Math.abs(x);
-            y = y * Math.abs(y);
+
+            // From Circle to Square
+            x = .5 * Math.sqrt(2 + x*x - y*y + 2*x*Math.sqrt(2)) - .5 * Math.sqrt(2 + x*x - y*y - 2*x*Math.sqrt(2));
+            y = .5 * Math.sqrt(2 - x*x + y*y + 2*x*Math.sqrt(2)) - .5 * Math.sqrt(2 - x*x + y*y - 2*x*Math.sqrt(2));
+
+//            x = x * Math.abs(x);
+//            y = y * Math.abs(y);
 
             //Forward speed, Sideways speed, Rotation Speed
             x = xLimiter.calculate(x) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;
