@@ -53,9 +53,8 @@ public class UI {
 //        shuffleboardTab.addNumber("Elevator Inches", elevator::getPositionInches)
 //                .withPosition(2, 2);
 //
-//        shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
-//                .withPosition(4, 0);
-//
+        shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
+                .withPosition(4, 0);
 
         //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
         ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
