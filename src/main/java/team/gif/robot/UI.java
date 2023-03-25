@@ -26,35 +26,36 @@ public class UI {
                 .withPosition(5, 0)
                 .withSize(2,3);
 
+        shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
+                .withPosition(4, 0);
+
         /*
         *  Everything below here is for debugging
         */
 //        shuffleboardTab.addNumber("Arm Ticks", arm::getPosition)
 //                .withPosition(0, 0);
 //
-//        shuffleboardTab.addNumber("Elevator target", elevator::getTargetPosition)
-//                .withPosition(1, 2);
-//
-//        shuffleboardTab.addNumber("Arm Output", arm::getOutput)
-//                .withPosition(2, 1);
-//
-//        shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
-//                .withPosition(3, 1);
-//
-//        shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
-//                .withPosition(0, 1);
-//
-//        shuffleboardTab.addNumber("Arm target", arm::getTargetPosition)
-//                .withPosition(0, 2);
-//
-//        shuffleboardTab.addNumber("Elevator PID Error", elevator::PIDError)
-//                .withPosition(1, 1);
-//
+        shuffleboardTab.addNumber("Elevator target", elevator::getTargetPosition)
+                .withPosition(1, 2);
+
+        shuffleboardTab.addNumber("Arm Output", arm::getOutput)
+                .withPosition(2, 1);
+
+        shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
+                .withPosition(3, 1);
+
+        shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
+                .withPosition(0, 1);
+
+        shuffleboardTab.addNumber("Arm target", arm::getTargetPosition)
+                .withPosition(0, 2);
+
+        shuffleboardTab.addNumber("Elevator PID Error", elevator::PIDError)
+                .withPosition(1, 1);
+
 //        shuffleboardTab.addNumber("Elevator Inches", elevator::getPositionInches)
 //                .withPosition(2, 2);
 //
-        shuffleboardTab.addNumber("Tele Pos", telescopingArm::getPosition)
-                .withPosition(4, 0);
 
         //TODO SwerveAuto can remove after PID constants are finalized and autos are running well
        //SA  ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
