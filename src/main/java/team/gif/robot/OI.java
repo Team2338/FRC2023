@@ -160,8 +160,8 @@ public class OI {
 
         gamePieceSensor.onTrue(
             new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
-            .andThen(Robot.collector::resetTimer)
-            .andThen(new GoHomeConditional())
+               .andThen(Robot.collector::resetTimer)
+               .andThen(new GoHomeConditional())
         );
         gamePieceSensor.onFalse(
             new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)

@@ -42,16 +42,23 @@ public final class Constants {
         public static final double FRONT_RIGHT_OFFSET = -20.3906;
         public static final double REAR_RIGHT_OFFSET = 157.85156;
 
-        public static final double TRACK_WIDTH = Units.inchesToMeters(21.4375);
         // Distance between centers of right and left wheels on robot
         public static final double TRACK_LENGTH = Units.inchesToMeters(25);
+
         // Distance between front and back wheels on robot
+        public static final double TRACK_WIDTH = Units.inchesToMeters(21.4375);
+
+        // location of wheels from center of robot using following axis
+        //        +x
+        //         ^
+        //         |
+        //  +y  <---
         public static final SwerveDriveKinematics DRIVE_KINEMATICS =
             new SwerveDriveKinematics(
-                new Translation2d(TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // x was +, y was +
-                new Translation2d(TRACK_LENGTH / 2, TRACK_WIDTH / 2), // x was +, y was -
-                new Translation2d(-TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // x was -, y was +
-                new Translation2d(-TRACK_LENGTH / 2, TRACK_WIDTH / 2)); // x was -, y was -
+                new Translation2d(TRACK_LENGTH / 2, TRACK_WIDTH / 2), // front left
+                new Translation2d(TRACK_LENGTH / 2, -TRACK_WIDTH / 2), // front right
+                new Translation2d(-TRACK_LENGTH / 2, TRACK_WIDTH / 2), // back left
+                new Translation2d(-TRACK_LENGTH / 2, -TRACK_WIDTH / 2)); // back right
 
         public static final boolean kGyroReversed = false;
 
@@ -125,10 +132,9 @@ public final class Constants {
         public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = Math.PI;
         public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = Math.PI;
 
-
-        public static final double kPXController = 1;
-        public static final double kPYController = 1;
-        public static final double kPThetaController = 0.65;
+        public static final double PX_CONTROLLER = 5.0;
+        public static final double PY_CONTROLLER = 5.0;
+        public static final double P_THETA_CONTROLLER = 3.7;
 
         // Constraint for the motion profiled robot angle controller
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
@@ -166,6 +172,7 @@ public final class Constants {
         public static final double PEAK_OUTPUT_FORWARD = 0.55; // 0.55; // down // Percent motor command, arm is much faster than elevator
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.35;
+        public static final double AUTO_OUTPUT_CONE_HIGH_POS = .25;
         public static final double PEAK_OUTPUT_FORWARD_CUBE_MID_POS = 0.30;
         public static final double PEAK_OUTPUT_REVERSE = -0.55; // -0.55 // arm is going up
 
@@ -182,7 +189,7 @@ public final class Constants {
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
-        public static final double LOAD_FROM_GROUND_POS = 100.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 103.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
         public static final double PLACE_CONE_HIGH_POS = 82.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
@@ -226,7 +233,7 @@ public final class Constants {
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 43.16 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double LOAD_FROM_GROUND_POS = 14.2 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_POS = 13.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 44.9 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
         public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -239,7 +246,7 @@ public final class Constants {
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MIN_POS =  13.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
+        public static final double MIN_POS =  12.75 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
     public static class TelescopingArm {

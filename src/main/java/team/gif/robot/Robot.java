@@ -63,6 +63,7 @@ public class Robot extends TimedRobot {
     public static RobotCompressor compressor;
     private Timer elapsedTime;
     private boolean runAutoScheduler;
+    public static boolean runningAutonomousMode;
 
     public static Pigeon pigeon;
 
@@ -93,19 +94,14 @@ public class Robot extends TimedRobot {
         ledSubsystem = new LEDSubsystem();
         compressor = new RobotCompressor(RobotMap.COMPRESSOR, PneumaticsModuleType.REVPH);
 
+        swervetrain = new SwerveDrivetrain(telemetryLogger);
+        driveSwerve = new DriveSwerve();
+        swervetrain.setDefaultCommand(driveSwerve);
+        swervetrain.resetHeading();
+
+
         ui = new UI();
         uiSmartDashboard = new UiSmartDashboard();
-
-        if (isCompBot) {
-            swervetrain = new SwerveDrivetrain(telemetryLogger);
-            driveSwerve = new DriveSwerve();
-            swervetrain.setDefaultCommand(driveSwerve);
-            swervetrain.resetHeading();
-        } else {
-            drivetrain = new Drivetrain(false, false);
-            arcadeDrive = new DriveArcade();
-            drivetrain.setDefaultCommand(arcadeDrive);
-        }
 
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
@@ -126,6 +122,10 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
         SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
+        // TODO SwerveAuto remove after PID constants are finalized and autos are running well
+        SmartDashboard.putNumber("kPX", 5.0);
+        SmartDashboard.putNumber("kPY", 5.0);
+        SmartDashboard.putNumber("kPTheta", 3.7);
 
         if (isCompBot) {
 //SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
@@ -134,7 +134,9 @@ public class Robot extends TimedRobot {
 
         elapsedTime = new Timer();
         telemetryLogger.init();
-        robotContainer = new RobotContainer();
+        // TODO SwerveAuto put back after PID constants are finalized and autos are running well
+//        robotContainer = new RobotContainer();
+        runningAutonomousMode = false;
     }
 
     /**
@@ -168,9 +170,14 @@ public class Robot extends TimedRobot {
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit() {
+        // TODO SwerveAuto remove after PID constants are finalized and autos are running well
+        robotContainer = new RobotContainer();
+
+        runningAutonomousMode = true;
+
         eventLogger.addEvent("AUTO", "Auto Init");
         eventLogger.addEvent("AUTO", "Reset sensors");
-        pigeon.resetPigeonPosition(180);
+//        pigeon.resetPigeonPosition(180);
 
         autonomousCommand = robotContainer.getAutonomousCommand(chosenAuto);
         eventLogger.addEvent("AUTO", "Got command from container");
@@ -180,7 +187,6 @@ public class Robot extends TimedRobot {
         runAutoScheduler = true;
 
         compressor.disable();
-
     }
 
     /** This function is called periodically during autonomous. */
@@ -205,6 +211,7 @@ public class Robot extends TimedRobot {
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
+        runningAutonomousMode = false;
 
         compressor.enableDigital();
     }
