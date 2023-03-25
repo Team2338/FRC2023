@@ -26,8 +26,8 @@ public class RobotTrajectory {
 
     public PPSwerveControllerCommand baseSwerveCommand(PathPlannerTrajectory trajectory) {
         // rest odometry to the initial position of the path
-        Robot.pigeon.resetPigeonPosition( trajectory.getInitialHolonomicPose().getRotation().getDegrees());
-        Robot.swervetrain.resetOdometry(trajectory.getInitialHolonomicPose());
+//        Robot.pigeon.resetPigeonPosition( trajectory.getInitialHolonomicPose().getRotation().getDegrees());
+//        Robot.swervetrain.resetOdometry(trajectory.getInitialHolonomicPose());
 
         return new PPSwerveControllerCommand(
             trajectory,

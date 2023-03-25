@@ -15,6 +15,7 @@ import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.AutoArmConeHigh;
 import team.gif.robot.commands.autos.lib.AutoDrive;
+import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.autos.lib.UntilBotIsFalling;
 import team.gif.robot.commands.autos.lib.UntilBotIsLevel;
 import team.gif.robot.commands.collector.WheelsIn;
@@ -44,6 +45,7 @@ public class PlaceMobilityEngageBarrier extends SequentialCommandGroup {
         );
 
         addCommands(
+                new SetInitialHeading(trajectory),
                 new ParallelCommandGroup(
                     new WheelsOut(),
                     new SetArmPosition(Constants.Arm.STAGE_POS)
