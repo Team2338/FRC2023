@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
 import team.gif.robot.commands.autos.NoAuto;
-import team.gif.robot.commands.autos.PlaceCollectPlace;
+import team.gif.robot.commands.autos.PlaceCollectPlaceBlue;
+import team.gif.robot.commands.autos.PlaceCollectPlaceRed;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighEngage;
@@ -48,12 +49,13 @@ public class RobotContainer {
     private void buildAutoCommands() {
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE, new PlaceCubeHighMobilityEngage());
         autoCommands.put(autoMode.NONE, new NoAuto());
-        autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
+        autoCommands.put(autoMode.PLACE_COLLECT_PLACE_BLUE, new PlaceCollectPlaceBlue());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_ENGAGE, new PlaceCubeHighEngage());
 //        autoCommands.put(autoMode.PLACE_CONE_HIGH_MOBILITY, new PlaceConeHighMobility());
 //        autoCommands.put(autoMode.PLACE_CONE_MID_MOBILITY, new PlaceMobilityConeMid());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY, new PlaceCubeHighMobility());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE, new PlaceCubeHighNoHomeEngage());
+        autoCommands.put(autoMode.PLACE_COLLECT_PLACE_RED, new PlaceCollectPlaceRed());
 //        autoCommands.put(autoMode.PLACE_CUBE_MID_MOBILITY, new PlaceMobilityCubeMid());
     }
 
