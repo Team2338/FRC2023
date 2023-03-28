@@ -183,7 +183,7 @@ public final class Constants {
 
         public static final double TICKS_PER_DEGREE = 31.378; // PBOT 26.8
         public static final double ZERO_OFFSET_TICKS = 319; // was 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
-        public static final double PID_TOLERANCE = 2.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
+        public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
         // 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; is 90 degrees, 0 straight up
@@ -240,7 +240,7 @@ public final class Constants {
         public static final double PLACE_CONE_MID_POS = 43 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
-        public static final double MAX_HOME_SAFE_POS = 15.6 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 14 maximum elevator height to allow arm to come under bar
+        public static final double MAX_HOME_SAFE_POS = 13.75 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 15.6 // PBOT 14 maximum elevator height to allow arm to come under bar
         public static final double STAGE_POS = MAX_HOME_SAFE_POS;
         public static final double HOME_POS = 14.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;

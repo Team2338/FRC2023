@@ -4,18 +4,25 @@
 
 package team.gif.robot.commands.autos.lib;
 
+import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class UntilBotIsFalling extends CommandBase {
+public class SetInitialHeading extends CommandBase {
 
-    public UntilBotIsFalling() {
+    PathPlannerTrajectory traj;
+
+    public SetInitialHeading(PathPlannerTrajectory trajectory) {
         super();
+        traj = trajectory;
     }
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        Robot.pigeon.resetPigeonPosition(traj.getInitialHolonomicPose().getRotation().getDegrees());
+        Robot.swervetrain.resetOdometry(traj.getInitialHolonomicPose());
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
@@ -23,12 +30,7 @@ public class UntilBotIsFalling extends CommandBase {
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
-    public boolean isFinished() {
-//        System.out.println("checking pitch " + Robot.pigeon.getPitch());
-        // > -X is coming from alliance station and falling to become level
-        // < X is falling from opponent side
-        return Robot.pigeon.getPitch() > -12.0 && Robot.pigeon.getPitch() < 10.0; // was -14.0 // MW -10 and 12
-    }
+    public boolean isFinished() { return true; }
 
     // Called once the command ends or is interrupted.
     @Override

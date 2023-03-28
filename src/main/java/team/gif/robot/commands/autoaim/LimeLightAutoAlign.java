@@ -43,7 +43,7 @@ public class LimeLightAutoAlign extends CommandBase {
 //        rotationSpeed = (Math.abs(rOffset) < rTolerence) ? 0 : ((rOffset > 0) ? -0.4 : 0.4);
 
         if (Robot.limelightLow.hasTarget()) {
-            yOffset = -Robot.limelightLow.getXOffset();
+            yOffset = Robot.limelightLow.getXOffset();
             velocitySpeed = (Math.abs(yOffset) < yTolerence) ? 0 : ((yOffset > 0) ? -0.2 : 0.2);
         }
 

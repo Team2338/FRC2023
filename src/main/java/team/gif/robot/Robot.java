@@ -123,9 +123,9 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putNumber("Auto Time",Constants.AutoConstants.DRIVE_TIME_DEFAULT);
         // TODO SwerveAuto remove after PID constants are finalized and autos are running well
-        SmartDashboard.putNumber("kPX", 5.0);
-        SmartDashboard.putNumber("kPY", 5.0);
-        SmartDashboard.putNumber("kPTheta", 3.7);
+        //SA SmartDashboard.putNumber("kPX", 5.0);
+        //SA SmartDashboard.putNumber("kPY", 5.0);
+        //SA SmartDashboard.putNumber("kPTheta", 3.7);
 
         if (isCompBot) {
 //SB            ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
         elapsedTime = new Timer();
         telemetryLogger.init();
         // TODO SwerveAuto put back after PID constants are finalized and autos are running well
-//        robotContainer = new RobotContainer();
+        robotContainer = new RobotContainer();
         runningAutonomousMode = false;
     }
 
@@ -171,7 +171,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         // TODO SwerveAuto remove after PID constants are finalized and autos are running well
-        robotContainer = new RobotContainer();
+        //robotContainer = new RobotContainer();
 
         runningAutonomousMode = true;
 

@@ -12,6 +12,7 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.AutoArmConeHigh;
+import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.WheelsIn;
@@ -22,10 +23,10 @@ import team.gif.robot.commands.telescopingArm.ArmOut;
 
 import java.util.HashMap;
 
-public class PlaceCollectPlaceBlue extends SequentialCommandGroup {
+public class PlaceCollectPlaceBarrier extends SequentialCommandGroup {
 
-    public PlaceCollectPlaceBlue() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Blue", 1.8, 1.2);
+    public PlaceCollectPlaceBarrier() {
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Barrier", 1.8, 1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("goHome", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.STAGE_POS),
@@ -49,17 +50,8 @@ public class PlaceCollectPlaceBlue extends SequentialCommandGroup {
         );
 
         addCommands(
-            new WheelsOut(),
-            new SetArmPosition(Constants.Arm.STAGE_POS),
-            new ParallelCommandGroup(
-                new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
-                new AutoArmConeHigh(),
-                //new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS),
-                new WaitCommand(0.2).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS))
-            ),
-            new WheelsIn(),
-            new WaitCommand(0.2),
-            new ArmIn(),
+            new SetInitialHeading(trajectory),
+            new PlaceConeHigh(),
             trajectoryWithEvents,
             new CollectorEject().withTimeout(1.0)
         );

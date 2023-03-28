@@ -25,14 +25,6 @@ public class PlaceCubeHighEngage extends SequentialCommandGroup {
             new GoHomeStageHome(),
 
             new DriveAndEngage() // Drive to the charging station and engage
-
-//            new AutoDrive(-Constants.AutoConstants.DRIVE_FAST).withTimeout(2.6), // drive (time and speed based) until we are angled
-//            new WaitCommand(.25),               // given pigeon time to settle
-//            new ParallelDeadlineGroup(
-//                new UntilBotIsFalling(),               // monitor gyro until level
-//                new AutoDrive(-Constants.AutoConstants.DRIVE_SLOW)
-//            ),
-//            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.2)       // give the bot a little push back to stop momentum
         );
     }
 }

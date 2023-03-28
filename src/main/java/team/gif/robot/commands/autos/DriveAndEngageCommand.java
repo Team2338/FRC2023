@@ -5,11 +5,11 @@
 package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.Robot;
 
 public class DriveAndEngageCommand extends CommandBase {
 
-    public DriveAndEngageCommand() {
-    }
+    public DriveAndEngageCommand() {}
 
     // Called when the command is initially scheduled.
     @Override
@@ -18,7 +18,10 @@ public class DriveAndEngageCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        new DriveAndEngage().schedule();
+        if( Robot.oi.driver.getHID().getXButtonPressed())
+            new CenterMobilityEngage().schedule();
+        else
+            new DriveAndEngage().schedule();
     }
 
     // Returns true when the command should end.

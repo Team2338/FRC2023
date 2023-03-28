@@ -8,6 +8,7 @@ import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
+import team.gif.robot.commands.telescopingArm.ArmLoadFromDouble;
 import team.gif.robot.commands.telescopingArm.ArmMid;
 import team.gif.robot.commands.telescopingArm.ArmOut;
 
@@ -51,9 +52,12 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS;
-//                    new ArmIn().schedule();
                     armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS;
-                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_COLLECT_POS)).schedule();
+//                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_COLLECT_POS)).schedule();
+                    if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.HIGH_COLLECT_POS )
+                        new ArmLoadFromDouble().schedule();
+                    else
+                        new WaitCommand(0.9).andThen(new ArmLoadFromDouble()).schedule();
                     break;
                 case Constants.Location.LOAD_FROM_SINGLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS;

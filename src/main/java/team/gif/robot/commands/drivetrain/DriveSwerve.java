@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
+import static java.lang.Math.cos;
+
 public class DriveSwerve extends CommandBase {
     private final SlewRateLimiter forwardLimiter;
     private final SlewRateLimiter strafeLimiter;
@@ -23,6 +25,9 @@ public class DriveSwerve extends CommandBase {
     @Override
     public void execute() {
         if (Robot.isCompBot) {
+            double forwardSign;
+            double strafeSign;
+
             double forward = -Robot.oi.driver.getLeftY(); // need to invert because -Y is away, +Y is pull back
             forward = (Math.abs(forward) > Constants.Joystick.DEADBAND) ? forward : 0.0; //0.00001;
 
@@ -32,10 +37,23 @@ public class DriveSwerve extends CommandBase {
             double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
 
+            forwardSign = forward/Math.abs(forward);
+            strafeSign = strafe/Math.abs(strafe);
             // Use a parabolic curve (instead if linear) for the joystick to speed ratio
             // This allows for small joystick inputs to use slower speeds
             forward = forward * Math.abs(forward);
             strafe = strafe * Math.abs(strafe);
+
+            forward = .5 * Math.sqrt(2 + forward*forward - strafe*strafe + 2*forward*Math.sqrt(2)) -
+                    .5 * Math.sqrt(2 + forward*forward - strafe*strafe - 2*forward*Math.sqrt(2));
+
+            strafe = .5 * Math.sqrt(2 - forward*forward + strafe*strafe + 2*strafe*Math.sqrt(2)) -
+                    .5 * Math.sqrt(2 - forward*forward + strafe*strafe - 2*strafe*Math.sqrt(2));
+
+            if( Double.isNaN(forward) )
+                forward = forwardSign;
+            if( Double.isNaN(strafe) )
+                strafe = strafeSign;
 
             //Forward speed, Sideways speed, Rotation Speed
             forward = forwardLimiter.calculate(forward) * Constants.ModuleConstants.TELE_DRIVE_MAX_SPEED_METERS_PER_SECOND;

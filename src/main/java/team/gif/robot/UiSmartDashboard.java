@@ -38,14 +38,13 @@ public class UiSmartDashboard {
         // Auto selections
         autoModeChooser.addOption("NONE", autoMode.NONE);
         autoModeChooser.setDefaultOption("P Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
-//        autoModeChooser.addOption("P Cone High Mobility", autoMode.PLACE_CONE_HIGH_MOBILITY);
-//        autoModeChooser.addOption("P Cone Mid Mobility", autoMode.PLACE_CONE_MID_MOBILITY);
-        autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
-//        autoModeChooser.addOption("P Cube Mid Mobility", autoMode.PLACE_CUBE_MID_MOBILITY);
-        autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_MOBILITY_ENGAGE);
         autoModeChooser.addOption("P Cube High No Home Engage", autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE);
-        autoModeChooser.addOption("P Collect Place Blue", autoMode.PLACE_COLLECT_PLACE_BLUE);
-        autoModeChooser.addOption("P Collect Place Red", autoMode.PLACE_COLLECT_PLACE_RED);
+        autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
+        autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE);
+        autoModeChooser.addOption("P Collect Place Cable", autoMode.PLACE_COLLECT_PLACE_CABLE);
+        autoModeChooser.addOption("P Collect Place Barrier", autoMode.PLACE_COLLECT_PLACE_BARRIER);
+        autoModeChooser.addOption("P Mobility Engage Cable", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
+        autoModeChooser.addOption("P Mobility Engage Barrier", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)
