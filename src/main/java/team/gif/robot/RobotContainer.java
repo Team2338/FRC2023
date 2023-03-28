@@ -56,7 +56,7 @@ public class RobotContainer {
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY, new PlaceCubeHighMobility());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE, new PlaceCubeHighMobilityEngage());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE_CABLE, new PlaceCollectPlaceCable());
-        autoCommands.put(autoMode.PLACE_COLLECT_PLACE_BARRIER, new PlaceCollectPlaceBarrier());
+//-        autoCommands.put(autoMode.PLACE_COLLECT_PLACE_BARRIER, new PlaceCollectPlaceBarrier());
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE_CABLE, new PlaceMobilityEngageCable());
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE_BARRIER, new PlaceMobilityEngageBarrier());
 //        autoCommands.put(autoMode.PLACE_CUBE_MID_MOBILITY, new PlaceMobilityCubeMid());
