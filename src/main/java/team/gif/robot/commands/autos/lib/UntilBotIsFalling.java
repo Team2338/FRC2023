@@ -27,7 +27,7 @@ public class UntilBotIsFalling extends CommandBase {
 //        System.out.println("checking pitch " + Robot.pigeon.getPitch());
         // > -X is coming from alliance station and falling to become level
         // < X is falling from opponent side
-        return Robot.pigeon.getPitch() > -10.0 && Robot.pigeon.getPitch() < 10.0; // was -14.0 // MW -10 and 12
+        return Robot.pigeon.getPitch() > -12.0 && Robot.pigeon.getPitch() < 10.0; // was -14.0 // MW -10 and 12
     }
 
     // Called once the command ends or is interrupted.

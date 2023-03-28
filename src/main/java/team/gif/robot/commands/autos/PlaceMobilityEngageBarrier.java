@@ -60,16 +60,17 @@ public class PlaceMobilityEngageBarrier extends SequentialCommandGroup {
             new WaitCommand(0.2),
             new ArmIn(),
             trajectoryWithEvents,
-            new ParallelDeadlineGroup(
-                    new UntilBotIsFalling(),               // monitor gyro until level
-                    new AutoDrive(Constants.AutoConstants.DRIVE_SLOW),
-                    new GoHomeStageHome()
-            ),
-            new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.35), // give the bot a little push back to stop momentum
-            new WaitCommand(0.5),
-            new UntilBotIsLevel(),
-            new UntilBotIsLevel(),
-            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001))
+            new EngageFromCenter()
+//            new ParallelDeadlineGroup(
+//                    new UntilBotIsFalling(),               // monitor gyro until level
+//                    new AutoDrive(Constants.AutoConstants.DRIVE_SLOW),
+//                    new GoHomeStageHome()
+//            ),
+//            new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.35), // give the bot a little push back to stop momentum
+//            new WaitCommand(0.5),
+//            new UntilBotIsLevel(),
+//            new UntilBotIsLevel(),
+//            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001))
         );
     }
 }
