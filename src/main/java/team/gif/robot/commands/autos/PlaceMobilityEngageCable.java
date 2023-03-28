@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class PlaceMobilityEngageCable extends SequentialCommandGroup {
 
     public PlaceMobilityEngageCable() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectEngage Blue", 2.0, 1.5); // 1.8 1.2
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceMobEngage Cable", 2.0, 1.5); // 1.8 1.2
         HashMap<String, Command> eventMap = new HashMap<>();
 
         eventMap.put("goHome", new ParallelCommandGroup(

@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class PlaceCollectPlaceBarrier extends SequentialCommandGroup {
 
     public PlaceCollectPlaceBarrier() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Red", 1.8, 1.2);
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Barrier", 1.8, 1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("goHome", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.STAGE_POS),

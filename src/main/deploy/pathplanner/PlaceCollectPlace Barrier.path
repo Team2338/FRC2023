@@ -98,7 +98,6 @@
   "maxVelocity": 1.8,
   "maxAcceleration": 1.2,
   "isReversed": null,
-<<<<<<< HEAD
   "markers": [
     {
       "position": 0.26,
@@ -125,7 +124,4 @@
       ]
     }
   ]
-=======
-  "markers": []
->>>>>>> ts-45-degree-joystick
 }

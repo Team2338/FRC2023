@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class PlaceCollectPlaceCable extends SequentialCommandGroup {
 
     public PlaceCollectPlaceCable() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Blue", 1.8, 1.2);
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceCollectPlace Cable", 1.8, 1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("goHome", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.STAGE_POS),
