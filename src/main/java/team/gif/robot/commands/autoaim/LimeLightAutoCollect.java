@@ -22,13 +22,9 @@ public class LimeLightAutoCollect extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-//        if (Robot.collectorWheels.getWheelState()) {
-//            Robot.limelightHigh.setPipeline(1);
-//        } else {
-//            Robot.limelightHigh.setPipeline(0);
-//        }
         collectorCollectSchedule.schedule();
         count = 0;
+        Robot.ledSubsystem.clearLEDGamePieceColor();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -37,7 +33,7 @@ public class LimeLightAutoCollect extends CommandBase {
         double rotationSpeed = 0;
         if (count < 20) {
             if (Robot.limelightHigh.hasTarget()) {
-                xOffset = -Robot.limelightHigh.getXOffset();
+                xOffset = Robot.limelightHigh.getXOffset();
                 rotationSpeed = (Math.abs(xOffset) < yTolerence) ? 0 : ((xOffset > 0) ? -0.4 : 0.4);
                 if (rotationSpeed == 0) {
                     count++;
@@ -50,12 +46,22 @@ public class LimeLightAutoCollect extends CommandBase {
             SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
             Robot.swervetrain.setModuleStates(moduleStates);
         }
-        if (count == 20 && Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MAX_POS) {
-            Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.HIGH_VELOCITY);
-        } else {
-            Robot.telescopingArm.setMotorSpeed(0);
-        }
 
+        if (Robot.elevator.getPosition() > (Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS - 3 * Constants.Elevator.EL_TICKS_PER_INCH) &&
+            Robot.arm.getPosition() > (Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS - 5 * Constants.Arm.TICKS_PER_DEGREE) &&
+            Robot.arm.getPosition() < (Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS + 3 * Constants.Arm.TICKS_PER_DEGREE)) {
+
+
+            Robot.ledSubsystem.clearLEDGamePieceColor();
+
+            if (count == 20 && Robot.telescopingArm.getPosition() < Constants.TelescopingArm.MAX_POS) {
+                Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.HIGH_VELOCITY);
+            } else {
+                Robot.telescopingArm.setMotorSpeed(0);
+            }
+        } else {
+            Robot.ledSubsystem.setLEDAutoAlignError();
+        }
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
@@ -69,6 +75,7 @@ public class LimeLightAutoCollect extends CommandBase {
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        Robot.ledSubsystem.clearLEDGamePieceColor();
         ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0.0);
         SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         Robot.swervetrain.setModuleStates(moduleStates);
