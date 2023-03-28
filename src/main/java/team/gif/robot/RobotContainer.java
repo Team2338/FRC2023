@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
 import team.gif.robot.commands.autos.NoAuto;
-import team.gif.robot.commands.autos.PlaceMobilityEngageCable;
-import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
-import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighEngage;
@@ -50,6 +47,7 @@ public class RobotContainer {
 
     private void buildAutoCommands() {
         autoCommands.put(autoMode.NONE, new NoAuto());
+//        autoCommands.put(autoMode.PLACE_COLLECT_PLACE, new PlaceCollectPlace());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_ENGAGE, new PlaceCubeHighEngage());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE, new PlaceCubeHighNoHomeEngage());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY, new PlaceCubeHighMobility());
