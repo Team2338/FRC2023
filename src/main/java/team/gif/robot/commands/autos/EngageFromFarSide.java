@@ -11,14 +11,14 @@ import team.gif.robot.commands.autos.lib.UntilBotIsFalling;
 import team.gif.robot.commands.autos.lib.UntilBotIsLevel;
 import team.gif.robot.commands.combo.GoHomeStageHome;
 
-public class EngageFromCenter extends SequentialCommandGroup {
+public class EngageFromFarSide extends SequentialCommandGroup {
     /**
      * Coming from the far side (center, opponent) <br>
      * Starting from an angled position <br>
      * Method will crawl up until engaged
      *
      */
-    public EngageFromCenter(){
+    public EngageFromFarSide(){
         addCommands(
             new ParallelDeadlineGroup(
                 new UntilBotIsFalling(),               // monitor gyro until level

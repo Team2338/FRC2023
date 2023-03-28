@@ -69,7 +69,7 @@ public class LEDSubsystem extends SubsystemBase {
         GamePiece[1] = 0;
         GamePiece[2] = 0;
     }
-    
+
     public void setColors() {
         for (int i = 0; i < RobotMap.HP_LEDS.length; i++) {
             ledBuffer.setRGB(RobotMap.HP_LEDS[i],HP[0],HP[1], HP[2]);

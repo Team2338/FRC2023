@@ -32,17 +32,17 @@ public class UI {
         /*
         *  Everything below here is for debugging
         */
-//        shuffleboardTab.addNumber("Arm Ticks", arm::getPosition)
-//                .withPosition(0, 0);
-//
+        shuffleboardTab.addNumber("Arm Ticks", arm::getPosition)
+                .withPosition(0, 0);
+
         shuffleboardTab.addNumber("Elevator target", elevator::getTargetPosition)
                 .withPosition(1, 2);
 
         shuffleboardTab.addNumber("Arm Output", arm::getOutput)
-                .withPosition(2, 1);
+                .withPosition(0, 3);
 
         shuffleboardTab.addNumber("Elevator Output", elevator::getOutputPercent)
-                .withPosition(3, 1);
+                .withPosition(1, 3);
 
         shuffleboardTab.addNumber("Arm PID Error", arm::PIDError)
                 .withPosition(0, 1);

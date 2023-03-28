@@ -171,7 +171,7 @@ public class OI {
 //        dRTrigger.onTrue(new LedToggle());
 
         // Test joystick commands used during practice matches to determine which auto to use
-        dBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
+        dBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage (+x button will cross charging station)
         aLBump.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
         dStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
 

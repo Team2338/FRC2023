@@ -15,9 +15,9 @@ import team.gif.robot.commands.telescopingArm.ArmIn;
 
 import java.util.HashMap;
 
-public class PlaceMobilityEngageBarrier extends SequentialCommandGroup {
+public class MobilityEngageBarrierCommand extends SequentialCommandGroup {
 
-    public PlaceMobilityEngageBarrier() {
+    public MobilityEngageBarrierCommand() {
         PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceMobEngage Barrier", 2.0, 1.5); // 1.8 1.2
         HashMap<String, Command> eventMap = new HashMap<>();
 
@@ -34,7 +34,6 @@ public class PlaceMobilityEngageBarrier extends SequentialCommandGroup {
 
         addCommands(
             new SetInitialHeading(trajectory),
-            new PlaceConeHigh(),
             trajectoryWithEvents,
             new EngageFromFarSide()
         );

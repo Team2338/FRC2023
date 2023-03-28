@@ -51,17 +51,7 @@ public class PlaceCollectPlaceCable extends SequentialCommandGroup {
 
         addCommands(
             new SetInitialHeading(trajectory),
-            new WheelsOut(),
-            new SetArmPosition(Constants.Arm.STAGE_POS),
-            new ParallelCommandGroup(
-                new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
-                new AutoArmConeHigh(),
-                //new SetArmPosition(Constants.Arm.PLACE_CONE_HIGH_POS),
-                new WaitCommand(0.2).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS))
-            ),
-            new WheelsIn(),
-            new WaitCommand(0.2),
-            new ArmIn(),
+            new PlaceConeHigh(),
             trajectoryWithEvents,
             new CollectorEject().withTimeout(1.0)
         );

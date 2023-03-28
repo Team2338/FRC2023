@@ -5,6 +5,7 @@
 package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.Robot;
 
 public class DriveToChargingStationCommand extends CommandBase {
 
@@ -17,7 +18,10 @@ public class DriveToChargingStationCommand extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        new DriveToChargingStation().schedule();
+        if( Robot.oi.driver.getHID().getXButtonPressed())
+            new MobilityEngageBarrierCommand().schedule();
+        else
+            new DriveToChargingStation().schedule();
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
