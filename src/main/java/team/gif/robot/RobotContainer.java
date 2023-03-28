@@ -9,11 +9,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
 import team.gif.robot.commands.autos.NoAuto;
+import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
+import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
 import team.gif.robot.commands.autos.PlaceMobilityEngageBarrier;
+import team.gif.robot.commands.autos.PlaceMobilityEngageCable;
 
 import java.util.HashMap;
 
