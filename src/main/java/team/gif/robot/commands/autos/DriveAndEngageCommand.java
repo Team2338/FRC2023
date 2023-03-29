@@ -18,7 +18,7 @@ public class DriveAndEngageCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if( Robot.oi.driver.getHID().getXButtonPressed())
+        if( Robot.oi.dX.getAsBoolean() )
             new CenterMobilityEngage().schedule();
         else
             new DriveAndEngage().schedule();

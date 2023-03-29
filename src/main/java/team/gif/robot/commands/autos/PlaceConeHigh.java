@@ -28,16 +28,16 @@ public class PlaceConeHigh extends SequentialCommandGroup {
         addCommands(
             new ParallelCommandGroup(
                 new WheelsOut(),
-                new SetArmPosition(Constants.Arm.STAGE_POS)
+                new SetArmPosition(Constants.Arm.STAGE_POS).withTimeout(5)
             ),
             new ParallelCommandGroup(
-                new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS),
-                new AutoArmConeHigh(),
-                new WaitCommand(0.2).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS))
+                new SetElevatorPosition(Constants.Elevator.PLACE_CONE_HIGH_POS).withTimeout(5),
+                new AutoArmConeHigh().withTimeout(5),
+                new WaitCommand(0.2).andThen(new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS).withTimeout(5))
             ),
             new WheelsIn(),
             new WaitCommand(0.2),
-            new ArmIn()
+            new ArmIn().withTimeout(5)
         );
     }
 }
