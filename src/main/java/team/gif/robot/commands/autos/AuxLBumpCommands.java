@@ -6,10 +6,11 @@ package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
+import team.gif.robot.commands.combo.ToggleManualPIDControl;
 
-public class DriveToChargingStationCommand extends CommandBase {
+public class AuxLBumpCommands extends CommandBase {
 
-    public DriveToChargingStationCommand() {}
+    public AuxLBumpCommands() {}
 
     // Called when the command is initially scheduled.
     @Override
@@ -18,10 +19,10 @@ public class DriveToChargingStationCommand extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        if( Robot.oi.dX.getAsBoolean() )
-            new MobilityEngageBarrier().schedule();
+        if( Robot.oi.driver.getHID().getXButtonPressed())
+            new PlaceCollectPlaceCable().schedule();
         else
-            new DriveToChargingStation().schedule();
+            new NoHomeEngageCommand().schedule();
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
@@ -30,7 +31,7 @@ public class DriveToChargingStationCommand extends CommandBase {
         return true;
     }
 
-    // Called when the command ends or is interrupted.
+    // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
 }

@@ -8,9 +8,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
+import team.gif.robot.commands.autos.AuxBackCommands;
+import team.gif.robot.commands.autos.AuxLBumpCommands;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
 import team.gif.robot.commands.autos.NoHomeEngageCommand;
+import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
+import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -24,6 +28,7 @@ import team.gif.robot.commands.drivetrain.MoveCloserSlow;
 import team.gif.robot.commands.drivetrain.MoveLeftSlow;
 import team.gif.robot.commands.drivetrain.MoveRightSlow;
 import team.gif.robot.commands.driveModes.EnableBoost;
+import team.gif.robot.commands.drivetrain.ResetHeading;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
 
@@ -114,11 +119,15 @@ public class OI {
      */
 
         // elevator
-        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
-
+//        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
+        dX.and(dRBump).onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
+        dX.and(dLBump).onTrue((new ResetHeading()));
+        dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
+        dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
+        dX.and(aLStickBtn).onTrue( new NoHomeEngageCommand());
 //        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
 
-        // manual mode
+        // manual mode & run PlaceCollectPlaceBarrier test
         aBack.toggleOnTrue(new ToggleManualPIDControl());
 
         // combo loading actions
@@ -145,7 +154,7 @@ public class OI {
 
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
         dA.onTrue(new LimeLightAutoAlign());
-//        dA.onTrue(new ArmLift());
+        aStart.onTrue(new ArmLift());
         dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
 
@@ -172,7 +181,7 @@ public class OI {
 
         // Test joystick commands used during practice matches to determine which auto to use
         dBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage (+x button will cross charging station)
-        aLBump.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
+        aLBump.onTrue(new AuxLBumpCommands()); // test button to leave arm out while scaling the charging station
         dStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
 
         // Test joystick used during practice matches to determine which auto to use

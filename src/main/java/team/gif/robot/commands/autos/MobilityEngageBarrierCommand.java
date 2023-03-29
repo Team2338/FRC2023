@@ -1,41 +1,32 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package team.gif.robot.commands.autos;
 
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.commands.FollowPathWithEvents;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import team.gif.lib.RobotTrajectory;
-import team.gif.robot.Constants;
-import team.gif.robot.commands.arm.SetArmPosition;
-import team.gif.robot.commands.autos.lib.SetInitialHeading;
-import team.gif.robot.commands.elevator.SetElevatorPosition;
-import team.gif.robot.commands.telescopingArm.ArmIn;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import java.util.HashMap;
+public class MobilityEngageBarrierCommand extends CommandBase {
 
-public class MobilityEngageBarrierCommand extends SequentialCommandGroup {
+    public MobilityEngageBarrierCommand() {}
 
-    public MobilityEngageBarrierCommand() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("PlaceMobEngage Barrier", 2.0, 1.5); // 1.8 1.2
-        HashMap<String, Command> eventMap = new HashMap<>();
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize(){}
 
-        eventMap.put("goHome", new ParallelCommandGroup(
-            new SetArmPosition(Constants.Arm.STAGE_POS),
-            new ArmIn(),
-            new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
-
-        FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
-            RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
-            trajectory.getMarkers(),
-            eventMap
-        );
-
-        addCommands(
-            new SetInitialHeading(trajectory),
-            trajectoryWithEvents,
-            new EngageFromFarSide()
-        );
+    // Called every time the scheduler runs (~20ms) while the command is scheduled
+    @Override
+    public void execute() {
+        new MobilityEngageBarrier().schedule();
     }
+
+    // Return true when the command should end, false if it should continue. Runs every ~20ms.
+    @Override
+    public boolean isFinished() {
+        return true;
+    }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {}
 }
