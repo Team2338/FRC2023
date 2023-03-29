@@ -2,19 +2,17 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
-import team.gif.robot.commands.autos.AuxBackCommands;
-import team.gif.robot.commands.autos.AuxLBumpCommands;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
-import team.gif.robot.commands.autos.NoHomeEngageCommand;
+import team.gif.robot.commands.autos.MobilityEngageCable;
 import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
 import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
+import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
@@ -118,16 +116,18 @@ public class OI {
      *   aX.onTrue(new PrintCommand("aX"));
      */
 
-        // elevator
-//        aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
+        // drivetrain
+        dDPadUp.whileTrue(new MoveAwaySlow());
+        dDPadRight.whileTrue(new MoveRightSlow());
+        dDPadLeft.whileTrue(new MoveLeftSlow());
+        dDPadDown.whileTrue(new MoveCloserSlow());
+        dLStickBtn.whileTrue(new EnableBoost());
+
+        // reset / zero sensors
         dX.and(dRBump).onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
         dX.and(dLBump).onTrue((new ResetHeading()));
-        dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
-        dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
-        dX.and(aLStickBtn).onTrue( new NoHomeEngageCommand());
-//        aRTrigger.onTrue(new PrintCommand("aRTrigger"));
 
-        // manual mode & run PlaceCollectPlaceBarrier test
+        // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());
 
         // combo loading actions
@@ -148,25 +148,17 @@ public class OI {
         // collector
         dRTrigger.whileTrue(new CollectorCollect());
         dLTrigger.whileTrue(new CollectorEject());
-
         dRBump.whileTrue(new CubeLED());
         dLBump.whileTrue(new ConeLED());
-
         dY.toggleOnTrue(new ToggleWheelsInAndOut());
-        dA.onTrue(new LimeLightAutoAlign());
         aStart.onTrue(new ArmLift());
+
+        // auto assistance
+        dA.onTrue(new LimeLightAutoAlign());
         dB.onTrue(new LimeLightAutoCollect());
         //dX kills limelight auto align
 
-        // enable these for testing purposes
-        // commented out so it doesn't throw errors on the console
-//        tX.whileTrue(new MoveArm(-0.2)); // goes in
-//        tY.whileTrue(new MoveArm(0.2)); // goes out
-//        tDPadRight.onTrue(new ArmOut(Constants.TelescopingArm.MAX_POS));
-//        tDPadLeft.onTrue(new ArmIn()); // move arm all in
-
-        dLStickBtn.whileTrue(new EnableBoost());
-
+        // auto sensor actions
         gamePieceSensor.onTrue(
             new InstantCommand(Robot.ledSubsystem::setLEDGamePieceColor)
                .andThen(Robot.collector::resetTimer)
@@ -176,23 +168,26 @@ public class OI {
             new InstantCommand(Robot.ledSubsystem::clearLEDGamePieceColor)
             .andThen(new GoHomeTimeCondition())
         );
-        // limelight toggle
-//        dRTrigger.onTrue(new LedToggle());
 
-        // Test joystick commands used during practice matches to determine which auto to use
-        dBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage (+x button will cross charging station)
-        aLBump.onTrue(new AuxLBumpCommands()); // test button to leave arm out while scaling the charging station
-        dStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
+        // Test buttons used during practice matches to test and calibrate autos
+        dBack.onTrue(new DriveAndEngageCommand()); // drive to charging station and engage (+x button will cross charging station)
+        dStart.onTrue(new DriveToChargingStationCommand()); // just drive to the charging station
+        dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
+        dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
+        dX.and(aLStickBtn).onTrue( new PlaceCubeHighNoHomeEngage());
+        dX.and(aRStickBtn).onTrue(new MobilityEngageCable());
+
+        // enable these for testing purposes
+        // commented out so it doesn't throw errors on the console
+//        tX.whileTrue(new MoveArm(-0.2)); // goes in
+//        tY.whileTrue(new MoveArm(0.2)); // goes out
+//        tDPadRight.onTrue(new ArmOut(Constants.TelescopingArm.MAX_POS));
+//        tDPadLeft.onTrue(new ArmIn()); // move arm all in
 
         // Test joystick used during practice matches to determine which auto to use
 //        tBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
 //        tStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
 //        tDPadRight.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
-
-        dDPadUp.whileTrue(new MoveAwaySlow());
-        dDPadRight.whileTrue(new MoveRightSlow());
-        dDPadLeft.whileTrue(new MoveLeftSlow());
-        dDPadDown.whileTrue(new MoveCloserSlow());
     }
 
     public void setRumble(boolean rumble) {
