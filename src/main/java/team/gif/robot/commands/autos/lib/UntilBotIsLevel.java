@@ -29,9 +29,9 @@ public class UntilBotIsLevel extends CommandBase {
     @Override
     public void execute() {
         if(posAngle == 2) {
-            Robot.swervetrain.drive(-0.2, 0, 0);
-        } else if(posAngle == 1) {
             Robot.swervetrain.drive(0.2, 0, 0);
+        } else if(posAngle == 1) {
+            Robot.swervetrain.drive(-0.2, 0, 0);
         }
     }
 

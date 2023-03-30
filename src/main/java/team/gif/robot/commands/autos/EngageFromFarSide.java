@@ -2,6 +2,7 @@ package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.robot.Constants;
@@ -25,7 +26,8 @@ public class EngageFromFarSide extends SequentialCommandGroup {
                 new AutoDrive(Constants.AutoConstants.DRIVE_SLOW),
                 new GoHomeStageHome()
             ),
-            new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.35), // give the bot a little push back to stop momentum
+            new PrintCommand("Starting Kickback from far side"),
+            new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.15), // give the bot a little push back to stop momentum
             new WaitCommand(0.5),
             new UntilBotIsLevel().withTimeout(5),
             new UntilBotIsLevel().withTimeout(5),
