@@ -15,7 +15,9 @@ public class UntilBotIsAngled extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        System.out.println("UntilBotIsAngled starting");
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
@@ -24,7 +26,9 @@ public class UntilBotIsAngled extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return Robot.pigeon.getPitch() > 10.0;
+        double pitch = Robot.pigeon.getPitch();
+        System.out.println("UBA pitch: " + pitch);
+        return pitch > 10.0;
     }
 
     // Called once the command ends or is interrupted.

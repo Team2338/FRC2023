@@ -25,7 +25,7 @@ public class CenterMobilityEngage extends SequentialCommandGroup {
                 new UntilBotIsFalling().withTimeout(8),               // monitor gyro until falling
                 new AutoDrive(-0.7)
             ),
-            new AutoDrive(-0.5).withTimeout(0.45), //was 0.75->0.55 // finish driving over station
+            new AutoDrive(-0.5).withTimeout(0.55), //was 0.75->0.55 // finish driving over station
             new WaitCommand(0.5),                  // give charging station time to level and stop teetering
             // begin to drive back to alliance station
             new ParallelDeadlineGroup(

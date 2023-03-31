@@ -18,7 +18,7 @@ public class UntilBotIsLevel extends CommandBase {
     @Override
     public void initialize() {
         posAngle = 0;
-        if (Robot.pigeon.getPitch() > 4.0) {
+        if (Robot.pigeon.getPitch() > 4.0) { //overshot
             posAngle = 2;
         } else if (Robot.pigeon.getPitch() < -4.0) {
             posAngle = 1;
@@ -30,9 +30,9 @@ public class UntilBotIsLevel extends CommandBase {
     @Override
     public void execute() {
         if(posAngle == 2) {
-            Robot.swervetrain.drive(0.2, 0, 0);
+            Robot.swervetrain.drive(-0.2, 0, 0); // drive toward alliance wall fRel
         } else if(posAngle == 1) {
-            Robot.swervetrain.drive(-0.2, 0, 0);
+            Robot.swervetrain.drive(0.2, 0, 0); // drive away from alliance fRel
         }
     }
 

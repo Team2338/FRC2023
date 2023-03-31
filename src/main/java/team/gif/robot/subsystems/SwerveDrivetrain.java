@@ -149,7 +149,7 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     /**
-     * Drive the bot with given params
+     * Drive the bot with given params - always field relative
      * @param x dForward
      * @param y dLeft
      * @param rot dRot
