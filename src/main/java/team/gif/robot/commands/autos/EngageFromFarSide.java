@@ -29,9 +29,10 @@ public class EngageFromFarSide extends SequentialCommandGroup {
             ),
             new PrintCommand("Starting Kickback from far side"),
             new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.3), // give the bot a little push back to stop momentum
+            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001)),
             new WaitCommand(0.3),
-            new UntilBotIsLevel().withTimeout(5),
-            new UntilBotIsLevel().withTimeout(5),
+            new UntilBotIsLevel().withTimeout(2),
+            new UntilBotIsLevel().withTimeout(2),
             new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001))
         );
     }

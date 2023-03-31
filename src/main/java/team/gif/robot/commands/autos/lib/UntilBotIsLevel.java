@@ -18,9 +18,9 @@ public class UntilBotIsLevel extends CommandBase {
     @Override
     public void initialize() {
         posAngle = 0;
-        if (Robot.pigeon.getPitch() > 4.0) { //overshot
+        if (Robot.pigeon.getPitch() > 5.0) { //overshot
             posAngle = 2;
-        } else if (Robot.pigeon.getPitch() < -4.0) {
+        } else if (Robot.pigeon.getPitch() < -5.0) {
             posAngle = 1;
         }
         System.out.println("UBL posAngle :" + posAngle);
@@ -40,7 +40,7 @@ public class UntilBotIsLevel extends CommandBase {
     @Override
     public boolean isFinished() {
         System.out.println("UBL pitch:" + Robot.pigeon.getPitch());
-        return Math.abs(Robot.pigeon.getPitch()) < 2.0;
+        return Math.abs(Robot.pigeon.getPitch()) < 4.0;
     }
 
     // Called once the command ends or is interrupted.
