@@ -21,6 +21,7 @@ public class EngageFromFarSide extends SequentialCommandGroup {
      */
     public EngageFromFarSide(){
         addCommands(
+            new PrintCommand("Beginning EFFS"),
             new ParallelDeadlineGroup(
                 new UntilBotIsFalling().withTimeout(8),               // monitor gyro until level
                 new AutoDrive(Constants.AutoConstants.DRIVE_SLOW),
