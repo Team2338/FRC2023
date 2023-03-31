@@ -23,6 +23,7 @@ public class UntilBotIsLevel extends CommandBase {
         } else if (Robot.pigeon.getPitch() < -4.0) {
             posAngle = 1;
         }
+        System.out.println("UBL posAngle :" + posAngle);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -38,6 +39,7 @@ public class UntilBotIsLevel extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
+        System.out.println("UBL pitch:" + Robot.pigeon.getPitch());
         return Math.abs(Robot.pigeon.getPitch()) < 2.0;
     }
 

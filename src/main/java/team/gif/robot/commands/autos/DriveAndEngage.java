@@ -17,6 +17,7 @@ public class DriveAndEngage extends SequentialCommandGroup {
     public DriveAndEngage(){
         addCommands(
 //            new AutoDrive(-Constants.AutoConstants.DRIVE_FAST).withTimeout(SmartDashboard.getNumber("AutoTime", 2.3)), // drive (time and speed based) until we are angled
+            new PrintCommand("Auto: Drive and Engage"),
             new DriveToChargingStation(),
             new AutoDrive(-Constants.AutoConstants.HOLD_AT_ANGLE).withTimeout(.25),               // give pigeon time to settle
             new ParallelDeadlineGroup(
@@ -25,7 +26,7 @@ public class DriveAndEngage extends SequentialCommandGroup {
                 new GoHomeStageHome()
             ),
             new PrintCommand("Reached -10 degrees. Starting kickback"),
-            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.15), // give the bot a little push back to stop momentum
+            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.25), // was // give the bot a little push back to stop momentum
             new WaitCommand(0.3),
 
             new UntilBotIsLevel().withTimeout(5),
