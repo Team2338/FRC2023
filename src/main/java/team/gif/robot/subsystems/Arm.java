@@ -38,6 +38,10 @@ public class Arm extends SubsystemBase {
         armGamePieceSensor = new DigitalInput(9);
     }
 
+    /**
+     * Move the arm with an input current
+     * @param percent percent of max current to move the arm
+     */
     public void move(double percent) {
         if (Robot.oi.aux.getHID().getRightStickButton()) {
             armMotor.configReverseSoftLimitThreshold(0);
@@ -56,76 +60,151 @@ public class Arm extends SubsystemBase {
         armMotor.set(ControlMode.Position, armTargetPos);
     }
 
+    /**
+     * Get the current position of the arm in ticks
+     * @return arm position in ticks
+     */
     public double getPosition() {
         return armMotor.getSelectedSensorPosition(); // 4096
     }
 
+    /**
+     * Get the current position of the arm in degrees
+     * @return arm position in degrees
+     */
     public double getPositionDegrees() {
         return (armMotor.getSelectedSensorPosition() - Constants.Arm.ZERO_OFFSET_TICKS ) / Constants.Arm.TICKS_PER_DEGREE; // 4096
     }
-    
+
+    /**
+     * Set the target position of the arm in ticks
+     * @param pos target position in ticks
+     */
     public void setTargetPosition(double pos) {
         armTargetPos = pos;
     }
 
+    /**
+     * Get the target position of the arm in ticks
+     * @return target position in ticks
+     */
     public double getTargetPosition() {
         return armTargetPos; // 4096
     }
 
+    /**
+     * Get the current output of the arm motor as a percent
+     * @return the current output of the arm motor as a percent
+     */
     public double getOutput(){
         return armMotor.getMotorOutputPercent();
     }
 
+    /**
+     * Get the current error of the arm PID
+     * @return the current error of the arm PID
+     */
     public double PIDError(){
         return getPosition() - armTargetPos;
     }
 
+    /**
+     * Get the current error of the arm PID in degrees
+     * @param enableLimit whether or not to enable current limiting
+     */
     public void currentLimitingEnable(boolean enableLimit) {
         armMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(enableLimit, MAX_SUPPLY_CURRENT_AMPS,MAX_STATOR_CURRENT_AMPS, 0));
     }
 
+    /**
+     * Check if the arm is at its target position
+     * @return true if the arm is at its target position
+     */
     public boolean isFinished() {
         return Math.abs(PIDError()) < Constants.Arm.PID_TOLERANCE;
     }
 
+    /**
+     * Get if the arm is in manual mode
+     * @return true if the arm is in manual mode
+     */
     public boolean getArmManualFlag() { return armManualFlag;}
 
+    /**
+     * Set the motor position through MotionMagic
+     * @param position position to move to
+     * @param arbitraryFeedForward feed forward to use
+     */
     public void setMotionMagic(double position, double arbitraryFeedForward) {
         armMotor.set(ControlMode.MotionMagic, position, DemandType.ArbitraryFeedForward, arbitraryFeedForward);
     }
 
+    /**
+     * Set the cruise velocity of the arm
+     * @param ticksPer100ms ticks per 100ms to set cruise velocity to
+     */
     public void setCruiseVelocity(int ticksPer100ms) {
         armMotor.configMotionCruiseVelocity(ticksPer100ms);
     }
 
+    /**
+     * Set the feed forward of the arm
+     * @param f the feed forward to set
+     */
     public void configF(double f) {
         armMotor.config_kF(0, f);
     }
 
+    /**
+     * Set the proportional gain of the arm
+     * @param p the proportional gain to set
+     */
     public void configP(double p) {
         armMotor.config_kP(0, p);
     }
 
+    /**
+     * Set the integral gain of the arm
+     * @param i the integral gain to set
+     */
     public void configI(double i) {
         armMotor.config_kI(0, i);
     }
 
+    /**
+     * Reset the integral accumulator of the arm
+     */
     public void resetI() {
         armMotor.setIntegralAccumulator(0);
     }
 
+    /**
+     * Get the integral accumulator of the arm
+     * @return the integral accumulator of the arm
+     */
     public double getI() {
         return armMotor.getIntegralAccumulator(0);
     }
 
+    /**
+     * Get the state of the game piece sensor in the arm
+     * @return true if the game piece sensor is triggered
+     */
     public boolean getSensor() {
         return armGamePieceSensor.get();
     }
 
+    /**
+     * Set the peak output of the arm
+     * @param output the peak output to set
+     */
     public void configPeakOutputForward(double output) {
         armMotor.configPeakOutputForward(output);
     }
 
+    /**
+     * Configure the arm talon
+     */
     private void configArmTalon() {
         armMotor.configFactoryDefault();
 

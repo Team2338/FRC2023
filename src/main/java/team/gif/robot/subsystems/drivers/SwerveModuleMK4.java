@@ -80,10 +80,18 @@ public class SwerveModuleMK4 {
 
     }
 
+    /**
+     * Get the Falcon driving the wheel
+     * @return Returns the Falcon driving the wheel
+     */
     public TalonFX getDriveMotor() {
         return this.driveMotor;
     }
 
+    /**
+     * Get the SparkMax turning the wheel
+     * @return Returns the SparkMax turning the wheel
+     */
     public CANSparkMax getTurnMotor() {
         return this.turnMotor;
     }
