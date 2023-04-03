@@ -13,6 +13,7 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.AutoArmConeHigh;
+import team.gif.robot.commands.autos.lib.CheckForGP;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
@@ -43,6 +44,7 @@ public class PlaceCollectPlaceCable extends SequentialCommandGroup {
         eventMap.put("armPlace", new ParallelCommandGroup(
                 new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
                 new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)));
+        eventMap.put("checkGP", new CheckForGP());
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
                 RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
