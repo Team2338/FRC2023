@@ -66,8 +66,14 @@ public class LEDSubsystem extends SubsystemBase {
 
     public void setLEDAutoAlignError() {
         GamePiece[0] = 255;
-        GamePiece[1] = 0;
-        GamePiece[2] = 0;
+        GamePiece[1] = 255;
+        GamePiece[2] = 255;
+    }
+
+    public void setLEDAutoCollectActive() {
+        HP[0] = 255;
+        HP[1] = 0;
+        HP[2] = 0;
     }
 
     public void setColors() {

@@ -2,6 +2,7 @@ package team.gif.robot.commands.autos;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.robot.Constants;
@@ -20,15 +21,18 @@ public class EngageFromFarSide extends SequentialCommandGroup {
      */
     public EngageFromFarSide(){
         addCommands(
+            new PrintCommand("Beginning EFFS"),
             new ParallelDeadlineGroup(
                 new UntilBotIsFalling().withTimeout(8),               // monitor gyro until level
                 new AutoDrive(Constants.AutoConstants.DRIVE_SLOW),
                 new GoHomeStageHome()
             ),
-            new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.35), // give the bot a little push back to stop momentum
-            new WaitCommand(0.5),
-            new UntilBotIsLevel().withTimeout(5),
-            new UntilBotIsLevel().withTimeout(5),
+            new PrintCommand("Starting Kickback from far side"),
+            new AutoDrive(-Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.3), // give the bot a little push back to stop momentum
+            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001)),
+            new WaitCommand(0.3),
+            new UntilBotIsLevel().withTimeout(2),
+            new UntilBotIsLevel().withTimeout(2),
             new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001))
         );
     }

@@ -15,7 +15,9 @@ public class UntilBotIsFalling extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        System.out.println("UntilBotIsFalling starting");
+    }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
@@ -27,7 +29,9 @@ public class UntilBotIsFalling extends CommandBase {
 //        System.out.println("checking pitch " + Robot.pigeon.getPitch());
         // > -X is coming from alliance station and falling to become level
         // < X is falling from opponent side
-        return Robot.pigeon.getPitch() > -12.0 && Robot.pigeon.getPitch() < 10.0; // was -14.0 // MW -10 and 12
+        double pitch = Robot.pigeon.getPitch();
+        System.out.println("UBF Pitch: " + pitch);
+        return pitch > -10.0 && pitch < 12.0; // was -14.0 // MW -10 and 12
     }
 
     // Called once the command ends or is interrupted.

@@ -40,7 +40,7 @@ import team.gif.robot.subsystems.drivers.RobotCompressor;
  * project.
  */
 public class Robot extends TimedRobot {
-    private Command autonomousCommand;
+    private static Command autonomousCommand;
     private RobotContainer robotContainer;
     private static autoMode chosenAuto;
     private static delay chosenDelay;
@@ -257,4 +257,7 @@ public class Robot extends TimedRobot {
     //TODO: Change and check before each usage
     public static boolean isCompBot = true;
 
+    public static void cancelAuto() {
+        autonomousCommand.cancel();
+    }
 }

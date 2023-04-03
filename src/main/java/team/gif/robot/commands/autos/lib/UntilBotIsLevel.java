@@ -18,27 +18,29 @@ public class UntilBotIsLevel extends CommandBase {
     @Override
     public void initialize() {
         posAngle = 0;
-        if (Robot.pigeon.getPitch() > 4.0) {
+        if (Robot.pigeon.getPitch() > 5.0) { //overshot
             posAngle = 2;
-        } else if (Robot.pigeon.getPitch() < -4.0) {
+        } else if (Robot.pigeon.getPitch() < -5.0) {
             posAngle = 1;
         }
+        System.out.println("UBL posAngle :" + posAngle);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
         if(posAngle == 2) {
-            Robot.swervetrain.drive(-0.2, 0, 0);
+            Robot.swervetrain.drive(-0.2, 0, 0); // drive toward alliance wall fRel
         } else if(posAngle == 1) {
-            Robot.swervetrain.drive(0.2, 0, 0);
+            Robot.swervetrain.drive(0.2, 0, 0); // drive away from alliance fRel
         }
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return Math.abs(Robot.pigeon.getPitch()) < 2.0;
+        System.out.println("UBL pitch:" + Robot.pigeon.getPitch());
+        return Math.abs(Robot.pigeon.getPitch()) < 4.0;
     }
 
     // Called once the command ends or is interrupted.

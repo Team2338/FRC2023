@@ -25,6 +25,7 @@ public class LimeLightAutoCollect extends CommandBase {
         collectorCollectSchedule.schedule();
         count = 0;
         Robot.ledSubsystem.clearLEDGamePieceColor();
+        Robot.ledSubsystem.setLEDAutoCollectActive();
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -76,6 +77,7 @@ public class LimeLightAutoCollect extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Robot.ledSubsystem.clearLEDGamePieceColor();
+        Robot.ledSubsystem.setLEDHPColor(0, 0, 0);
         ChassisSpeeds chassisSpeeds = new ChassisSpeeds(0, 0, 0.0);
         SwerveModuleState[] moduleStates = Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         Robot.swervetrain.setModuleStates(moduleStates);
