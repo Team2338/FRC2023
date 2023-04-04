@@ -1,6 +1,8 @@
 package team.gif.robot.commands.collector;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import team.gif.robot.Robot;
 
 public class WheelsOut extends CommandBase {
@@ -11,6 +13,7 @@ public class WheelsOut extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("Start: " + Timer.getFPGATimestamp());
         Robot.collectorWheels.wheelsOut();
     }
 

@@ -35,7 +35,7 @@ public class AutoArmConeHigh extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted){
-        Robot.arm.setTargetPosition(Constants.Arm.PLACE_CONE_HIGH_POS- (5.0 * Constants.Arm.TICKS_PER_DEGREE));
+        Robot.arm.setTargetPosition(Constants.Arm.PLACE_CONE_HIGH_POS - (5.0 * Constants.Arm.TICKS_PER_DEGREE));
         Robot.arm.configPeakOutputForward(Constants.Arm.PEAK_OUTPUT_FORWARD);
         Robot.arm.configI(Constants.Arm.I_GT_45);
         Robot.arm.resetI();

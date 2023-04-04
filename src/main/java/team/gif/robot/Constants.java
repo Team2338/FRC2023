@@ -63,7 +63,7 @@ public final class Constants {
         public static final boolean kGyroReversed = false;
 
         public static final double COAST_DRIVE_RPM = 2500; // 2750; //4800 demo speed //2750
-        public static final double BOOST_DRIVE_RPM = 1750; // 2000;
+        public static final double BOOST_DRIVE_RPM = 1675; // 1675 is max speed; was 1750;
         public static final double SLOW_DRIVE_RPM = 3500;
 
         public static final double COAST_SPEED_METERS_PER_SECOND = COAST_DRIVE_RPM *
@@ -174,6 +174,8 @@ public final class Constants {
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.35;
         public static final double AUTO_OUTPUT_CONE_HIGH_POS = .25;
+        public static final double AUTO_OUTPUT_CONE_HIGH_STAGE = .80;
+        public static final double AUTO_OUTPUT_CONE_HIGH_FAST = .30;
         public static final double PEAK_OUTPUT_FORWARD_CUBE_MID_POS = 0.30;
         public static final double PEAK_OUTPUT_REVERSE = -0.55; // -0.55 // arm is going up
 
@@ -222,6 +224,7 @@ public final class Constants {
         // Motion Magic constants
         public static final int MAX_VELOCITY = 500 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final int REV_MAX_VELOCITY = 500 * 10;
+        public static final double AUTO_OUTPUT_CONE_HIGH_FAST = 1.0;
         public static final int MAX_ACCELERATION = 9000; // Elevator acceleration (ticks/100ms/s)
         public static final double F = 0.8;
         public static final double REV_F = 0.3;

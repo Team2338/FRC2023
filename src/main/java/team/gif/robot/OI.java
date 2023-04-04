@@ -7,11 +7,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.arm.ArmLift;
 import team.gif.robot.commands.autoaim.LimeLightAutoAlign;
 import team.gif.robot.commands.autoaim.LimeLightAutoCollect;
+import team.gif.robot.commands.autos.AutoConeHighFast;
 import team.gif.robot.commands.autos.DriveAndEngageCommand;
 import team.gif.robot.commands.autos.DriveToChargingStationCommand;
 import team.gif.robot.commands.autos.MobilityEngageCable;
 import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
 import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
+import team.gif.robot.commands.autos.PlaceConeHigh;
 import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
@@ -170,8 +172,10 @@ public class OI {
         );
 
         // Test buttons used during practice matches to test and calibrate autos
-        dBack.onTrue(new DriveAndEngageCommand()); // drive to charging station and engage (+x button will cross charging station)
-        dStart.onTrue(new DriveToChargingStationCommand()); // just drive to the charging station
+//        dBack.onTrue(new DriveAndEngageCommand()); // drive to charging station and engage (+x button will cross charging station)
+        dBack.onTrue(new AutoConeHighFast());
+//        dStart.onTrue(new DriveToChargingStationCommand()); // just drive to the charging station
+        dStart.onTrue(new PlaceConeHigh()); // just drive to the charging station
         dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
         dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
         dX.and(aLStickBtn).onTrue( new PlaceCubeHighNoHomeEngage());

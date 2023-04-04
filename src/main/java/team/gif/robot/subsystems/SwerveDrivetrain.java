@@ -92,11 +92,11 @@ public class SwerveDrivetrain extends SubsystemBase {
 
         drivePace = drivePace.COAST_FR;
 
-//SB        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-//SB        swerveTab.addDouble("FL_Rotation", fL::getRawHeading);
-//SB        swerveTab.addDouble("FR_Rotation", fR::getRawHeading);
-//SB        swerveTab.addDouble("RL_Rotation", rL::getRawHeading);
-//SB        swerveTab.addDouble("RR_Rotation", rR::getRawHeading);
+        ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
+        swerveTab.addDouble("FL_Rotation", fL::getDriveOutput);
+        swerveTab.addDouble("FR_Rotation", fR::getDriveOutput);
+        swerveTab.addDouble("RL_Rotation", rL::getDriveOutput);
+        swerveTab.addDouble("RR_Rotation", rR::getDriveOutput);
     }
 
     public SwerveDrivetrain(TelemetryFileLogger logger) {
@@ -155,6 +155,8 @@ public class SwerveDrivetrain extends SubsystemBase {
      * @param rot dRot
      */
     public void drive(double x, double y, double rot) {
+
+
         SwerveModuleState[] swerveModuleStates =
                 Constants.Drivetrain.DRIVE_KINEMATICS.toSwerveModuleStates(
                         drivePace.getIsFieldRelative() ?

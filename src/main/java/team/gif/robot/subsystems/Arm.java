@@ -40,8 +40,10 @@ public class Arm extends SubsystemBase {
 
     public void move(double percent) {
         if (Robot.oi.aux.getHID().getRightStickButton()) {
-            armMotor.configReverseSoftLimitThreshold(0);
+            armMotor.configReverseSoftLimitEnable(false);
+//            armMotor.configReverseSoftLimitThreshold(0);
         } else {
+            armMotor.configReverseSoftLimitEnable(true);
             armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         }
 

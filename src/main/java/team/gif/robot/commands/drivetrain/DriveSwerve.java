@@ -41,8 +41,8 @@ public class DriveSwerve extends CommandBase {
             strafeSign = strafe/Math.abs(strafe);
             // Use a parabolic curve (instead if linear) for the joystick to speed ratio
             // This allows for small joystick inputs to use slower speeds
-            forward = forward * Math.abs(forward);
-            strafe = strafe * Math.abs(strafe);
+            forward = Math.abs(forward) * forward;
+            strafe = Math.abs(strafe) * strafe;
 
             forward = .5 * Math.sqrt(2 + forward*forward - strafe*strafe + 2*forward*Math.sqrt(2)) -
                     .5 * Math.sqrt(2 + forward*forward - strafe*strafe - 2*forward*Math.sqrt(2));

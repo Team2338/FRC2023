@@ -1,5 +1,6 @@
 package team.gif.robot.commands.collector;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
@@ -12,6 +13,7 @@ public class WheelsIn extends CommandBase {
     @Override
     public void initialize() {
         Robot.collectorWheels.wheelsIn();
+        System.out.println("End: " + Timer.getFPGATimestamp());
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

@@ -17,7 +17,7 @@ public class CollectorEject extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.collector.setSpeedPercentCollector(-Constants.Collector.COLLECTOR_RUN_EJECT);
+        Robot.collector.setSpeedPercentCollector(-1.0);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
