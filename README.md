@@ -1,6 +1,6 @@
 # 2338 FRC 2023
 ![logo](https://avatars.githubusercontent.com/u/8992546?s=200&v=4)
-#### Code for Gear It Forward's 2023 robot, [Przesada](https://www.youtube.com/watch?v=i8rPwPnoQRg&pp=ygUIMjMzOCBmcmM%3D).
+#### Code for Gear It Forward's 2023 robot, [Zephyr](https://www.youtube.com/watch?v=i8rPwPnoQRg&pp=ygUIMjMzOCBmcmM%3D).
 #### General Notes:
 * Written in Java
 * Timed Robot Format
@@ -8,6 +8,7 @@
   * PhoenixProAnd5
   * REVLib
   * WPILibNewCommands
+  * PathPlanner
 ****
 ## Sections
 1. [Collector](#collector)
@@ -28,12 +29,29 @@
    * Drive Modes
 6. [LED Subsystem](#led)
    * LED Control and Management
+7. [Vision](#vision)
+   * Vision Processing
+   * Vision Commands
+8. [Spoiler](#spoiler)
+   * Spoiler?
+     * Spoiler!
 
 ******
 Collector<a name="collector"></a>
 ----
 Our collector is made up of two elements - a pneumatic system to set the shape of the game piece carried and a 
 set of wheels to quickly intake said game piece.<br />
+```java
+public class CollectorWheels {
+    private static final DoubleSolenoid solenoid = new DoubleSolenoid( PneumaticsModuleType.REVPH, RobotMap.SOLENOID_COLLECTOR_FORWARD, RobotMap.SOLENOID_COLLECTOR_REVERSE);
+    private DoubleSolenoid.Value state = DoubleSolenoid.Value.kForward;
+    
+    public void wheelsOut() {
+            state = DoubleSolenoid.Value.kReverse;
+            Robot.ledSubsystem.LEDWheelsOut();
+    }
+}
+```
 Subsystems and Commands to reference: <br />
 * [Collector.java](src/main/java/team/gif/robot/subsystems/Collector.java)<br />
 * [CollectorWheels.java](src/main/java/team/gif/robot/subsystems/CollectorWheels.java)<br />
@@ -41,6 +59,7 @@ Subsystems and Commands to reference: <br />
 * [WheelsOut.java](src/main/java/team/gif/robot/commands/collector/WheelsOut.java)<br />
 * [CollectorEject.java](src/main/java/team/gif/robot/commands/collector/CollectorEject.java)<br />
 * [CollectorCollect.java](src/main/java/team/gif/robot/commands/collector/CollectorCollect.java)<br />
+<!-- -->
 ***
 Arm<a name="arm"></a>
 ---
@@ -82,7 +101,7 @@ Swerve Drivetrain<a name="swerve"></a>
 ---
 This year, we decided on using a swerve chassis to take advantage of its ability to strafe in the 
 community, as well as to get around defence in the center of the field as fast as possible.
-We use SMS MK4's as our chosen swerve modules, configured with NEOs to turn, Falcons to drive, and
+We use SDS MK4's as our chosen swerve modules, configured with NEOs to turn, Falcons to drive, and
 CANCoders to track the direction of the wheel. Unlike other examples you may encounter, we opted not to use WPILibs tools 
 to optimize the state, as we found it was far too slow and inaccurate on our bot.
 Instead, we found the fastest way to get to any given state on a disconnected 0->360 degree axis.
@@ -129,6 +148,25 @@ public class SwerveModuleMK4 {
 ```
 We decoupled the SwerveModule class from the SwerveDrivetrain class due to the base SwerveModule code's
 usability across multiple module types and motors.<br />
+For path generation during autonomous, we found out pretty early that the included TrajectoryGenerator class cannot 
+generate holonomic paths. Our solution was [Team 3015 Ranger Robotics' fantastic PathPlanner](https://github.com/mjansen4857/pathplanner) application, allowing us to both
+rotate and translate at the same time, just like in tele-op with field-relative instruction. <br />
+```java
+public class RobotTrajectory {
+    public PPSwerveControllerCommand baseSwerveCommand(PathPlannerTrajectory trajectory) {
+        return new PPSwerveControllerCommand(
+            trajectory,
+            Robot.swervetrain::getPose,
+            Constants.Drivetrain.DRIVE_KINEMATICS,
+            new PIDController(Constants.AutoConstants.PX_CONTROLLER, 0, 0),
+            new PIDController(Constants.AutoConstants.PY_CONTROLLER, 0, 0),
+            new PIDController(Constants.AutoConstants.P_THETA_CONTROLLER, 0, 0),
+            Robot.swervetrain::setModuleStates,
+            Robot.swervetrain
+        );
+    }
+}
+```
 Subsystems and Commands to reference:<br />
 * [SwerveModuleMK4.java](src%2Fmain%2Fjava%2Fteam%2Fgif%2Frobot%2Fsubsystems%2Fdrivers%2FSwerveModuleMK4.java)
 * [SwerveDrivetrain.java](src%2Fmain%2Fjava%2Fteam%2Fgif%2Frobot%2Fsubsystems%2FSwerveDrivetrain.java)
