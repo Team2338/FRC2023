@@ -43,8 +43,17 @@ public class Elevator extends SubsystemBase {
         return (elevatorMotor.getSelectedSensorPosition() + Constants.Elevator.ZERO_OFFSET_TICKS) / Constants.Elevator.EL_TICKS_PER_INCH;
     }
 
-    public double convertInchesToPos(int inches ){
+    public double inchesToPos(int inches) {
         return inches * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS;
+    }
+
+    /**
+     *
+     * @param inches
+     * @return Inches in units of ticks
+     */
+    public double inchesToTicks(int inches) {
+        return inches * Constants.Elevator.EL_TICKS_PER_INCH;
     }
 
     public double getTargetPosition() {

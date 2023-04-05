@@ -44,7 +44,7 @@ public class Arm extends SubsystemBase {
 //            armMotor.configReverseSoftLimitThreshold(0);
         } else {
             armMotor.configReverseSoftLimitEnable(true);
-            armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
+//-            armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         }
 
         // soft limits will keep the robot arm in allowable range
@@ -119,6 +119,15 @@ public class Arm extends SubsystemBase {
     public double getI() {
         return armMotor.getIntegralAccumulator(0);
     }
+
+    public double degreesToPos(double deg) { return deg * Constants.Arm.TICKS_PER_DEGREE - Constants.Arm.ZERO_OFFSET_TICKS;}
+
+    /**
+     *
+     * @param degrees
+     * @return degrees in units of ticks
+     */
+    public double degreesToTicks(double degrees) { return degrees * Constants.Arm.TICKS_PER_DEGREE;}
 
     public boolean getSensor() {
         return armGamePieceSensor.get();

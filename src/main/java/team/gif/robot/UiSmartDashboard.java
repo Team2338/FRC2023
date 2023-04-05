@@ -45,6 +45,7 @@ public class UiSmartDashboard {
         autoModeChooser.addOption("P Collect Place Left", autoMode.PLACE_COLLECT_PLACE_BARRIER);
         autoModeChooser.addOption("P Mobility Engage Right", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
         autoModeChooser.addOption("P Mobility Engage Left", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
+        autoModeChooser.addOption("3 GP Right", autoMode.THREE_GP_RIGHT);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)
