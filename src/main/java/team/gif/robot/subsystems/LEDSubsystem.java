@@ -40,30 +40,45 @@ public class LEDSubsystem extends SubsystemBase {
         HP[2] = b;
     }
 
+    /**
+     * Assigns the color of the LEDs to green to indicate the game piece is in
+     */
     public void setLEDGamePieceColor() {
         GamePiece[0] = 0;
         GamePiece[1] = 255;
         GamePiece[2] = 0;
     }
 
+    /**
+     * Assigns the color of the LEDs to null to indicate the game piece is not in
+     */
     public void clearLEDGamePieceColor() {
         GamePiece[0] = 0;
         GamePiece[1] = 0;
         GamePiece[2] = 0;
     }
 
+    /**
+     * Assigns the color of the LEDs to null to indicate the wheels are in
+     */
     public void LEDWheelsIn() {
         WheelState[0] = 0;
         WheelState[1] = 0;
         WheelState[2] = 0;
     }
 
+    /**
+     * Assigns the color of the LEDs to blue to indicate the wheels are out
+     */
     public void LEDWheelsOut() {
         WheelState[0] = 0;
         WheelState[1] = 0;
         WheelState[2] = 255;
     }
 
+    /**
+     * Assigns the color of the LEDs to red to indicate an error on autoAlign
+     */
     public void setLEDAutoAlignError() {
         GamePiece[0] = 255;
         GamePiece[1] = 255;
@@ -76,6 +91,9 @@ public class LEDSubsystem extends SubsystemBase {
         HP[2] = 0;
     }
 
+    /**
+     * Sets the colors of the LEDs
+     */
     public void setColors() {
         for (int i = 0; i < RobotMap.HP_LEDS.length; i++) {
             ledBuffer.setRGB(RobotMap.HP_LEDS[i],HP[0],HP[1], HP[2]);

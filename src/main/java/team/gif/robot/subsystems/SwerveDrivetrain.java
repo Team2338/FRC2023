@@ -267,10 +267,18 @@ public class SwerveDrivetrain extends SubsystemBase {
         return Robot.pigeon.getCompassHeading();
     }
 
+    /**
+     * set the drivePace settings for the drivebase
+     * @param drivePace the drivePace to set
+     */
     public void setDrivePace(drivePace drivePace) {
         this.drivePace = drivePace;
     }
 
+    /**
+     * Get the current drivePace settings
+     * @return the current drivePace settings
+     */
     public static drivePace getDrivePace() {
         return drivePace;
     }

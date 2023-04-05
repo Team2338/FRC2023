@@ -20,9 +20,14 @@ public class Collector extends SubsystemBase {
         collectorMotor.setSensorPhase(true);
     }
 
+    /**
+     * Sets the speed of the collector motor
+     * @param percent percent of max speed to run the collector motor
+     */
     public void setSpeedPercentCollector(double percent) {
         collectorMotor.set(ControlMode.PercentOutput, percent);
     }
+
 
     public void resetTimer() {
         elapsedTime.reset();

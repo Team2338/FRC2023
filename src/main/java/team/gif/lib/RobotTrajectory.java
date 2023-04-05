@@ -13,7 +13,7 @@ import team.gif.robot.Robot;
  * @since 2/14/23
  */
 public class RobotTrajectory {
-    public RobotTrajectory() {}
+    private RobotTrajectory() {}
 
     private static RobotTrajectory instance = null;
 
@@ -24,6 +24,11 @@ public class RobotTrajectory {
         return instance;
     }
 
+    /**
+     * Creates a swerve command for the robot
+     * @param trajectory the trajectory to follow
+     * @return the swerve command
+     */
     public PPSwerveControllerCommand baseSwerveCommand(PathPlannerTrajectory trajectory) {
         // rest odometry to the initial position of the path
 //        Robot.pigeon.resetPigeonPosition( trajectory.getInitialHolonomicPose().getRotation().getDegrees());

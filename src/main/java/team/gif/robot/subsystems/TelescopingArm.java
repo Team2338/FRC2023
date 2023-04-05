@@ -26,6 +26,10 @@ public class TelescopingArm extends SubsystemBase {
         // would use soft limits but only takes in integer values which is not precise enough
     }
 
+    /**
+     * Set the motor output of the telescoping arm as a percent of max speed
+     * @param percent percent of max speed to run the telescoping arm
+     */
     public void setMotorSpeed(double percent) {
         // do not allow for arm to go past soft limits
         if ( (percent > 0 && telescopingMotor.getEncoder().getPosition() > Constants.TelescopingArm.MAX_POS ) ||
@@ -35,6 +39,10 @@ public class TelescopingArm extends SubsystemBase {
         telescopingMotor.set(percent);
     }
 
+    /**
+     * Get the current position of the telescoping arm
+     * @return the current position of the telescoping arm
+     */
     public double getPosition() {
         return telescopingMotor.getEncoder().getPosition();
     }
