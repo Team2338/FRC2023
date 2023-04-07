@@ -54,7 +54,8 @@ public class Arm extends SubsystemBase {
     /**
      * Use PID to move the arm to a position
      */
-    public void PIDMove() {
+    public void
+    PIDMove() {
         armMotor.set(ControlMode.Position, armTargetPos);
     }
 

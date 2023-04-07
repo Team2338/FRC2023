@@ -155,10 +155,10 @@ public final class Constants {
     }
 
     public static class Arm {
-        public static final double FF = -0.04; // -0.02 // arm is going down
-        public static final double P = 1.0; // 2.0; // 2.0; // 1.2; // arm is going down
-        public static final double REV_FF = -0.02; // -0.02; // -0.03 // arm is going up
-        public static final double REV_P = 2.0; // 2.0; // // arm is going up
+        public static final double FF = -0.04; //wasd -0.12; //was -0.08; // was -0.04; // -0.02 // arm is going down
+        public static final double P = 1.5; // wasd 2.0; //was 1.0 // 2.0; // 2.0; // 1.2; // arm is going down
+        public static final double REV_FF = FF; // -0.15; // wasd -0.04; //was -0.02; // -0.03 // arm is going up
+        public static final double REV_P = 1.0; // 2.0; //was 2.0; // // arm is going up
         public static final double I_GT_45 = 0.003;
         public static final double I_LT_45 = 0.0;
         public static final double D = 0.0;
@@ -170,22 +170,22 @@ public final class Constants {
         public static final double REV_F = 16.0; // 0.3; // 0.38;
 
         // general motor function parameters
-        public static final double PEAK_OUTPUT_FORWARD = 0.55; // 0.55; // down // Percent motor command, arm is much faster than elevator
+        public static final double PEAK_OUTPUT_FORWARD = 0.70; //was 0.55; // down // Percent motor command, arm is much faster than elevator
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
-        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.35;
+        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25; // wasg 0.35;
         public static final double AUTO_OUTPUT_CONE_HIGH_POS = .25;
         public static final double AUTO_OUTPUT_CONE_HIGH_STAGE = .80;
         public static final double AUTO_OUTPUT_CONE_HIGH_FAST = .30;
         public static final double PEAK_OUTPUT_FORWARD_CUBE_MID_POS = 0.30;
-        public static final double PEAK_OUTPUT_REVERSE = -0.55; // -0.55 // arm is going up
+        public static final double PEAK_OUTPUT_REVERSE = -0.80; //was -0.55 // arm is going up
 
         // motion magic parameters (not currently used)
 //        public static final int MAX_VELOCITY = 16000; //16000 // 5000; // ticks/100ms
 //        public static final int REV_MAX_VELOCITY = 16000;
 //        public static final int MAX_ACCELERATION = 16000; // ticks/100ms/s
 
-        public static final double TICKS_PER_DEGREE = 31.378; // PBOT 26.8
-        public static final double ZERO_OFFSET_TICKS = 319; // was 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
+        public static final double TICKS_PER_DEGREE = 30.91;//was 31.378; // PBOT 26.8
+        public static final double ZERO_OFFSET_TICKS = 230; //was 319; // was 303; // PBOT 375; // ticks between motor 0 and straight up (compass 0)
         public static final double PID_TOLERANCE = 3.0 * TICKS_PER_DEGREE; // allows arm to be within 3 degrees of target
 
         // n is in degrees
@@ -196,7 +196,7 @@ public final class Constants {
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS_AUTO = -45.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
-        public static final double PLACE_CONE_HIGH_POS = 82.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_HIGH_POS = 81.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
         public static final double PLACE_LOW_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
@@ -212,30 +212,30 @@ public final class Constants {
 
     public static class Elevator {
         // PID constants
-        public static final double P = 4.0;
+        public static final double P = 1.5; // wasg 2.0; //was 4.0;
         public static final double I = 0.0;
         public static final double D = 0.0;
+        public static final double F = 0.1; // wasg 0.05; //was 0.8;
+        public static final double REV_F = 0.1; //was 0.3;
 
-        public static final double P_HOLD = 0.1;
+        public static final double P_HOLD = 0.5; //was 0.1;
         public static final double I_HOLD = 0.0;
         public static final double D_HOLD = 0.0;
-        public static final double F_HOLD = 0.004; //0.004
-        public static final double F_HOLD_LOW = 0.02; //0.004
+        public static final double F_HOLD = 0.004; // wasg 0.002; //0.004
+        public static final double F_HOLD_LOW = 0.004; // wasg 0.002; //was 0.02; //was 0.004
 
         // Motion Magic constants
-        public static final int MAX_VELOCITY = 500 * 10; // n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
+        public static final int MAX_VELOCITY = 1500 * 10; // wasg 500 n=ticks/sec * 10 : Elevator velocity (ticks/100ms)
         public static final double SLOW_VELOCITY_PERC = 0.5; //
-        public static final int REV_MAX_VELOCITY = 500 * 10;
+        public static final int REV_MAX_VELOCITY = 1500 * 10; // wasg 500
         public static final double AUTO_OUTPUT_CONE_HIGH_FAST = 1.0;
-        public static final int MAX_ACCELERATION = 9000; // Elevator acceleration (ticks/100ms/s)
-        public static final double F = 0.8;
-        public static final double REV_F = 0.3;
+        public static final int MAX_ACCELERATION = 20000; // Elevator acceleration (ticks/100ms/s)
         public static final double GRAV_FEED_FORWARD = 400 / 1023.0; // Percent constant to counteract gravity
         public static final double REV_GRAV_FEED_FORWARD = 50 / 1023.0;
 
-        public static final double EL_TICKS_PER_INCH = 1750; // PBOT 1700;
+        public static final double EL_TICKS_PER_INCH = 1787.61; //was 1750; // PBOT 1700;
         public static final double PID_TOLERANCE = EL_TICKS_PER_INCH/2; // 1/x inch ... allows PID to end without having to be exact
-        public static final double ZERO_OFFSET_TICKS = 12.5 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
+        public static final double ZERO_OFFSET_TICKS = 13.0 * EL_TICKS_PER_INCH; // PBOT 11 // 13 inches above ground
 
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 43.16 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // n is in inches
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 15 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
@@ -243,7 +243,7 @@ public final class Constants {
         public static final double PLACE_CUBE_HIGH_POS = 44.9 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS_AUTO = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
-        public static final double PLACE_CONE_HIGH_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double PLACE_CONE_HIGH_POS = 46.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 43 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
@@ -252,7 +252,7 @@ public final class Constants {
         public static final double HOME_POS = 14.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12.5
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
-        public static final double MAX_POS = 48 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
+        public static final double MAX_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double MIN_POS =  12.75 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 

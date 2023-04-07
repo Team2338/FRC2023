@@ -17,8 +17,8 @@ public class AutoConeMidRear extends CommandBase {
     double elapsedTime = 0;
 
     double EL_PCH_POS = 23 * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS;
-    double ARM_SLOW_POS = -40.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS; // was 65
-    double ARM_PCH_POS = -50.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS; // was 65
+    double ARM_SLOW_POS = -30.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS; // was 65
+    double ARM_PCH_POS = -40.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS; // was 65
     double ARM_POS_TELE_START = -15.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS;
     double ARM_TELE_POS = 35.0;
 
@@ -60,7 +60,7 @@ public class AutoConeMidRear extends CommandBase {
             if( armPos < ARM_SLOW_POS)
                 Robot.arm.move(-1.0);
             else
-                Robot.arm.move(-0.5);
+                Robot.arm.move(-0.3);
         }
 
         if (!elevatorDone && armPos < 500) {

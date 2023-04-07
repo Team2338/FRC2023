@@ -71,7 +71,11 @@ public class SetArmPosition extends CommandBase {
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        double pos = Robot.arm.getPositionDegrees();
+        double FF = Math.sin( pos * Math.PI / 180) * Constants.Arm.FF;
+        Robot.arm.configF(FF);
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
