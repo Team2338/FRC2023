@@ -11,6 +11,7 @@ import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.commands.telescopingArm.ArmLoadFromDouble;
 import team.gif.robot.commands.telescopingArm.ArmMid;
 import team.gif.robot.commands.telescopingArm.ArmOut;
+import team.gif.robot.subsystems.Arm;
 
 /*
  *
@@ -44,7 +45,7 @@ public class GoLocation extends CommandBase {
         double elevatorTargetPos;
         double armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD;
 
-        if (Robot.arm.getPosition() < Constants.Arm.STAGE_POS) { // need to be in a safe place before going anywhere else
+        if (Robot.arm.getPosition() < Constants.Arm.STAGE_POS && !Robot.runningAutonomousMode) { // need to be in a safe place before going anywhere else
             Globals.goLocationTarget = location;
             new GoLocationFromHome().schedule();
         } else {
@@ -108,7 +109,7 @@ public class GoLocation extends CommandBase {
                     armTargetPos = -1;
                     break;
             }
-            if( armTargetPos >= 0 ) {
+            if (armTargetPos > -1) {
                 if (Math.abs(Robot.elevator.getPosition() - elevatorTargetPos) > Constants.Elevator.PID_TOLERANCE)
                     new SetElevatorPosition(elevatorTargetPos).schedule();
                 new SetArmPosition(armTargetPos,armPeakOutput).schedule();

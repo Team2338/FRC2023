@@ -24,8 +24,8 @@ public class SetArmPosition extends CommandBase {
         addRequirements(Robot.arm);
 
         // do not allow code to set a point higher or lower than max/min
-        if (targetPos > Constants.Arm.MAX_POS) { targetPos = Constants.Arm.MAX_POS; }
-        if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
+        //-if (targetPos > Constants.Arm.MAX_POS) { targetPos = Constants.Arm.MAX_POS; }
+        //-if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
 
         targetPosition = targetPos;
         this.peakOutputForward = peakOutputForward;

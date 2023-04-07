@@ -198,6 +198,7 @@ public final class Constants {
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
         public static final double PLACE_CONE_HIGH_POS = 81.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;//90
+        public static final double PLACE_CONE_MID_REAR_POS = -50 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_LOW_POS = 105.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
 
         public static final double STAGE_POS = 30.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // this is the location which is safe to go to/from home
@@ -245,6 +246,7 @@ public final class Constants {
         public static final double PLACE_CUBE_MID_POS = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
         public static final double PLACE_CONE_HIGH_POS = 46.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 43 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
+        public static final double PLACE_CONE_MID_REAR_POS = 23 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_LOW_POS = 19 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_HOME_SAFE_POS = 13.75 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 15.6 // PBOT 14 maximum elevator height to allow arm to come under bar
@@ -288,6 +290,7 @@ public final class Constants {
 
         public static final int PLACE_CUBE_HIGH = 5;
         public static final int PLACE_CUBE_MID = 6;
+        public static final int PLACE_CONE_MID_REAR = 8;
         public static final int PLACE_LOW = 7;
     }
 

@@ -25,19 +25,19 @@ import java.util.HashMap;
 public class ThreeGamePieceRight extends SequentialCommandGroup {
 
     public ThreeGamePieceRight() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Right", 2.0, 3.0); // 1.8 1.2
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Right", 1.7, 3.0); // 1.8 1.2
         HashMap<String, Command> eventMap = new HashMap<>();
 
         eventMap.put("goHomeCollect", new ParallelCommandGroup(
-                new AutoFloorCollectPos(),
                 new ArmIn(),
+                new AutoFloorCollectPos(),
                 new WaitCommand(1).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
 
         eventMap.put("goHighCubeRear", new ParallelCommandGroup(
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoCubeHighRearPos()));
 
-        eventMap.put("placeCube", new CollectorEject(.6).withTimeout(0.20));
+        eventMap.put("placeCubeHigh", new CollectorEject(1.0).withTimeout(0.25));
 
         eventMap.put("goCollectGP2", new ParallelCommandGroup(
                 new AutoFloorCollectPos(),

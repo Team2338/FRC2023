@@ -28,6 +28,10 @@ public class AutoStagePos extends CommandBase {
         elevatorDownDone = false;
         Arm.armMotor.configReverseSoftLimitThreshold(-1700);
         Arm.armMotor.configPeakOutputReverse(-1.0);
+
+        // set this here in case auto ends before this does
+        Robot.elevator.setElevatorTargetPos(EL_TARGET_POS);
+        Robot.arm.setTargetPosition(ARM_TARGET_POS);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -60,6 +64,9 @@ public class AutoStagePos extends CommandBase {
             Robot.arm.resetI();
             Robot.arm.PIDMove();
         }
+        if (elevatorDownDone) {
+            Robot.elevator.PIDHold();
+        }
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
@@ -71,6 +78,9 @@ public class AutoStagePos extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted){
+        Robot.elevator.setElevatorTargetPos(EL_TARGET_POS);
+        Robot.arm.setTargetPosition(ARM_TARGET_POS);
         Arm.armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
+        System.out.println("stage done");
     }
 }

@@ -22,6 +22,9 @@ public class UI {
         shuffleboardTab.addNumber("Arm Degrees", arm::getPositionDegrees)
                 .withPosition(3, 0);
 
+        shuffleboardTab.addNumber("Elevator Inches", elevator::getPositionInches)
+                .withPosition(3, 1);
+
         shuffleboardTab.addNumber("Gyro Pitch", Robot.pigeon::getPitch)
                 .withPosition(5, 0)
                 .withSize(2,3);
