@@ -12,6 +12,7 @@ import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
+import team.gif.robot.commands.autos.lib.CheckForGP;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 public class ThreeGamePieceRight extends SequentialCommandGroup {
 
     public ThreeGamePieceRight() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Right", 1.7, 3.0); // 1.8 1.2
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Right", 1.6, 3.0); // 1.8 1.2
         HashMap<String, Command> eventMap = new HashMap<>();
 
         eventMap.put("goHomeCollect", new ParallelCommandGroup(
@@ -37,7 +38,7 @@ public class ThreeGamePieceRight extends SequentialCommandGroup {
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoCubeHighRearPos()));
 
-        eventMap.put("placeCubeHigh", new CollectorEject(1.0).withTimeout(0.25));
+        eventMap.put("placeCubeHigh", new CollectorEject(0.80).withTimeout(0.25));
 
         eventMap.put("goCollectGP2", new ParallelCommandGroup(
                 new AutoFloorCollectPos(),
@@ -48,7 +49,9 @@ public class ThreeGamePieceRight extends SequentialCommandGroup {
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoCubeMidRearPos()));
 
-        eventMap.put("placeCubeMid", new CollectorEject(.5).withTimeout(0.15));
+        eventMap.put("checkForGP", new CheckForGP());
+
+        eventMap.put("placeCubeMid", new CollectorEject(.4).withTimeout(0.15));
 
         eventMap.put("goStage", new ParallelCommandGroup(
                 new ArmIn(), // arm in just in case gravity pulled it out

@@ -4,6 +4,7 @@
 
 package team.gif.robot.commands.autos;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
@@ -49,6 +50,7 @@ public class AutoCubeHighRearPos extends CommandBase {
         double elevatorPos = Robot.elevator.getPosition();
 
         if (elevatorPos < Constants.Elevator.MIN_POS && !elevatorDownDone) {
+            System.out.println("ACHRP: EL Down Done: " + Timer.getFPGATimestamp());
             elevatorDownDone = true;
         }
 
@@ -58,10 +60,12 @@ public class AutoCubeHighRearPos extends CommandBase {
 //        }
 
         if (armPos < ARM_TARGET_POS && !armDone) {
+            System.out.println("ACHRP: Arm Done: " + Timer.getFPGATimestamp());
             armDone = true;
         }
 
         if (Robot.telescopingArm.getPosition() > TELE_TARGET_POS && !armTeleDone) {
+            System.out.println("ACHRP: Tele Done: " + Timer.getFPGATimestamp());
             armTeleDone = true;
         }
 
@@ -115,10 +119,6 @@ public class AutoCubeHighRearPos extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted){
-        elevatorDownDone = false;
-        armDone = false;
-        armStageDone = false;
-        armTeleDone = false;
         Arm.armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
     }
 }

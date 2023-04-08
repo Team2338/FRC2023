@@ -49,17 +49,17 @@ public class AutoConeMidRear extends CommandBase {
     public void execute() {
         double armPos = Robot.arm.getPosition();
         if (armPos < ARM_TARGET_POS && !armDone) {
-            System.out.println("Arm Done: " + Timer.getFPGATimestamp());
+            System.out.println("ACMR Arm Done: " + Timer.getFPGATimestamp());
             armDone = true;
         }
 
         if (Robot.elevator.getPosition() > EL_TARGET_POS && !elevatorDone) {
-            System.out.println("Elevator Done: " + Timer.getFPGATimestamp());
+            System.out.println("ACMR Elevator Done: " + Timer.getFPGATimestamp());
             elevatorDone = true;
         }
 
         if (Robot.telescopingArm.getPosition() > ARM_TELE_TARGET_POS && !armTeleDone) {
-            System.out.println("Tele Done:" + Timer.getFPGATimestamp());
+            System.out.println("ACMR Tele Done:" + Timer.getFPGATimestamp());
             armTeleDone = true;
         }
 
@@ -81,10 +81,10 @@ public class AutoConeMidRear extends CommandBase {
             if (Robot.telescopingArm.getPosition() < ARM_TELE_TARGET_POS - 6) {
 //                Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.HIGH_VELOCITY);
                 Robot.telescopingArm.setMotorSpeed(0.7);
-                System.out.println("Tele Fast");
+                System.out.println("ACMR Tele Fast");
             } else {
                 Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
-                System.out.println("Tele Slow");
+                System.out.println("ACMR Tele Slow");
             }
         }
 
@@ -118,10 +118,6 @@ public class AutoConeMidRear extends CommandBase {
     public void end(boolean interrupted){
         elapsedTime = Timer.getFPGATimestamp() - elapsedTime;
         System.out.println("New Time: " + elapsedTime);
-//        elevatorDone = false;
-//        armDone = false;
-//        armTeleDone = false;
-//        armStageDone = false;
         Arm.armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
     }
 }

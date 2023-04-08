@@ -4,6 +4,7 @@
 
 package team.gif.robot.commands.autos;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
@@ -50,6 +51,7 @@ public class AutoCubeMidRearPos extends CommandBase {
         double elevatorPos = Robot.elevator.getPosition();
 
         if (elevatorPos < Constants.Elevator.MIN_POS && !elevatorDownDone) {
+            System.out.println("ACMRP: EL Down Done: " + Timer.getFPGATimestamp());
             elevatorDownDone = true;
         }
 
@@ -59,6 +61,7 @@ public class AutoCubeMidRearPos extends CommandBase {
 //        }
 
         if (armPos < ARM_TARGET_POS && !armDone) {
+            System.out.println("ACMRP: Arm Done: " + Timer.getFPGATimestamp());
             armDone = true;
         }
 

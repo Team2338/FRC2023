@@ -255,7 +255,7 @@ public final class Constants {
         public static final double ELEVATOR_30 = 30 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
 
         public static final double MAX_POS = 47 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double MIN_POS =  12.75 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
+        public static final double MIN_POS =  13.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // PBOT 12
     }
 
     public static class TelescopingArm {
