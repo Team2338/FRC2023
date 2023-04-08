@@ -10,7 +10,8 @@ public enum autoMode {
     PLACE_CUBE_HIGH_NO_HOME_ENGAGE(0),
     PLACE_MOBILITY_ENGAGE_CABLE(0),
     PLACE_MOBILITY_ENGAGE_BARRIER(0),
-    THREE_GP_RIGHT(0)
+    THREE_GP_RIGHT(0),
+    THREE_GP_LEFT(0)
     ;
 
     private int value;
