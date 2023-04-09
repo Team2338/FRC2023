@@ -54,7 +54,7 @@ public class ThreeGamePieceLeft extends SequentialCommandGroup {
                 new AutoStagePos()));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
-            RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
+            RobotTrajectory.getInstance().baseSwerveCommand(trajectory, RobotTrajectory.getInstance().lowSpeedPIDConfig),
             trajectory.getMarkers(),
             eventMap
         );

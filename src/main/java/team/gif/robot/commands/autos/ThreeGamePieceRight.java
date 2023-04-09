@@ -27,6 +27,7 @@ public class ThreeGamePieceRight extends SequentialCommandGroup {
 
     public ThreeGamePieceRight() {
         PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Right", 1.6, 3.0); // 1.8 1.2
+
         HashMap<String, Command> eventMap = new HashMap<>();
 
         eventMap.put("goHomeCollect", new ParallelCommandGroup(
@@ -68,7 +69,7 @@ public class ThreeGamePieceRight extends SequentialCommandGroup {
 //            new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
-            RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
+            RobotTrajectory.getInstance().baseSwerveCommand(trajectory, RobotTrajectory.getInstance().lowSpeedPIDConfig),
             trajectory.getMarkers(),
             eventMap
         );

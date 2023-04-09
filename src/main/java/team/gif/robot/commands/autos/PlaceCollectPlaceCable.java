@@ -47,7 +47,7 @@ public class PlaceCollectPlaceCable extends SequentialCommandGroup {
         eventMap.put("checkGP", new CheckForGP());
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
-                RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
+                RobotTrajectory.getInstance().baseSwerveCommand(trajectory, RobotTrajectory.getInstance().lowSpeedPIDConfig),
                 trajectory.getMarkers(),
                 eventMap
         );
