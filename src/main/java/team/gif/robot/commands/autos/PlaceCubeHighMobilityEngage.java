@@ -21,7 +21,7 @@ public class PlaceCubeHighMobilityEngage extends SequentialCommandGroup {
         addCommands(
                 new SetArmPosition(Constants.Arm.STAGE_POS),
                 new ParallelCommandGroup(
-                        new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
+                        new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS, Constants.Arm.PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS),
                         new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)
                 ),
                 new CollectorEject().withTimeout(0.15),

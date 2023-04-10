@@ -2,19 +2,14 @@ package team.gif.robot.commands.drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class ResetHeading extends CommandBase {
-    private double heading = 0;
+public class Reset180 extends CommandBase {
 
-    public ResetHeading() {}
-
-    public ResetHeading(double heading) {
-        this.heading = heading;
-    }
+    public Reset180() {}
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.pigeon.resetPigeonPosition(heading);
+        Robot.pigeon.resetPigeonPosition(180);
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled

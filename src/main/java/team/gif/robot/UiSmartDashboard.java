@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import team.gif.lib.autoMode;
 import team.gif.lib.delay;
+import team.gif.robot.commands.drivetrain.Reset0;
+import team.gif.robot.commands.drivetrain.Reset180;
 import team.gif.robot.commands.drivetrain.ResetHeading;
 
 import static team.gif.robot.Robot.elevator;
@@ -71,7 +73,8 @@ public class UiSmartDashboard {
         delayChooser.addOption("14", delay.DELAY_14);
         delayChooser.addOption("15", delay.DELAY_15);
 
-        SmartDashboard.putData("Reset", new ResetHeading());
+        SmartDashboard.putData("Reset", new Reset0());
+        SmartDashboard.putData("Reset 180", new Reset180());
 
         tab.add("Delay", delayChooser)
             .withPosition(7, 0)

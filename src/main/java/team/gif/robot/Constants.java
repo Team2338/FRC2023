@@ -171,7 +171,7 @@ public final class Constants {
 
         // general motor function parameters
         public static final double PEAK_OUTPUT_FORWARD = 0.70; //was 0.55; // down // Percent motor command, arm is much faster than elevator
-        public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.35;
+        public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.3; //was 0.35;
         public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25; // wasg 0.35;
         public static final double AUTO_OUTPUT_CONE_HIGH_POS = .25;
         public static final double AUTO_OUTPUT_CONE_HIGH_STAGE = .80;

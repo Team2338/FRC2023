@@ -81,11 +81,61 @@
         "x": 2.298031604610218,
         "y": 1.0848209730607496
       },
-      "nextControl": null,
+      "nextControl": {
+        "x": 1.5443665075364343,
+        "y": 1.0848209730607496
+      },
       "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": true,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.182194347294677,
+        "y": 0.9
+      },
+      "prevControl": {
+        "x": 2.6977024894220727,
+        "y": 0.9
+      },
+      "nextControl": {
+        "x": 5.666686205167283,
+        "y": 0.9
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 7.036986381665072,
+        "y": 0.9
+      },
+      "prevControl": {
+        "x": 6.271561321663983,
+        "y": 0.9
+      },
+      "nextControl": null,
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
@@ -127,6 +177,18 @@
       "position": 1.01,
       "names": [
         "checkGP"
+      ]
+    },
+    {
+      "position": 2.98,
+      "names": [
+        "placeCubeHigh"
+      ]
+    },
+    {
+      "position": 3.03,
+      "names": [
+        "goStage"
       ]
     }
   ]
