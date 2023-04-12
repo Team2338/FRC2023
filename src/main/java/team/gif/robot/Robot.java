@@ -22,6 +22,7 @@ import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.commands.led.LEDSubsystemDefault;
+import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorWheels;
@@ -214,6 +215,8 @@ public class Robot extends TimedRobot {
         runningAutonomousMode = false;
 
         compressor.enableDigital();
+
+        new ArmIn().schedule(); // at the ned of auto, arm may be out (e.g. shooting from charging station)
     }
 
     /** This function is called periodically during operator control. */

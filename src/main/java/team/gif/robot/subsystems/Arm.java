@@ -121,7 +121,7 @@ public class Arm extends SubsystemBase {
         return armMotor.getIntegralAccumulator(0);
     }
 
-    public double degreesToPos(double deg) { return deg * Constants.Arm.TICKS_PER_DEGREE - Constants.Arm.ZERO_OFFSET_TICKS;}
+    public double degreesToPos(double deg) { return deg * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS;}
 
     /**
      *

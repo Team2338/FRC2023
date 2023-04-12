@@ -10,19 +10,22 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.subsystems.Arm;
 
-public class AutoConeMidRear extends CommandBase {
+public class AutoCubeLowRearPos extends CommandBase {
     boolean elevatorDone = false;
+    boolean elevatorDownDone = false;
     boolean armDone = false;
-    boolean armTeleDone = false;
-    double elapsedTime = 0;
+    boolean armStageDone = false;
+//    boolean armTeleDone = false;
 
-    double EL_TARGET_POS = 25 * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS;
-    double ARM_SLOW_POS = -20.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS; // was 65
-    double ARM_TARGET_POS = -62.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS; // was 65
-    double ARM_POS_TELE_START = -20.0 * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS;
-    double ARM_TELE_TARGET_POS = 31.0;
+    double EL_TARGET_POS = 20 * Constants.Elevator.EL_TICKS_PER_INCH - Constants.Elevator.ZERO_OFFSET_TICKS;
+    double ARM_TARGET_POS = Robot.arm.degreesToPos(-95);
+//    double ARM_POS_TELE_START = Robot.arm.degreesToPos(-85);
 
-    public AutoConeMidRear(){
+//    double TELE_TARGET_POS = 38.0;
+    double ARM_STAGE_POS = Constants.Arm.STAGE_POS;
+
+
+    public AutoCubeLowRearPos(){
         super();
         addRequirements(Robot.arm,Robot.elevator);
     }
@@ -30,11 +33,12 @@ public class AutoConeMidRear extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.collectorWheels.wheelsOut();
+        System.out.println("AutoCubeLowRear");
         elevatorDone = false;
+        elevatorDownDone = false;
         armDone = false;
-        armTeleDone = false;
-        elapsedTime = Timer.getFPGATimestamp();
+        armStageDone = false;
+//        armTeleDone = false;
         Arm.armMotor.configReverseSoftLimitThreshold(-1700);
         Arm.armMotor.configPeakOutputReverse(-1.0);
 
@@ -48,55 +52,57 @@ public class AutoConeMidRear extends CommandBase {
     @Override
     public void execute() {
         double armPos = Robot.arm.getPosition();
+        double elevatorPos = Robot.elevator.getPosition();
+//        double armTelePos = Robot.telescopingArm.getPosition();
+
+        if (elevatorPos < Constants.Elevator.MIN_POS && !elevatorDownDone) {
+            System.out.println("ACLRP: EL Down Done: " + Timer.getFPGATimestamp());
+            elevatorDownDone = true;
+        }
+
+        if (elevatorDownDone && elevatorPos > EL_TARGET_POS && !elevatorDone) {
+            elevatorDone = true;
+            System.out.println("ACLRP: Elevator Done");
+        }
 
         if (armPos < ARM_TARGET_POS && !armDone) {
-            System.out.println("ACMR Arm Done: " + Timer.getFPGATimestamp());
+            System.out.println("ACLRP: Arm Done: " + Timer.getFPGATimestamp());
             armDone = true;
         }
 
-        if (Robot.elevator.getPosition() > EL_TARGET_POS && !elevatorDone) {
-            System.out.println("ACMR Elevator Done: " + Timer.getFPGATimestamp());
-            elevatorDone = true;
-        }
-
-        if (Robot.telescopingArm.getPosition() > ARM_TELE_TARGET_POS && !armTeleDone) {
-            System.out.println("ACMR Tele Done:" + Timer.getFPGATimestamp());
-            armTeleDone = true;
-        }
+//        if (armTelePos > TELE_TARGET_POS && !armTeleDone) {
+//            armTeleDone = true;
+//            System.out.println("CMR: Tele Done");
+//        }
 
         if (!armDone) {
             Robot.arm.PIDMove();
-////            Robot.arm.move(-Constants.Arm.AUTO_OUTPUT_CONE_HIGH_STAGE);
-//            if( armPos < ARM_SLOW_POS)
-//                Robot.arm.move(-1.0);
-//            else
-//                Robot.arm.move(-0.5);
         }
 
-        if (!elevatorDone && armPos < 500) {
+        if (!elevatorDownDone) {
+            Robot.elevator.move(-Constants.Elevator.SLOW_VELOCITY_PERC);
+        }
+
+        if (elevatorDownDone && armPos < Robot.arm.degreesToTicks(0) && !elevatorDone) {
             Robot.elevator.setMotionMagic(EL_TARGET_POS, Constants.Elevator.GRAV_FEED_FORWARD);
-//-            Robot.elevator.move(Constants.Elevator.AUTO_OUTPUT_CONE_HIGH_FAST);
         }
 
-        if (!armTeleDone && armPos < ARM_POS_TELE_START) {
-            if (Robot.telescopingArm.getPosition() < ARM_TELE_TARGET_POS - 6) {
+//        if (!armTeleDone && armPos < ARM_POS_TELE_START) {
+//            if (armTelePos < TELE_TARGET_POS - 6) {
 //                Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.HIGH_VELOCITY);
-                Robot.telescopingArm.setMotorSpeed(0.7);
-                System.out.println("ACMR Tele Fast");
-            } else {
-                Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
-                System.out.println("ACMR Tele Slow");
-            }
-        }
+//            } else {
+//                Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
+//            }
+//        }
 
         if (elevatorDone) {
             Robot.elevator.setElevatorTargetPos(EL_TARGET_POS);
             Robot.elevator.PIDHold();
         }
 
-        if (armTeleDone) {
-            Robot.telescopingArm.setMotorSpeed(0);
-        }
+//        if (armTeleDone) {
+//            Robot.telescopingArm.setMotorSpeed(0);
+//        }
 
         if (armDone) {
             // hold arm at position
@@ -111,14 +117,13 @@ public class AutoConeMidRear extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return armDone && elevatorDone && armTeleDone;
+        return armDone && elevatorDownDone && elevatorDone ;
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted){
-        elapsedTime = Timer.getFPGATimestamp() - elapsedTime;
-        System.out.println("New Time: " + elapsedTime);
+        System.out.println("ending ACLRP");
         Arm.armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
     }
 }

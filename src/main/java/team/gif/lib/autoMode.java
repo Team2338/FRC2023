@@ -11,7 +11,8 @@ public enum autoMode {
     PLACE_MOBILITY_ENGAGE_CABLE(0),
     PLACE_MOBILITY_ENGAGE_BARRIER(0),
     THREE_GP_RIGHT(0),
-    THREE_GP_LEFT(0)
+    THREE_GP_LEFT(0),
+    PLACE_COLLECT_PLACE_ENGAGE_CENTER(0)
     ;
 
     private int value;

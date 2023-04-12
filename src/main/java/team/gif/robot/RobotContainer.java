@@ -11,6 +11,7 @@ import team.gif.lib.autoMode;
 import team.gif.robot.commands.autos.NoAuto;
 import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
 import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
+import team.gif.robot.commands.autos.PlaceCollectPlaceEngageCenter;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighEngage;
@@ -62,6 +63,7 @@ public class RobotContainer {
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE_BARRIER, new PlaceMobilityEngageBarrier());
         autoCommands.put(autoMode.THREE_GP_RIGHT, new ThreeGamePieceRight());
         autoCommands.put(autoMode.THREE_GP_LEFT, new ThreeGamePieceLeft());
+        autoCommands.put(autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER, new PlaceCollectPlaceEngageCenter());
     }
 
     /**
