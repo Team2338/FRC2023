@@ -66,11 +66,6 @@ public class AutoConeMidRear extends CommandBase {
 
         if (!armDone) {
             Robot.arm.PIDMove();
-////            Robot.arm.move(-Constants.Arm.AUTO_OUTPUT_CONE_HIGH_STAGE);
-//            if( armPos < ARM_SLOW_POS)
-//                Robot.arm.move(-1.0);
-//            else
-//                Robot.arm.move(-0.5);
         }
 
         if (!elevatorDone && armPos < 500) {
@@ -82,10 +77,8 @@ public class AutoConeMidRear extends CommandBase {
             if (Robot.telescopingArm.getPosition() < ARM_TELE_TARGET_POS - 6) {
 //                Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.HIGH_VELOCITY);
                 Robot.telescopingArm.setMotorSpeed(0.7);
-                System.out.println("ACMR Tele Fast");
             } else {
                 Robot.telescopingArm.setMotorSpeed(Constants.TelescopingArm.LOW_VELOCITY);
-                System.out.println("ACMR Tele Slow");
             }
         }
 

@@ -10,6 +10,7 @@ import team.gif.robot.Robot;
 public class UntilBotIsFallingReverseToward extends CommandBase {
 
     boolean falling = false;
+    double targetAngle = -12.0;
 
     public UntilBotIsFallingReverseToward() {
         super();
@@ -31,15 +32,22 @@ public class UntilBotIsFallingReverseToward extends CommandBase {
         // > -X is falling from opponent side facing away
         double pitch = Robot.pigeon.getPitch();
 
-        if( pitch < -13)
+        if( pitch < -13) // need to get to -13 first, then can check for a smaller angle
             falling = true;
 
-        System.out.println("UBFRT Pitch: Falling? " + falling + " " + pitch);
+        System.out.println("UBIFRT falling: " + falling + " pitch: " + String.format("%.2f",pitch));
 
-        return ( falling && pitch > -12.0);
+        if (falling && pitch > targetAngle) {
+            System.out.println("UBIFRT Hit target angle of " + targetAngle);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted){}
+    public void end(boolean interrupted){
+        System.out.println("UBIFRT end");
+    }
 }

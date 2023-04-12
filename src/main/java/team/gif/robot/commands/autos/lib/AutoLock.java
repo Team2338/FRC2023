@@ -33,12 +33,12 @@ public class AutoLock extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return ++count > 2;
+        return ++count > 3;
     }
 
     // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.swervetrain.drive(0, 0, 0);
+        Robot.swervetrain.stopModules();
     }
 }

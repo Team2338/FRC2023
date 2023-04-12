@@ -62,11 +62,11 @@ public class AutoCubeLowRearPos extends CommandBase {
 
         if (elevatorDownDone && elevatorPos > EL_TARGET_POS && !elevatorDone) {
             elevatorDone = true;
-            System.out.println("ACLRP: Elevator Done");
+            System.out.println("ACLRP: Elevator Done: " + Timer.getFPGATimestamp());
         }
 
         if (armPos < ARM_TARGET_POS && !armDone) {
-            System.out.println("ACLRP: Arm Done: " + Timer.getFPGATimestamp());
+            System.out.println("ACLRP: Arm Done " + String.format("%.2f",Robot.arm.getPositionDegrees()) + " degrees, time: " + Timer.getFPGATimestamp());
             armDone = true;
         }
 

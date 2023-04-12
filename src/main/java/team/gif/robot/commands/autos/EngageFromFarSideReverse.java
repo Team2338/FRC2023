@@ -34,15 +34,15 @@ public class EngageFromFarSideReverse extends SequentialCommandGroup {
             ),
             new PrintCommand("Starting Kickback from far side"),
             new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.2), // give the bot a little push back to stop momentum
-            //new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.00001)),
+            // Bot should be level so lock wheels
+            new PrintCommand("Locking wheels"),
             new AutoLock(),
-            new WaitCommand(0.2),
-            new PrintCommand("Starting UBIL"),
-            new UntilBotIsLevel().withTimeout(2),
-            new PrintCommand("Bot is level - lock wheels"),
+            new PrintCommand("Wheels locked - wait for pigeon to settle"),
+            new WaitCommand(0.3),
+            new UntilBotIsLevel(true).withTimeout(8), // does a second check on making sure the bot is level and didn't overtip
+            new PrintCommand("Bot is level (or timeout) - lock wheels"),
             new AutoLock(), // Wheels continue to turn. Need to solve.
             new PrintCommand("Wheels locked")
-//            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001))
         );
     }
 }
