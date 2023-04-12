@@ -40,7 +40,7 @@ public class EngageFromFarSideReverse extends SequentialCommandGroup {
             new PrintCommand("Starting UBIL"),
             new UntilBotIsLevel().withTimeout(2),
             new PrintCommand("Bot is level - lock wheels"),
-            new AutoLock(),
+            new AutoLock(), // Wheels continue to turn. Need to solve.
             new PrintCommand("Wheels locked")
 //            new InstantCommand(()-> Robot.swervetrain.drive(0,0,0.0001))
         );
