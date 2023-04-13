@@ -18,6 +18,7 @@ public class CheckForGP extends CommandBase {
     @Override
     public void initialize() {
         if (!Robot.arm.getSensor()) {
+            System.out.println("No GP - cancelling auto");
             Robot.cancelAuto();
         }
     }

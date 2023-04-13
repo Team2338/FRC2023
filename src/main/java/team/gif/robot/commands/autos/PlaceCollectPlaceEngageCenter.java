@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
+import team.gif.robot.commands.autos.lib.AutoLock;
 import team.gif.robot.commands.autos.lib.CheckForGP;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
@@ -52,13 +53,16 @@ public class PlaceCollectPlaceEngageCenter extends SequentialCommandGroup {
             new WheelsIn(),
             new WaitCommand(0.15),
             trajectoryWithEvents,
+            new AutoLock(),
             new ParallelCommandGroup(
                 new AutoCubeLowRearPos(),
                 new EngageFromFarSideReverse()
             ),
-            new PrintCommand("Ejecting"),
+            new PrintCommand("Checking for GP"),
+            new CheckForGP(), // cancels rest of auto if there is no GP
+            new PrintCommand("Arm Out"),
             new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS),
-            new CollectorEject(1.0).withTimeout(0.75)
+            new CollectorEject(true).withTimeout(0.75)
         );
     }
 }

@@ -4,8 +4,8 @@
 
 package team.gif.robot.commands.autos.lib;
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class UntilBotIsLevel extends CommandBase {
@@ -32,9 +32,9 @@ public class UntilBotIsLevel extends CommandBase {
         sign = invert ? -1 : 1;
 
         posAngle = 0;
-        if (Robot.pigeon.getPitch() > 9.0) { //overshot
+        if (Robot.pigeon.getPitch() > Robot.uiSmartDashboard.THRESHOLD_ANGLE) { //overshot
             posAngle = 2;
-        } else if (Robot.pigeon.getPitch() < -9.0) {
+        } else if (Robot.pigeon.getPitch() < -1 * Robot.uiSmartDashboard.THRESHOLD_ANGLE) {
             posAngle = 1;
         }
         System.out.println("UBIL posAngle :" + posAngle);
@@ -53,8 +53,9 @@ public class UntilBotIsLevel extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
+
         System.out.println("UBIL pitch:" + String.format("%.2f",Robot.pigeon.getPitch()));
-        return Math.abs(Robot.pigeon.getPitch()) < 8.0;
+        return Math.abs(Robot.pigeon.getPitch()) < Robot.uiSmartDashboard.LEVEL_ANGLE;
     }
 
     // Called once the command ends or is interrupted.

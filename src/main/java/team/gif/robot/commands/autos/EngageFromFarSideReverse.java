@@ -33,7 +33,7 @@ public class EngageFromFarSideReverse extends SequentialCommandGroup {
                 new AutoDrive(-Constants.AutoConstants.DRIVE_SLOW)
             ),
             new PrintCommand("Starting Kickback from far side"),
-            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.2), // give the bot a little push back to stop momentum
+            new AutoDrive(Constants.AutoConstants.DRIVE_SUPER_SLOW).withTimeout(.15), // give the bot a little push back to stop momentum
             // Bot should be level so lock wheels
             new PrintCommand("Locking wheels"),
             new AutoLock(),

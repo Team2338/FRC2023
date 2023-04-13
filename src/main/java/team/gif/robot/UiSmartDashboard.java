@@ -1,8 +1,11 @@
 package team.gif.robot;
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,7 +14,6 @@ import team.gif.lib.autoMode;
 import team.gif.lib.delay;
 import team.gif.robot.commands.drivetrain.Reset0;
 import team.gif.robot.commands.drivetrain.Reset180;
-import team.gif.robot.commands.drivetrain.ResetHeading;
 
 import static team.gif.robot.Robot.elevator;
 
@@ -19,6 +21,47 @@ public class UiSmartDashboard {
 
     public SendableChooser<autoMode> autoModeChooser = new SendableChooser<>();
     public SendableChooser<delay> delayChooser = new SendableChooser<>();
+
+    private ShuffleboardTab autoTab = Shuffleboard.getTab("Autos");
+
+    private ShuffleboardLayout UBIL = autoTab
+            .getLayout("UBIL", BuiltInLayouts.kList)
+            .withPosition(0,0)
+            .withSize(1,2);
+
+    public double THRESHOLD_ANGLE;
+    public GenericEntry thresholdAngleUI = UBIL.add("Threshold <>+-",9.0)
+            .withPosition(0,0)
+            .getEntry();
+
+    public double LEVEL_ANGLE;
+    public GenericEntry levelAngleUI = UBIL.add("Level <",8.0)
+            .withPosition(1,0)
+            .getEntry();
+
+    private ShuffleboardLayout UBIFRT = autoTab
+            .getLayout("UBIFRT", BuiltInLayouts.kList)
+            .withPosition(1,0)
+            .withSize(1,2);
+
+    public double CROSSOVER_ANGLE;
+    final public GenericEntry crossOverAngleUI = UBIFRT.add("CrossOverAngle",-13.2)
+            .withPosition(2,1)
+            .getEntry();
+
+    public double TARGET_ANGLE;
+    final public GenericEntry targetAngleUI = UBIFRT.add("TargetAngle",-11.0)
+            .withPosition(3,1)
+            .getEntry();
+
+    private ShuffleboardLayout collectorLayout = autoTab
+            .getLayout("Collector", BuiltInLayouts.kList)
+            .withPosition(2,0)
+            .withSize(1,1);
+
+    public double COLLECTOR_EJECT_SPEED;
+    final public GenericEntry collectorEjectSpeedUI = collectorLayout.add("Speed",0.8)
+            .getEntry();
 
     /**
      *  Widgets (e.g. gyro),
@@ -39,17 +82,17 @@ public class UiSmartDashboard {
 
         // Auto selections
         autoModeChooser.addOption("NONE", autoMode.NONE);
-        autoModeChooser.setDefaultOption("P Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
+        autoModeChooser.setDefaultOption("3 GP ^R Right", autoMode.THREE_GP_RIGHT);
+        autoModeChooser.addOption("3 GP ^R Left", autoMode.THREE_GP_LEFT);
+        autoModeChooser.addOption("2 GP ^R Center Engage", autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER);
+        autoModeChooser.addOption("2 GP ^ Right", autoMode.PLACE_COLLECT_PLACE_CABLE);
+        autoModeChooser.addOption("2 GP ^ Left", autoMode.PLACE_COLLECT_PLACE_BARRIER);
+        autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE);
+        autoModeChooser.addOption("P Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
         autoModeChooser.addOption("P Cube High No Home Engage", autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE);
         autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
-        autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE);
-        autoModeChooser.addOption("P Collect Place Right", autoMode.PLACE_COLLECT_PLACE_CABLE);
-        autoModeChooser.addOption("P Collect Place Left", autoMode.PLACE_COLLECT_PLACE_BARRIER);
-        autoModeChooser.addOption("P Mobility Engage Right", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
-        autoModeChooser.addOption("P Mobility Engage Left", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
-        autoModeChooser.addOption("3 GP Right", autoMode.THREE_GP_RIGHT);
-        autoModeChooser.addOption("3 GP Left", autoMode.THREE_GP_LEFT);
-        autoModeChooser.addOption("2 GP Center Engage", autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER);
+        autoModeChooser.addOption("P ^ Mobility Engage Right", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
+        autoModeChooser.addOption("P ^ Mobility Engage Left", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)
