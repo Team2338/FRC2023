@@ -13,7 +13,6 @@ public enum autoMode {
     THREE_GP_RIGHT(0),
     THREE_GP_LEFT(0),
     PLACE_COLLECT_PLACE_ENGAGE_CENTER(0),
-    PLACE_ENGAGE_MOBILITY_CENTER(0)
     ;
 
     private int value;
