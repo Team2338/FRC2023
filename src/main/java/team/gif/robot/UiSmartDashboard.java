@@ -93,6 +93,7 @@ public class UiSmartDashboard {
         autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
         autoModeChooser.addOption("P ^ Mobility Engage Right", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
         autoModeChooser.addOption("P ^ Mobility Engage Left", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
+        autoModeChooser.addOption("P ^ Mobility Engage Center", autoMode.PLACE_ENGAGE_MOBILITY_CENTER);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)

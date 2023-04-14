@@ -8,18 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import team.gif.lib.autoMode;
-import team.gif.robot.commands.autos.NoAuto;
-import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
-import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
-import team.gif.robot.commands.autos.PlaceCollectPlaceEngageCenter;
-import team.gif.robot.commands.autos.PlaceCubeHighMobility;
-import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
-import team.gif.robot.commands.autos.PlaceCubeHighEngage;
-import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
-import team.gif.robot.commands.autos.PlaceMobilityEngageBarrier;
-import team.gif.robot.commands.autos.PlaceMobilityEngageCable;
-import team.gif.robot.commands.autos.ThreeGamePieceLeft;
-import team.gif.robot.commands.autos.ThreeGamePieceRight;
+import team.gif.robot.commands.autos.*;
 
 import java.util.HashMap;
 
@@ -64,6 +53,7 @@ public class RobotContainer {
         autoCommands.put(autoMode.THREE_GP_RIGHT, new ThreeGamePieceRight());
         autoCommands.put(autoMode.THREE_GP_LEFT, new ThreeGamePieceLeft());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER, new PlaceCollectPlaceEngageCenter());
+        autoCommands.put(autoMode.PLACE_ENGAGE_MOBILITY_CENTER, new PlaceCubeHighMobilityEngagePP());
     }
 
     /**
