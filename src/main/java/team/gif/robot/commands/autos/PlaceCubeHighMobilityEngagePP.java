@@ -7,12 +7,14 @@ import edu.wpi.first.wpilibj2.command.*;
 import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
+import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.AutoLock;
 import team.gif.robot.commands.autos.lib.CheckForGP;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.WheelsIn;
+import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.commands.telescopingArm.ArmOut;
 
@@ -43,22 +45,14 @@ public class PlaceCubeHighMobilityEngagePP extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: 2 GP Engage"),
-            new SetInitialHeading(trajectory),
-            new AutoConeMidRear(),
-            new WheelsIn(),
-            new WaitCommand(0.15),
-            trajectoryWithEvents,
-            new AutoLock(),
+            new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
-                new AutoCubeLowRearPos(),
-                new EngageFromFarSideReverse()
+                    new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS, Constants.Arm.PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS),
+                    new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)
             ),
-            new PrintCommand("Checking for GP"),
-            new CheckForGP(), // cancels rest of auto if there is no GP
-            new PrintCommand("Arm Out"),
-            new ArmOut(Constants.TelescopingArm.HIGH_CONE_POS),
-            new CollectorEject(true).withTimeout(0.75)
+            new CollectorEject().withTimeout(0.15),
+            trajectoryWithEvents,
+            new AutoLock()
         );
     }
 }
