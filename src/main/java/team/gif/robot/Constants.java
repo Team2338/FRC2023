@@ -243,7 +243,7 @@ public final class Constants {
         public static final double LOAD_FROM_GROUND_POS = 14.215 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 44.9 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS_AUTO = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
-        public static final double PLACE_CUBE_MID_POS = 17.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // was 40
+        public static final double PLACE_CUBE_MID_POS = 19.0 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // // PWNG was 17 was 40
         public static final double PLACE_CONE_HIGH_POS = 46.5 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS;
         public static final double PLACE_CONE_MID_POS = 43 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36
         public static final double PLACE_CONE_MID_REAR_POS = 23 * EL_TICKS_PER_INCH - ZERO_OFFSET_TICKS; // 36

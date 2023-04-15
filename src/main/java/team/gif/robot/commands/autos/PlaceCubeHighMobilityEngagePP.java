@@ -11,6 +11,7 @@ import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
+import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.elevator.SetElevatorPosition;
@@ -35,6 +36,7 @@ public class PlaceCubeHighMobilityEngagePP extends SequentialCommandGroup {
         );
 
         addCommands(
+            new SetInitialHeading(trajectory),
             new SetArmPosition(Constants.Arm.STAGE_POS),
             new ParallelCommandGroup(
                     new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS, Constants.Arm.PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS),

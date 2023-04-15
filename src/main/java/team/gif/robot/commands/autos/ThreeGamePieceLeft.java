@@ -39,7 +39,7 @@ public class ThreeGamePieceLeft extends SequentialCommandGroup {
         eventMap.put("goCollectGP2", new ParallelCommandGroup(
                 new AutoFloorCollectPos(),
                 new ArmIn(),
-                new WaitCommand(1).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
+                new WaitCommand(0.5).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
 
         eventMap.put("goMidCubeRear", new ParallelCommandGroup(
                 new ArmIn(), // arm in just in case gravity pulled it out

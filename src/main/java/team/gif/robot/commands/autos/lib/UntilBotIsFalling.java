@@ -9,6 +9,8 @@ import team.gif.robot.Robot;
 
 public class UntilBotIsFalling extends CommandBase {
 
+    boolean falling = false;
+
     public UntilBotIsFalling() {
         super();
     }
@@ -17,6 +19,8 @@ public class UntilBotIsFalling extends CommandBase {
     @Override
     public void initialize() {
         System.out.println("UntilBotIsFalling starting");
+
+        falling = false;
     }
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
@@ -26,15 +30,23 @@ public class UntilBotIsFalling extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-//        System.out.println("checking pitch " + Robot.pigeon.getPitch());
-        // > -X is coming from alliance station and falling to become level
-        // < X is falling from opponent side
+        // > -X is falling from opponent side facing away
         double pitch = Robot.pigeon.getPitch();
-        System.out.println("UBF Pitch: " + pitch);
-        return pitch > -10.0 && pitch < 12.0; // was -14.0 // MW -10 and 12
+
+        if( pitch < Robot.uiSmartDashboard.CROSSOVER_ANGLE) // need to get to -13 first, then can check for a smaller angle
+            falling = true;
+
+        System.out.println("UBIF falling: " + falling + " pitch: " + String.format("%.2f",pitch));
+
+        if (falling && pitch > Robot.uiSmartDashboard.TARGET_ANGLE) {
+            System.out.println("UBIF Hit target angle of " + Robot.uiSmartDashboard.TARGET_ANGLE);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted){}
+    public void end(boolean interrupted){System.out.println("UBIF end");}
 }

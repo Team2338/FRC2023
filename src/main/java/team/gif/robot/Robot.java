@@ -189,11 +189,11 @@ public class Robot extends TimedRobot {
 
         compressor.disable();
 
-        uiSmartDashboard.THRESHOLD_ANGLE = uiSmartDashboard.thresholdAngleUI.getDouble(1.0);
-        uiSmartDashboard.LEVEL_ANGLE = uiSmartDashboard.levelAngleUI.getDouble(1.0);
-        uiSmartDashboard.CROSSOVER_ANGLE = uiSmartDashboard.crossOverAngleUI.getDouble(1.0);
-        uiSmartDashboard.TARGET_ANGLE = uiSmartDashboard.targetAngleUI.getDouble(1.0);
-        uiSmartDashboard.COLLECTOR_EJECT_SPEED = uiSmartDashboard.collectorEjectSpeedUI.getDouble(1.0);
+//        uiSmartDashboard.THRESHOLD_ANGLE = uiSmartDashboard.thresholdAngleUI.getDouble(1.0);
+//        uiSmartDashboard.LEVEL_ANGLE = uiSmartDashboard.levelAngleUI.getDouble(1.0);
+//        uiSmartDashboard.CROSSOVER_ANGLE = uiSmartDashboard.crossOverAngleUI.getDouble(1.0);
+//        uiSmartDashboard.TARGET_ANGLE = uiSmartDashboard.targetAngleUI.getDouble(1.0);
+//        uiSmartDashboard.COLLECTOR_EJECT_SPEED = uiSmartDashboard.collectorEjectSpeedUI.getDouble(1.0);
     }
 
     /** This function is called periodically during autonomous. */
@@ -234,6 +234,13 @@ public class Robot extends TimedRobot {
                 (timeLeft <= 5.0 && timeLeft >= 3.0));
 
         telemetryLogger.run();
+
+        uiSmartDashboard.THRESHOLD_ANGLE = uiSmartDashboard.thresholdAngleUI.getDouble(1.0);
+        uiSmartDashboard.LEVEL_ANGLE = uiSmartDashboard.levelAngleUI.getDouble(1.0);
+        uiSmartDashboard.CROSSOVER_ANGLE = uiSmartDashboard.crossOverAngleUI.getDouble(1.0);
+        uiSmartDashboard.TARGET_ANGLE = uiSmartDashboard.targetAngleUI.getDouble(1.0);
+        uiSmartDashboard.COLLECTOR_EJECT_SPEED = uiSmartDashboard.collectorEjectSpeedUI.getDouble(1.0);
+
     }
 
     @Override
