@@ -24,9 +24,54 @@ public class UiSmartDashboard {
 
     private ShuffleboardTab autoTab = Shuffleboard.getTab("Autos");
 
+    private ShuffleboardLayout UBIF = autoTab
+            .getLayout("PCH E", BuiltInLayouts.kList)
+            .withPosition(0,0)
+            .withSize(1,2);
+
+    public double FALLING_ANGLE;
+    public GenericEntry fallingAngleUI = UBIF.add("Falling",-11.0)
+            .withPosition(0,1)
+            .getEntry();
+
+    public double CROSSOVER_ANGLE;
+    public GenericEntry crossoverAngleUI = UBIF.add("Crossover",-13.0)
+            .withPosition(0,0)
+            .getEntry();
+
+    private ShuffleboardLayout UBIF_FFS = autoTab
+            .getLayout("* ME", BuiltInLayouts.kList)
+            .withPosition(1,0)
+            .withSize(1,2);
+
+    public double FFS_CROSSOVER_ANGLE;
+    final public GenericEntry ffsCrossoverAngleUI = UBIF_FFS.add("FFS Crossover",13.0)
+            .withPosition(0,0)
+            .getEntry();
+
+    public double FFS_FALLING_ANGLE;
+    final public GenericEntry ffsFallingAngleUI = UBIF_FFS.add("FFS Falling",11.0)
+            .withPosition(0,1)
+            .getEntry();
+
+    private ShuffleboardLayout UBIFRT = autoTab
+            .getLayout("2GP CE", BuiltInLayouts.kList)
+            .withPosition(2,0)
+            .withSize(1,2);
+
+    public double UBIFRT_CROSSOVER_ANGLE;
+    final public GenericEntry ubifrtCrossoverAngleUI = UBIFRT.add("FFSRT Crossover",-13.0)
+            .withPosition(0,0)
+            .getEntry();
+
+    public double UBIFRT_FALLING_ANGLE;
+    final public GenericEntry ubifrtFallingAngleUI = UBIFRT.add("FFSRT Falling",-11.0)
+            .withPosition(0,1)
+            .getEntry();
+
     private ShuffleboardLayout UBIL = autoTab
             .getLayout("UBIL", BuiltInLayouts.kList)
-            .withPosition(0,0)
+            .withPosition(3,0)
             .withSize(1,2);
 
     public double THRESHOLD_ANGLE;
@@ -36,27 +81,12 @@ public class UiSmartDashboard {
 
     public double LEVEL_ANGLE;
     public GenericEntry levelAngleUI = UBIL.add("Level <",8.0)
-            .withPosition(1,0)
-            .getEntry();
-
-    private ShuffleboardLayout UBIFRT = autoTab
-            .getLayout("UBIFRT", BuiltInLayouts.kList)
-            .withPosition(1,0)
-            .withSize(1,2);
-
-    public double CROSSOVER_ANGLE;
-    final public GenericEntry crossOverAngleUI = UBIFRT.add("CrossOverAngle",-13.2)
-            .withPosition(2,1)
-            .getEntry();
-
-    public double TARGET_ANGLE;
-    final public GenericEntry targetAngleUI = UBIFRT.add("TargetAngle",-11.0)
-            .withPosition(3,1)
+            .withPosition(0,1)
             .getEntry();
 
     private ShuffleboardLayout collectorLayout = autoTab
             .getLayout("Collector", BuiltInLayouts.kList)
-            .withPosition(2,0)
+            .withPosition(4,0)
             .withSize(1,1);
 
     public double COLLECTOR_EJECT_SPEED;

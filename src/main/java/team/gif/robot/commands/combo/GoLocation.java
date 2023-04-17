@@ -53,7 +53,7 @@ public class GoLocation extends CommandBase {
                 case Constants.Location.LOAD_FROM_DOUBLE_SUBSTATION:
                     elevatorTargetPos = Constants.Elevator.LOAD_FROM_DOUBLE_SUBSTATION_POS;
                     armTargetPos = Constants.Arm.LOAD_FROM_DOUBLE_SUBSTATION_POS;
-                    armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_CONE_HIGH_POS;
+                    armPeakOutput = Constants.Arm.PEAK_OUTPUT_FORWARD_LOAD_FROM_DOUBLE;
 //                    new WaitCommand(0.9).andThen(new ArmOut(Constants.TelescopingArm.HIGH_COLLECT_POS)).schedule();
                     if (Robot.telescopingArm.getPosition() > Constants.TelescopingArm.HIGH_COLLECT_POS )
                         new ArmLoadFromDouble().schedule();

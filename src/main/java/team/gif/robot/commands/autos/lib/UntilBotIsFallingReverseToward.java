@@ -11,6 +11,10 @@ public class UntilBotIsFallingReverseToward extends CommandBase {
 
     boolean falling = false;
 
+    /**
+     * Bot facing away, on far side, driving toward us (in reverse), from far side to the charging station
+     * Results in negative angle when initially climbing
+     */
     public UntilBotIsFallingReverseToward() {
         super();
     }
@@ -30,16 +34,24 @@ public class UntilBotIsFallingReverseToward extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        // > -X is falling from opponent side facing away
         double pitch = Robot.pigeon.getPitch();
 
-        if( pitch < Robot.uiSmartDashboard.CROSSOVER_ANGLE) // need to get to -13 first, then can check for a smaller angle
+        // need to be climbing, then can check for a smaller angle
+        // less than because bot goes from 0 to -15
+        if( pitch < Robot.uiSmartDashboard.UBIFRT_CROSSOVER_ANGLE)
             falling = true;
 
-        System.out.println("UBIFRT falling: " + falling + " pitch: " + String.format("%.2f",pitch));
+        System.out.println("UBIFRT (C " + String.format("%.1f",Robot.uiSmartDashboard.UBIFRT_CROSSOVER_ANGLE) + " F " + String.format("%.1f",Robot.uiSmartDashboard.UBIFRT_FALLING_ANGLE) + ") falling: " + falling + " pitch: " + String.format("%.2f",pitch));
 
-        if (falling && pitch > Robot.uiSmartDashboard.TARGET_ANGLE) {
-            System.out.println("UBIFRT Hit target angle of " + Robot.uiSmartDashboard.TARGET_ANGLE);
+        // if we have overshot right from the start, exit
+        if( pitch > 0 ) {
+            System.out.println("UBIFRT Path Overshot! Exiting UBIFRT");
+            return true;
+        }
+
+        // greater than because bot is falling, going from -15 to 0
+        if (falling && pitch > Robot.uiSmartDashboard.UBIFRT_FALLING_ANGLE) {
+            System.out.println("UBIFRT Hit target angle of " + Robot.uiSmartDashboard.UBIFRT_FALLING_ANGLE);
             return true;
         } else {
             return false;

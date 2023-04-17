@@ -173,13 +173,11 @@ public class OI {
         );
 
         // Test buttons used during practice matches to test and calibrate autos
-        dBack.onTrue(new DriveAndEngageCommand()); // drive to charging station and engage (+x button will cross charging station)
-//        dBack.onTrue(new AutoConeMidRear());
-        dStart.onTrue(new DriveToChargingStationCommand()); // just drive to the charging station
-//        dStart.onTrue(new PlaceConeHigh()); // just drive to the charging station
+        dStart.onTrue(new InstantCommand(Robot::loadAutoConstants).andThen(new DriveToChargingStationCommand())); // just drive to the charging station
+        dBack.onTrue(new InstantCommand(Robot::loadAutoConstants).andThen(new DriveAndEngageCommand())); // drive to charging station and engage (+x button will cross charging station)
         dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
         dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
-        dX.and(aLStickBtn).onTrue( new PlaceCubeHighNoHomeEngage());
+        dX.and(aLStickBtn).onTrue( new InstantCommand(Robot::loadAutoConstants).andThen(new PlaceCubeHighNoHomeEngage()));
         dX.and(aRStickBtn).onTrue(new MobilityEngageCable());
 
         // enable these for testing purposes

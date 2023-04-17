@@ -27,7 +27,7 @@ public class AutoStagePos extends CommandBase {
         armDone = false;
         elevatorDownDone = false;
         Arm.armMotor.configReverseSoftLimitThreshold(-1700);
-        Arm.armMotor.configPeakOutputReverse(-1.0);
+        Arm.armMotor.configPeakOutputReverse(-0.8); // arm is forward, coming back, need to slow it down
 
         // set this here in case auto ends before this does
         Robot.elevator.setElevatorTargetPos(EL_TARGET_POS);
@@ -81,6 +81,7 @@ public class AutoStagePos extends CommandBase {
         Robot.elevator.setElevatorTargetPos(EL_TARGET_POS);
         Robot.arm.setTargetPosition(ARM_TARGET_POS);
         Arm.armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
-        System.out.println("stage done");
+        Arm.armMotor.configPeakOutputReverse(Constants.Arm.PEAK_OUTPUT_REVERSE);
+        System.out.println("Arm at stage pos: done");
     }
 }

@@ -7,22 +7,22 @@ package team.gif.robot.commands.autos.lib;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import team.gif.robot.Robot;
 
-public class UntilBotIsFalling extends CommandBase {
+public class UntilBotIsFallingFarSide extends CommandBase {
 
     boolean falling = false;
 
     /**
-     * Bot facing us, in between Alliance Station and Charging Station, driving away (in reverse), from AS to the CS
-     * Results in negative angle when initially climbing
+     * Bot facing us, on far side, driving toward us, from far side to the charging station
+     * Results in positive angle when initially climbing
      */
-    public UntilBotIsFalling() {
+    public UntilBotIsFallingFarSide() {
         super();
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("UntilBotIsFalling starting");
+        System.out.println("UntilBotIsFallingFarSide starting");
 
         falling = false;
     }
@@ -37,15 +37,15 @@ public class UntilBotIsFalling extends CommandBase {
         double pitch = Robot.pigeon.getPitch();
 
         // need to be climbing, then can check for a smaller angle
-        // less than because bot goes from 0 to -15
-        if (pitch < Robot.uiSmartDashboard.CROSSOVER_ANGLE)
+        // greater than because bot goes from 0 to 15
+        if (pitch > Robot.uiSmartDashboard.FFS_CROSSOVER_ANGLE)
             falling = true;
 
-        System.out.println("UBIF (C " + String.format("%.1f",Robot.uiSmartDashboard.CROSSOVER_ANGLE) + " F " + String.format("%.1f",Robot.uiSmartDashboard.FALLING_ANGLE) + ") falling: " + falling + " pitch: " + String.format("%.2f",pitch));
+        System.out.println("UBIFFS (C " + String.format("%.1f",Robot.uiSmartDashboard.FFS_CROSSOVER_ANGLE) + " F " + String.format("%.1f",Robot.uiSmartDashboard.FFS_FALLING_ANGLE) +  ") falling: " + falling + " pitch: " + String.format("%.2f",pitch));
 
-        // greater than because bot is falling, going from -15 to 0
-        if (falling && pitch > Robot.uiSmartDashboard.FALLING_ANGLE) {
-            System.out.println("UBIF Hit target angle of " + Robot.uiSmartDashboard.FALLING_ANGLE);
+        // less than because bot is falling, going from 15 to 0
+        if (falling && pitch < Robot.uiSmartDashboard.FFS_FALLING_ANGLE) {
+            System.out.println("UBIFFS Hit target angle of " + Robot.uiSmartDashboard.FFS_FALLING_ANGLE);
             return true;
         } else {
             return false;
@@ -54,5 +54,5 @@ public class UntilBotIsFalling extends CommandBase {
 
     // Called once the command ends or is interrupted.
     @Override
-    public void end(boolean interrupted){System.out.println("UBIF end");}
+    public void end(boolean interrupted){System.out.println("UBIFFS end");}
 }

@@ -147,7 +147,7 @@ public final class Constants {
         public static final double DRIVE_SLOW = 0.27; // 0.3;
         public static final double DRIVE_SUPER_SLOW = 0.2;
         public static final double HOLD_AT_ANGLE = 0.15;
-        public static final double DRIVE_TIME_DEFAULT = 1.7; // seconds until the bot gets to the charging station
+        public static final double DRIVE_TIME_DEFAULT = 1.5; // seconds until the bot gets to the charging station
     }
 
     public static final class Joystick {
@@ -172,7 +172,8 @@ public final class Constants {
         // general motor function parameters
         public static final double PEAK_OUTPUT_FORWARD = 0.70; //was 0.55; // down // Percent motor command, arm is much faster than elevator
         public static final double PEAK_OUTPUT_FORWARD_CUBE_HIGH_POS = 0.3; //was 0.35;
-        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25; // wasg 0.35;
+        public static final double PEAK_OUTPUT_FORWARD_CONE_HIGH_POS = 0.25; // was 0.35;
+        public static final double PEAK_OUTPUT_FORWARD_LOAD_FROM_DOUBLE = 0.25;
         public static final double AUTO_OUTPUT_CONE_HIGH_POS = .20;
         public static final double AUTO_OUTPUT_CONE_HIGH_STAGE = .80;
         public static final double AUTO_OUTPUT_CONE_HIGH_FAST = .30;
