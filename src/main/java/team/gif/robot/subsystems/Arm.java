@@ -44,9 +44,11 @@ public class Arm extends SubsystemBase {
      */
     public void move(double percent) {
         if (Robot.oi.aux.getHID().getRightStickButton()) {
-            armMotor.configReverseSoftLimitThreshold(0);
+            armMotor.configReverseSoftLimitEnable(false);
+//            armMotor.configReverseSoftLimitThreshold(0);
         } else {
-            armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
+            armMotor.configReverseSoftLimitEnable(true);
+//-            armMotor.configReverseSoftLimitThreshold(Constants.Arm.MIN_POS);
         }
 
         // soft limits will keep the robot arm in allowable range
@@ -56,7 +58,8 @@ public class Arm extends SubsystemBase {
     /**
      * Use PID to move the arm to a position
      */
-    public void PIDMove() {
+    public void
+    PIDMove() {
         armMotor.set(ControlMode.Position, armTargetPos);
     }
 
@@ -185,6 +188,15 @@ public class Arm extends SubsystemBase {
     public double getI() {
         return armMotor.getIntegralAccumulator(0);
     }
+
+    public double degreesToPos(double deg) { return deg * Constants.Arm.TICKS_PER_DEGREE + Constants.Arm.ZERO_OFFSET_TICKS;}
+
+    /**
+     *
+     * @param degrees
+     * @return degrees in units of ticks
+     */
+    public double degreesToTicks(double degrees) { return degrees * Constants.Arm.TICKS_PER_DEGREE;}
 
     /**
      * Get the state of the game piece sensor in the arm

@@ -22,6 +22,7 @@ import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
 import team.gif.robot.commands.led.LEDSubsystemDefault;
+import team.gif.robot.commands.telescopingArm.ArmIn;
 import team.gif.robot.subsystems.Arm;
 import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorWheels;
@@ -137,6 +138,8 @@ public class Robot extends TimedRobot {
         // TODO SwerveAuto put back after PID constants are finalized and autos are running well
         robotContainer = new RobotContainer();
         runningAutonomousMode = false;
+
+        loadAutoConstants();
     }
 
     /**
@@ -187,6 +190,8 @@ public class Robot extends TimedRobot {
         runAutoScheduler = true;
 
         compressor.disable();
+
+        loadAutoConstants();
     }
 
     /** This function is called periodically during autonomous. */
@@ -214,6 +219,8 @@ public class Robot extends TimedRobot {
         runningAutonomousMode = false;
 
         compressor.enableDigital();
+
+        new ArmIn().schedule(); // at the ned of auto, arm may be out (e.g. shooting from charging station)
     }
 
     /** This function is called periodically during operator control. */
@@ -259,5 +266,17 @@ public class Robot extends TimedRobot {
 
     public static void cancelAuto() {
         autonomousCommand.cancel();
+    }
+
+    public static void loadAutoConstants() {
+        uiSmartDashboard.THRESHOLD_ANGLE = uiSmartDashboard.thresholdAngleUI.getDouble(1.0);
+        uiSmartDashboard.LEVEL_ANGLE = uiSmartDashboard.levelAngleUI.getDouble(1.0);
+        uiSmartDashboard.CROSSOVER_ANGLE = uiSmartDashboard.crossoverAngleUI.getDouble(1.0);
+        uiSmartDashboard.FALLING_ANGLE = uiSmartDashboard.fallingAngleUI.getDouble(1.0);
+        uiSmartDashboard.FFS_CROSSOVER_ANGLE = uiSmartDashboard.ffsCrossoverAngleUI.getDouble(1.0);
+        uiSmartDashboard.FFS_FALLING_ANGLE = uiSmartDashboard.ffsFallingAngleUI.getDouble(1.0);
+        uiSmartDashboard.UBIFRT_CROSSOVER_ANGLE = uiSmartDashboard.ubifrtCrossoverAngleUI.getDouble(1.0);
+        uiSmartDashboard.UBIFRT_FALLING_ANGLE = uiSmartDashboard.ubifrtFallingAngleUI.getDouble(1.0);
+        uiSmartDashboard.COLLECTOR_EJECT_SPEED = uiSmartDashboard.collectorEjectSpeedUI.getDouble(1.0);
     }
 }

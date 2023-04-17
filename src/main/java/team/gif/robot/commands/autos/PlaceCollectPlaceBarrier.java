@@ -45,6 +45,11 @@ public class PlaceCollectPlaceBarrier extends SequentialCommandGroup {
                 new SetArmPosition(Constants.Arm.PLACE_CUBE_HIGH_POS),
                 new SetElevatorPosition(Constants.Elevator.PLACE_CUBE_HIGH_POS)));
         eventMap.put("checkGP", new CheckForGP());
+        eventMap.put("placeCubeHigh", new CollectorEject().withTimeout(0.25));
+        eventMap.put("goStage", new ParallelCommandGroup(
+                new ArmIn(), // arm in just in case gravity pulled it out
+                new AutoStagePos()
+        ));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
                 RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
@@ -53,11 +58,10 @@ public class PlaceCollectPlaceBarrier extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: PCP Barrier"),
+            new PrintCommand("Auto: 2 GP Left"),
             new SetInitialHeading(trajectory),
             new PlaceConeHigh(),
-            trajectoryWithEvents,
-            new CollectorEject().withTimeout(1.0)
+            trajectoryWithEvents
         );
     }
 }

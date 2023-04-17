@@ -11,12 +11,16 @@ import team.gif.lib.autoMode;
 import team.gif.robot.commands.autos.NoAuto;
 import team.gif.robot.commands.autos.PlaceCollectPlaceBarrier;
 import team.gif.robot.commands.autos.PlaceCollectPlaceCable;
+import team.gif.robot.commands.autos.PlaceCollectPlaceEngageCenter;
+import team.gif.robot.commands.autos.PlaceCubeHighEngage;
 import team.gif.robot.commands.autos.PlaceCubeHighMobility;
 import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngage;
-import team.gif.robot.commands.autos.PlaceCubeHighEngage;
+import team.gif.robot.commands.autos.PlaceCubeHighMobilityEngagePP;
 import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
 import team.gif.robot.commands.autos.PlaceMobilityEngageBarrier;
 import team.gif.robot.commands.autos.PlaceMobilityEngageCable;
+import team.gif.robot.commands.autos.ThreeGamePieceLeft;
+import team.gif.robot.commands.autos.ThreeGamePieceRight;
 
 import java.util.HashMap;
 
@@ -53,11 +57,14 @@ public class RobotContainer {
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_ENGAGE, new PlaceCubeHighEngage());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE, new PlaceCubeHighNoHomeEngage());
         autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY, new PlaceCubeHighMobility());
-        autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE, new PlaceCubeHighMobilityEngage());
+        autoCommands.put(autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE, new PlaceCubeHighMobilityEngagePP());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE_CABLE, new PlaceCollectPlaceCable());
         autoCommands.put(autoMode.PLACE_COLLECT_PLACE_BARRIER, new PlaceCollectPlaceBarrier());
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE_CABLE, new PlaceMobilityEngageCable());
         autoCommands.put(autoMode.PLACE_MOBILITY_ENGAGE_BARRIER, new PlaceMobilityEngageBarrier());
+        autoCommands.put(autoMode.THREE_GP_RIGHT, new ThreeGamePieceRight());
+        autoCommands.put(autoMode.THREE_GP_LEFT, new ThreeGamePieceLeft());
+        autoCommands.put(autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER, new PlaceCollectPlaceEngageCenter());
     }
 
     /**

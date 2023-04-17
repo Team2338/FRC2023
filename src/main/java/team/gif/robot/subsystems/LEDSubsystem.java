@@ -91,6 +91,18 @@ public class LEDSubsystem extends SubsystemBase {
         HP[2] = 0;
     }
 
+    public void setLEDFullSpeed() {
+        HP[0] = 255;
+        HP[1] = 0;
+        HP[2] = 0;
+    }
+
+    public void setLEDNonFullSpeed() {
+        HP[0] = 0;
+        HP[1] = 255;
+        HP[2] = 0;
+    }
+
     /**
      * Sets the colors of the LEDs
      */

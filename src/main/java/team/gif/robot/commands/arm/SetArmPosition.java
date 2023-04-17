@@ -24,8 +24,8 @@ public class SetArmPosition extends CommandBase {
         addRequirements(Robot.arm);
 
         // do not allow code to set a point higher or lower than max/min
-        if (targetPos > Constants.Arm.MAX_POS) { targetPos = Constants.Arm.MAX_POS; }
-        if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
+        //-if (targetPos > Constants.Arm.MAX_POS) { targetPos = Constants.Arm.MAX_POS; }
+        //-if (targetPos < Constants.Arm.MIN_POS) { targetPos = Constants.Arm.MIN_POS; }
 
         targetPosition = targetPos;
         this.peakOutputForward = peakOutputForward;
@@ -71,7 +71,11 @@ public class SetArmPosition extends CommandBase {
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        double pos = Robot.arm.getPositionDegrees();
+        double FF = Math.sin( pos * Math.PI / 180) * Constants.Arm.FF;
+        Robot.arm.configF(FF);
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override

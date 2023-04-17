@@ -117,6 +117,14 @@ public class SwerveModuleMK4 {
     }
 
     /**
+     * Get the drive motor's current output
+     * @return the current output as a percent
+     */
+    public double getDriveOutput() {
+        return driveMotor.getMotorOutputPercent();
+    }
+
+    /**
      * Get the active turn velocity
      * @return Returns the active turn velocity as a double in EncoderTicks per 100ms
      */

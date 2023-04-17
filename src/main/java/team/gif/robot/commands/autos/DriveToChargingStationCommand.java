@@ -19,7 +19,7 @@ public class DriveToChargingStationCommand extends CommandBase {
     @Override
     public void execute() {
         if( Robot.oi.dX.getAsBoolean() )
-            new MobilityEngageBarrier().schedule();
+            new CollectEngageCenter().schedule();
         else
             new DriveToChargingStation().schedule();
     }
