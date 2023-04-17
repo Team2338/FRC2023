@@ -82,17 +82,17 @@ public class UiSmartDashboard {
 
         // Auto selections
         autoModeChooser.addOption("NONE", autoMode.NONE);
-        autoModeChooser.setDefaultOption("3 GP ^R Right", autoMode.THREE_GP_RIGHT);
         autoModeChooser.addOption("3 GP ^R Left", autoMode.THREE_GP_LEFT);
+        autoModeChooser.setDefaultOption("3 GP ^R Right", autoMode.THREE_GP_RIGHT);
         autoModeChooser.addOption("2 GP ^R Center Engage", autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER);
-        autoModeChooser.addOption("2 GP ^ Right", autoMode.PLACE_COLLECT_PLACE_CABLE);
         autoModeChooser.addOption("2 GP ^ Left", autoMode.PLACE_COLLECT_PLACE_BARRIER);
+        autoModeChooser.addOption("2 GP ^ Right", autoMode.PLACE_COLLECT_PLACE_CABLE);
         autoModeChooser.addOption("P Cube High Mobility Engage", autoMode.PLACE_CUBE_HIGH_MOBILITY_ENGAGE);
         autoModeChooser.addOption("P Cube High Engage", autoMode.PLACE_CUBE_HIGH_ENGAGE);
         autoModeChooser.addOption("P Cube High No Home Engage", autoMode.PLACE_CUBE_HIGH_NO_HOME_ENGAGE);
         autoModeChooser.addOption("P Cube High Mobility", autoMode.PLACE_CUBE_HIGH_MOBILITY);
-        autoModeChooser.addOption("P ^ Mobility Engage Right", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
         autoModeChooser.addOption("P ^ Mobility Engage Left", autoMode.PLACE_MOBILITY_ENGAGE_BARRIER);
+        autoModeChooser.addOption("P ^ Mobility Engage Right", autoMode.PLACE_MOBILITY_ENGAGE_CABLE);
 
         tab.add("Auto Select", autoModeChooser)
             .withWidget(BuiltInWidgets.kComboBoxChooser)

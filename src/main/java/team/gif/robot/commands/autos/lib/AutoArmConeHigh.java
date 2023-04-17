@@ -29,13 +29,13 @@ public class AutoArmConeHigh extends CommandBase {
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return Robot.arm.getPosition() > (Constants.Arm.PLACE_CONE_HIGH_POS - (6.0 * Constants.Arm.TICKS_PER_DEGREE));
+        return Robot.arm.getPosition() > (Constants.Arm.PLACE_CONE_HIGH_POS - (3.0 * Constants.Arm.TICKS_PER_DEGREE));
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted){
-        Robot.arm.setTargetPosition(Constants.Arm.PLACE_CONE_HIGH_POS - (5.0 * Constants.Arm.TICKS_PER_DEGREE));
+        Robot.arm.setTargetPosition(Constants.Arm.PLACE_CONE_HIGH_POS - (3.0 * Constants.Arm.TICKS_PER_DEGREE));
         Robot.arm.configPeakOutputForward(Constants.Arm.PEAK_OUTPUT_FORWARD);
         Robot.arm.configI(Constants.Arm.I_GT_45);
         Robot.arm.resetI();

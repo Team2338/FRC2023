@@ -58,7 +58,7 @@ public class PlaceCollectPlaceCable extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: PCP Cable"),
+            new PrintCommand("Auto: 2 GP Right"),
             new SetInitialHeading(trajectory),
             new PlaceConeHigh(),
             trajectoryWithEvents

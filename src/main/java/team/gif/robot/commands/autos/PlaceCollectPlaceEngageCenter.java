@@ -47,7 +47,7 @@ public class PlaceCollectPlaceEngageCenter extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: 2 GP Engage"),
+            new PrintCommand("Auto: 2 GP Center Engage"),
             new SetInitialHeading(trajectory),
             new AutoConeMidRear(),
             new WheelsIn(),

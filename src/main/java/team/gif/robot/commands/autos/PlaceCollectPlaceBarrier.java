@@ -58,7 +58,7 @@ public class PlaceCollectPlaceBarrier extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: PCP Barrier"),
+            new PrintCommand("Auto: 2 GP Left"),
             new SetInitialHeading(trajectory),
             new PlaceConeHigh(),
             trajectoryWithEvents
