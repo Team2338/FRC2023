@@ -93,10 +93,10 @@ public class SwerveDrivetrain extends SubsystemBase {
         drivePace = drivePace.COAST_FR;
 
         ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
-        swerveTab.addDouble("FL_Rotation", fL::getDriveOutput);
-        swerveTab.addDouble("FR_Rotation", fR::getDriveOutput);
-        swerveTab.addDouble("RL_Rotation", rL::getDriveOutput);
-        swerveTab.addDouble("RR_Rotation", rR::getDriveOutput);
+        swerveTab.addDouble("FL_Rotation", fL::getTurningHeading);
+        swerveTab.addDouble("FR_Rotation", fR::getTurningHeading);
+        swerveTab.addDouble("RL_Rotation", rL::getTurningHeading);
+        swerveTab.addDouble("RR_Rotation", rR::getTurningHeading);
     }
 
     public SwerveDrivetrain(TelemetryFileLogger logger) {

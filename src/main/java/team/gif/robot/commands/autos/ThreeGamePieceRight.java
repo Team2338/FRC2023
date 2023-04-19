@@ -13,6 +13,7 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.CheckForGP;
+import team.gif.robot.commands.autos.lib.PrintPosition;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
@@ -56,6 +57,11 @@ public class ThreeGamePieceRight extends SequentialCommandGroup {
         eventMap.put("goStage", new ParallelCommandGroup(
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoStagePos()));
+
+        eventMap.put("printPosition1", new PrintPosition(1));
+        eventMap.put("printPosition2", new PrintPosition(2));
+        eventMap.put("printPosition4", new PrintPosition(4));
+        eventMap.put("printPosition5", new PrintPosition(5));
 
         //        eventMap.put("armDown", new ParallelCommandGroup(
 //                new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS),

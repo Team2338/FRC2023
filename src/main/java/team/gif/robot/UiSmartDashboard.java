@@ -29,14 +29,14 @@ public class UiSmartDashboard {
             .withPosition(0,0)
             .withSize(1,2);
 
-    public double FALLING_ANGLE;
-    public GenericEntry fallingAngleUI = UBIF.add("Falling",-11.0)
-            .withPosition(0,1)
+    public double CROSSOVER_ANGLE;
+    public GenericEntry crossoverAngleUI = UBIF.add("Crossover",-13.5)
+            .withPosition(0,0)
             .getEntry();
 
-    public double CROSSOVER_ANGLE;
-    public GenericEntry crossoverAngleUI = UBIF.add("Crossover",-13.0)
-            .withPosition(0,0)
+    public double FALLING_ANGLE;
+    public GenericEntry fallingAngleUI = UBIF.add("Falling",-12.0)
+            .withPosition(0,1)
             .getEntry();
 
     private ShuffleboardLayout UBIF_FFS = autoTab
@@ -45,12 +45,12 @@ public class UiSmartDashboard {
             .withSize(1,2);
 
     public double FFS_CROSSOVER_ANGLE;
-    final public GenericEntry ffsCrossoverAngleUI = UBIF_FFS.add("FFS Crossover",13.0)
+    final public GenericEntry ffsCrossoverAngleUI = UBIF_FFS.add("FFS Crossover",13.5)
             .withPosition(0,0)
             .getEntry();
 
     public double FFS_FALLING_ANGLE;
-    final public GenericEntry ffsFallingAngleUI = UBIF_FFS.add("FFS Falling",11.0)
+    final public GenericEntry ffsFallingAngleUI = UBIF_FFS.add("FFS Falling",12.0)
             .withPosition(0,1)
             .getEntry();
 
@@ -60,12 +60,12 @@ public class UiSmartDashboard {
             .withSize(1,2);
 
     public double UBIFRT_CROSSOVER_ANGLE;
-    final public GenericEntry ubifrtCrossoverAngleUI = UBIFRT.add("FFSRT Crossover",-13.0)
+    final public GenericEntry ubifrtCrossoverAngleUI = UBIFRT.add("FFSRT Crossover",-13.5)
             .withPosition(0,0)
             .getEntry();
 
     public double UBIFRT_FALLING_ANGLE;
-    final public GenericEntry ubifrtFallingAngleUI = UBIFRT.add("FFSRT Falling",-11.0)
+    final public GenericEntry ubifrtFallingAngleUI = UBIFRT.add("FFSRT Falling",-12.0)
             .withPosition(0,1)
             .getEntry();
 
@@ -90,7 +90,7 @@ public class UiSmartDashboard {
             .withSize(1,1);
 
     public double COLLECTOR_EJECT_SPEED;
-    final public GenericEntry collectorEjectSpeedUI = collectorLayout.add("Speed",0.8)
+    final public GenericEntry collectorEjectSpeedUI = collectorLayout.add("Speed",0.9)
             .getEntry();
 
     /**

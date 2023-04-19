@@ -221,6 +221,30 @@
       "names": [
         "checkForGP"
       ]
+    },
+    {
+      "position": 1.0,
+      "names": [
+        "printPosition1"
+      ]
+    },
+    {
+      "position": 2.0,
+      "names": [
+        "printPosition2"
+      ]
+    },
+    {
+      "position": 4.0,
+      "names": [
+        "printPosition4"
+      ]
+    },
+    {
+      "position": 5.0,
+      "names": [
+        "printPosition5"
+      ]
     }
   ]
 }

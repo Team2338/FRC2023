@@ -4,6 +4,7 @@ import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.lib.RobotTrajectory;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.autos.lib.CheckForGP;
+import team.gif.robot.commands.autos.lib.PrintPosition;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
@@ -52,6 +54,11 @@ public class ThreeGamePieceLeft extends SequentialCommandGroup {
         eventMap.put("goStage", new ParallelCommandGroup(
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoStagePos()));
+
+        eventMap.put("recordPosition1", new PrintPosition(1));
+        eventMap.put("recordPosition2", new PrintPosition(2));
+        eventMap.put("recordPosition3", new PrintPosition(3));
+        eventMap.put("recordPosition4", new PrintPosition(4));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
             RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
