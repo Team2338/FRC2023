@@ -1,6 +1,7 @@
 package team.gif.robot.commands.combo;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import team.gif.robot.OI;
 import team.gif.robot.Robot;
 import team.gif.robot.commands.combo.GoHome;
 
@@ -11,6 +12,10 @@ public class GoHomeTimeCondition extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        if(Robot.oi.aLBump.getAsBoolean()) {
+            return;
+        }
+
         if (!Robot.runningAutonomousMode && Robot.collector.getTimer() > 2.0) {
             new GoHome().schedule();
         }

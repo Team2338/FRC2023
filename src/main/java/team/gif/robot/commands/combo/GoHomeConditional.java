@@ -19,6 +19,10 @@ public class GoHomeConditional extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        if(Robot.oi.aLBump.getAsBoolean()) {
+            return;
+        }
+
         if(Math.abs(Robot.elevator.getPosition() - Constants.Elevator.LOAD_FROM_SINGLE_SUBSTATION_POS) < (1 * Constants.Elevator.EL_TICKS_PER_INCH)) {
             if(Math.abs(Robot.arm.getPosition() - Constants.Arm.LOAD_FROM_SINGLE_SUBSTATION_POS) < (3 * Constants.Arm.TICKS_PER_DEGREE)) {
                 return;
