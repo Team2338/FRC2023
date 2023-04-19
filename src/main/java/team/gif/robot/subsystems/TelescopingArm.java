@@ -46,4 +46,6 @@ public class TelescopingArm extends SubsystemBase {
     public double getPosition() {
         return telescopingMotor.getEncoder().getPosition();
     }
+
+    public boolean safePos() { return getPosition() < 0.8 * Constants.TelescopingArm.MAX_POS; }
 }
