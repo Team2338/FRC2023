@@ -35,7 +35,7 @@ public class PlaceCollectPlaceCable extends SequentialCommandGroup {
                 new ArmIn(),
                 new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
         eventMap.put("armDown", new ParallelCommandGroup(
-                new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS),
+                new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS,0.5),
                 new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS),
                 new WaitCommand(1).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
         eventMap.put("checkGP", new CheckForGP());
