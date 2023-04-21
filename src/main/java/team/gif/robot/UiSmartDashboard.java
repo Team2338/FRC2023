@@ -112,8 +112,10 @@ public class UiSmartDashboard {
 
         // Auto selections
         autoModeChooser.addOption("NONE", autoMode.NONE);
-        autoModeChooser.addOption("3 GP ^R Left", autoMode.THREE_GP_LEFT);
-        autoModeChooser.setDefaultOption("3 GP ^R Right", autoMode.THREE_GP_RIGHT);
+        autoModeChooser.addOption("3 GP ^R Blue Left Barrier", autoMode.THREE_GP_BLUE_LEFT_BARRIER);
+        autoModeChooser.setDefaultOption("3 GP ^R Blue Right Cable", autoMode.THREE_GP_BLUE_RIGHT_CABLE);
+        autoModeChooser.addOption("3 GP ^R Red Left Cable", autoMode.THREE_GP_RED_LEFT_CABLE);
+        autoModeChooser.addOption("3 GP ^R Red Right Barrier", autoMode.THREE_GP_RED_RIGHT_BARRIER);
         autoModeChooser.addOption("2 GP ^R Center Engage", autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER);
         autoModeChooser.addOption("2 GP ^ Left", autoMode.PLACE_COLLECT_PLACE_BARRIER);
         autoModeChooser.addOption("2 GP ^ Right", autoMode.PLACE_COLLECT_PLACE_CABLE);

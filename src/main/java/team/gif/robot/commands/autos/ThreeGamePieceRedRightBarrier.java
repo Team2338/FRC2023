@@ -4,7 +4,6 @@ import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -21,10 +20,10 @@ import team.gif.robot.commands.telescopingArm.ArmIn;
 
 import java.util.HashMap;
 
-public class ThreeGamePieceLeft extends SequentialCommandGroup {
+public class ThreeGamePieceRedRightBarrier extends SequentialCommandGroup {
 
-    public ThreeGamePieceLeft() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3GP Left", 1.6, 3.0); // 1.8 1.2
+    public ThreeGamePieceRedRightBarrier() {
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Red Right Barrier", 1.6, 3.0); // 1.8 1.2
         HashMap<String, Command> eventMap = new HashMap<>();
 
         eventMap.put("goHomeCollect", new ParallelCommandGroup(
@@ -41,7 +40,7 @@ public class ThreeGamePieceLeft extends SequentialCommandGroup {
         eventMap.put("goCollectGP2", new ParallelCommandGroup(
                 new AutoFloorCollectPos(),
                 new ArmIn(),
-                new WaitCommand(0.5).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
+                new WaitCommand(1).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
 
         eventMap.put("goMidCubeRear", new ParallelCommandGroup(
                 new ArmIn(), // arm in just in case gravity pulled it out
@@ -55,10 +54,20 @@ public class ThreeGamePieceLeft extends SequentialCommandGroup {
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoStagePos()));
 
-        eventMap.put("recordPosition1", new PrintPosition(1));
-        eventMap.put("recordPosition2", new PrintPosition(2));
-        eventMap.put("recordPosition3", new PrintPosition(3));
-        eventMap.put("recordPosition4", new PrintPosition(4));
+        eventMap.put("printPosition1", new PrintPosition(1));
+        eventMap.put("printPosition2", new PrintPosition(2));
+        eventMap.put("printPosition4", new PrintPosition(4));
+        eventMap.put("printPosition5", new PrintPosition(5));
+
+        //        eventMap.put("armDown", new ParallelCommandGroup(
+//                new SetArmPosition(Constants.Arm.LOAD_FROM_GROUND_POS),
+//                new SetElevatorPosition(Constants.Elevator.LOAD_FROM_GROUND_POS),
+//                new WaitCommand(1).andThen( new CollectorCollect().until(Robot.arm.armGamePieceSensor::get).withTimeout(3.0))));
+
+//        eventMap.put("goHome", new ParallelCommandGroup(
+//            new SetArmPosition(Constants.Arm.STAGE_POS),
+//            new ArmIn(),
+//            new SetElevatorPosition(Constants.Elevator.STAGE_POS)));
 
         FollowPathWithEvents trajectoryWithEvents = new FollowPathWithEvents(
             RobotTrajectory.getInstance().baseSwerveCommand(trajectory),
@@ -67,7 +76,7 @@ public class ThreeGamePieceLeft extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: 3 GP Left"),
+            new PrintCommand("Auto: 3 GP Red Right Barrier"),
 //                new WheelsOut(),
 
             new SetInitialHeading(trajectory),
