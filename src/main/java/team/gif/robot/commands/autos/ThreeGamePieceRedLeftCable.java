@@ -35,7 +35,7 @@ public class ThreeGamePieceRedLeftCable extends SequentialCommandGroup {
                 new ArmIn(), // arm in just in case gravity pulled it out
                 new AutoCubeHighRearPos()));
 
-        eventMap.put("placeCubeHigh", new CollectorEject(0.80).withTimeout(0.25));
+        eventMap.put("placeCubeHigh", new CollectorEject(0.70).withTimeout(0.25));
 
         eventMap.put("goCollectGP2", new ParallelCommandGroup(
                 new AutoFloorCollectPos(),

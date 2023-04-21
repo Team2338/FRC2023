@@ -18,7 +18,7 @@ public class AutoFloorCollectPos extends CommandBase {
 //    boolean armTeleDone = false;
 
     double EL_TARGET_POS = Constants.Elevator.LOAD_FROM_GROUND_POS; //+ Robot.elevator.inchesToTicks(4);
-    double ARM_TARGET_POS = Constants.Arm.LOAD_FROM_GROUND_POS;// - Robot.arm.degreesToTicks(15);
+    double ARM_TARGET_POS = Constants.Arm.LOAD_FROM_GROUND_AUTO_POS; // LOAD_FROM_GROUND_POS;// - Robot.arm.degreesToTicks(15);
 
     double ARM_STAGE_POS = Constants.Arm.STAGE_POS;
 //    double ARM_TELE_TARGET_POS = Constants.TelescopingArm.MIN_POS;

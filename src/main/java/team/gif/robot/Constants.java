@@ -194,6 +194,7 @@ public final class Constants {
         public static final double LOAD_FROM_DOUBLE_SUBSTATION_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double LOAD_FROM_SINGLE_SUBSTATION_POS = 47.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; //PbOT 45.0
         public static final double LOAD_FROM_GROUND_POS = 103.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
+        public static final double LOAD_FROM_GROUND_AUTO_POS = 102.25 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS = 90.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_HIGH_POS_AUTO = -45.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS;
         public static final double PLACE_CUBE_MID_POS = 68.0 * TICKS_PER_DEGREE + ZERO_OFFSET_TICKS; // was 105
