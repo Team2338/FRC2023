@@ -9,25 +9,21 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import team.gif.lib.RobotTrajectory;
-import team.gif.robot.Constants;
 import team.gif.robot.Robot;
-import team.gif.robot.commands.arm.SetArmPosition;
 import team.gif.robot.commands.autos.lib.CheckForGP;
 import team.gif.robot.commands.autos.lib.PrintPosition;
 import team.gif.robot.commands.autos.lib.SetInitialHeading;
 import team.gif.robot.commands.collector.CollectorCollect;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.WheelsIn;
-import team.gif.robot.commands.collector.WheelsOut;
-import team.gif.robot.commands.elevator.SetElevatorPosition;
 import team.gif.robot.commands.telescopingArm.ArmIn;
 
 import java.util.HashMap;
 
-public class ThreeGamePieceRight extends SequentialCommandGroup {
+public class ThreeGamePieceBlueRightCable extends SequentialCommandGroup {
 
-    public ThreeGamePieceRight() {
-        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Right", 1.6, 3.0); // 1.8 1.2
+    public ThreeGamePieceBlueRightCable() {
+        PathPlannerTrajectory trajectory = PathPlanner.loadPath("3 GP Blue Right Cable", 1.6, 3.0); // 1.8 1.2
         HashMap<String, Command> eventMap = new HashMap<>();
 
         eventMap.put("goHomeCollect", new ParallelCommandGroup(
@@ -80,7 +76,7 @@ public class ThreeGamePieceRight extends SequentialCommandGroup {
         );
 
         addCommands(
-            new PrintCommand("Auto: 3 GP Right"),
+            new PrintCommand("Auto: 3 GP Blue Right Cable"),
 //                new WheelsOut(),
 
             new SetInitialHeading(trajectory),

@@ -25,15 +25,15 @@
     {
       "anchorPoint": {
         "x": 6.4,
-        "y": 0.9021142828610453
+        "y": 0.8
       },
       "prevControl": {
         "x": 4.182194347294677,
-        "y": 0.8906951147235624
+        "y": 0.7885808318625172
       },
       "nextControl": {
         "x": 4.182194347294677,
-        "y": 0.8906951147235624
+        "y": 0.7885808318625172
       },
       "holonomicAngle": 0.0,
       "isReversal": true,
@@ -49,19 +49,19 @@
     },
     {
       "anchorPoint": {
-        "x": 2.35,
+        "x": 2.2066782595103653,
         "y": 1.0
       },
       "prevControl": {
         "x": 2.9260858521717044,
-        "y": 0.8172933098002947
+        "y": 0.8564376103111184
       },
       "nextControl": {
-        "x": 1.7739141478282958,
-        "y": 1.1827066901997054
+        "x": 2.9260858521717044,
+        "y": 0.8564376103111184
       },
       "holonomicAngle": 0.0,
-      "isReversal": false,
+      "isReversal": true,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
@@ -78,12 +78,12 @@
         "y": 0.7765034333487463
       },
       "prevControl": {
-        "x": 2.642620205043524,
-        "y": 0.6958564853219766
+        "x": 3.1196779876133984,
+        "y": 0.7620495501851733
       },
       "nextControl": {
-        "x": 4.901601939956017,
-        "y": 0.833599274036155
+        "x": 4.903204021275934,
+        "y": 0.7925371746922212
       },
       "holonomicAngle": 0.0,
       "isReversal": false,
@@ -99,16 +99,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.614477160578253,
-        "y": 1.667198548072311
+        "x": 6.91,
+        "y": 1.32
       },
       "prevControl": {
-        "x": 4.821667762993646,
-        "y": 0.5024433980491892
+        "x": 5.356993133302506,
+        "y": 0.04805424756148624
       },
       "nextControl": {
-        "x": 6.625003188438841,
-        "y": 1.6740371139435213
+        "x": 6.91971104023021,
+        "y": 1.327953549103644
       },
       "holonomicAngle": 39.09,
       "isReversal": false,
@@ -125,18 +125,18 @@
     {
       "anchorPoint": {
         "x": 2.35,
-        "y": 1.15
+        "y": 0.85
       },
       "prevControl": {
-        "x": 5.906488736054395,
-        "y": 0.3626408671620762
+        "x": 5.152823638980611,
+        "y": -0.1818141063632548
       },
       "nextControl": {
-        "x": 2.1612253069071192,
-        "y": 1.1917921972164747
+        "x": 5.152823638980611,
+        "y": -0.1818141063632548
       },
       "holonomicAngle": 0.0,
-      "isReversal": false,
+      "isReversal": true,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
@@ -153,8 +153,8 @@
         "y": 0.9592101235484528
       },
       "prevControl": {
-        "x": 4.364901037494382,
-        "y": 0.4453475573617818
+        "x": 4.421996878182891,
+        "y": 0.9363717872704366
       },
       "nextControl": null,
       "holonomicAngle": 0.0,
@@ -170,5 +170,81 @@
       }
     }
   ],
-  "markers": []
+  "maxVelocity": 2.0,
+  "maxAcceleration": 5.0,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "goHomeCollect"
+      ]
+    },
+    {
+      "position": 1.02,
+      "names": [
+        "goHighCubeRear"
+      ]
+    },
+    {
+      "position": 1.98,
+      "names": [
+        "placeCubeHigh"
+      ]
+    },
+    {
+      "position": 2.2,
+      "names": [
+        "goCollectGP2"
+      ]
+    },
+    {
+      "position": 4.189090909090954,
+      "names": [
+        "goMidCubeRear"
+      ]
+    },
+    {
+      "position": 4.98,
+      "names": [
+        "placeCubeMid"
+      ]
+    },
+    {
+      "position": 6.0,
+      "names": [
+        "goStage"
+      ]
+    },
+    {
+      "position": 4.27636363636369,
+      "names": [
+        "checkForGP"
+      ]
+    },
+    {
+      "position": 1.0,
+      "names": [
+        "printPosition1"
+      ]
+    },
+    {
+      "position": 2.0,
+      "names": [
+        "printPosition2"
+      ]
+    },
+    {
+      "position": 4.0,
+      "names": [
+        "printPosition4"
+      ]
+    },
+    {
+      "position": 5.0,
+      "names": [
+        "printPosition5"
+      ]
+    }
+  ]
 }
