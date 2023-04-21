@@ -44,11 +44,14 @@ public abstract class RobotMap {
     public static final int COLLECTOR_MOTOR = 43;
 
     // LED 28
-    public static final int LED_PWM_PORT = 9;
+    public static final int LED_PWM_PORT = 8;
     public static final int[] HP_LEDS = {0,1,2,3,4,5,   6,7,8,25,26,27}; // {0,1,2,9};
     public static final int[] GAME_PIECE_LEDS = {9,10,11,12,  21,22,23,24}; // {3,4,7,8};
     public static final int[] WHEEL_STATE_LEDS = {13,14,15,16,17,18,19,20}; // {5,6};
 
+//    public static final int[] HP_LEDS = {0,1,2,3,4,5,   13,14,15,25,26,27}; // {0,1,2,9};
+//    public static final int[] GAME_PIECE_LEDS = {16,17,18, 22,23,24 };//,30,  39,40,41,42}; // {3,4,7,8};
+//    public static final int[] WHEEL_STATE_LEDS = {19,20,21};//,34,35,36,37,38}; // {5,6};
     // Compressors
     public static final int COMPRESSOR = 1;
     public static final int SENSOR_AIR_PRESSURE = 3;

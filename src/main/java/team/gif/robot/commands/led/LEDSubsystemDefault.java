@@ -25,4 +25,9 @@ public class LEDSubsystemDefault extends CommandBase {
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     public void end(boolean interrupted) {}
+
+    @Override
+    public boolean runsWhenDisabled() {
+        return true;
+    }
 }

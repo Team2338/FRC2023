@@ -28,4 +28,10 @@ public class ConeLED extends CommandBase {
     public void end(boolean interrupted) {
         Robot.ledSubsystem.setLEDHPColor(0,0,0);
     }
+
+    @Override
+    public boolean runsWhenDisabled() {
+        return true;
+    }
+
 }
