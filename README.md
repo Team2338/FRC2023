@@ -4,6 +4,7 @@
 #### General Information:
 * Written in Java
 * Timed Robot Format
+* Season tldr; Thank you, thank you so much for a wonderful season! Subdivision finalists is a fantastic result for the fantastic bot that we built this year. As always thank you to our amazing alliance partners, starting with 2506 and 5934 at the Midwest Regional, 111 and 5586 at 7 rivers, and 1727, 498, and 610 at Houston!
 * VendorDeps: 
   * PhoenixProAnd5
   * REVLib
