@@ -24,6 +24,7 @@ import team.gif.robot.commands.combo.GoHomeConditional;
 import team.gif.robot.commands.combo.GoHomeTimeCondition;
 import team.gif.robot.commands.combo.GoLocation;
 import team.gif.robot.commands.combo.ToggleManualPIDControl;
+import team.gif.robot.commands.diagnostics.Diagnostics;
 import team.gif.robot.commands.drivetrain.MoveAwaySlow;
 import team.gif.robot.commands.drivetrain.MoveCloserSlow;
 import team.gif.robot.commands.drivetrain.MoveLeftSlow;
@@ -191,6 +192,8 @@ public class OI {
 //        tBack.onTrue(new DriveAndEngageCommand()); // test button to drive to charging station and engage
 //        tStart.onTrue(new DriveToChargingStationCommand()); // test button to just drive to the charging station
 //        tDPadRight.onTrue(new NoHomeEngageCommand()); // test button to leave arm out while scaling the charging station
+
+        tA.onTrue(new Diagnostics());
     }
 
     public void setRumble(boolean rumble) {
@@ -198,5 +201,9 @@ public class OI {
         driver.getHID().setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
         aux.getHID().setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
         aux.getHID().setRumble(GenericHID.RumbleType.kRightRumble, rumble ? 1.0 : 0.0);
+    }
+
+    public void setRumbleDia(boolean rumble) {
+        test.getHID().setRumble(GenericHID.RumbleType.kLeftRumble, rumble ? 1.0 : 0.0);
     }
 }

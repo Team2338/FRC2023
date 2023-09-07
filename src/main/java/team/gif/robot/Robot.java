@@ -18,6 +18,7 @@ import team.gif.robot.commands.arm.ArmPIDControl;
 import team.gif.lib.logging.EventFileLogger;
 import team.gif.lib.logging.TelemetryFileLogger;
 import team.gif.robot.commands.collector.WheelsDefault;
+import team.gif.robot.commands.diagnostics.Diagnostics;
 import team.gif.robot.commands.drivetrain.DriveArcade;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.commands.elevator.ElevatorPIDControl;
@@ -69,6 +70,7 @@ public class Robot extends TimedRobot {
     public static Pigeon pigeon;
 
     public static UI ui;
+    public static Diagnostics diagnostics; //this is not ini
 
     /**
      * This function is run when the robot is first started up and should be used for any

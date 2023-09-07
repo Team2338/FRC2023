@@ -28,6 +28,7 @@ public class Collector extends SubsystemBase {
         collectorMotor.set(ControlMode.PercentOutput, percent);
     }
 
+    public double getSpeed() {return collectorMotor.getMotorOutputVoltage();}
 
     public void resetTimer() {
         elapsedTime.reset();

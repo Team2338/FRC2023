@@ -2,6 +2,7 @@ package team.gif.robot;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import team.gif.robot.commands.diagnostics.Diagnostics;
 
 import static team.gif.robot.Robot.arm;
 import static team.gif.robot.Robot.elevator;
@@ -64,5 +65,16 @@ public class UI {
        //SA  ShuffleboardTab swerveTab = Shuffleboard.getTab("Swerve");
         //SAswerveTab.add("CurrY", Robot.swervetrain.getPose().getY());
         //SAswerveTab.add("CurrX", Robot.swervetrain.getPose().getX());
+
+        ShuffleboardTab shuffleboard = Shuffleboard.getTab("FRC2023 Diagnostics");
+
+        shuffleboard.addBoolean("Diagnostics Running", Robot.diagnostics::getDiagnosticsRunning);
+
+        shuffleboard.addBoolean("Elevator & Arm", Robot.diagnostics::getArmAndEle);
+        shuffleboard.addString("Problem in Elevator & Arm", Robot.diagnostics::getElevatorAndArmProblem);
+
+        shuffleboard.addBoolean("Collector Collect", Robot.diagnostics::getCollector);
+        shuffleboard.addString("Collector Collect Problem", Robot.diagnostics::getCollectorProblem);
+
     }
 }
