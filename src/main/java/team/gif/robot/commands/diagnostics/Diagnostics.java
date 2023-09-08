@@ -25,20 +25,10 @@ public class Diagnostics extends SequentialCommandGroup {
     public Diagnostics() {
         Globals.diagnosticsFlag = true; //setting the flag to true
         addCommands(
-                new WaitCommand(2),
-                new GoLocation(Constants.Location.LOAD_FROM_SINGLE_SUBSTATION), //going to single substation
-                new WheelsOut(), //collector wheels out (cone pos)
-                /**
-                 * Collector will run it's own diagnostics if the diagnostics flag in true
-                 * Just call CollectorCollect()
-                 * **/
-                new CollectorCollect().until(Robot.arm.armGamePieceSensor::get), //wait 1s and then run wheels until GP collected
-                //new GoHome(), //go home pos // TODO: I don't think we need this.
-
-                new WaitCommand(3).andThen(new GoLocation(Constants.Location.PLACE_CONE_HIGH)), //wait for 5s and go to place cone high pos
-                new Check("Elevator And Arm", true),
-                new WaitCommand(6).andThen(new WheelsIn()), //release the cone
-                new GoHome(), //go home pos
+                new WaitCommand(2), //wait for 2s
+                new Check("Collector", true), // checking the collector only
+                new WaitCommand(3).andThen(new Check("Elevator And Arm", true)), //checking the elevator and arm only
+                //new GoHome(), //go home pos TODO: to be tested if it goes to home when the
 
                 new WaitCommand(5)
         );

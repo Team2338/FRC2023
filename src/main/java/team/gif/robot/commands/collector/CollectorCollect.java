@@ -25,6 +25,7 @@ public class CollectorCollect extends CommandBase {
         //Diagnostics details
         if (Globals.diagnosticsFlag) {
             if (Robot.collector.getSpeed() > Constants.Collector.COLLECTOR_RUN_COLLECT) {
+                System.out.println("Collector Diagnostics");
                 Diagnostics.collector = true;
                 Diagnostics.collectorProblem = "No Problem";
             } else {
