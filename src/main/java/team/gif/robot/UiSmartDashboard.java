@@ -111,7 +111,7 @@ public class UiSmartDashboard {
             .withPosition(5, 0);
 
         // Auto selections
-        autoModeChooser.addOption("NONE", autoMode.NONE);
+        autoModeChooser.addOption("IXNAY", autoMode.NONE);
         autoModeChooser.addOption("3 GP ^R Left", autoMode.THREE_GP_LEFT);
         autoModeChooser.setDefaultOption("3 GP ^R Right", autoMode.THREE_GP_RIGHT);
         autoModeChooser.addOption("2 GP ^R Center Engage", autoMode.PLACE_COLLECT_PLACE_ENGAGE_CENTER);
