@@ -28,7 +28,9 @@ import team.gif.robot.subsystems.Collector;
 import team.gif.robot.subsystems.CollectorWheels;
 import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.Elevator;
+import team.gif.robot.subsystems.Indexer;
 import team.gif.robot.subsystems.LEDSubsystem;
+import team.gif.robot.subsystems.Shooter;
 import team.gif.robot.subsystems.SwerveDrivetrain;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Limelight;
@@ -54,6 +56,8 @@ public class Robot extends TimedRobot {
     public static Limelight limelightHigh;
     public static Limelight limelightLow;
     public static Arm arm;
+    public static Shooter shooter;
+    public static Indexer indexer;
     public static Elevator elevator;
     public static Collector collector;
     public static CollectorWheels collectorWheels;
@@ -85,6 +89,8 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         arm = new Arm();
+        shooter = new Shooter();
+        indexer = new Indexer();
         elevator = new Elevator();
         collector = new Collector();
         collectorWheels = new CollectorWheels();
@@ -106,6 +112,7 @@ public class Robot extends TimedRobot {
 
         arm.setTargetPosition(arm.getPosition());
         arm.setDefaultCommand(new ArmPIDControl());
+
 
         ledSubsystem.setDefaultCommand(new LEDSubsystemDefault());
 

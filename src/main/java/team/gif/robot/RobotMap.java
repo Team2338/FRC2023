@@ -53,4 +53,8 @@ public abstract class RobotMap {
     public static final int COMPRESSOR = 1;
     public static final int SENSOR_AIR_PRESSURE = 3;
 
+    //2024 Bella Shooter Prototype
+    public static final int SHOOTER_LEFT_MOTOR = 8;
+    public static final int SHOOTER_RIGHT_MOTOR = 10;
+    public static final int INDEXER_MOTOR = 12;
 }

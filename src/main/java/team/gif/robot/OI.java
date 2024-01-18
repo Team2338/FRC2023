@@ -18,6 +18,7 @@ import team.gif.robot.commands.autos.PlaceConeHigh;
 import team.gif.robot.commands.autos.PlaceCubeHighNoHomeEngage;
 import team.gif.robot.commands.collector.CollectorEject;
 import team.gif.robot.commands.collector.CollectorCollect;
+import team.gif.robot.commands.collector.ShooterShoot;
 import team.gif.robot.commands.collector.ToggleWheelsInAndOut;
 import team.gif.robot.commands.combo.GoHome;
 import team.gif.robot.commands.combo.GoHomeConditional;
@@ -32,6 +33,7 @@ import team.gif.robot.commands.driveModes.EnableBoost;
 import team.gif.robot.commands.drivetrain.ResetHeading;
 import team.gif.robot.commands.led.ConeLED;
 import team.gif.robot.commands.led.CubeLED;
+import team.gif.robot.commands.shooter.ShooterIndex;
 
 public class OI {
     /*
@@ -127,9 +129,10 @@ public class OI {
         dLStickBtn.whileTrue(new EnableBoost());
 
         // reset / zero sensors
-        dX.and(dRBump).onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
-        dX.and(dLBump).onTrue((new ResetHeading()));
-
+//        dX.and(dRBump).onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
+//        dX.and(dLBump).onTrue((new ResetHeading()));
+        dX.whileTrue(new ShooterShoot());
+        dY.whileTrue(new ShooterIndex());
         // manual mode
         aBack.toggleOnTrue(new ToggleManualPIDControl());
 
@@ -153,7 +156,7 @@ public class OI {
         dLTrigger.whileTrue(new CollectorEject());
         dRBump.whileTrue(new CubeLED());
         dLBump.whileTrue(new ConeLED());
-        dY.toggleOnTrue(new ToggleWheelsInAndOut());
+//        dY.toggleOnTrue(new ToggleWheelsInAndOut());
         aStart.onTrue(new ArmLift());
 
         // auto assistance
@@ -175,10 +178,10 @@ public class OI {
         // Test buttons used during practice matches to test and calibrate autos
         dStart.onTrue(new InstantCommand(Robot::loadAutoConstants).andThen(new DriveToChargingStationCommand())); // just drive to the charging station
         dBack.onTrue(new InstantCommand(Robot::loadAutoConstants).andThen(new DriveAndEngageCommand())); // drive to charging station and engage (+x button will cross charging station)
-        dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
-        dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
-        dX.and(aLStickBtn).onTrue( new InstantCommand(Robot::loadAutoConstants).andThen(new PlaceCubeHighNoHomeEngage()));
-        dX.and(aRStickBtn).onTrue(new MobilityEngageCable());
+//        dX.and(aRTrigger).onTrue( new PlaceCollectPlaceCable());
+//        dX.and(aLTrigger).onTrue( new PlaceCollectPlaceBarrier());
+//        dX.and(aLStickBtn).onTrue( new InstantCommand(Robot::loadAutoConstants).andThen(new PlaceCubeHighNoHomeEngage()));
+//        dX.and(aRStickBtn).onTrue(new MobilityEngageCable());
 
         // enable these for testing purposes
         // commented out so it doesn't throw errors on the console
