@@ -34,8 +34,23 @@ public class DriveSwerve extends CommandBase {
             double strafe = -Robot.oi.driver.getLeftX(); // need to invert because -X is left, +X is right
             strafe = (Math.abs(strafe) > Constants.Joystick.DEADBAND) ? strafe : 0.0;
 
-            double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive
-            rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
+
+            double xOffset = Robot.limelightHigh.getXOffset();
+            double p = -0.015;
+//             double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive
+            double rot = 0;
+
+            if(!Robot.limelightHigh.hasTarget()) {
+                rot = -Robot.oi.driver.getRightX();
+                rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
+            } else if (xOffset < -2.5) {
+                rot = xOffset * p;
+            } else if (xOffset > 2.5) {
+                rot = xOffset * p;
+            }
+
+
+
 
             forwardSign = forward/Math.abs(forward);
             strafeSign = strafe/Math.abs(strafe);
