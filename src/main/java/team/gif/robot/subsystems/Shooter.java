@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
      * @param percent percent of max current to move the arm
      */
     public void shoot(double percent) {
-        leftMotor.set(percent);
+        leftMotor.set(-percent);
         rightMotor.set(percent);
     }
 }

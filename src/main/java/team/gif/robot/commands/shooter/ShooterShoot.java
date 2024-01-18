@@ -18,7 +18,7 @@ public class ShooterShoot extends CommandBase {
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {
-        Robot.shooter.shoot(.5);
+        Robot.shooter.shoot(.75);
     }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.

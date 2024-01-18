@@ -25,6 +25,6 @@ public class Indexer extends SubsystemBase {
      * @param percent percent of max current to move the arm
      */
     public void advance(double percent) {
-        indexerMotor.set(percent);
+        indexerMotor.set(-percent);
     }
 }

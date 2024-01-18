@@ -144,10 +144,13 @@ public class OI {
 
         // combo placing cone actions
         aRBump.onTrue(new GoLocation(Constants.Location.PLACE_CONE_HIGH));
-        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
+//        aX.onTrue(new GoLocation(Constants.Location.PLACE_CONE_MID));
+
+        aX.whileTrue(new ShooterShoot());
+        aY.whileTrue(new ShooterIndex());
 
         // combo placing cube actions
-        aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));
+//        aY.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_HIGH));
         aB.onTrue(new GoLocation(Constants.Location.PLACE_CUBE_MID));
         aA.onTrue(new GoLocation(Constants.Location.PLACE_LOW));
 
